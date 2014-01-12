@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Concepts</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <!-- Bootstrap -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="/css/site.css" rel="stylesheet" media="screen">
+    <link href="/css/syntax.css" rel="stylesheet" media="screen">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <!-- Fixed navbar -->
+    <div class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">Urubu</a>
+        </div>
+        <div class="navbar-collapse collapse">
+
+          <ul class="nav navbar-nav navbar-left">
+ 
+	    <li><a href="/">Home</a></li>    
+            <li><a href="/start.html">Read me first</a></li>
+            <li><a href="/install.html">Installation</a></li>
+            <li class="active"><a href="/manual/">Manual</a></li>
+            <li><a href="/status.html">Status & Plans</a></li>
+          </ul>
+
+          <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+              <a href="/sites/" class="dropdown-toggle" data-toggle="dropdown">Urubu sites <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="http://dev.myhdl.org">MyHDL development website</a></li>    
+                <li><a href="http://www.jandecaluwe.com">Jan Decaluwe</a></li>    
+                <li><a href="http://music.jandecaluwe.com">Jan Decaluwe / Music</a></li>    
+                <li><a href="http://urubu.jandecaluwe.com">This site (Urubu documentation)</a></li>    
+              </ul>
+            <li><a href="/about.html">About</a></li>
+          </ul>
+
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+
+
+<div class="container">
+
+    <ol class="breadcrumb">
+       <li><a href="/">Home</a></li>
+       <li><a href="/manual/">Manual</a></li>
+       <li class="active">Concepts</li>
+    </ol>
+
+    <div class="page-header">
+ 
+        <h1>Concepts</h1>
+    </div>
+
+    <div class="row">
+
+<div class="col-md-3" role="navigation"> 
+ 
+    <div class="sidebar" data-spy="affix" 
+         data-offset-top="80" 
+         data-offset-bottom="60">
+        <div class="well">
+            <a href="#"><em>Concepts</em></a>
+            <div class="toc">
+<ul>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#authoring">Authoring</a></li>
+<li><a href="#configuration">Configuration</a></li>
+<li><a href="#templating">Templating</a></li>
+<li><a href="#theming">Theming</a></li>
+<li><a href="#navigation">Navigation</a></li>
+<li><a href="#project-wide-reference-links">Project-wide reference links</a></li>
+<li><a href="#development-and-deployment">Development and deployment</a></li>
+</ul>
+</div>
+
+        </div>
+    </div>
+</div>
+
+        <div class="col-md-6" data-spy="scroll" data-target="#sidenav" role="main">
+             
+<a href="https://twitter.com/share" class="twitter-share-button">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+<!-- Place this tag where you want the +1 button to render. -->
+<div class="g-plusone" data-size="medium"></div>
+
+<!-- Place this tag after the last +1 button tag. -->
+<script type="text/javascript">
+window.__gcfg = {
+    lang: 'en-US'
+};
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/plusone.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>
+
+<script type="text/javascript" src="http://www.reddit.com/static/button/button1.js"></script>
+            <h2 id="introduction">Introduction</h2>
+<p>Welcome to Urubu! My name is Jan Decaluwe and I am Urubu's author.</p>
+<p>Urubu is a micro <abbr title="Content Management System">CMS</abbr> for static websites.  The qualification "micro* means that
+it has a small feature set, defined by what I need for my purposes.  To know
+whether it is the right tool for you, check out <a href="/start.html" title="Read me first">Read me first</a>. </p>
+<p>Urubu's design philosophy is radical reuse of great software and ideas from
+others. In the following sections, I will describe its concepts and how
+they are implemented.</p>
+<h2 id="authoring">Authoring</h2>
+<p>In Urubu, content is entered in <a href="http://daringfireball.net/projects/markdown/" title="Markdown">Markdown</a> format. This is a lightweight format
+that feels like a natural way to write content in plain text.</p>
+<p>Markdown support in Urubu is implemented by the <a href="http://pythonhosted.org/Markdown/" title="Python-Markdown">Python-Markdown</a> package, that
+converts the format to html. Urubu also supports the industry standard
+<a href="http://pythonhosted.org/Markdown/extensions/extra.html" title="Markdown Extra">Markdown Extra</a> extensions, with useful features such as tables and definition
+lists.</p>
+<p>Urubu supports nicely rendered code blocks, an essential feature for software
+projects documentation. <a href="http://pythonhosted.org/Markdown/extensions/fenced_code_blocks.html">Fenced Code Blocks</a> are provided by the Markdown Extra
+extensions.  This lets you enter language-specific code blocks without the need
+for indentation. The CodeHilite extension of Python-Markdown enables
+language-specific syntax highlighting through the <a href="http://pygments.org" title="Pygments">Pygments</a> library.</p>
+<h2 id="configuration">Configuration</h2>
+<p>The configuration options in Urubu are kept minimal, in the spirit of "There
+should be one obvious way to do it".  Where used, the configuration format is
+YAML, implemented by the <a href="http://pyyaml.org" title="PyYAML">PyYAML</a> library.</p>
+<p>Configuration is mostly distributed, in the sense that every content file
+should have a <em>front matter</em>, that specifies the title, layout, date and so on.
+This idea is found in many tools, but Urubu reuses the technique from <a href="http://jekyllrb.com" title="Jekyll">Jekyll</a>.
+YAML front matter is specified between two sets of triple dashes.</p>
+<p>Urubu extends this configuration technique by treating index files specially.
+Each folder in the site should have an index file (called <code>index.md</code>) that
+specifies the ordered folder content. This can be done explicitly by listing
+the files, or implicitly by specifying how the files should be ordered. </p>
+<h2 id="templating">Templating</h2>
+<p>With templates you specify the html layout for a particular type of a page.
+In a template you can mix plain html with control structures and variable
+interpolation. The actual html page is generated by evaluating the template
+with the appropriate evaluation context provided by Urubu.</p>
+<p>Urubu uses the <a href="http://jinja.pocoo.org" title="Jinja2">Jinja2</a> templating language library.</p>
+<h2 id="theming">Theming</h2>
+<p>A theme refers to the general look and feel of a web site. Partially this is
+defined by the templates as discussed above. The other part is defined in style
+sheets, with a technique known as Cascading Style Sheets (CSS). Basically
+this is a sophisticated technique to define how the various html elements
+should be rendered by the web browser.</p>
+<p>With Urubu, you are free to design and use your own style sheets. However, it
+has been developed with the <a href="http://getbootstrap.com" title="Bootstrap">Bootstrap</a> framework in mind.  Bootstrap is a
+professionally-designed framework with lots of useful predefined styles
+components. Urubu generates html that is Bootstrap-friendly, and infers
+the appropriate template variables for certain Bootstrap components. </p>
+<p>A great feature of Bootstrap is that it is "mobile first". This means that your
+website will automatically adapt to any platform - smartphone, tablet or
+widescreen.</p>
+<p>A notable project is <a href="http://bootswatch.com" title="Bootswatch">Bootswatch</a>. This is a set of themes designed as drop-in
+replacement for the stock bootstrap styles. This gives you an effortless
+option to change the look and feel of your website.</p>
+<h2 id="navigation">Navigation</h2>
+<p>I am a big fan of Steve Krug's book <a href="http://www.amazon.com/Dont-Make-Me-Think-Usability/dp/0321344758">Don't make me think</a>,
+and I feel that the lessons from this book are still often ignored.
+Actually, the lack of focus of other tools on these ideas are the
+main reason why I wrote Urubu.</p>
+<p>A main concept is good navigation. Urubu supports various techniques
+by inferring navigation-oriented variables and making them available to
+the template engine. Moreover, they work well with some well-defined
+and nicely style <a href="http://getbootstrap.com" title="Bootstrap">Bootstrap</a> navigation components. In this way,
+you can easily implement the following:</p>
+<ul>
+<li>a navbar for navigation between major sections</li>
+<li>table of contents of a page in a sidebar</li>
+<li>breadcrumbs</li>
+<li>previous and next pager buttons</li>
+<li>active page or section highlighting </li>
+</ul>
+<p>Other techniques, independent from Urubu, can also help. Note for example that
+the sidebar on this page is "affixed": it moves as you scroll through the page,
+but never leaves the viewport. At any time, the full structure of the page
+remains visible and available for navigation. This was implemented by borrowing
+code from the <a href="http://getbootstrap.com" title="Bootstrap">Bootstrap</a> theme.</p>
+<h2 id="project-wide-reference-links">Project-wide reference links</h2>
+<p>A reference link is a way to refer to a link object via a reference id. Urubu
+supports the concept of project-wide reference links.  Global reference links
+are defined in the site configuration file.  Moreover, all content pages and
+folders are available as reference links.</p>
+<p>When you use a reference id in configuration info or in Markdown content
+(between square brackets) Urubu will automatically resolve it. For Markdown,
+this feature is implemented as a Markdown extension. Note that it doesn't
+require any syntax change. It enables page linking similar to what is commonly
+found on wiki's. </p>
+<p>Project-wide reference links are a distinguishing Urubu feature.</p>
+<p>One of the messages of Steve Krug's book is that the text that you click should
+be the title of the page where you land. Therefore, when you use reference
+links, Urubu will insert the title of the link in the generated html (unless
+you specify an alternative text explicitly).</p>
+<h2 id="development-and-deployment">Development and deployment</h2>
+<p>You can develop a Urubu project is like a software project, from a git or
+mercurial repository.  This gives best-in-class revision control.  Moreover,
+all the workflows these systems provide are available. For example, you can
+develop your website collaboratively on <a href="http://www.github.com" title="GitHub">GitHub</a> or <a href="http://www.bitbucket.com" title="Bitbucket">Bitbucket</a>.  Finally, it
+is easy to automate deployment, triggered by a push of the generated site to an
+upstream repository. </p>
+        </div>
+
+    </div>
+    
+<ul class="pager">
+    <li class="next"><a href="/manual/structure.html">Project structure &rarr;</a></li>
+</ul>
+
+    <div class="footer">
+        <p class="text-center"> Content licensed under the
+           <a href="http://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA License</a>
+        </p> 
+    </div>
+
+</div> 
+
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="/js/bootstrap.min.js"></script>
+
+  </body>
+</html>

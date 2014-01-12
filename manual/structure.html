@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Project structure</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <!-- Bootstrap -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="/css/site.css" rel="stylesheet" media="screen">
+    <link href="/css/syntax.css" rel="stylesheet" media="screen">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <!-- Fixed navbar -->
+    <div class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">Urubu</a>
+        </div>
+        <div class="navbar-collapse collapse">
+
+          <ul class="nav navbar-nav navbar-left">
+ 
+	    <li><a href="/">Home</a></li>    
+            <li><a href="/start.html">Read me first</a></li>
+            <li><a href="/install.html">Installation</a></li>
+            <li class="active"><a href="/manual/">Manual</a></li>
+            <li><a href="/status.html">Status & Plans</a></li>
+          </ul>
+
+          <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+              <a href="/sites/" class="dropdown-toggle" data-toggle="dropdown">Urubu sites <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="http://dev.myhdl.org">MyHDL development website</a></li>    
+                <li><a href="http://www.jandecaluwe.com">Jan Decaluwe</a></li>    
+                <li><a href="http://music.jandecaluwe.com">Jan Decaluwe / Music</a></li>    
+                <li><a href="http://urubu.jandecaluwe.com">This site (Urubu documentation)</a></li>    
+              </ul>
+            <li><a href="/about.html">About</a></li>
+          </ul>
+
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+
+
+<div class="container">
+
+    <ol class="breadcrumb">
+       <li><a href="/">Home</a></li>
+       <li><a href="/manual/">Manual</a></li>
+       <li class="active">Project structure</li>
+    </ol>
+
+    <div class="page-header">
+ 
+        <h1>Project structure</h1>
+    </div>
+
+    <div class="row">
+
+<div class="col-md-3" role="navigation"> 
+ 
+    <div class="sidebar" data-spy="affix" 
+         data-offset-top="80" 
+         data-offset-bottom="60">
+        <div class="well">
+            <a href="#"><em>Project structure</em></a>
+            <div class="toc">
+<ul>
+<li><a href="#the-project-directory">The project directory</a></li>
+<li><a href="#processing-rules">Processing rules</a></li>
+<li><a href="#special-files">Special files</a><ul>
+<li><a href="#_siteyml">_site.yml</a></li>
+<li><a href="#_layouts">_layouts</a></li>
+<li><a href="#_python">_python</a></li>
+</ul>
+</li>
+<li><a href="#project-wide-reference-ids">Project-wide reference ids</a></li>
+<li><a href="#content-files">Content files</a></li>
+<li><a href="#index-files">Index files</a></li>
+</ul>
+</div>
+
+        </div>
+    </div>
+</div>
+
+        <div class="col-md-6" data-spy="scroll" data-target="#sidenav" role="main">
+             
+<a href="https://twitter.com/share" class="twitter-share-button">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+<!-- Place this tag where you want the +1 button to render. -->
+<div class="g-plusone" data-size="medium"></div>
+
+<!-- Place this tag after the last +1 button tag. -->
+<script type="text/javascript">
+window.__gcfg = {
+    lang: 'en-US'
+};
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/plusone.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>
+
+<script type="text/javascript" src="http://www.reddit.com/static/button/button1.js"></script>
+            <h2 id="the-project-directory">The project directory</h2>
+<p>A typical Urubu project directory looks as follows:</p>
+<div class="codehilite"><pre>Makefile
+_site.yml
+_layouts/_base.html
+         page.html
+         ...
+_python/__init__.py
+        validators.py
+        filters.py
+css/...
+js/...
+index.md
+folder1/index.md
+        file1.md
+        pic1.png
+        ...
+folder2/index.md
+        file2.md
+        file3.md
+        ...
+</pre></div>
+
+
+<p>Files and directories with pathnames starting with an underscore <code>_</code> are
+special. They are used during processing, but excluded from the built website.
+Their function will be discussed further on.  </p>
+<p>The <code>css</code> and <code>js</code> directories are just an example of how CSS style sheets and
+javascript files could be organized. You can use any organization that you
+prefer.</p>
+<p>Content files are in Markdown format and should have the <code>.md</code> extension. You
+have complete freedom in organizing them in directories. However, every
+directory should have an <code>index.md</code> file, including the top-level directory.</p>
+<h2 id="processing-rules">Processing rules</h2>
+<p>Urubu generates a website by processing the files and directory in the project
+directory, and putting the result in a <code>_build</code> subdirectory. The processing
+depends on the pathname as follows:</p>
+<ul>
+<li>a <code>Makefile</code> is not copied to the build </li>
+<li>files and directories starting with a
+dot <code>.</code> or underscore <code>_</code> are not copied to the build.</li>
+<li>Markdown files with extension <code>.md</code> are converted to a
+html file that is put into the build in the same relative location</li>
+<li>all other files and directories are copied unmodified to the build in the
+same relative location</li>
+</ul>
+<p>As a result of the project organization and the build process, the
+structure of the build matches the structure of the project directory.
+The relative location of all files is thus preserved.</p>
+<h2 id="special-files">Special files</h2>
+<h3 id="_siteyml"><code>_site.yml</code></h3>
+<p>This file contains site configuration info in YAML format.
+Currently, a single attribute is predefined: </p>
+<table class="table">
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>reflinks</code></td>
+<td>Holds a mapping from reference ids to link objects.</td>
+</tr>
+</tbody>
+</table>
+<p>Link objects are a mapping with an <code>url</code> key that maps to the link url and
+a <code>title</code> key that maps to the link title. </p>
+<p>You can define additional attributes that will be made available as
+site variables to the template engine. The following is an example of a
+<code>_site.yml</code> file:</p>
+<div class="codehilite"><pre>brand: Urubu 
+
+reflinks:
+    content_license:
+        url: http://creativecommons.org/licenses/by-sa/3.0/
+        title: CC-BY-SA License
+    software_license:
+        url: http://www.gnu.org/licenses/agpl-3.0.txt
+        title: GNU Affero General Public License
+    markdown:
+        url: http://daringfireball.net/projects/markdown/  
+        title: Markdown
+</pre></div>
+
+
+<h3 id="_layouts"><code>_layouts</code></h3>
+<p>This directory contains the templates that define the available layouts.
+They are used by the Jinja2 template engine to render html pages.
+The templates files should have the <code>.html</code> extension.</p>
+<h3 id="_python"><code>_python</code></h3>
+<p>This directory contains Python hooks for the template engine. </p>
+<h2 id="project-wide-reference-ids">Project-wide reference ids</h2>
+<p>Urubu has the concept of project-wide reference ids.  You can use them to refer
+to link objects in your content and configuration.  Their definition comes
+from two sources:</p>
+<ul>
+<li>global reference ids are mapped to link objects in the <code>_site.yml</code>
+configuration file, as discussed earlier</li>
+<li>all content pages and folders objects have reference ids</li>
+</ul>
+<p>Project-wide references ids live in a single namespace. For pages and folders,
+the id is a root-relative pathname starting with a slash <code>/</code> and without file
+extension. By convention, global reference ids should not start with a <code>/</code>.   </p>
+<p>In your content and configuration info, you can also use relative reference
+ids. Urubu will resolve them depending on the file location in the project. In
+case of a name clash with a global reference id, you will have to disambiguate
+by adding pathname components. </p>
+<p>In accordance with Markdown conventions, reference ids are case-insensitive.</p>
+<h2 id="content-files">Content files</h2>
+<p>Content files are Markdown files with extension <code>.md</code>. They should start with
+YAML front matter that defines a number of attributes, as in the following example:</p>
+<div class="codehilite"><pre>---
+title: Read me first
+layout: page
+date: 2014-01-15
+---
+&lt;Markdown content&gt;
+</pre></div>
+
+
+<p>The following attributes are predefined:</p>
+<table class="table">
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>title</code></td>
+<td>Specifies the page title. Mandatory.</td>
+</tr>
+<tr>
+<td><code>layout</code></td>
+<td>Specifies the desired layout, without the <code>.html</code> extension. Mandatory.</td>
+</tr>
+<tr>
+<td><code>date</code></td>
+<td>Specifies the date. Optional.</td>
+</tr>
+<tr>
+<td><code>tags</code></td>
+<td>Reserved for future use.</td>
+</tr>
+</tbody>
+</table>
+<p>In addition, you can add arbitrary user-defined attributes. All attributes 
+are made available as page object attributes to the template engine.</p>
+<h2 id="index-files">Index files</h2>
+<p>Index files with basename <code>index.md</code> are a special kind of content files.  They
+are used to specify the content of a directory. There are two options to
+specify the content, explicitly with the <code>content</code> attribute or implicitly
+using the <code>order</code> attribute.  </p>
+<table class="table">
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>content</code></td>
+<td>Defines the content explicitly as a list of reference ids or local link objects.</td>
+</tr>
+<tr>
+<td><code>order</code></td>
+<td>Defines the attribute by which the content in the directory should be ordered.</td>
+</tr>
+<tr>
+<td><code>reverse</code></td>
+<td>Optional boolean attribute defines reverse order or not. Default is <code>false</code>.</td>
+</tr>
+</tbody>
+</table>
+<p><code>content</code> and <code>order</code> are mutually exclusive; you should use one of the two options.</p>
+<p>A local link object is a mapping with a <code>url</code> key to an url, and a <code>title</code> key
+to a title.  Alternatively, you can start from an existing reference id
+using a <code>ref</code> key, and overwrite its title.  </p>
+<p>The ordering attribute can be predefined or user-defined, but it should be
+specified in each content file in the directory.  As an example, you can
+specify that the content of a directory should be ordered as blog by the
+following front matter in the index file: </p>
+<div class="codehilite"><pre>---
+title: Blog
+layout: blog_index
+order: date
+reverse: true
+---
+</pre></div>
+        </div>
+
+    </div>
+    
+<ul class="pager">
+    <li class="previous"><a href="/manual/intro.html">&larr; Concepts</a></li>
+    <li class="next"><a href="/manual/authoring.html">Authoring &rarr;</a></li>
+</ul>
+
+    <div class="footer">
+        <p class="text-center"> Content licensed under the
+           <a href="http://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA License</a>
+        </p> 
+    </div>
+
+</div> 
+
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="/js/bootstrap.min.js"></script>
+
+  </body>
+</html>

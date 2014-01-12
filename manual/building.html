@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Project building</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <!-- Bootstrap -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="/css/site.css" rel="stylesheet" media="screen">
+    <link href="/css/syntax.css" rel="stylesheet" media="screen">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <!-- Fixed navbar -->
+    <div class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">Urubu</a>
+        </div>
+        <div class="navbar-collapse collapse">
+
+          <ul class="nav navbar-nav navbar-left">
+ 
+	    <li><a href="/">Home</a></li>    
+            <li><a href="/start.html">Read me first</a></li>
+            <li><a href="/install.html">Installation</a></li>
+            <li class="active"><a href="/manual/">Manual</a></li>
+            <li><a href="/status.html">Status & Plans</a></li>
+          </ul>
+
+          <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+              <a href="/sites/" class="dropdown-toggle" data-toggle="dropdown">Urubu sites <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="http://dev.myhdl.org">MyHDL development website</a></li>    
+                <li><a href="http://www.jandecaluwe.com">Jan Decaluwe</a></li>    
+                <li><a href="http://music.jandecaluwe.com">Jan Decaluwe / Music</a></li>    
+                <li><a href="http://urubu.jandecaluwe.com">This site (Urubu documentation)</a></li>    
+              </ul>
+            <li><a href="/about.html">About</a></li>
+          </ul>
+
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+
+
+<div class="container">
+
+    <ol class="breadcrumb">
+       <li><a href="/">Home</a></li>
+       <li><a href="/manual/">Manual</a></li>
+       <li class="active">Project building</li>
+    </ol>
+
+    <div class="page-header">
+ 
+        <h1>Project building</h1>
+    </div>
+
+    <div class="row">
+
+<div class="col-md-3" role="navigation"> 
+ 
+    <div class="sidebar" data-spy="affix" 
+         data-offset-top="80" 
+         data-offset-bottom="60">
+        <div class="well">
+            <a href="#"><em>Project building</em></a>
+            <div class="toc">
+<ul>
+<li><a href="#the-urubu-command">The urubu command</a></li>
+<li><a href="#subcommands">Subcommands</a></li>
+<li><a href="#development-flow">Development flow</a></li>
+</ul>
+</div>
+
+        </div>
+    </div>
+</div>
+
+        <div class="col-md-6" data-spy="scroll" data-target="#sidenav" role="main">
+             
+<a href="https://twitter.com/share" class="twitter-share-button">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+<!-- Place this tag where you want the +1 button to render. -->
+<div class="g-plusone" data-size="medium"></div>
+
+<!-- Place this tag after the last +1 button tag. -->
+<script type="text/javascript">
+window.__gcfg = {
+    lang: 'en-US'
+};
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/plusone.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>
+
+<script type="text/javascript" src="http://www.reddit.com/static/button/button1.js"></script>
+            <h2 id="the-urubu-command">The <code>urubu</code> command</h2>
+<p>After installation, an <code>urubu</code> command will be available.</p>
+<p>If you prefer, you can call the installed package as a script
+using <code>python -m urubu</code>, with the same effect.</p>
+<h2 id="subcommands">Subcommands</h2>
+<p>The <code>urubu</code> command supports two subcommands:</p>
+<dl>
+<dt><code>build</code></dt>
+<dd>Build the website. Run this from the top level in the project
+directory. The website will be built in the <code>_build</code> subdirectory.</dd>
+<dt><code>serve</code></dt>
+<dd>Start a local webserver to serve the website as you develop it.
+The website will be available at <code>localhost:8000</code>. Run this
+command in a separate terminal window and kill the server
+when you are done.</dd>
+</dl>
+<h2 id="development-flow">Development flow</h2>
+<p>I prefer to put the  commands in a Makefile, so that I can
+run <code>make</code> to build and <code>make serve</code> to start a server.</p>
+<p>Currently, you have to build the site explicitly to see
+the development changes in the browser.</p>
+        </div>
+
+    </div>
+    
+<ul class="pager">
+    <li class="previous"><a href="/manual/authoring.html">&larr; Authoring</a></li>
+    <li class="next"><a href="/manual/templating.html">Templating &rarr;</a></li>
+</ul>
+
+    <div class="footer">
+        <p class="text-center"> Content licensed under the
+           <a href="http://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA License</a>
+        </p> 
+    </div>
+
+</div> 
+
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="/js/bootstrap.min.js"></script>
+
+  </body>
+</html>

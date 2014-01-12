@@ -1,0 +1,5 @@
+include *.txt
+include *.md
+graft doc
+prune doc/_build
+global-exclude *.pyc

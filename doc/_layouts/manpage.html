@@ -1,0 +1,13 @@
+{% extends "article.html" %}
+
+    
+{% block pagerblock %}
+<ul class="pager">
+    {% if this.prev %}
+    <li class="previous"><a href="{{this.prev.url}}">&larr; {{this.prev.title}}</a></li>
+    {% endif %}
+    {% if this.next %}
+    <li class="next"><a href="{{this.next.url}}">{{this.next.title}} &rarr;</a></li>
+    {% endif %}
+</ul>
+{% endblock %}

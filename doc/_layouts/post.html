@@ -1,0 +1,21 @@
+{% extends "_base.html" %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-6" "main">
+            <div class="page-header">
+                <h1>{{this.title}}</h1>
+           </div>
+           {{this.body}}
+            {% include 'sharing.html' %}
+
+           <div class="footer">
+              <p class="text-center"> Content licensed under the
+                 <a href="{{site.reflinks.license.url}}">{{site.reflinks.license.title}}</a> license.
+               </p> 
+           </div>
+        </div>
+   </div>
+</div>
+{% endblock %}

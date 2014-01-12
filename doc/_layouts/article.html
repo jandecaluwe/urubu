@@ -1,0 +1,21 @@
+{% extends "page.html" %}
+
+{% block sharing %}
+{% include 'sharing.html' %}
+{% endblock %}
+
+
+{% block sidebar %}
+<div class="col-md-3" role="navigation"> 
+    {% if this.toc %} 
+    <div class="sidebar" data-spy="affix" 
+         data-offset-top="80" 
+         data-offset-bottom="60">
+        <div class="well">
+            <a href="#"><em>{{this.title}}</em></a>
+            {{this.toc}}
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

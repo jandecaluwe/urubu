@@ -1,0 +1,52 @@
+{% extends "_base.html" %}
+
+{% block body %}
+
+<div class="container">
+
+    {% block breadcrumbs %}
+    <ol class="breadcrumb">
+       <li><a href="/">Home</a></li>
+       {% for bc in this.breadcrumbs[:-1] %}
+       <li><a href="{{bc.url}}">{{bc.title}}</a></li>
+       {% endfor %}
+       <li class="active">{{this.breadcrumbs[-1].title}}</li>
+    </ol>
+    {% endblock %}
+
+    <div class="page-header">
+        {% block title %} 
+        <h1>{{this.title}}</h1>
+        {% endblock %}
+    </div>
+
+    <div class="row">
+
+        {% block sidebar %}
+        {% endblock %}
+
+        {% block content %}
+        <div class="col-md-6" data-spy="scroll" data-target="#sidenav" role="main">
+             
+            {% block sharing %}
+            {% endblock %}
+
+            {{this.body}}
+        </div>
+        {% endblock %}
+
+    </div>
+    
+    {% block pagerblock %}
+    {% endblock %}
+
+    <div class="footer">
+        <p class="text-center"> Content licensed under the
+           <a href="{{site.reflinks.content_license.url}}">{{site.reflinks.content_license.title}}</a>
+        </p> 
+    </div>
+
+</div> 
+
+{% endblock %}
+

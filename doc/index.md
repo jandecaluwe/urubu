@@ -5,6 +5,7 @@ content:
     - start 
     - install
     - manual 
+    - faq
     - status
     - sites
     - about

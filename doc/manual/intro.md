@@ -34,7 +34,7 @@ Urubu supports nicely rendered code blocks, an essential feature for software
 projects documentation. [Fenced Code Blocks] are provided by the Markdown Extra
 extensions.  This lets you enter language-specific code blocks without the need
 for indentation. The CodeHilite extension of Python-Markdown enables
-language-specific syntax highlighting through the [pygments] library.
+language-specific syntax highlighting via the [pygments] library.
 
 [Fenced Code Blocks]: http://pythonhosted.org/Markdown/extensions/fenced_code_blocks.html
 
@@ -113,9 +113,10 @@ you can easily implement the following:
 
 Other techniques, independent from Urubu, can also help. Note for example that
 the sidebar on this page is "affixed": it moves as you scroll through the page,
-but never leaves the viewport. At any time, the full structure of the page
-remains visible and available for navigation. This was implemented by borrowing
-code from the [bootstrap] theme.
+but never leaves the viewport. (Note: this description assumes that the
+viewport is wide enough to accomodate the sidebar.) At any time, the full
+structure of the page remains visible and available for navigation. This was
+implemented by borrowing code from the [bootstrap] theme.
 
 Project-wide reference links 
 ============================
@@ -142,8 +143,8 @@ Development and deployment
 ==========================
 
 You can develop a Urubu project is like a software project, from a git or
-mercurial repository.  This gives best-in-class revision control.  Moreover,
-all the workflows these systems provide are available. For example, you can
-develop your website collaboratively on [github] or [bitbucket].  Finally, it
-is easy to automate deployment, triggered by a push of the generated site to an
-upstream repository. 
+mercurial repository.  This gives you best-in-class revision control.
+Moreover, all the workflows that these systems provide are available. For
+example, you can develop your website collaboratively on [github] or
+[bitbucket].  Finally, it is easy to automate deployment, triggered by a push
+of the generated site to an upstream repository. 

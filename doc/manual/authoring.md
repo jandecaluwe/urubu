@@ -39,8 +39,8 @@ Reference links
 ===============
 
 Stock Markdown supports "reference links" that are resolved by defining them
-later in the file. For example, you can enter `[urubu]` in your content and
-further on defined iit as follows:
+later in the file. For example, you can use `[urubu]` in your content and
+further on define it as follows:
 
 ```
 [urubu]: http://urubu.jandecaluwe.com

@@ -1,6 +1,9 @@
 brand: Urubu 
 
 reflinks:
+    jandecaluwe:
+        url: http://www.jandecaluwe.com
+        title: Jan Decaluwe
     dev_myhdl_site: 
         url: http://dev.myhdl.org 
         title: MyHDL development website

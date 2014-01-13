@@ -115,10 +115,9 @@ the page object.
 
 ### Index pages
 
-Index pages are associated with `index.md` files. They are special
-in the sense that they define the content of a folder. Therefore,
-they have the same `content` attribute as the corresponding
-folder object.
+Index pages are associated with `index.md` files. They are special in the sense
+that they define the attributes and the content of a folder. Therefore, they
+have the same `content` attribute as the corresponding folder object.
 
 Context variables
 -----------------
@@ -168,9 +167,6 @@ Filters functions should be defined as [custom filters in
 Jinja2][jinja2_filters].
 
 [jinja2_filters]: http://jinja.pocoo.org/docs/api/#custom-filters
-
-
-
 
 
 

@@ -7,7 +7,7 @@ date: 2014-01-10
 Author
 ======
 
-The Urubu software is written by Jan Decaluwe.
+The Urubu software is written by [jandecaluwe].
 
 License
 =======

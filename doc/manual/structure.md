@@ -33,7 +33,7 @@ folder2/index.md
 
 Files and directories with pathnames starting with an underscore `_` are
 special. They are used during processing, but excluded from the built website.
-Their function will be discussed further on.  
+Their function will be discussed below.  
 
 The `css` and `js` directories are just an example of how CSS style sheets and
 javascript files could be organized. You can use any organization that you
@@ -161,9 +161,9 @@ Index files
 ===========
 
 Index files with basename `index.md` are a special kind of content files.  They
-are used to specify the content of a directory. There are two options to
-specify the content, explicitly with the `content` attribute or implicitly
-using the `order` attribute.  
+are used to specify the attributes and the content of a directory. There are
+two options to specify the content, explicitly with the `content` attribute or
+implicitly using the `order` attribute.  
 
 Attribute | Description
 -----------|------------

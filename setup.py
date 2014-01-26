@@ -1,6 +1,6 @@
 from setuptools import setup
 
-requires = ['jinja2 >= 2.7', 'pygments', 'markdown', 'pyyaml']
+requires = ['jinja2 >= 2.7', 'pygments', 'markdown', 'markdown-checklist', 'pyyaml']
 
 entry_points = {
     'console_scripts': [

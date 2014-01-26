@@ -46,8 +46,10 @@ undef_key_error = "Undefined key '{}' in '{}'"
 def get_relpath(path, start):
     return os.path.relpath(path, start) 
 
-def get_components(path):
-    p, ext = os.path.splitext(path)
+def get_components(path, hasext=True):
+    p = path
+    if hasext:
+        p, ext = os.path.splitext(path)
     p = p.lstrip(os.curdir)
     p = p.strip(os.sep)
     components = []
@@ -139,9 +141,10 @@ class Project(object):
                     if meta is None:
                         warn(yamlfm_warning.format(relfn), UrubuWarning)
                         continue
-                    self.validate_filemeta(relfn, meta)
                     info = self.make_fileinfo(relfn, meta)
                     self.fileinfo.append(info)
+                    # validate after file info has been added so it can be used
+                    self.validate_filemeta(relfn, info)
                     self.add_reflink(info['id'], info)
                     if fn == 'index.md':
                         info = self.make_navinfo(relpath, meta)
@@ -221,7 +224,7 @@ class Project(object):
            id = ref    
         else:
            path = os.path.normpath(os.path.join(info['fn'], ref)) 
-           id = make_id(get_components(path)) 
+           id = make_id(get_components(path, hasext=False)) 
            if not id in reflinks:
                raise UrubuError(undef_ref_error.format(ref, info['fn']))  
         return reflinks[id]    
@@ -305,6 +308,7 @@ class Project(object):
         p = processors.ContentProcessor(sitedir, project=self)
         p.process()
 
+# import pprint 
 
 def build():
     proj = Project()
@@ -313,6 +317,7 @@ def build():
     proj.get_pythonhooks()
     proj.get_contentinfo()
     proj.resolve_reflinks()
+    # pprint.pprint(proj.site['reflinks'])
     proj.make_breadcrumbs()
     proj.make_pager()
     proj.make_site()

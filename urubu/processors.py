@@ -24,6 +24,8 @@ import os
 import markdown
 import jinja2
 
+from markdown_checklist.extension import ChecklistExtension
+
 from urubu import UrubuWarning, UrubuError
 from urubu import md_extensions
 
@@ -49,7 +51,8 @@ class ContentProcessor(object):
         self.site = project.site
         tableclass = md_extensions.TableClassExtension() 
         projectref = md_extensions.ProjectReferenceExtension()
-	extensions = ['extra', 'codehilite', 'headerid', 'toc', tableclass, projectref]
+        checklist = ChecklistExtension()
+	extensions = ['extra', 'codehilite', 'headerid', 'toc', tableclass, projectref, checklist]
         extension_configs = { 'codehilite' : [('guess_lang', 'False'),
                                               ('linenums', 'False')],
                               'headerid': [('level', 2)]

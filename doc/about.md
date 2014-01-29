@@ -32,7 +32,8 @@ is hosted on [GitHub Pages].
 Theme
 =====
 
-The theme on this website is based on stock [bootstrap].
+The theme on this website uses the [bootstrap] framework,
+and is based on stock [bootstrap].
 
 Trivia
 ======

@@ -31,12 +31,10 @@ converts the format to html. Urubu also supports the industry standard
 lists.
 
 Urubu supports nicely rendered code blocks, an essential feature for software
-projects documentation. [Fenced Code Blocks] are provided by the Markdown Extra
+projects documentation. [fenced_code] are provided by the Markdown Extra
 extensions.  This lets you enter language-specific code blocks without the need
-for indentation. The CodeHilite extension of Python-Markdown enables
+for indentation. The [code_hilite] extension of Python-Markdown enables
 language-specific syntax highlighting via the [pygments] library.
-
-[Fenced Code Blocks]: http://pythonhosted.org/Markdown/extensions/fenced_code_blocks.html
 
 Configuration
 =============
@@ -76,10 +74,10 @@ this is a sophisticated technique to define how the various html elements
 should be rendered by the web browser.
 
 With Urubu, you are free to design and use your own style sheets. However, it
-has been developed with the [bootstrap] framework in mind.  Bootstrap is a
+has been developed with [bootstrap] in mind.  Bootstrap is a
 professionally-designed framework with lots of useful predefined styles
-components. Urubu generates html that is Bootstrap-friendly, and infers
-the appropriate template variables for certain Bootstrap components. 
+components. Urubu generates html that is Bootstrap-friendly, and infers the
+appropriate template variables for certain Bootstrap components. 
 
 A great feature of Bootstrap is that it is "mobile first". This means that your
 website will automatically adapt to any platform - smartphone, tablet or

@@ -34,7 +34,6 @@
 
           <ul class="nav navbar-nav navbar-left">
             {% block home %} 
-	    <li><a href="/">Home</a></li>    
             {% endblock %}
             {% for item in site.reflinks['/'].content[:-2] %}
             {%   set context = '' %}

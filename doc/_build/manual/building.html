@@ -34,12 +34,11 @@
 
           <ul class="nav navbar-nav navbar-left">
  
-	    <li><a href="/">Home</a></li>    
             <li><a href="/start.html">Read me first</a></li>
             <li><a href="/install.html">Installation</a></li>
             <li class="active"><a href="/manual/">Manual</a></li>
             <li><a href="/faq/">FAQ</a></li>
-            <li><a href="/status.html">Status & Plans</a></li>
+            <li><a href="/status.html">Status</a></li>
           </ul>
 
           <ul class="nav navbar-nav navbar-right">
@@ -125,10 +124,10 @@ using <code>python -m urubu</code>, with the same effect.</p>
 <dd>Build the website. Run this from the top level in the project
 directory. The website will be built in the <code>_build</code> subdirectory.</dd>
 <dt><code>serve</code></dt>
-<dd>Start a local webserver to serve the website as you develop it.
-The website will be available at <code>localhost:8000</code>. Run this
-command in a separate terminal window and kill the server
-when you are done.</dd>
+<dd>Start a local webserver to serve the website as you develop it.  The
+website will be available at <code>localhost:8000</code>. Run this command from within the
+<code>_build</code> subdirectory in a separate terminal window, and kill the server when
+you are done.</dd>
 </dl>
 <h2 id="development-flow">Development flow</h2>
 <p>I prefer to put the  commands in a Makefile, so that I can

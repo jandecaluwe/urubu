@@ -50,13 +50,13 @@ Urubu generates a website by processing the files and directory in the project
 directory, and putting the result in a `_build` subdirectory. The processing
 depends on the pathname as follows:
 
-* a `Makefile` is not copied to the build 
+* a `Makefile` is not copied to the build. 
 * files and directories starting with a
 dot `.` or underscore `_` are not copied to the build.
 * Markdown files with extension `.md` are converted to a
-html file that is put into the build in the same relative location
+html file that is put into the build in the same relative location.
 * all other files and directories are copied unmodified to the build in the
-same relative location
+same relative location.
 
 As a result of the project organization and the build process, the
 structure of the build matches the structure of the project directory.
@@ -116,8 +116,8 @@ to link objects in your content and configuration.  Their definition comes
 from two sources:
 
 * global reference ids are mapped to link objects in the `_site.yml`
-configuration file, as discussed earlier
-* all content pages and folders objects have reference ids
+configuration file, as discussed earlier.
+* all content pages and folders objects have reference ids.
 
 Project-wide references ids live in a single namespace. For pages and folders,
 the id is a root-relative pathname starting with a slash `/` and without file

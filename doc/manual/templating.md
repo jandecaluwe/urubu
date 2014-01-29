@@ -19,9 +19,9 @@ of your content files.
 
 In general, it is better to keep logic in Python code.  However, for the
 purpose of generation of pages in a format such as html, this would not be very
-practical.  A template is therefore a compromise, in which some of the logic to
-the template itself. Template logic is good for the following common tasks when
-generating pages:
+practical.  A template is therefore a compromise, in which some of the logic is
+put into the template itself. Template logic is good for the following common
+tasks:
 
 * iteration over a list of items
 * testing whether an item is defined
@@ -87,6 +87,7 @@ Attribute      | Description
 
 Attribute      | Description 
 ---------------|---------------------------
+`fn`           | The pathname of the file or directory corresponding the object. 
 `components`   | The components of the object's pathname, without file extension, as a list.
 
 ### Folder attributes
@@ -127,7 +128,7 @@ two context variables.
 
 ### `site` 
 
-This Variable holds site-wide information.
+This variable holds site-wide information.
 
 It has one predefined attribute:
 

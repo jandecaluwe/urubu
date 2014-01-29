@@ -21,11 +21,11 @@ The `urubu` command supports two subcommands:
 : Build the website. Run this from the top level in the project
 directory. The website will be built in the `_build` subdirectory.
 
-`serve`
-: Start a local webserver to serve the website as you develop it.
-The website will be available at `localhost:8000`. Run this
-command in a separate terminal window and kill the server
-when you are done.
+`serve` 
+: Start a local webserver to serve the website as you develop it.  The
+website will be available at `localhost:8000`. Run this command from within the
+`_build` subdirectory in a separate terminal window, and kill the server when
+you are done.
 
 Development flow
 ================

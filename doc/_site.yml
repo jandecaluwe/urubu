@@ -55,3 +55,21 @@ reflinks:
     urubu_repo:
         url: https://github.com/jandecaluwe/urubu
         title: Urubu repo
+    tables: 
+        url: http://pythonhosted.org/Markdown/extensions/tables.html
+        title: Tables
+    abbrev: 
+        url: http://pythonhosted.org/Markdown/extensions/abbreviations.html
+        title: Abbrevations
+    def_list: 
+        url: http://pythonhosted.org/Markdown/extensions/definition_lists.html
+        title: Definition Lists
+    fenced_code: 
+        url: http://pythonhosted.org/Markdown/extensions/fenced_code_blocks.html
+        title: Fenced Code Blocks
+    markdown_checklist: 
+        url: https://github.com/FND/markdown-checklist
+        title: GitHub style Task Lists
+    code_hilite: 
+        url: http://pythonhosted.org/Markdown/extensions/code_hilite.html
+        title: CodeHilite

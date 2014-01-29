@@ -1,11 +1,11 @@
 ---
-title: Status & Plans 
+title: Status 
 layout: page 
 date: 2014-01-10
 ---
 
-Status
-======
+Current status
+==============
 
 The Urubu software is in the alpha stage of experimental releases.
 
@@ -19,11 +19,11 @@ Plans
 
 In the future, some support for tagging and pagination may be added.
 
-I have no plans to add special support for on-site comments. I have become
+I have currently no plans to add special support for on-site comments. I have become
 skeptical of their value, as weak comments consume a lot more (negative) energy
 than strong ones. Of course, you can do that yourself in the templates. 
 
-Also, I have no plans to support other input formats, such as reStructuredText
+Also, I have currently no plans to support other input formats, such as reStructuredText
 or asciidoc. I work with reStructuredText for manuals, but I don't particularly
 like it. Some work was needed on Markdown extensions in order to support my
 requirements, and I believe the result is fine now. I don't see much value in

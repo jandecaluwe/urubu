@@ -10,10 +10,19 @@ Content
 In Urubu, content is entered in [markdown] format. This is a lightweight format
 that feels like a natural way to write content in plain text.
 
-The original markdown has a small feature set. For example, it did not even
+Stock markdown has a small feature set. For example, it does not even
 support tables. For this reason, Urubu supports some extensions. In particular,
 it supports the [markdown_extra] extensions that have become an industry
-standard.
+standard, as well as a few others.
+
+The most notable supported extensions are:
+
+* [tables]
+* [abbrev]
+* [def_list]
+* [fenced_code] 
+* [code_hilite]
+* [markdown_checklist]
 
 Code
 ====
@@ -21,16 +30,20 @@ Code
 Urubu intents to offer good support for software projects. Therefore, it
 supports nicely rendered code blocks. 
 
-One part of the solution is *fenced code blocks*, provided by the Markdown
-Extra extensions.  This lets you enter language-specific code blocks without
-the need for indentation.
+One part of the solution is [fenced_code], provided by the Markdown Extra
+extensions.  This lets you enter language-specific code blocks without the need
+for indentation.
 
-The second part is the CodeHilite extension of Python-Markdown.  This extension
-enables language-specific syntax highlighting through the [pygments] library.
+The second part is the [code_hilite] extension of Python-Markdown.  This
+extension enables language-specific syntax highlighting through the [pygments]
+library.
 
 To properly render the highlighted code, you will need to add a `syntax.css`
-stylesheet. A good solutions is to use the [syntax stylesheet from
+stylesheet. A good solution is to use the [syntax stylesheet from
 GitHub][syntax_github].
+
+
+
 
 [syntax_github]: https://github.com/mojombo/tpw/blob/master/css/syntax.css
 

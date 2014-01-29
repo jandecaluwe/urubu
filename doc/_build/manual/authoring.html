@@ -34,12 +34,11 @@
 
           <ul class="nav navbar-nav navbar-left">
  
-	    <li><a href="/">Home</a></li>    
             <li><a href="/start.html">Read me first</a></li>
             <li><a href="/install.html">Installation</a></li>
             <li class="active"><a href="/manual/">Manual</a></li>
             <li><a href="/faq/">FAQ</a></li>
-            <li><a href="/status.html">Status & Plans</a></li>
+            <li><a href="/status.html">Status</a></li>
           </ul>
 
           <ul class="nav navbar-nav navbar-right">
@@ -117,20 +116,30 @@ window.__gcfg = {
             <h2 id="content">Content</h2>
 <p>In Urubu, content is entered in <a href="http://daringfireball.net/projects/markdown/" title="Markdown">Markdown</a> format. This is a lightweight format
 that feels like a natural way to write content in plain text.</p>
-<p>The original markdown has a small feature set. For example, it did not even
+<p>Stock markdown has a small feature set. For example, it does not even
 support tables. For this reason, Urubu supports some extensions. In particular,
 it supports the <a href="http://pythonhosted.org/Markdown/extensions/extra.html" title="Markdown Extra">Markdown Extra</a> extensions that have become an industry
-standard.</p>
+standard, as well as a few others.</p>
+<p>The most notable supported extensions are:</p>
+<ul>
+<li><a href="http://pythonhosted.org/Markdown/extensions/tables.html" title="Tables">Tables</a></li>
+<li><a href="http://pythonhosted.org/Markdown/extensions/abbreviations.html" title="Abbrevations">Abbrevations</a></li>
+<li><a href="http://pythonhosted.org/Markdown/extensions/definition_lists.html" title="Definition Lists">Definition Lists</a></li>
+<li><a href="http://pythonhosted.org/Markdown/extensions/fenced_code_blocks.html" title="Fenced Code Blocks">Fenced Code Blocks</a> </li>
+<li><a href="http://pythonhosted.org/Markdown/extensions/code_hilite.html" title="CodeHilite">CodeHilite</a></li>
+<li><a href="https://github.com/FND/markdown-checklist" title="GitHub style Task Lists">GitHub style Task Lists</a></li>
+</ul>
 <h2 id="code">Code</h2>
 <p>Urubu intents to offer good support for software projects. Therefore, it
 supports nicely rendered code blocks. </p>
-<p>One part of the solution is <em>fenced code blocks</em>, provided by the Markdown
-Extra extensions.  This lets you enter language-specific code blocks without
-the need for indentation.</p>
-<p>The second part is the CodeHilite extension of Python-Markdown.  This extension
-enables language-specific syntax highlighting through the <a href="http://pygments.org" title="Pygments">Pygments</a> library.</p>
+<p>One part of the solution is <a href="http://pythonhosted.org/Markdown/extensions/fenced_code_blocks.html" title="Fenced Code Blocks">Fenced Code Blocks</a>, provided by the Markdown Extra
+extensions.  This lets you enter language-specific code blocks without the need
+for indentation.</p>
+<p>The second part is the <a href="http://pythonhosted.org/Markdown/extensions/code_hilite.html" title="CodeHilite">CodeHilite</a> extension of Python-Markdown.  This
+extension enables language-specific syntax highlighting through the <a href="http://pygments.org" title="Pygments">Pygments</a>
+library.</p>
 <p>To properly render the highlighted code, you will need to add a <code>syntax.css</code>
-stylesheet. A good solutions is to use the <a href="https://github.com/mojombo/tpw/blob/master/css/syntax.css">syntax stylesheet from
+stylesheet. A good solution is to use the <a href="https://github.com/mojombo/tpw/blob/master/css/syntax.css">syntax stylesheet from
 GitHub</a>.</p>
 <h2 id="reference-links">Reference links</h2>
 <p>Stock Markdown supports "reference links" that are resolved by defining them

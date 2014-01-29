@@ -10,6 +10,13 @@ You can install Urubu using pip:
 pip install urubu
 ```
 
+To upgrade an existing installation to the
+latest version, use:
+
+```
+pip install --upgrade urubu
+```
+
 If pip is not yet available on your system, follow the [pip installation
 instructions][pip_install].
 

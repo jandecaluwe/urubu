@@ -34,12 +34,11 @@
 
           <ul class="nav navbar-nav navbar-left">
  
-	    <li><a href="/">Home</a></li>    
             <li><a href="/start.html">Read me first</a></li>
             <li><a href="/install.html">Installation</a></li>
             <li class="active"><a href="/manual/">Manual</a></li>
             <li><a href="/faq/">FAQ</a></li>
-            <li><a href="/status.html">Status & Plans</a></li>
+            <li><a href="/status.html">Status</a></li>
           </ul>
 
           <ul class="nav navbar-nav navbar-right">
@@ -160,13 +159,13 @@ directory should have an <code>index.md</code> file, including the top-level dir
 directory, and putting the result in a <code>_build</code> subdirectory. The processing
 depends on the pathname as follows:</p>
 <ul>
-<li>a <code>Makefile</code> is not copied to the build </li>
+<li>a <code>Makefile</code> is not copied to the build. </li>
 <li>files and directories starting with a
 dot <code>.</code> or underscore <code>_</code> are not copied to the build.</li>
 <li>Markdown files with extension <code>.md</code> are converted to a
-html file that is put into the build in the same relative location</li>
+html file that is put into the build in the same relative location.</li>
 <li>all other files and directories are copied unmodified to the build in the
-same relative location</li>
+same relative location.</li>
 </ul>
 <p>As a result of the project organization and the build process, the
 structure of the build matches the structure of the project directory.
@@ -221,8 +220,8 @@ to link objects in your content and configuration.  Their definition comes
 from two sources:</p>
 <ul>
 <li>global reference ids are mapped to link objects in the <code>_site.yml</code>
-configuration file, as discussed earlier</li>
-<li>all content pages and folders objects have reference ids</li>
+configuration file, as discussed earlier.</li>
+<li>all content pages and folders objects have reference ids.</li>
 </ul>
 <p>Project-wide references ids live in a single namespace. For pages and folders,
 the id is a root-relative pathname starting with a slash <code>/</code> and without file

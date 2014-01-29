@@ -34,12 +34,11 @@
 
           <ul class="nav navbar-nav navbar-left">
  
-	    <li><a href="/">Home</a></li>    
             <li><a href="/start.html">Read me first</a></li>
             <li><a href="/install.html">Installation</a></li>
             <li class="active"><a href="/manual/">Manual</a></li>
             <li><a href="/faq/">FAQ</a></li>
-            <li><a href="/status.html">Status & Plans</a></li>
+            <li><a href="/status.html">Status</a></li>
           </ul>
 
           <ul class="nav navbar-nav navbar-right">
@@ -142,9 +141,9 @@ all you have to do is specify the appropriate layout in the YAML front matter
 of your content files.</p>
 <p>In general, it is better to keep logic in Python code.  However, for the
 purpose of generation of pages in a format such as html, this would not be very
-practical.  A template is therefore a compromise, in which some of the logic to
-the template itself. Template logic is good for the following common tasks when
-generating pages:</p>
+practical.  A template is therefore a compromise, in which some of the logic is
+put into the template itself. Template logic is good for the following common
+tasks:</p>
 <ul>
 <li>iteration over a list of items</li>
 <li>testing whether an item is defined</li>
@@ -234,6 +233,10 @@ available in the <code>content</code> of a particular index page.</p>
 </thead>
 <tbody>
 <tr>
+<td><code>fn</code></td>
+<td>The pathname of the file or directory corresponding the object.</td>
+</tr>
+<tr>
 <td><code>components</code></td>
 <td>The components of the object's pathname, without file extension, as a list.</td>
 </tr>
@@ -299,7 +302,7 @@ have the same <code>content</code> attribute as the corresponding folder object.
 <p>Urubu makes the context available to templates with
 two context variables.</p>
 <h4 id="site"><code>site</code></h4>
-<p>This Variable holds site-wide information.</p>
+<p>This variable holds site-wide information.</p>
 <p>It has one predefined attribute:</p>
 <table class="table">
 <thead>

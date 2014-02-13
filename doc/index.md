@@ -6,6 +6,7 @@ content:
     - install
     - manual 
     - faq
+    - support
     - status
     - sites
     - about

@@ -22,9 +22,19 @@ body {
 }
 
 /* toc */
+
+.sidebar {
+    line-height: normal
+}
+
 .toc ul  {
     padding-left: 0;
+    font-size: 90%;
     list-style: none;
+}
+
+.toc ul li {
+    padding-top: 3px;
 }
 
 .toc ul ul {

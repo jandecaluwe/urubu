@@ -151,7 +151,7 @@ Attribute | Description
 -----------|------------
 `title`    | Specifies the page title. Mandatory.
 `layout`   | Specifies the desired layout, without the `.html` extension. Mandatory.
-`date`     | Specifies the date. Optional.
+`date`     | Specifies the date in YYYY-MM-DD format. Optional.
 `tags`     | Reserved for future use.
 
 In addition, you can add arbitrary user-defined attributes. All attributes 

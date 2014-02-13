@@ -4,6 +4,9 @@ reflinks:
     jandecaluwe:
         url: http://www.jandecaluwe.com
         title: Jan Decaluwe
+    myhdl_site: 
+        url: http://new.myhdl.org 
+        title: MyHDL website
     dev_myhdl_site: 
         url: http://dev.myhdl.org 
         title: MyHDL development website

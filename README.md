@@ -1,5 +1,5 @@
-Urubu 0.2
-=========
+Urubu 0.2.1
+===========
 
 Urubu is a micro CMS for static websites, with a focus on good navigation
 practices.

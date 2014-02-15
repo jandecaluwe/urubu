@@ -38,10 +38,18 @@ sitedir = '_build'
 yamlfm_warning = "No yaml front matter in '{}' - ignored"
 undef_ref_error = "Undefined reference '{}' in '{}'"
 ambig_ref_error = "Ambiguous reference id '{}'"
-undef_layout_error = "Layout undefined in {}"
+undef_layout_error = "'layout' undefined in {}"
 undef_meta_error = "{} '{}' has no '{}' attribute"
 date_error = "Date format error in '{}' (should be YYYY-MM-DD)"
 undef_key_error = "Undefined key '{}' in '{}'"
+undef_content_error = "No 'content' or 'order' specified in {}"
+
+type_error = "'{}' value should be a '{}' in '{}'"  
+
+def require(key, mapping, tipe, fn):
+    if key in mapping:
+        if not (isinstance(mapping[key], tipe)):
+            raise TypeError(type_error.format(key, tipe, fn))
 
 def get_relpath(path, start):
     return os.path.relpath(path, start) 
@@ -149,6 +157,7 @@ class Project(object):
                     if fn == 'index.md':
                         info = self.make_navinfo(relpath, meta)
                         self.navinfo.append(info)
+                        self.validate_navmeta(relfn, info)
                         self.add_reflink(info['id'], info)
 
     def validate_filemeta(self, relfn, meta):
@@ -169,6 +178,11 @@ class Project(object):
         if 'date' in meta:
             if not isinstance(meta['date'], datetime.date):
                 raise UrubuError(date_error.format(relfn))
+
+    def validate_navmeta(self, relfn, meta):
+        if ('content' not in meta) and ('order' not in meta):
+            raise UrubuError(undef_content_error.format(relfn))
+        require('content', meta, list, relfn)
 
     def make_fileinfo(self, relfn, meta):
         """Make a fileinfo dict."""
@@ -199,6 +213,7 @@ class Project(object):
             if 'content' in info:
                 self.resolve_content(info)
             else: # order
+                assert 'order' in info
                 self.get_content(info)
             # make reflinks content available in index file also
             index_id = make_id(info['components'] + ['index'])
@@ -278,6 +293,8 @@ class Project(object):
     def make_pager(self):
         for info in self.navinfo:
             content = info['content']
+            if not content:
+                return
             content[0]['prev'] = None
             for i in range(1, len(content)):
                 content[i-1]['next'] = content[i]

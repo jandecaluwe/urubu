@@ -285,7 +285,11 @@ class Project(object):
         for info in self.fileinfo:
             breadcrumbs = []
             id = '' 
-            for comp in info['components']: 
+            comps = info['components'] 
+            # discard index 
+            if comps[-1] == 'index':
+                comps = comps[:-1]
+            for comp in comps: 
                 id = id + '/' + comp
                 breadcrumbs.append(self.site['reflinks'][id])
             info['breadcrumbs'] = breadcrumbs

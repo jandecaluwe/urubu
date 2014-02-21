@@ -1,5 +1,5 @@
 ---
-title: Sites
+title: Urubu sites
 layout: index
 navstyle: expand
 content:

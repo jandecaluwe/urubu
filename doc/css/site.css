@@ -12,13 +12,13 @@ body {
     margin-top: 20px;
 }
 
-h2:first-of-type {
+.content h2:first-of-type {
   margin-top: 0px;
 }
 
 .half-rule {
   width: 100px;
-  margin: 15px auto;
+  margin: 25px auto;
 }
 
 

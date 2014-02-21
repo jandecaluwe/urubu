@@ -12,13 +12,33 @@ body {
     margin-top: 20px;
 }
 
+h2:first-of-type {
+  margin-top: 0px;
+}
+
+.half-rule {
+  width: 100px;
+  margin: 15px auto;
+}
+
+
+.fa {
+  margin-right: 0.5em;
+}
+
+.checklist {
+  padding: 0;
+  list-style: none;
+}
+
 /* footer */
 
 .footer {
-  margin-top: 20px;
+  margin-top: 30px;
   padding-top: 16px;
   color: #777;
   border-top: 1px solid #eee;
+  text-align: center;
 }
 
 /* toc */

@@ -28,9 +28,6 @@
         {% block content %}
         <div class="col-md-6" data-spy="scroll" data-target="#sidenav" role="main">
              
-            {% block sharing %}
-            {% endblock %}
-
             {{this.body}}
         </div>
         {% endblock %}
@@ -41,6 +38,9 @@
     {% endblock %}
 
     <div class="footer">
+        <div style="margin: 8px">
+        {% include 'sharing.html' %}
+        </div>
         <p class="text-center"> Content licensed under the
            <a href="{{site.reflinks.content_license.url}}">{{site.reflinks.content_license.title}}</a>
         </p> 

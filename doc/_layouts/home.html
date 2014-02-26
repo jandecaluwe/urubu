@@ -17,6 +17,8 @@
 </div>
 
 <div class="container">
+{% set news = site.reflinks['/news'].content[0] %}
+<p class="lead text-center">{{news.date|datetimeformat}}: <a href="news">{{news.title}}</a></p>
 {{this.body}}
 </div>
 

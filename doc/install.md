@@ -4,6 +4,9 @@ layout: page
 date: 2014-01-10
 ---
 
+Urubu requires Python 2.7. It is developed with Python 3 in mind, but only
+tested with Python 2.7.
+
 You can install Urubu using pip: 
 
 ```

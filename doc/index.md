@@ -69,12 +69,3 @@ Deploy by pushing.
 
 </div>
 
-<hr class="half-rule">
-
-<div class="col-md-6 col-md-offset-3">
-Urubu is currently at version 0.2.1.
-It is developed with Python 3 in mind, but only tested with Python 2.7.
-Currently, I develop and test it on the websites that I maintain.
-</div>
-
-

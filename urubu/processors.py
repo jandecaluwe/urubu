@@ -48,6 +48,7 @@ class ContentProcessor(object):
     def __init__(self, sitedir, project):
         self.sitedir = sitedir
         self.fileinfo = project.fileinfo
+        self.navinfo = project.navinfo
         self.site = project.site
         tableclass = md_extensions.TableClassExtension() 
         projectref = md_extensions.ProjectReferenceExtension()
@@ -92,6 +93,18 @@ class ContentProcessor(object):
                 # filter out empty tocs, 35 is the magic length
                 if len(self.md.toc) > 35:
                     info['toc'] = self.md.toc
+            # markdown support in keys
+            mdkeys = [key for key in info if key[-3:] == '.md']
+            for mdkey in mdkeys:
+                key = mdkey[:-3]
+                info[key] = self.md.convert(info[mdkey]) 
+            self.md.reset()        
+        for info in self.navinfo:
+            # markdown support in keys
+            mdkeys = [key for key in info if key[-3:] == '.md']
+            for mdkey in mdkeys:
+                key = mdkey[:-3]
+                info[key] = self.md.convert(info[mdkey]) 
             self.md.reset()        
 
     def render(self):

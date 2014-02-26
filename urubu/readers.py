@@ -46,7 +46,7 @@ def _get_yamlfm_helper(fn):
             if not line:
                 return None
             elif line.strip() == '---':
-                s = '\n'.join(lines)
+                s = ''.join(lines)
                 meta = yaml.safe_load(s)
                 if isinstance(meta, dict):
                     return meta

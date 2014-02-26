@@ -39,14 +39,14 @@ yamlfm_warning = "No yaml front matter in '{}' - ignored"
 undef_ref_error = "Undefined reference '{}' in '{}'"
 ambig_ref_error = "Ambiguous reference id '{}'"
 undef_layout_error = "'layout' undefined in {}"
-undef_meta_error = "{} '{}' has no '{}' attribute"
+undef_info_error = "{} '{}' has no '{}' attribute"
 date_error = "Date format error in '{}' (should be YYYY-MM-DD)"
 undef_key_error = "Undefined key '{}' in '{}'"
 undef_content_error = "No 'content' or 'order' specified in {}"
 
 type_error = "'{}' value should be a '{}' in '{}'"  
 
-def require(key, mapping, tipe, fn):
+def require_key(key, mapping, tipe, fn):
     if key in mapping:
         if not (isinstance(mapping[key], tipe)):
             raise TypeError(type_error.format(key, tipe, fn))
@@ -152,37 +152,37 @@ class Project(object):
                     info = self.make_fileinfo(relfn, meta)
                     self.fileinfo.append(info)
                     # validate after file info has been added so it can be used
-                    self.validate_filemeta(relfn, info)
+                    self.validate_fileinfo(relfn, info)
                     self.add_reflink(info['id'], info)
                     if fn == 'index.md':
                         info = self.make_navinfo(relpath, meta)
                         self.navinfo.append(info)
-                        self.validate_navmeta(relfn, info)
+                        self.validate_navinfo(relfn, info)
                         self.add_reflink(info['id'], info)
 
-    def validate_filemeta(self, relfn, meta):
-        if 'layout' not in meta:
-            raise UrubuError(undef_meta_error.format('File', relfn, 'layout'))
-        layout = meta['layout']
+    def validate_fileinfo(self, relfn, info):
+        if 'layout' not in info:
+            raise UrubuError(undef_info_error.format('File', relfn, 'layout'))
+        layout = info['layout']
         # first run a validator if it exist
         if layout in self.validators:
-            self.validators[layout](meta)
+            self.validators[layout](info)
         # a validator may add/modify attributes
-        layout = meta['layout']
+        layout = info['layout']
         if layout is None:
             return
         if layout not in self.layouts:
             self.layouts.append(layout)
-        if 'title' not in meta:
-            raise UrubuError(undef_meta_error.format('File', relfn, 'title'))
-        if 'date' in meta:
-            if not isinstance(meta['date'], datetime.date):
+        if 'title' not in info:
+            raise UrubuError(undef_info_error.format('File', relfn, 'title'))
+        if 'date' in info:
+            if not isinstance(info['date'], datetime.date):
                 raise UrubuError(date_error.format(relfn))
 
-    def validate_navmeta(self, relfn, meta):
-        if ('content' not in meta) and ('order' not in meta):
+    def validate_navinfo(self, relfn, info):
+        if ('content' not in info) and ('order' not in info):
             raise UrubuError(undef_content_error.format(relfn))
-        require('content', meta, list, relfn)
+        require_key('content', info, list, relfn)
 
     def make_fileinfo(self, relfn, meta):
         """Make a fileinfo dict."""

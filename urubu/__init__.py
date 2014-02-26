@@ -15,7 +15,7 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with Urubu.  If not, see <http://www.gnu.org/licenses/>.
 
-__version__ = "0.2.1"
+__version__ = "0.3"
 
 class UrubuWarning(UserWarning):
     pass

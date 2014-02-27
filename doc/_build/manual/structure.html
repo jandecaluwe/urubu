@@ -93,6 +93,7 @@
 </li>
 <li><a href="#project-wide-reference-ids">Project-wide reference ids</a></li>
 <li><a href="#content-files">Content files</a></li>
+<li><a href="#markdown-in-attributes">Markdown in attributes</a></li>
 <li><a href="#index-files">Index files</a></li>
 </ul>
 </div>
@@ -254,6 +255,26 @@ date: 2014-01-15
 </table>
 <p>In addition, you can add arbitrary user-defined attributes. All attributes 
 are made available as page object attributes to the template engine.</p>
+<h2 id="markdown-in-attributes">Markdown in attributes</h2>
+<p>Optionally, you can use markdown format in front matter attributes.  Markdown
+processing is enabled by adding a <code>.md</code> suffix to the attribute. The resulting
+html code will be stored in a synthesized attribute without the <code>.md</code> suffix.  </p>
+<p>For example:</p>
+<div class="codehilite"><pre>---
+title:  
+layout: page
+summary.md: |
+    A summary of the page items as a list:
+
+    * item 1
+    * item 2
+    * item 3 
+---
+</pre></div>
+
+
+<p>After processing, the page object will have a <code>summary</code> attribute with the html
+code.</p>
 <h2 id="index-files">Index files</h2>
 <p>Index files with basename <code>index.md</code> are a special kind of content files.  They
 are used to specify the attributes and the content of a directory. There are

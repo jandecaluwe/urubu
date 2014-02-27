@@ -157,6 +157,31 @@ Attribute | Description
 In addition, you can add arbitrary user-defined attributes. All attributes 
 are made available as page object attributes to the template engine.
 
+Markdown in attributes
+======================
+
+Optionally, you can use markdown format in front matter attributes.  Markdown
+processing is enabled by adding a `.md` suffix to the attribute. The resulting
+html code will be stored in a synthesized attribute without the `.md` suffix.  
+
+For example:
+
+```
+---
+title:  
+layout: page
+summary.md: |
+    A summary of the page items as a list:
+    
+    * item 1
+    * item 2
+    * item 3 
+---
+```
+
+After processing, the page object will have a `summary` attribute with the html
+code.
+
 Index files
 ===========
 

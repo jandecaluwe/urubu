@@ -114,6 +114,9 @@ class Project(object):
 
     def get_pythonhooks(self):
         """Get user-defined python hooks."""
+        # add cwd to path to make it entry points work on windows
+        import sys
+        sys.path.insert(0, os.getcwd())
         try:
             import _python
         except ImportError:

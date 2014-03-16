@@ -36,8 +36,9 @@ workdir = os.getcwd()
 sitedir = '_build'
 
 yamlfm_warning = "No yaml front matter in '{}' - ignored"
+ambig_reflink_error = "Ambiguous reference id '{}'"
 undef_ref_error = "Undefined reference '{}' in '{}'"
-ambig_ref_error = "Ambiguous reference id '{}'"
+ambig_ref_error = "Ambiguous reference id '{}' in '{}'"
 undef_layout_error = "'layout' undefined in {}"
 undef_info_error = "{} '{}' has no '{}' attribute"
 date_error = "Date format error in '{}' (should be YYYY-MM-DD)"
@@ -137,7 +138,7 @@ class Project(object):
         """Add a valid reflink to the site reflinks."""
         id = id.lower()
         if id in self.site['reflinks']:
-            raise UrubuError(ambig_ref_error.format(id))
+            raise UrubuError(ambig_reflink_error.format(id))
         self.site['reflinks'][id] = info 
          
     def get_contentinfo(self):
@@ -238,13 +239,15 @@ class Project(object):
         """Resolve a reference."""
         reflinks = self.site['reflinks']
         ref = ref.lower()
+        path = os.path.normpath(os.path.join(info['fn'], ref)) 
+        indexfn = info['fn'] + '/index'
+        id = make_id(get_components(path, hasext=False)) 
         if ref in reflinks:
+           if (ref != id) and (id in reflinks):
+               raise UrubuError(ambig_ref_error.format(ref, indexfn))  
            id = ref    
-        else:
-           path = os.path.normpath(os.path.join(info['fn'], ref)) 
-           id = make_id(get_components(path, hasext=False)) 
-           if not id in reflinks:
-               raise UrubuError(undef_ref_error.format(ref, info['fn']))  
+        elif not id in reflinks:
+           raise UrubuError(undef_ref_error.format(ref, indexfn))  
         return reflinks[id]    
 
     def resolve_linkspec(self, linkspec, info):

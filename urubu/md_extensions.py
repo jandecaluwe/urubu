@@ -27,9 +27,10 @@ from markdown import Extension
 from markdown.treeprocessors import Treeprocessor
 from markdown.inlinepatterns import ReferencePattern, REFERENCE_RE, SHORT_REF_RE
 
-from urubu import UrubuWarning
+from urubu import UrubuWarning, UrubuError
 
 undef_ref_warning = "Undefined ref [{}] in file '{}'"
+ambig_ref_error = "Ambiguous ref [{}] in file '{}'"
 
 
 def _set_table_class(tree):
@@ -53,36 +54,40 @@ class ProjectReferencePattern(ReferencePattern):
 
     def handleMatch(self, m):
         try:
-            id = m.group(9).lower()
+            ref = m.group(9).lower()
         except IndexError:
-            id = None
+            ref = None
         shortref = False
-        if not id:
+        if not ref:
             # if we got something like "[Google][]" or "[Google]"
             # we'll use "google" as the id
-            id = m.group(2).lower()
+            ref = m.group(2).lower()
             shortref = True
 
         text = m.group(2)
-        # Clean up linebreaks in id
-        id = self.NEWLINE_CLEANUP_RE.sub(' ', id)
-        if id in self.markdown.references:
-            href, title = self.markdown.references[id]
+        # Clean up linebreaks in ref 
+        ref = self.NEWLINE_CLEANUP_RE.sub(' ', ref)
+        if ref in self.markdown.references:
+            href, title = self.markdown.references[ref]
         else: 
-            orig_id = id
             this = self.markdown.this
-            if id not in self.markdown.site['reflinks']:
-                if not posixpath.isabs(id):
-                    rootrelpath = '/' +  '/'.join(this['components'][:-1])
-                    id = posixpath.normpath(posixpath.join(rootrelpath, id))
-                    id = id.lower()
+            if not posixpath.isabs(ref):
+                rootrelpath = '/' +  '/'.join(this['components'][:-1])
+                id = posixpath.normpath(posixpath.join(rootrelpath, ref))
+                id = id.lower()
+            else:
+                id = ref
+            if ref in self.markdown.site['reflinks']:
+                if (ref != id) and (id in self.markdown.site['reflinks']):
+                    raise UrubuError(ambig_ref_error.format(ref, this['fn']))  
+                id = ref 
             if id in self.markdown.site['reflinks']:
                 item = self.markdown.site['reflinks'][id]
                 href, title = item['url'], item['title'] 
                 if shortref:
                     text = title
             else: # ignore undefined refs
-                warn(undef_ref_warning.format(orig_id, this['fn']), UrubuWarning)
+                warn(undef_ref_warning.format(ref, this['fn']), UrubuWarning)
                 return None
 
         return self.makeTag(href, title, text)

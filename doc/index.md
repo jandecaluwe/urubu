@@ -71,8 +71,8 @@ define page layouts.
 <h4>Sophisticated control</h4>
 <p>
   Per-page control of page layout 
-  and other stuff. Plus,
-  add custom variables.  
+  and other stuff. Plus
+  user-defined variables.  
 </p>  
     </div>
 

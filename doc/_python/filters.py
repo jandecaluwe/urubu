@@ -1,5 +1,5 @@
-def datetimeformat(value, format="%d-%b-%Y"):
+def dateformat(value, format="%d-%b-%Y"):
     return value.strftime(format)
 
 filters = {}
-filters['datetimeformat'] = datetimeformat
+filters['dateformat'] = dateformat

@@ -82,7 +82,9 @@ class Project(object):
     def __init__(self):
         self.config = {}
         self.site = {'brand' : '',
-                     'reflinks': {}
+                     'reflinks': {},
+                     'link_ext' : '.html',
+                     'file_ext' : '.html'
                     }
         self.fileinfo = []
         self.filerefs = {}
@@ -195,7 +197,7 @@ class Project(object):
         info['components'] = components = get_components(relfn)
         info['id'] = make_id(components)
         # make html url from ref 
-        info['url'] = info['id'] + '.html'
+        info['url'] = info['id'] + self.site['link_ext']
         info.update(meta)
         return info
 

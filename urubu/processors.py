@@ -116,7 +116,7 @@ class ContentProcessor(object):
             html = templ.render(this=info, site=self.site)
             fn = info['fn']
             bfn, ext = os.path.splitext(fn)
-            outfn = os.path.join(self.sitedir, bfn) + '.html'
+            outfn = os.path.join(self.sitedir, bfn) + self.site['file_ext']
             with open(outfn, 'w', encoding='utf-8', errors='strict') as outf:
                outf.write(html)
         

@@ -69,7 +69,7 @@ Special files
 -----------
 
 This file contains site configuration info in YAML format.
-Currently, a single attribute is predefined: 
+Currently, these are the predefined attributes: 
 
 Attribute      | Description
 ---------------|-------------

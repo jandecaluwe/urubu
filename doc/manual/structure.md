@@ -74,9 +74,24 @@ Currently, a single attribute is predefined:
 Attribute      | Description
 ---------------|-------------
 `reflinks`     | Holds a mapping from reference ids to link objects.
+`file_ext`     | Change default file extension (`'.html'`) for processed `.md` files
+`link_ext`     | Change default file extension (`'.html'`) for links to site's pages
 
-Link objects are a mapping with an `url` key that maps to the link url and
-a `title` key that maps to the link title. 
+Link objects, for the `reflinks` attribute, are a mapping with an `url` key that maps
+to the link url and a `title` key that maps to the link title. 
+
+The file extension attributes , `file_ext` and `link_ext`, are both usually set to the
+same value (i.e. `'.php'`), unless the target site has .htaccess rewrite rules that
+affect the file extensions.
+
+Examples of this are sites that internally redirect pages like `www.test.com/account`
+to `www.test.com/account.htm`. For this case, one would need to set `file_ext` to
+`'.htm'`, so Urubu generated files have the `.htm` extension, whereas `link_ext` would
+be set to `''`, so that the `a href` links are directed to the files without extension.
+
+Otherwise, `file_ext` and `link_ext` should be set to the same extension, specially
+during testing, so that the simple web server invoked by `urubu serve` works fine,
+as well as any web server that does not rewrite the file extensions of the requests. 
 
 You can define additional attributes that will be made available as
 site variables to the template engine. The following is an example of a
@@ -95,6 +110,9 @@ reflinks:
     markdown:
         url: http://daringfireball.net/projects/markdown/  
         title: Markdown
+        
+file_ext: '.htm'  # Change default file extension ('.html')
+link_ext: '.htm'  # Change default link extension ('.html')
 ```
 
 `_layouts`

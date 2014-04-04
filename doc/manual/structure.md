@@ -80,7 +80,7 @@ Attribute      | Description
 Link objects, for the `reflinks` attribute, are a mapping with an `url` key that maps
 to the link url and a `title` key that maps to the link title. 
 
-The file extension attributes , `file_ext` and `link_ext`, are both usually set to the
+The file extension attributes, `file_ext` and `link_ext`, are both usually set to the
 same value (i.e. `'.php'`), unless the target site has .htaccess rewrite rules that
 affect the file extensions.
 

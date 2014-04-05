@@ -19,13 +19,20 @@ from __future__ import print_function
 
 import argparse
 
+import os
+
 from urubu import __version__
 from urubu import project
 
 def serve():
     """HTTP server straight from the docs."""
+    # allow running this from the top level
+    if os.path.isdir('_build'):
+        os.chdir('_build')     
     import SimpleHTTPServer
     import SocketServer
+    # local use, address reuse should be OK
+    SocketServer.TCPServer.allow_reuse_address = True
     PORT = 8000
     Handler = SimpleHTTPServer.SimpleHTTPRequestHandler
     httpd = SocketServer.TCPServer(('', PORT), Handler)

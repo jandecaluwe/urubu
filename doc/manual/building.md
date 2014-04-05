@@ -9,23 +9,22 @@ The `urubu` command
 
 After installation, an `urubu` command will be available.
 
-If you prefer, you can call the installed package as a script
-using `python -m urubu`, with the same effect.
+If you prefer, you can call the installed package as a script using `python -m
+urubu`, with the same effect.
 
 Subcommands
 ===========
 
-The `urubu` command supports two subcommands:
+The `urubu` command supports two subcommands. Run these commands from the top
+level project directory.
 
 `build`
-: Build the website. Run this from the top level in the project
-directory. The website will be built in the `_build` subdirectory.
+: Build the website.  The website will be in the `_build` subdirectory.
 
 `serve` 
-: Start a local webserver to serve the website as you develop it.  The
-website will be available at `localhost:8000`. Run this command from within the
-`_build` subdirectory in a separate terminal window, and kill the server when
-you are done.
+: Start a local webserver to serve the website as you develop it.  The website
+will be available at `localhost:8000`. Run this command in a separate terminal
+window, and kill the server when you are done.
 
 Development flow
 ================

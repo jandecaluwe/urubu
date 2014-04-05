@@ -1,15 +1,15 @@
 body {
-    position: relative;
-    padding-top: 50px;
-    padding-bottom: 20px;
+  position: relative;
+  padding-top: 50px;
+  padding-bottom: 20px;
 }
 
 .page-header {
-     margin-top: 30px;
+  margin-top: 30px;
 }
 
 .breadcrumb {
-    margin-top: 20px;
+  margin-top: 20px;
 }
 
 .content h2:first-of-type {
@@ -44,32 +44,32 @@ body {
 /* toc */
 
 .sidebar {
-    line-height: normal
+  font-size: 90%;
+  line-height: normal
 }
 
 .toc ul  {
-    padding-left: 0;
-    font-size: 90%;
-    list-style: none;
+  padding-left: 0;
+  list-style: none;
 }
 
 .toc ul li {
-    padding-top: 3px;
+  padding-top: 3px;
 }
 
 .toc ul ul {
-    padding-left: 10px;
-    font-size: 95%;
+  padding-left: 10px;
+  font-size: 95%;
 }
 
 /* heading scrolling */
 
 h2[id]:before, 
 h3[id]:before{
-    content: "";
-    display: block;
-    height: 70px;
-    margin-top:-70px;
+  content: "";
+  display: block;
+  height: 70px;
+  margin-top:-70px;
 }
 
 /* affix hacks from boostrap 3.0 docs */

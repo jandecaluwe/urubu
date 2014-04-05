@@ -91,7 +91,7 @@
          data-offset-top="80" 
          data-offset-bottom="60">
         <div class="well">
-            <a href="#"><em>Project structure</em></a>
+            <a href="#"><strong>Project structure</strong></a>
             <div class="toc">
 <ul>
 <li><a href="#the-project-directory">The project directory</a></li>
@@ -167,7 +167,7 @@ The relative location of all files is thus preserved.</p>
 <h2 id="special-files">Special files</h2>
 <h3 id="_siteyml"><code>_site.yml</code></h3>
 <p>This file contains site configuration info in YAML format.
-Currently, a single attribute is predefined: </p>
+Currently, these are the predefined attributes: </p>
 <table class="table">
 <thead>
 <tr>
@@ -180,10 +180,28 @@ Currently, a single attribute is predefined: </p>
 <td><code>reflinks</code></td>
 <td>Holds a mapping from reference ids to link objects.</td>
 </tr>
+<tr>
+<td><code>file_ext</code></td>
+<td>Change default file extension (<code>'.html'</code>) for processed <code>.md</code> files</td>
+</tr>
+<tr>
+<td><code>link_ext</code></td>
+<td>Change default file extension (<code>'.html'</code>) for links to site's pages</td>
+</tr>
 </tbody>
 </table>
-<p>Link objects are a mapping with an <code>url</code> key that maps to the link url and
-a <code>title</code> key that maps to the link title. </p>
+<p>Link objects, for the <code>reflinks</code> attribute, are a mapping with an <code>url</code> key that maps
+to the link url and a <code>title</code> key that maps to the link title. </p>
+<p>The file extension attributes, <code>file_ext</code> and <code>link_ext</code>, are both usually set to the
+same value (i.e. <code>'.php'</code>), unless the target site has .htaccess rewrite rules that
+affect the file extensions.</p>
+<p>Examples of this are sites that internally redirect pages like <code>www.test.com/account</code>
+to <code>www.test.com/account.htm</code>. For this case, one would need to set <code>file_ext</code> to
+<code>'.htm'</code>, so Urubu generated files have the <code>.htm</code> extension, whereas <code>link_ext</code> would
+be set to <code>''</code>, so that the <code>a href</code> links are directed to the files without extension.</p>
+<p>Otherwise, <code>file_ext</code> and <code>link_ext</code> should be set to the same extension, specially
+during testing, so that the simple web server invoked by <code>urubu serve</code> works fine,
+as well as any web server that does not rewrite the file extensions of the requests. </p>
 <p>You can define additional attributes that will be made available as
 site variables to the template engine. The following is an example of a
 <code>_site.yml</code> file:</p>
@@ -199,6 +217,9 @@ reflinks:
     markdown:
         url: http://daringfireball.net/projects/markdown/  
         title: Markdown
+
+file_ext: &#39;.htm&#39;  # Change default file extension (&#39;.html&#39;)
+link_ext: &#39;.htm&#39;  # Change default link extension (&#39;.html&#39;)
 </pre></div>
 
 

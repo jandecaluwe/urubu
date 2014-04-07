@@ -26,6 +26,10 @@ level project directory.
 will be available at `localhost:8000`. Run this command in a separate terminal
 window, and kill the server when you are done.
 
+**Compatibility Note** In version 0.3.1 and earlier, you have to run the
+`build` command from within the `_build` subdirectory.
+{: .text-info}
+
 Development flow
 ================
 

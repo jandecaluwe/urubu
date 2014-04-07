@@ -38,7 +38,12 @@ body {
   padding-top: 16px;
   color: #777;
   border-top: 1px solid #eee;
+  font-size: 90%;
   text-align: center;
+}
+
+.footer p {
+  margin: 0px;
 }
 
 /* toc */

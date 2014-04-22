@@ -34,6 +34,10 @@
     {% if site.navbar_inverse %}
     {%   set navbar_style = "navbar-inverse" %}
     {% endif %}
+    {% set navbar_right_items = 2 %}
+    {% if site.navbar_right_items %}
+    {%   set navbar_right_items = site.navbar_right_items %}
+    {% endif %}
     <div class="navbar {{navbar_style}} navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
@@ -49,7 +53,7 @@
           <ul class="nav navbar-nav navbar-left">
             {% block home %} 
             {% endblock %}
-            {% for item in site.reflinks['/'].content[:-2] %}
+            {% for item in site.reflinks['/'].content[:-navbar_right_items] %}
             {%   set context = '' %}
             {%   if item.components|d and this.components[0] == item.components[0] %}
             {%     set context = ' class="active"' %}
@@ -70,7 +74,7 @@
           </ul>
 
           <ul class="nav navbar-nav navbar-right">
-            {% for item in site.reflinks['/'].content[-2:] %}
+            {% for item in site.reflinks['/'].content[-navbar_right_items:] %}
             {%   set context = '' %}
             {%   if item.components|d and this.components[0] == item.components[0] %}
             {%     set context = ' class="active"' %}

@@ -1,6 +1,7 @@
 ---
 title: Templating 
-layout: manpage 
+layout: page 
+pager: true
 author: Jan Decaluwe
 ---
 

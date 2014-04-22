@@ -1,6 +1,7 @@
 ---
 title: Concepts 
-layout: manpage 
+layout: page 
+pager: true
 author: Jan Decaluwe
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: Installation
-layout: page 
+layout: simple_page 
 date: 2014-01-10
 ---
 

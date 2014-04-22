@@ -1,6 +1,6 @@
 ---
 title: Support
-layout: page 
+layout: simple_page 
 date: 2014-02-13
 ---
 

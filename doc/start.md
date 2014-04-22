@@ -1,6 +1,7 @@
 ---
 title: Read me first
-layout: article 
+layout: page 
+pager: true
 date: 2014-01-10
 ---
 

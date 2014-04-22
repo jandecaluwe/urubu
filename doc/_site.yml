@@ -1,8 +1,12 @@
 brand: Urubu 
 
+bootswatch: null 
+navbar_inverse: false 
+bootstrap: 3.1.1
+
 reflinks:
     jandecaluwe:
-        url: http://www.jandecaluwe.com
+        url: ttp://www.jandecaluwe.com
         title: Jan Decaluwe
     myhdl_site: 
         url: http://www.myhdl.org 

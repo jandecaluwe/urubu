@@ -5,7 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
     <!-- Bootstrap -->
-    <link href="/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    {% set bootstrap = "3.1.1" %}
+    {% if site.bootstrap %}
+    {%   set bootstrap = site.bootstrap %}
+    {% endif %}
+    {% if site.bootswatch %}
+    {%   set theme_path = "bootswatch/"+ bootstrap + '/' + site.bootswatch %}
+    {% else %}
+    {%   set theme_path = "bootstrap/" + bootstrap + "/css" %}
+    {% endif %}
+    <link href="//netdna.bootstrapcdn.com/{{theme_path}}/bootstrap.min.css" rel="stylesheet" media="screen">
     <link href="/css/site.css" rel="stylesheet" media="screen">
     <link href="/css/syntax.css" rel="stylesheet" media="screen">
 
@@ -21,7 +30,11 @@
   <body>
 
     <!-- Fixed navbar -->
-    <div class="navbar navbar-default navbar-fixed-top">
+    {% set navbar_style = "navbar-default" %}
+    {% if site.navbar_inverse %}
+    {%   set navbar_style = "navbar-inverse" %}
+    {% endif %}
+    <div class="navbar {{navbar_style}} navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -87,7 +100,8 @@
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://code.jquery.com/jquery.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="/js/bootstrap.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/{{bootstrap}}/js/bootstrap.min.js"></script>
 
   </body>
 </html>
+

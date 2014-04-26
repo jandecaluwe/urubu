@@ -1,7 +1,7 @@
 ---
 title: Urubu sites
 layout: index
-navstyle: expand
+dropdown: true
 content:
     - ref: myhdl_site 
       title: MyHDL

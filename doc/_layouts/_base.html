@@ -58,7 +58,7 @@
             {%   if item.components|d and this.components[0] == item.components[0] %}
             {%     set context = ' class="active"' %}
             {%   endif %}
-            {%   if item.content|d and item.navstyle == 'expand' %}
+            {%   if item.content|d and item.dropdown %}
             <li{{context}} class="dropdown">
               <a href="{{item.url}}" class="dropdown-toggle" data-toggle="dropdown">{{item.title}} <b class="caret"></b></a>
               <ul class="dropdown-menu">
@@ -79,7 +79,7 @@
             {%   if item.components|d and this.components[0] == item.components[0] %}
             {%     set context = ' class="active"' %}
             {%   endif %}
-            {%   if item.content|d and item.navstyle == 'expand' %}
+            {%   if item.content|d and item.dropdown %}
             <li{{context}} class="dropdown">
               <a href="{{item.url}}" class="dropdown-toggle" data-toggle="dropdown">{{item.title}} <b class="caret"></b></a>
               <ul class="dropdown-menu">

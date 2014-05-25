@@ -80,3 +80,6 @@ reflinks:
     code_hilite: 
         url: http://pythonhosted.org/Markdown/extensions/code_hilite.html
         title: CodeHilite
+    urubu-quickstart:
+        url: http://urubu-quickstart.jandecaluwe.com
+        title: Urubu Quickstart

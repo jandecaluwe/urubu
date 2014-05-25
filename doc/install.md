@@ -30,3 +30,4 @@ You may want to install Urubu in an isolated environment using [virtualenv].
 Urubu depends on a number of libraries that will automatically be installed if
 not yet available: [python_markdown], [pyyaml], [pygments] and [jinja2].
 
+For a quick way to set up a new Urubu project, visit [urubu-quickstart].

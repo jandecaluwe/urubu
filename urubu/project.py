@@ -184,6 +184,9 @@ class Project(object):
         if 'date' in info:
             if not isinstance(info['date'], datetime.date):
                 raise UrubuError(date_error.format(relfn))
+        else: # use modification time
+            t = os.path.getmtime(relfn)
+            info['date'] = datetime.date.fromtimestamp(t)
 
     def validate_navinfo(self, relfn, info):
         if ('content' not in info) and ('order' not in info):

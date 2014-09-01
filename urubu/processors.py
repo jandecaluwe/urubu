@@ -49,6 +49,7 @@ class ContentProcessor(object):
         self.sitedir = sitedir
         self.fileinfo = project.fileinfo
         self.navinfo = project.navinfo
+        self.taginfo = project.taginfo
         self.site = project.site
         tableclass = md_extensions.TableClassExtension() 
         projectref = md_extensions.ProjectReferenceExtension()
@@ -69,6 +70,12 @@ class ContentProcessor(object):
         self.templates = {}
         for layout in project.layouts:
             self.templates[layout] = self.env.get_template(layout + '.html')
+        try:
+            self.templates['tag_index'] = self.env.get_template('tag_index.html')
+        except jinja2.exceptions.TemplateNotFound:
+            pass
+
+
 
 
     def process(self):
@@ -107,16 +114,24 @@ class ContentProcessor(object):
                 info[key] = self.md.convert(info[mdkey]) 
             self.md.reset()        
 
+    def render_file(self, info):
+        layout = info['layout']
+        templ = self.templates[layout]
+        html = templ.render(this=info, site=self.site)
+        fn = info['fn']
+        bfn, ext = os.path.splitext(fn)
+        outfn = os.path.join(self.sitedir, bfn) + self.site['file_ext']
+        with open(outfn, 'w', encoding='utf-8', errors='strict') as outf:
+           outf.write(html)
+
     def render(self):
+        # content files
         for info in self.fileinfo:
-            layout = info['layout']
-            if layout is None:
+            if info['layout'] is None:
                 continue
-            templ = self.templates[layout]
-            html = templ.render(this=info, site=self.site)
-            fn = info['fn']
-            bfn, ext = os.path.splitext(fn)
-            outfn = os.path.join(self.sitedir, bfn) + self.site['file_ext']
-            with open(outfn, 'w', encoding='utf-8', errors='strict') as outf:
-               outf.write(html)
-        
+            self.render_file(info)
+        # tag index files
+        if 'tag_index' not in self.templates:
+            return
+        for info in self.taginfo:
+            self.render_file(info)

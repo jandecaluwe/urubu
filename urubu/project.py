@@ -34,6 +34,8 @@ configfn = '_config.yml'
 siteinfofn = '_site.yml'
 workdir = os.getcwd()
 sitedir = '_build'
+tagdir = 'tag'
+tag_index_layout = 'tag_index'
 
 yamlfm_warning = "No yaml front matter in '{}' - ignored"
 ambig_reflink_error = "Ambiguous reference id '{}'"
@@ -82,14 +84,15 @@ class Project(object):
     def __init__(self):
         self.config = {}
         self.site = {'brand' : '',
-                     'reflinks': {},
+                     'reflinks' : {},
+                     'taglist' : [],
                      'link_ext' : '.html',
                      'file_ext' : '.html'
                     }
         self.fileinfo = []
-        self.filerefs = {}
         self.navinfo = [] 
-	self.navrefs = {}
+        self.taginfo = []
+        self.tagmap = {}
         self.filters = {}
         self.validators = {}
         self.layouts = []
@@ -155,21 +158,31 @@ class Project(object):
                     if meta is None:
                         warn(yamlfm_warning.format(relfn), UrubuWarning)
                         continue
-                    info = self.make_fileinfo(relfn, meta)
-                    self.fileinfo.append(info)
+                    fileinfo = self.make_fileinfo(relfn, meta)
+                    self.fileinfo.append(fileinfo)
                     # validate after file info has been added so it can be used
-                    self.validate_fileinfo(relfn, info)
-                    self.add_reflink(info['id'], info)
+                    self.validate_fileinfo(relfn, fileinfo)
+                    self.add_reflink(fileinfo['id'], fileinfo)
                     if fn == 'index.md':
-                        info = self.make_navinfo(relpath, meta)
-                        self.navinfo.append(info)
-                        self.validate_navinfo(relfn, info)
-                        self.add_reflink(info['id'], info)
+                        # start from fileinfo of index file
+                        navinfo = self.make_navinfo(relpath, fileinfo)
+                        self.navinfo.append(navinfo)
+                        self.validate_navinfo(relfn, navinfo)
+                        self.add_reflink(navinfo['id'], navinfo)
+                        # add nav info to tag map
+                        self.add_info_to_tagmap(navinfo)
+                    else:
+                        # add id for non-index files to tag tags
+                        self.add_info_to_tagmap(fileinfo)
 
     def validate_fileinfo(self, relfn, info):
+        # layout is mandatory
         if 'layout' not in info:
             raise UrubuError(undef_info_error.format('File', relfn, 'layout'))
         layout = info['layout']
+        # modification date, always available
+        t = os.path.getmtime(relfn)
+        info['mdate'] = datetime.date.fromtimestamp(t)
         # first run a validator if it exist
         if layout in self.validators:
             self.validators[layout](info)
@@ -179,14 +192,19 @@ class Project(object):
             return
         if layout not in self.layouts:
             self.layouts.append(layout)
+        # title
         if 'title' not in info:
             raise UrubuError(undef_info_error.format('File', relfn, 'title'))
+        # date
         if 'date' in info:
             if not isinstance(info['date'], datetime.date):
                 raise UrubuError(date_error.format(relfn))
-        else: # use modification time
-            t = os.path.getmtime(relfn)
-            info['date'] = datetime.date.fromtimestamp(t)
+        # tags
+        if 'tags' in info:
+            # TODO: make sure it's a list of strings
+            if isinstance(info['tags'], str):
+                info['tags'] = [info['tags']]
+            # TODO: normalize tags
 
     def validate_navinfo(self, relfn, info):
         if ('content' not in info) and ('order' not in info):
@@ -204,9 +222,11 @@ class Project(object):
         info.update(meta)
         return info
 
-    def make_navinfo(self, relpath, meta):
+    def make_navinfo(self, relpath, fileinfo):
         """Make a navinfo dict."""
-        info = {}
+        # start from fileinfo of index file
+        info = fileinfo.copy() 
+        # overwrite attributes according to navinfo view
         info['fn'] = relpath 
         info['components'] = components = get_components(relpath)
         info['id'] = make_id(components)
@@ -214,8 +234,17 @@ class Project(object):
         info['url'] = info['id']
         if info['url'] != '/':
             info['url'] += '/'
-        info.update(meta)
         return info
+
+    def add_info_to_tagmap(self, info):
+        """Add id to tagmap."""
+        # tags are optional
+        if 'tags' not in info:
+            return
+        for tag in info['tags']:
+            if tag not in self.tagmap:
+                self.tagmap[tag] = []
+            self.tagmap[tag].append(info)
 
     def resolve_reflinks(self):
         for info in self.navinfo:
@@ -316,6 +345,42 @@ class Project(object):
                 content[i]['prev'] = content[i-1]
             content[-1]['next'] = None    
 
+    def make_taginfo(self, tag, content):
+        """Make a taginfo dict."""
+        info = {} 
+        info['title'] = info['tag'] = tag
+        info['layout'] = tag_index_layout
+        info['fn'] = os.path.join(tagdir, tag, 'index') 
+        info['components'] = components = (tagdir, tag) 
+        info['id'] = make_id(components)
+        # add trailing slash for tag index url
+        info['url'] = info['id'] + '/'
+        info['content'] = content
+        return info
+
+
+    def process_tags(self):
+        """ Process tag map and tag content."""
+        def get_date(item):
+            """ Return item's date, or mdate as fallback."""
+            if 'date' in item:
+                return item['date']
+            else:
+                return item['mdate']
+        taglist = self.tagmap.keys()
+        for tag in taglist:
+            # sort tag content by date
+            content = sorted(self.tagmap[tag], key=get_date, reverse=True)
+            taginfo = self.make_taginfo(tag, content)
+            self.taginfo.append(taginfo)
+            self.add_reflink(taginfo['id'], taginfo)
+        
+        # sort tags according to content length
+        def get_contentlen(tag):
+            return len(self.tagmap[tag]) 
+        self.site['taglist'] = sorted(taglist, key=get_contentlen, reverse=True)
+
+
     def make_site(self):
         """Make the site."""
         # Keep sitedir alive if it exists, for the server
@@ -333,6 +398,11 @@ class Project(object):
                 shutil.copytree(wp, sp, ignore=ignore)
             elif os.path.isfile(wp):
                 shutil.copyfile(wp, sp)            
+        # make tag index dirs
+        if self.site['taglist']:
+            os.mkdir(os.path.join(sitedir, tagdir))
+            for tag in self.site['taglist']:
+                os.mkdir(os.path.join(sitedir, tagdir, tag))
         self.process_content()
 
     def process_content(self):
@@ -352,4 +422,5 @@ def build():
     # pprint.pprint(proj.site['reflinks'])
     proj.make_breadcrumbs()
     proj.make_pager()
+    proj.process_tags()
     proj.make_site()

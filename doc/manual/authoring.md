@@ -43,11 +43,7 @@ To properly render the highlighted code, you will need to add a `syntax.css`
 stylesheet. A good solution is to use the [syntax stylesheet from
 GitHub][syntax_github].
 
-
-
-
 [syntax_github]: https://github.com/mojombo/tpw/blob/master/css/syntax.css
-
 
 Reference links
 ===============
@@ -62,13 +58,13 @@ further on define it as follows:
 
 This is nice for readability, but it all remains file based.
 
-Urubu extends this behavior by automatically resolving project-wide
-reference links. (See the chapter about [structure]).
+Urubu extends this behavior by automatically resolving project-wide reference
+links. (See the chapter about [structure]).
 
 This feature is implemented as a Markdown extension. Note that it doesn't
 require a syntax change. It enables page linking similar to what is commonly
 found on wikis.
 
-When you using reference links, Urubu will insert the title of the link in the
+When using reference links, Urubu will insert the title of the link in the
 generated html (unless you specify an alternative text explicitly).  In this
 way, the text that you click will match the title of the page where you land.

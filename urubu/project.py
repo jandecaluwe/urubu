@@ -147,7 +147,7 @@ class Project(object):
         self.site['reflinks'][id] = info 
          
     def get_contentinfo(self):
-        """Get info form the markdown content files."""
+        """Get info from the markdown content files."""
         pattern = '*.md'
         for path, dirnames, filenames in os.walk(workdir):
             relpath = get_relpath(path, workdir)

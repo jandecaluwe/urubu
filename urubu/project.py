@@ -30,12 +30,8 @@ import itertools
 from urubu import UrubuWarning, UrubuError
 from urubu import readers, processors 
 
-configfn = '_config.yml'
-siteinfofn = '_site.yml'
-workdir = os.getcwd()
-sitedir = '_build'
-tagdir = 'tag'
-tag_index_layout = 'tag_index'
+from urubu.config import (configfn, siteinfofn, workdir, sitedir,
+                          tagdir, tagid, tagindexid, tag_layout) 
 
 yamlfm_warning = "No yaml front matter in '{}' - ignored"
 ambig_reflink_error = "Ambiguous reference id '{}'"
@@ -85,13 +81,12 @@ class Project(object):
         self.config = {}
         self.site = {'brand' : '',
                      'reflinks' : {},
-                     'taglist' : [],
                      'link_ext' : '.html',
                      'file_ext' : '.html'
                     }
-        self.fileinfo = []
-        self.navinfo = [] 
-        self.taginfo = []
+        self.filelist = []
+        self.navlist = [] 
+        self.taglist = []
         self.tagmap = {}
         self.filters = {}
         self.validators = {}
@@ -159,14 +154,14 @@ class Project(object):
                         warn(yamlfm_warning.format(relfn), UrubuWarning)
                         continue
                     fileinfo = self.make_fileinfo(relfn, meta)
-                    self.fileinfo.append(fileinfo)
+                    self.filelist.append(fileinfo)
                     # validate after file info has been added so it can be used
                     self.validate_fileinfo(relfn, fileinfo)
                     self.add_reflink(fileinfo['id'], fileinfo)
                     if fn == 'index.md':
                         # start from fileinfo of index file
                         navinfo = self.make_navinfo(relpath, fileinfo)
-                        self.navinfo.append(navinfo)
+                        self.navlist.append(navinfo)
                         self.validate_navinfo(relfn, navinfo)
                         self.add_reflink(navinfo['id'], navinfo)
                         # add nav info to tag map
@@ -208,7 +203,12 @@ class Project(object):
 
     def validate_navinfo(self, relfn, info):
         if ('content' not in info) and ('order' not in info):
-            raise UrubuError(undef_content_error.format(relfn))
+            # exception: tag folder doesn't require content atribute
+            # set it to empty list align with normal folders 
+            if info['id'] == tagid:
+                info['content'] = []
+            else:
+                raise UrubuError(undef_content_error.format(relfn))
         require_key('content', info, list, relfn)
 
     def make_fileinfo(self, relfn, meta):
@@ -247,7 +247,7 @@ class Project(object):
             self.tagmap[tag].append(info)
 
     def resolve_reflinks(self):
-        for info in self.navinfo:
+        for info in self.navlist:
             if 'content' in info:
                 self.resolve_content(info)
             else: # order
@@ -312,7 +312,7 @@ class Project(object):
                    raise UrubuError(undef_key_error.format(key, item['fn'])) 
                return True
             return False 
-        allinfo = itertools.chain(self.fileinfo, self.navinfo)
+        allinfo = itertools.chain(self.filelist, self.navlist)
         refcontent = itertools.ifilter(pred, allinfo)
 
         def get_keyval(item):
@@ -322,7 +322,7 @@ class Project(object):
 
 
     def make_breadcrumbs(self):
-        for info in self.fileinfo:
+        for info in self.filelist:
             breadcrumbs = []
             id = '' 
             comps = info['components'] 
@@ -335,7 +335,7 @@ class Project(object):
             info['breadcrumbs'] = breadcrumbs
 
     def make_pager(self):
-        for info in self.navinfo:
+        for info in self.navlist:
             content = info['content']
             if not content:
                 return
@@ -349,7 +349,7 @@ class Project(object):
         """Make a taginfo dict."""
         info = {} 
         info['title'] = info['tag'] = tag
-        info['layout'] = tag_index_layout
+        info['layout'] = tag_layout
         info['fn'] = os.path.join(tagdir, tag, 'index') 
         info['components'] = components = (tagdir, tag) 
         info['id'] = make_id(components)
@@ -357,7 +357,6 @@ class Project(object):
         info['url'] = info['id'] + '/'
         info['content'] = content
         return info
-
 
     def process_tags(self):
         """ Process tag map and tag content."""
@@ -367,19 +366,25 @@ class Project(object):
                 return item['date']
             else:
                 return item['mdate']
-        taglist = self.tagmap.keys()
-        for tag in taglist:
+        for tag in self.tagmap.keys():
             # sort tag content by date
             content = sorted(self.tagmap[tag], key=get_date, reverse=True)
             taginfo = self.make_taginfo(tag, content)
-            self.taginfo.append(taginfo)
+            self.taglist.append(taginfo)
             self.add_reflink(taginfo['id'], taginfo)
-        
-        # sort tags according to content length
-        def get_contentlen(tag):
-            return len(self.tagmap[tag]) 
-        self.site['taglist'] = sorted(taglist, key=get_contentlen, reverse=True)
 
+        # sort tags according to content length
+        def get_contentlen(taginfo):
+            return len(taginfo['content'])
+        self.taglist = sorted(self.taglist, key=get_contentlen, reverse=True)
+                
+        # set up tagid info dict if it doesn't exist already
+        if tagid not in self.site['reflinks']:
+            self.site['reflinks'][tagid] = {}
+        self.site['reflinks'][tagid]['content'] = self.taglist 
+        # propagate content to index file if it exists
+        if tagindexid in self.site['reflinks']:
+            self.site['reflinks'][tagindexid]['content'] = self.taglist 
 
     def make_site(self):
         """Make the site."""
@@ -397,12 +402,14 @@ class Project(object):
             if os.path.isdir(wp):
                 shutil.copytree(wp, sp, ignore=ignore)
             elif os.path.isfile(wp):
-                shutil.copyfile(wp, sp)            
+                shutil.copyfile(wp, sp) 
         # make tag index dirs
-        if self.site['taglist']:
-            os.mkdir(os.path.join(sitedir, tagdir))
-            for tag in self.site['taglist']:
-                os.mkdir(os.path.join(sitedir, tagdir, tag))
+        if self.taglist:
+            tagpath = os.path.join(sitedir, tagdir)
+            if not os.path.isdir(tagpath):
+                os.mkdir(tagpath)
+            for taginfo in self.taglist:
+                os.mkdir(os.path.join(tagpath, taginfo['tag']))
         self.process_content()
 
     def process_content(self):

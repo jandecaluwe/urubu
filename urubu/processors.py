@@ -23,13 +23,16 @@ import os
 
 import markdown
 import jinja2
+from warnings import warn
 
 from markdown_checklist.extension import ChecklistExtension
 
 from urubu import UrubuWarning, UrubuError
 from urubu import md_extensions
 
-layoutdir = "_layouts"
+from urubu.config import layoutdir, tag_layout 
+
+tag_layout_warning = "Tags defined, but no {} layout found".format(tag_layout)
 
 def skip_yamlfm(f):
     """Return source of a file without yaml frontmatter."""
@@ -47,9 +50,9 @@ class ContentProcessor(object):
 
     def __init__(self, sitedir, project):
         self.sitedir = sitedir
-        self.fileinfo = project.fileinfo
-        self.navinfo = project.navinfo
-        self.taginfo = project.taginfo
+        self.filelist = project.filelist
+        self.navlist = project.navlist
+        self.taglist = project.taglist
         self.site = project.site
         tableclass = md_extensions.TableClassExtension() 
         projectref = md_extensions.ProjectReferenceExtension()
@@ -70,13 +73,13 @@ class ContentProcessor(object):
         self.templates = {}
         for layout in project.layouts:
             self.templates[layout] = self.env.get_template(layout + '.html')
+        # layout for tags is optional, triggers index file generation per tag
         try:
-            self.templates['tag_index'] = self.env.get_template('tag_index.html')
+            self.templates[tag_layout] = self.env.get_template(tag_layout + '.html')
         except jinja2.exceptions.TemplateNotFound:
-            pass
-
-
-
+            if self.taglist:
+                warn(tag_layout_warning, UrubuWarning)
+            
 
     def process(self):
         """Process the content.
@@ -88,7 +91,7 @@ class ContentProcessor(object):
         self.render() 
         
     def convert(self):
-        for info in self.fileinfo:
+        for info in self.filelist:
             fn = info['fn']
             with open(fn, encoding='utf-8-sig') as inf:
                src = skip_yamlfm(inf)
@@ -106,7 +109,7 @@ class ContentProcessor(object):
                 key = mdkey[:-3]
                 info[key] = self.md.convert(info[mdkey]) 
             self.md.reset()        
-        for info in self.navinfo:
+        for info in self.navlist:
             # markdown support in keys
             mdkeys = [key for key in info if key[-3:] == '.md']
             for mdkey in mdkeys:
@@ -126,12 +129,12 @@ class ContentProcessor(object):
 
     def render(self):
         # content files
-        for info in self.fileinfo:
+        for info in self.filelist:
             if info['layout'] is None:
                 continue
             self.render_file(info)
         # tag index files
-        if 'tag_index' not in self.templates:
+        if tag_layout not in self.templates:
             return
-        for info in self.taginfo:
+        for info in self.taglist:
             self.render_file(info)

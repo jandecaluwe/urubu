@@ -53,6 +53,115 @@ you can easily generate small variations of a parent template.
 Evaluation context
 ==================
 
+
+Link objects
+------------
+
+### Description
+
+Link objects are the primary objects that you use in templates. 
+They come in a number of flavours: 
+
+Link object        | Description
+-------------------|---------------
+global link object | Defined in the `_site.yml` file.
+local link object  | Defined in `content` attribute of an index file.
+folder object      | Corresponds to a project subdirectory.
+page object        | Correspond to a Markdown content file.
+tag folder object  | Dedicated folder for content ordered by tag. 
+tag object         | Represents content corresponding to a specific tag. 
+
+### Common attributes
+
+Attribute      | Description 
+---------------|---------------------------
+`url`          | The url of the object. 
+`title`        | The title of the object.
+
+### Common attributes, except for local link objects
+
+Attribute      | Description 
+---------------|---------------------------
+`id`           | The unique id by which the object is known in the project. 
+
+### Folder and page object attributes 
+
+Attribute      | Description 
+---------------|---------------------------
+`fn`           | The pathname of the file or directory corresponding the object. 
+`components`   | The components of the object's pathname, without file extension, as a list.
+`mdate`        | Modification date
+
+### Folder object attributes
+
+Attribute      | Description 
+---------------|---------------------------
+`content`      | The content of the folder as a list of page & folder objects.
+
+In addition, all attributes specified in the YAML front matter
+of the corresponding index file will be available as attributes of
+the folder object.
+
+### Page object attributes
+
+Attribute      | Description 
+---------------|---------------------------
+`layout`       | The template to render the object as a html file. 
+`body`         | The page content in html.
+`toc`          | The table of contents of the page as an unordered html list.
+`breadcrumbs`  | Breadcrumbs as a list. The current page object is at position 0, the containing folder objects are at the higher positions.
+`prev`         | The previous page object in the content, or `None` if there is none
+`next`         | The next page object in the content, or `None` if there is none
+
+In addition, all attributes specified in the YAML front matter
+of the corresponding file are available as attributes of
+the page object.
+
+### Index pages
+
+Index pages are associated with `index.md` files. They are special in the sense
+that they define the attributes and the content of a folder. Therefore, they
+have the same `content` attribute as the corresponding folder object.
+
+### Tag folder object
+
+The tag folder object is a special top-level folder whose `id` is `/tag`. Urubu
+infers tag-related content for this folder automatically.
+
+You can optionally create the corresponding directory in the source code, and
+use the index file to set attributes such as the `layout`. In any case, Urubu
+will create the object if tags are used, and infer the `content` attribute. 
+
+Attribute      | Description 
+---------------|---------------------------
+`id`           | `/tag` 
+`components`   | `[tag]`
+`content`      | A list of tag objects, inferred by Urubu. 
+
+The content is ordered according to the content size of tag objects,
+the largest one first.
+
+### Tag objects
+
+Tag objects are inferred by Urubu automatically. They list the content
+corresponding to a tag.
+
+Attribute      | Description 
+---------------|---------------------------
+`id`           | `/tag/{{tag}}`
+`components`   | `[tag, {{tag}}]`
+`title`        | `tag`
+`tag`          | `tag`
+`layout`       | `tag`  
+`content`      | List of page & folder objects corresponding to `tag`. 
+
+The content is ordered according to the date of the object. If the date is not
+defined, the modification date is used as a fallback (`mdate` attribute).
+
+The layout name is predefined to `tag`. You have to provide the `tag.html`
+template to trigger the rendering of tag objects. In the simplest case, it
+may be sufficient to inherit from a general index layout.
+
 Context variables
 -----------------
 
@@ -77,76 +186,7 @@ will be available as attributes of the `site` variable.
 
 ### `this`
 
-This variable holds the current page object.
-
-
-
-Link objects
-------------
-
-### Description
-
-Link objects are the primary objects that you use in templates. 
-They come in a number of flavours: 
-
-Link object        | Description
--------------------|---------------
-global link object | Defined in the `_site.yml` file.
-local link object  | Defined in the `content` attribute of an index page.
-folder object      | Corresponds to a project subdirectory.
-page objects       | Correspond to a Markdown content file.
-
-Global link, folder and page objects are identified by a
-unique reference id, as described in the [authoring].
-Local link objects don't have an id and are only
-available in the `content` of a particular index page.
-
-### Common link object attributes
-
-Attribute      | Description 
----------------|---------------------------
-`id`           | The unique id by which the object is known in the project. Not defined for local link objects.
-`url`          | The url of the object. 
-`title`        | The title of the object.
-
-### Common page and folder attributes 
-
-Attribute      | Description 
----------------|---------------------------
-`fn`           | The pathname of the file or directory corresponding the object. 
-`components`   | The components of the object's pathname, without file extension, as a list.
-
-### Folder object attributes
-
-Attribute      | Description 
----------------|---------------------------
-`content`      | The content of the folder as a list of page & folder objects.
-
-In addition, all attributes specified in the YAML front matter
-of the corresponding index file will be available as attributes of
-the folder object.
-
-### Page object attributes
-
-Attribute      | Description 
----------------|---------------------------
-`body`         | The page content in html.
-`toc`          | The table of contents of the page as an unordered html list.
-`breadcrumbs`  | Breadcrumbs as a list. The current page object is at position 0, the containing folder objects are at the higher positions.
-`prev`         | The previous page object in the content, or `None` if there is none
-`next`         | The next page object in the content, or `None` if there is none
-
-In addition, all attributes specified in the YAML front matter
-of the corresponding file are available as attributes of
-the page object.
-
-### Index pages
-
-Index pages are associated with `index.md` files. They are special in the sense
-that they define the attributes and the content of a folder. Therefore, they
-have the same `content` attribute as the corresponding folder object.
-
-
+This variable holds the current page or tag object.
 
 
 Python hooks

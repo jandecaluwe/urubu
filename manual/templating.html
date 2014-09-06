@@ -96,18 +96,21 @@
 <li><a href="#overview">Overview</a></li>
 <li><a href="#the-template-library">The template library</a></li>
 <li><a href="#evaluation-context">Evaluation context</a><ul>
-<li><a href="#context-variables">Context variables</a><ul>
-<li><a href="#site">site</a></li>
-<li><a href="#this">this</a></li>
-</ul>
-</li>
 <li><a href="#link-objects">Link objects</a><ul>
 <li><a href="#description">Description</a></li>
-<li><a href="#common-link-object-attributes">Common link object attributes</a></li>
-<li><a href="#common-page-and-folder-attributes">Common page and folder attributes</a></li>
+<li><a href="#common-attributes">Common attributes</a></li>
+<li><a href="#common-attributes-except-for-local-link-objects">Common attributes, except for local link objects</a></li>
+<li><a href="#folder-and-page-object-attributes">Folder and page object attributes</a></li>
 <li><a href="#folder-object-attributes">Folder object attributes</a></li>
 <li><a href="#page-object-attributes">Page object attributes</a></li>
 <li><a href="#index-pages">Index pages</a></li>
+<li><a href="#tag-folder-object">Tag folder object</a></li>
+<li><a href="#tag-objects">Tag objects</a></li>
+</ul>
+</li>
+<li><a href="#context-variables">Context variables</a><ul>
+<li><a href="#site">site</a></li>
+<li><a href="#this">this</a></li>
 </ul>
 </li>
 </ul>
@@ -155,32 +158,6 @@ check it out when using templates in Urubu.</p>
 <p>A great feature of Jinja2 is template inheritance. With this technique,
 you can easily generate small variations of a parent template.</p>
 <h2 id="evaluation-context">Evaluation context</h2>
-<h3 id="context-variables">Context variables</h3>
-<p>Urubu makes the context available to templates with
-two context variables.</p>
-<h4 id="site"><code>site</code></h4>
-<p>This variable holds site-wide information.</p>
-<p>It has one predefined attribute:</p>
-<table class="table">
-<thead>
-<tr>
-<th>Attribute</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>reflinks</code></td>
-<td>A mapping from all reference ids to link objects.</td>
-</tr>
-</tbody>
-</table>
-<p>Note that the id of the root object is <code>/</code>. Starting from there,
-you can traverse the whole site.</p>
-<p>In addition, all the attributes specified in the <code>_site.yml</code> file
-will be available as attributes of the <code>site</code> variable.</p>
-<h4 id="this"><code>this</code></h4>
-<p>This variable holds the current page object.</p>
 <h3 id="link-objects">Link objects</h3>
 <h4 id="description">Description</h4>
 <p>Link objects are the primary objects that you use in templates. 
@@ -199,23 +176,27 @@ They come in a number of flavours: </p>
 </tr>
 <tr>
 <td>local link object</td>
-<td>Defined in the <code>content</code> attribute of an index page.</td>
+<td>Defined in <code>content</code> attribute of an index file.</td>
 </tr>
 <tr>
 <td>folder object</td>
 <td>Corresponds to a project subdirectory.</td>
 </tr>
 <tr>
-<td>page objects</td>
+<td>page object</td>
 <td>Correspond to a Markdown content file.</td>
+</tr>
+<tr>
+<td>tag folder object</td>
+<td>Dedicated folder for content ordered by tag.</td>
+</tr>
+<tr>
+<td>tag object</td>
+<td>Represents content corresponding to a specific tag.</td>
 </tr>
 </tbody>
 </table>
-<p>Global link, folder and page objects are identified by a
-unique reference id, as described in the <a href="/manual/authoring.html" title="Authoring">Authoring</a>.
-Local link objects don't have an id and are only
-available in the <code>content</code> of a particular index page.</p>
-<h4 id="common-link-object-attributes">Common link object attributes</h4>
+<h4 id="common-attributes">Common attributes</h4>
 <table class="table">
 <thead>
 <tr>
@@ -224,10 +205,6 @@ available in the <code>content</code> of a particular index page.</p>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td><code>id</code></td>
-<td>The unique id by which the object is known in the project. Not defined for local link objects.</td>
-</tr>
 <tr>
 <td><code>url</code></td>
 <td>The url of the object.</td>
@@ -238,7 +215,22 @@ available in the <code>content</code> of a particular index page.</p>
 </tr>
 </tbody>
 </table>
-<h4 id="common-page-and-folder-attributes">Common page and folder attributes</h4>
+<h4 id="common-attributes-except-for-local-link-objects">Common attributes, except for local link objects</h4>
+<table class="table">
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>The unique id by which the object is known in the project.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="folder-and-page-object-attributes">Folder and page object attributes</h4>
 <table class="table">
 <thead>
 <tr>
@@ -254,6 +246,10 @@ available in the <code>content</code> of a particular index page.</p>
 <tr>
 <td><code>components</code></td>
 <td>The components of the object's pathname, without file extension, as a list.</td>
+</tr>
+<tr>
+<td><code>mdate</code></td>
+<td>Modification date</td>
 </tr>
 </tbody>
 </table>
@@ -285,6 +281,10 @@ the folder object.</p>
 </thead>
 <tbody>
 <tr>
+<td><code>layout</code></td>
+<td>The template to render the object as a html file.</td>
+</tr>
+<tr>
 <td><code>body</code></td>
 <td>The page content in html.</td>
 </tr>
@@ -313,6 +313,104 @@ the page object.</p>
 <p>Index pages are associated with <code>index.md</code> files. They are special in the sense
 that they define the attributes and the content of a folder. Therefore, they
 have the same <code>content</code> attribute as the corresponding folder object.</p>
+<h4 id="tag-folder-object">Tag folder object</h4>
+<p>The tag folder object is a special top-level folder whose <code>id</code> is <code>/tag</code>. Urubu
+infers tag-related content for this folder automatically.</p>
+<p>You can optionally create the corresponding directory in the source code, and
+use the index file to set attributes such as the <code>layout</code>. In any case, Urubu
+will create the object if tags are used, and infer the <code>content</code> attribute. </p>
+<table class="table">
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td><code>/tag</code></td>
+</tr>
+<tr>
+<td><code>components</code></td>
+<td><code>[tag]</code></td>
+</tr>
+<tr>
+<td><code>content</code></td>
+<td>A list of tag objects, inferred by Urubu.</td>
+</tr>
+</tbody>
+</table>
+<p>The content is ordered according to the content size of tag objects,
+the largest one first.</p>
+<h4 id="tag-objects">Tag objects</h4>
+<p>Tag objects are inferred by Urubu automatically. They list the content
+corresponding to a tag.</p>
+<table class="table">
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td><code>/tag/{{tag}}</code></td>
+</tr>
+<tr>
+<td><code>components</code></td>
+<td><code>[tag, {{tag}}]</code></td>
+</tr>
+<tr>
+<td><code>title</code></td>
+<td><code>tag</code></td>
+</tr>
+<tr>
+<td><code>tag</code></td>
+<td><code>tag</code></td>
+</tr>
+<tr>
+<td><code>layout</code></td>
+<td><code>tag</code></td>
+</tr>
+<tr>
+<td><code>content</code></td>
+<td>List of page &amp; folder objects corresponding to <code>tag</code>.</td>
+</tr>
+</tbody>
+</table>
+<p>The content is ordered according to the date of the object. If the date is not
+defined, the modification date is used as a fallback (<code>mdate</code> attribute).</p>
+<p>The layout name is predefined to <code>tag</code>. You have to provide the <code>tag.html</code>
+template to trigger the rendering of tag objects. In the simplest case, it
+may be sufficient to inherit from a general index layout.</p>
+<h3 id="context-variables">Context variables</h3>
+<p>Urubu makes the context available to templates with
+two context variables.</p>
+<h4 id="site"><code>site</code></h4>
+<p>This variable holds site-wide information.</p>
+<p>It has one predefined attribute:</p>
+<table class="table">
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>reflinks</code></td>
+<td>A mapping from all reference ids to link objects.</td>
+</tr>
+</tbody>
+</table>
+<p>Note that the id of the root object is <code>/</code>. Starting from there,
+you can traverse the whole site.</p>
+<p>In addition, all the attributes specified in the <code>_site.yml</code> file
+will be available as attributes of the <code>site</code> variable.</p>
+<h4 id="this"><code>this</code></h4>
+<p>This variable holds the current page or tag object.</p>
 <h2 id="python-hooks">Python hooks</h2>
 <p>Urubu support Python hooks to make templating easier. Upon
 a build, it tries to import a <code>_python</code> module or package,

@@ -57,7 +57,7 @@ class ContentProcessor(object):
         tableclass = md_extensions.TableClassExtension() 
         projectref = md_extensions.ProjectReferenceExtension()
         checklist = ChecklistExtension()
-	extensions = ['extra', 'codehilite', 'headerid', 'toc', tableclass, projectref, checklist]
+	extensions = ['extra', 'codehilite', 'headerid', 'toc', 'smarty', tableclass, projectref, checklist]
         extension_configs = { 'codehilite' : [('guess_lang', 'False'),
                                               ('linenums', 'False')],
                               'headerid': [('level', 2)]

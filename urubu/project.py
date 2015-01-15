@@ -144,8 +144,12 @@ class Project(object):
     def get_contentinfo(self):
         """Get info from the markdown content files."""
         pattern = '*.md'
+        ignore_patterns = self.get_ignore_patterns()
         for path, dirnames, filenames in os.walk(workdir):
             relpath = get_relpath(path, workdir)
+            if any(fnmatch.fnmatch(relpath, ip) for ip in ignore_patterns):
+                continue
+
             for fn in filenames:
                 if fnmatch.fnmatch(fn, pattern):
                     relfn = os.path.join(relpath, fn) 
@@ -386,13 +390,19 @@ class Project(object):
         if tagindexid in self.site['reflinks']:
             self.site['reflinks'][tagindexid]['content'] = self.taglist 
 
+    def get_ignore_patterns(self):
+        ignore_patterns = ('.?*', '_*', 'Makefile')
+        if 'ignore_patterns' in self.site:
+            ignore_patterns += tuple(self.site['ignore_patterns'])
+        return ignore_patterns
+
     def make_site(self):
         """Make the site."""
         # Keep sitedir alive if it exists, for the server
         if not os.path.exists(sitedir):
             os.mkdir(sitedir)
         make_clean(sitedir)
-        ignore_patterns =  ('.*', '_*', '*.md', 'Makefile')
+        ignore_patterns = self.get_ignore_patterns() + ('*.md',)
         ignore = shutil.ignore_patterns(*ignore_patterns)
         for fn in os.listdir(workdir):
             if any(fnmatch.fnmatch(fn, ip) for ip in ignore_patterns):

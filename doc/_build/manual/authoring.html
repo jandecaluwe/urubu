@@ -143,7 +143,11 @@ further on define it as follows:</p>
 
 <p>This is nice for readability, but it all remains file based.</p>
 <p>Urubu extends this behavior by automatically resolving project-wide reference
-links. (See the chapter about <a href="/manual/structure.html" title="Project structure">Project structure</a>).</p>
+links. (See the chapter about <a href="/manual/structure.html" title="Project structure">Project structure</a>). In addition, you can add a
+fragment (e.g. #some-anchor) to the reference to link within a page. Since
+Urubu automatically adds slugified IDs to markdown headers, you can use those
+as targets. For instance, to link to this &ldquo;Reference links&rdquo; section of this
+page, you can use <a href="/manual/authoring.html#reference-links" title="Authoring">authoring#reference-links</a>.</p>
 <p>This feature is implemented as a Markdown extension. Note that it doesn&rsquo;t
 require a syntax change. It enables page linking similar to what is commonly
 found on wikis.</p>

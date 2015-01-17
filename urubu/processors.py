@@ -20,10 +20,13 @@ from __future__ import unicode_literals
 from io import open
 
 import os
+from warnings import warn
 
 import markdown
+import logging
+logging.captureWarnings(False)
+
 import jinja2
-from warnings import warn
 
 from markdown_checklist.extension import ChecklistExtension
 

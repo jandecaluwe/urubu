@@ -23,6 +23,8 @@ from warnings import warn
 import posixpath
 
 import markdown
+import logging
+logging.captureWarnings(False)
 from markdown import Extension
 from markdown.treeprocessors import Treeprocessor
 from markdown.inlinepatterns import ReferencePattern, REFERENCE_RE, SHORT_REF_RE

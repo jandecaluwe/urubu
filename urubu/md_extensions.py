@@ -77,15 +77,20 @@ class ProjectReferencePattern(ReferencePattern):
                 id = id.lower()
             else:
                 id = ref
+            anchor = None
+            if '#' in id and id not in self.markdown.site['reflinks']:
+                id, anchor = id.split('#', 1)
             if ref in self.markdown.site['reflinks']:
                 if (ref != id) and (id in self.markdown.site['reflinks']):
-                    raise UrubuError(ambig_ref_error.format(ref, this['fn']))  
-                id = ref 
+                    raise UrubuError(ambig_ref_error.format(ref, this['fn']))
+                id = ref
             if id in self.markdown.site['reflinks']:
                 item = self.markdown.site['reflinks'][id]
-                href, title = item['url'], item['title'] 
+                href, title = item['url'], item['title']
                 if shortref:
                     text = title
+                if anchor is not None:
+                    href = '%s#%s' % (href, anchor)
             else: # ignore undefined refs
                 warn(undef_ref_warning.format(ref, this['fn']), UrubuWarning)
                 return None

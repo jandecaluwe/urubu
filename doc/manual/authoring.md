@@ -58,12 +58,12 @@ further on define it as follows:
 
 This is nice for readability, but it all remains file based.
 
-Urubu extends this behavior by automatically resolving project-wide reference
-links. (See the chapter about [structure]). In addition, you can add a
-fragment (e.g. #some-anchor) to the reference to link within a page. Since
-Urubu automatically adds slugified IDs to markdown headers, you can use those
-as targets. For instance, to link to this "Reference links" section of this
-page, you can use [authoring#reference-links][authoring#reference-links].
+Urubu extends this behavior by automatically resolving [project-wide reference
+ids][structure#project-wide-reference-ids]. In addition, you can add a fragment
+(e.g. #some-anchor) to the reference to link within a page.  Since Urubu
+automatically adds slugified IDs to markdown headers, you can use those as
+targets. For instance, to link to this "Reference links" section of this page,
+you can use [\[authoring#reference-links\]][authoring#reference-links].
 
 This feature is implemented as a Markdown extension. Note that it doesn't
 require a syntax change. It enables page linking similar to what is commonly

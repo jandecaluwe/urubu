@@ -115,6 +115,7 @@ standard, as well as a few others.</p>
 <p>The most notable supported extensions are:</p>
 <ul>
 <li><a href="http://pythonhosted.org/Markdown/extensions/tables.html" title="Tables">Tables</a></li>
+<li><a href="http://pythonhosted.org/Markdown/extensions/attr_list.html" title="Attribute lists">Attribute lists</a></li>
 <li><a href="http://pythonhosted.org/Markdown/extensions/abbreviations.html" title="Abbrevations">Abbrevations</a></li>
 <li><a href="http://pythonhosted.org/Markdown/extensions/definition_lists.html" title="Definition Lists">Definition Lists</a></li>
 <li><a href="http://pythonhosted.org/Markdown/extensions/fenced_code_blocks.html" title="Fenced Code Blocks">Fenced Code Blocks</a> </li>
@@ -143,14 +144,14 @@ further on define it as follows:</p>
 
 <p>This is nice for readability, but it all remains file based.</p>
 <p>Urubu extends this behavior by automatically resolving <a href="/manual/structure.html#project-wide-reference-ids" title="Project structure">project-wide reference
-ids</a>. In addition, you can add a fragment
-(e.g. #some-anchor) to the reference to link within a page.  Since Urubu
-automatically adds slugified IDs to markdown headers, you can use those as
-targets. For instance, to link to this &ldquo;Reference links&rdquo; section of this page,
-you can use <a href="/manual/authoring.html#reference-links" title="Authoring">[authoring#reference-links]</a>.</p>
-<p>This feature is implemented as a Markdown extension. Note that it doesn&rsquo;t
-require a syntax change. It enables page linking similar to what is commonly
-found on wikis.</p>
+ids</a>.  This feature is implemented as a
+Markdown extension. Note that it doesn&rsquo;t require a syntax change. It enables
+page linking similar to what is commonly found on wikis.</p>
+<p>In addition, you can add a fragment (e.g. #some-anchor) to the reference id to
+link within a page.  Since Urubu automatically adds slugified ids to markdown
+headers, you can use those as targets. For instance, to link to this &ldquo;Reference
+links&rdquo; section of this page, you can use<a href="/manual/authoring.html#reference-links" title="Authoring">[authoring#reference-links]</a>.
+You can also define your own ids using <a href="http://pythonhosted.org/Markdown/extensions/attr_list.html" title="Attribute lists">Attribute lists</a>. </p>
 <p>When using reference links, Urubu will insert the title of the link in the
 generated html (unless you specify an alternative text explicitly).  In this
 way, the text that you click will match the title of the page where you land.</p>

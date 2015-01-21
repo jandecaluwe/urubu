@@ -68,6 +68,9 @@ reflinks:
     abbrev: 
         url: http://pythonhosted.org/Markdown/extensions/abbreviations.html
         title: Abbrevations
+    attr_list:
+        url: http://pythonhosted.org/Markdown/extensions/attr_list.html
+        title: Attribute lists
     def_list: 
         url: http://pythonhosted.org/Markdown/extensions/definition_lists.html
         title: Definition Lists

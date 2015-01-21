@@ -19,6 +19,7 @@ standard, as well as a few others.
 The most notable supported extensions are:
 
 * [tables]
+* [attr_list]
 * [abbrev]
 * [def_list]
 * [fenced_code] 
@@ -59,15 +60,17 @@ further on define it as follows:
 This is nice for readability, but it all remains file based.
 
 Urubu extends this behavior by automatically resolving [project-wide reference
-ids][structure#project-wide-reference-ids]. In addition, you can add a fragment
-(e.g. #some-anchor) to the reference to link within a page.  Since Urubu
-automatically adds slugified IDs to markdown headers, you can use those as
-targets. For instance, to link to this "Reference links" section of this page,
-you can use [\[authoring#reference-links\]][authoring#reference-links].
+ids][structure#project-wide-reference-ids].  This feature is implemented as a
+Markdown extension. Note that it doesn't require a syntax change. It enables
+page linking similar to what is commonly found on wikis.
 
-This feature is implemented as a Markdown extension. Note that it doesn't
-require a syntax change. It enables page linking similar to what is commonly
-found on wikis.
+In addition, you can add a fragment (e.g. #some-anchor) to the reference id to
+link within a page.  Since Urubu automatically adds slugified ids to markdown
+headers, you can use those as targets. For instance, to link to this "Reference
+links" section of this page, you can use
+[\[authoring#reference-links\]][authoring#reference-links].
+You can also define your own ids using [attr_list]. 
+
 
 When using reference links, Urubu will insert the title of the link in the
 generated html (unless you specify an alternative text explicitly).  In this

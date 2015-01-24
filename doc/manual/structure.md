@@ -72,11 +72,12 @@ Special files
 This file contains site configuration info in YAML format.
 Currently, these are the predefined attributes: 
 
-Attribute      | Description
----------------|-------------
-`reflinks`     | Holds a mapping from reference ids to link objects.
-`file_ext`     | Change default file extension (`'.html'`) for processed `.md` files
-`link_ext`     | Change default file extension (`'.html'`) for links to site's pages
+Attribute         | Description
+------------------|-------------
+`reflinks`        | Holds a mapping from reference ids to link objects.
+`file_ext`        | Change default file extension (`'.html'`) for processed `.md` files
+`link_ext`        | Change default file extension (`'.html'`) for links to site's pages
+`ignore_patterns` | List of additional file names or globs to be ignored during processing 
 
 Link objects, for the `reflinks` attribute, are a mapping with an `url` key that maps
 to the link url and a `title` key that maps to the link title. 

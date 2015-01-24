@@ -80,6 +80,7 @@ class Project(object):
     def __init__(self):
         self.config = {}
         self.site = {'brand' : '',
+                     'root' : '',
                      'reflinks' : {},
                      'link_ext' : '.html',
                      'file_ext' : '.html'
@@ -214,7 +215,11 @@ class Project(object):
             else:
                 raise UrubuError(undef_content_error.format(relfn))
         require_key('content', info, list, relfn)
-
+    
+    def format_url(self, url):
+        url = self.site['root'] + url
+        return url
+    
     def make_fileinfo(self, relfn, meta):
         """Make a fileinfo dict."""
         info = {}
@@ -223,6 +228,8 @@ class Project(object):
         info['id'] = make_id(components)
         # make html url from ref 
         info['url'] = info['id'] + self.site['link_ext']
+        # format url for eventual relative reference
+        info['url'] = self.format_url(info['url'])
         info.update(meta)
         return info
 
@@ -238,6 +245,8 @@ class Project(object):
         info['url'] = info['id']
         if info['url'] != '/':
             info['url'] += '/'
+        # format url for eventual relative reference
+        info['url'] = self.format_url(info['url'])
         return info
 
     def add_info_to_tagmap(self, info):
@@ -359,6 +368,8 @@ class Project(object):
         info['id'] = make_id(components)
         # add trailing slash for tag index url
         info['url'] = info['id'] + '/'
+        # format url for eventual relative reference
+        info['url'] = self.format_url(info['url'])
         info['content'] = content
         return info
 

@@ -1,4 +1,4 @@
-# Copyright 2014 Jan Decaluwe
+# Copyright 2014-2015 Jan Decaluwe
 #
 # This file is part of Urubu.
 #
@@ -25,7 +25,9 @@ import posixpath
 import markdown
 import logging
 logging.captureWarnings(False)
+
 from markdown import Extension
+from markdown.extensions import headerid
 from markdown.treeprocessors import Treeprocessor
 from markdown.inlinepatterns import ReferencePattern, REFERENCE_RE, SHORT_REF_RE
 
@@ -56,32 +58,36 @@ class ProjectReferencePattern(ReferencePattern):
 
     def handleMatch(self, m):
         try:
-            ref = m.group(9).lower()
+            ref = m.group(9)
         except IndexError:
             ref = None
         shortref = False
         if not ref:
             # if we got something like "[Google][]" or "[Google]"
             # we'll use "google" as the id
-            ref = m.group(2).lower()
+            ref = m.group(2)
             shortref = True
 
-        text = m.group(2)
         # Clean up linebreaks in ref 
         ref = self.NEWLINE_CLEANUP_RE.sub(' ', ref)
-        if ref in self.markdown.references:
-            href, title = self.markdown.references[ref]
+
+        text = m.group(2)
+        id = ref.lower()
+
+        if id in self.markdown.references:
+            href, title = self.markdown.references[id]
         else: 
+            anchor = None
+            if '#' in ref:
+                ref, anchor = ref.split('#', 1)
             this = self.markdown.this
             if not posixpath.isabs(ref):
                 rootrelpath = '/' +  '/'.join(this['components'][:-1])
                 id = posixpath.normpath(posixpath.join(rootrelpath, ref))
                 id = id.lower()
             else:
-                id = ref
-            anchor = None
-            if '#' in id and id not in self.markdown.site['reflinks']:
-                id, anchor = id.split('#', 1)
+                id = ref.lower()
+            ref = ref.lower()
             if ref in self.markdown.site['reflinks']:
                 if (ref != id) and (id in self.markdown.site['reflinks']):
                     raise UrubuError(ambig_ref_error.format(ref, this['fn']))
@@ -91,8 +97,10 @@ class ProjectReferencePattern(ReferencePattern):
                 href, title = item['url'], item['title']
                 if shortref:
                     text = title
+                    if anchor is not None:
+                        text = anchor
                 if anchor is not None:
-                    href = '%s#%s' % (href, anchor)
+                    href = '%s#%s' % (href, headerid.slugify(anchor, '-'))
             else: # ignore undefined refs
                 warn(undef_ref_warning.format(ref, this['fn']), UrubuWarning)
                 return None

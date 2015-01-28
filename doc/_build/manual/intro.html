@@ -111,11 +111,11 @@
     <div class="content">
       <div class="col-md-6" role="main">
         <h2 id="introduction">Introduction</h2>
-<p>Welcome to Urubu! My name is Jan Decaluwe and I am Urubu&rsquo;s author.</p>
-<p>Urubu is a micro <abbr title="Content Management System">CMS</abbr> for static websites.  The qualification &ldquo;micro* means that
+<p>Welcome to Urubu! My name is Jan Decaluwe and I am Urubu's author.</p>
+<p>Urubu is a micro <abbr title="Content Management System">CMS</abbr> for static websites.  The qualification "micro* means that
 it has a small feature set, defined by what I need for my purposes.  To know
 whether it is the right tool for you, check out <a href="/start.html" title="Read me first">Read me first</a>. </p>
-<p>Urubu&rsquo;s design philosophy is radical reuse of great software and ideas from
+<p>Urubu's design philosophy is radical reuse of great software and ideas from
 others. In the following sections, I will describe its concepts and how
 they are implemented.</p>
 <h2 id="authoring">Authoring</h2>
@@ -131,8 +131,8 @@ extensions.  This lets you enter language-specific code blocks without the need
 for indentation. The <a href="http://pythonhosted.org/Markdown/extensions/code_hilite.html" title="CodeHilite">CodeHilite</a> extension of Python-Markdown enables
 language-specific syntax highlighting via the <a href="http://pygments.org" title="Pygments">Pygments</a> library.</p>
 <h2 id="configuration">Configuration</h2>
-<p>The configuration options in Urubu are kept minimal, in the spirit of &ldquo;There
-should be one obvious way to do it&rdquo;.  Where used, the configuration format is
+<p>The configuration options in Urubu are kept minimal, in the spirit of "There
+should be one obvious way to do it".  Where used, the configuration format is
 YAML, implemented by the <a href="http://pyyaml.org" title="PyYAML">PyYAML</a> library.</p>
 <p>Configuration is mostly distributed, in the sense that every content file
 should have a <em>front matter</em>, that specifies the title, layout, date and so on.
@@ -159,14 +159,14 @@ has been developed with <a href="http://getbootstrap.com" title="Bootstrap">Boot
 professionally-designed framework with lots of useful predefined styles
 components. Urubu generates html that is Bootstrap-friendly, and infers the
 appropriate template variables for certain Bootstrap components. </p>
-<p>A great feature of Bootstrap is that it is &ldquo;mobile first&rdquo;. This means that your
+<p>A great feature of Bootstrap is that it is "mobile first". This means that your
 website will automatically adapt to any platform - smartphone, tablet or
 widescreen.</p>
 <p>A notable project is <a href="http://bootswatch.com" title="Bootswatch">Bootswatch</a>. This is a set of themes designed as drop-in
 replacement for the stock bootstrap styles. This gives you an effortless
 option to change the look and feel of your website.</p>
 <h2 id="navigation">Navigation</h2>
-<p>I am a big fan of Steve Krug&rsquo;s book <a href="http://www.amazon.com/Dont-Make-Me-Think-Usability/dp/0321344758">Don&rsquo;t make me think</a>,
+<p>I am a big fan of Steve Krug's book <a href="http://www.amazon.com/Dont-Make-Me-Think-Usability/dp/0321344758">Don't make me think</a>,
 and I feel that the lessons from this book are still often ignored.
 Actually, the lack of focus of other tools on these ideas are the
 main reason why I wrote Urubu.</p>
@@ -183,7 +183,7 @@ you can easily implement the following:</p>
 <li>active page or section highlighting </li>
 </ul>
 <p>Other techniques, independent from Urubu, can also help. Note for example that
-the sidebar on this page is &ldquo;affixed&rdquo;: it moves as you scroll through the page,
+the sidebar on this page is "affixed": it moves as you scroll through the page,
 but never leaves the viewport. (Note: this description assumes that the
 viewport is wide enough to accomodate the sidebar.) At any time, the full
 structure of the page remains visible and available for navigation. This was
@@ -195,11 +195,11 @@ are defined in the site configuration file.  Moreover, all content pages and
 folders are available as reference links.</p>
 <p>When you use a reference id in configuration info or in Markdown content
 (between square brackets) Urubu will automatically resolve it. For Markdown,
-this feature is implemented as a Markdown extension. Note that it doesn&rsquo;t
+this feature is implemented as a Markdown extension. Note that it doesn't
 require any syntax change. It enables page linking similar to what is commonly
-found on wiki&rsquo;s. </p>
+found on wiki's. </p>
 <p>Project-wide reference links are a distinguishing Urubu feature.</p>
-<p>One of the messages of Steve Krug&rsquo;s book is that the text that you click should
+<p>One of the messages of Steve Krug's book is that the text that you click should
 be the title of the page where you land. Therefore, when you use reference
 links, Urubu will insert the title of the link in the generated html (unless
 you specify an alternative text explicitly).</p>

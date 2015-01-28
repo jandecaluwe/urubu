@@ -60,7 +60,10 @@ class ContentProcessor(object):
         tableclass = md_extensions.TableClassExtension() 
         projectref = md_extensions.ProjectReferenceExtension()
         checklist = ChecklistExtension()
-	extensions = ['extra', 'codehilite', 'headerid', 'toc', 'smarty', tableclass, projectref, checklist]
+        # there is a strange interaction between smarty and reference links that start on a new line
+        # disabling smarty for now...
+	# extensions = ['extra', 'codehilite', 'headerid', 'toc', 'smarty', tableclass, projectref, checklist]
+	extensions = ['extra', 'codehilite', 'headerid', 'toc', tableclass, projectref, checklist]
         extension_configs = { 'codehilite' : [('guess_lang', 'False'),
                                               ('linenums', 'False')],
                               'headerid': [('level', 2)]

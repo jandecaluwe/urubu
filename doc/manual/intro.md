@@ -117,26 +117,29 @@ viewport is wide enough to accomodate the sidebar.) At any time, the full
 structure of the page remains visible and available for navigation. This was
 implemented by borrowing code from the [bootstrap] theme.
 
-Project-wide reference links 
-============================
+Project-wide reference ids 
+==========================
 
-A reference link is a way to refer to a link object via a reference id. Urubu
-supports the concept of project-wide reference links.  Global reference links
-are defined in the site configuration file.  Moreover, all content pages and
-folders are available as reference links.
+Markdown defines the concept of a reference link. This is a way to refer to a
+page or an url using a reference id.  The syntax of a reference link is a
+reference id between square brackets, for example `[intro]`. 
 
-When you use a reference id in configuration info or in Markdown content
-(between square brackets) Urubu will automatically resolve it. For Markdown,
-this feature is implemented as a Markdown extension. Note that it doesn't
-require any syntax change. It enables page linking similar to what is commonly
-found on wiki's. 
+Urubu supports the concept of project-wide reference ids.  First, global
+reference ids can be defined in the site configuration file.  Moreover, all
+content pages and folders have a corresponding reference id: their pathname
+without extension. In this case, reference links are similar to wiki links, the
+typical way to link between pages in wiki's.
 
-Project-wide reference links are a distinguishing Urubu feature.
+Standard Markdown only resolves reference ids that are defined within the file.
+Urubu extends this behavior by resolving them over the project.  This feature
+is implemented as a Markdown extension. Note that it doesn't require new syntax.
+
+Project-wide reference ids are a unique Urubu feature.
 
 One of the messages of Steve Krug's book is that the text that you click should
 be the title of the page where you land. Therefore, when you use reference
-links, Urubu will insert the title of the link in the generated html (unless
-you specify an alternative text explicitly).
+links, Urubu will insert the page title in the generated html (unless you
+specify an alternative text explicitly).
 
 Development and deployment
 ==========================

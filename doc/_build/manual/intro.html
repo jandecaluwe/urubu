@@ -99,7 +99,7 @@
 <li><a href="#templating">Templating</a></li>
 <li><a href="#theming">Theming</a></li>
 <li><a href="#navigation">Navigation</a></li>
-<li><a href="#project-wide-reference-links">Project-wide reference links</a></li>
+<li><a href="#project-wide-reference-ids">Project-wide reference ids</a></li>
 <li><a href="#development-and-deployment">Development and deployment</a></li>
 </ul>
 </div>
@@ -188,21 +188,23 @@ but never leaves the viewport. (Note: this description assumes that the
 viewport is wide enough to accomodate the sidebar.) At any time, the full
 structure of the page remains visible and available for navigation. This was
 implemented by borrowing code from the <a href="http://getbootstrap.com" title="Bootstrap">Bootstrap</a> theme.</p>
-<h2 id="project-wide-reference-links">Project-wide reference links</h2>
-<p>A reference link is a way to refer to a link object via a reference id. Urubu
-supports the concept of project-wide reference links.  Global reference links
-are defined in the site configuration file.  Moreover, all content pages and
-folders are available as reference links.</p>
-<p>When you use a reference id in configuration info or in Markdown content
-(between square brackets) Urubu will automatically resolve it. For Markdown,
-this feature is implemented as a Markdown extension. Note that it doesn't
-require any syntax change. It enables page linking similar to what is commonly
-found on wiki's. </p>
-<p>Project-wide reference links are a distinguishing Urubu feature.</p>
+<h2 id="project-wide-reference-ids">Project-wide reference ids</h2>
+<p>Markdown defines the concept of a reference link. This is a way to refer to a
+page or an url using a reference id.  The syntax of a reference link is a
+reference id between square brackets, for example <code>[intro]</code>. </p>
+<p>Urubu supports the concept of project-wide reference ids.  First, global
+reference ids can be defined in the site configuration file.  Moreover, all
+content pages and folders have a corresponding reference id: their pathname
+without extension. In this case, reference links are similar to wiki links, the
+typical way to link between pages in wiki's.</p>
+<p>Standard Markdown only resolves reference ids that are defined within the file.
+Urubu extends this behavior by resolving them over the project.  This feature
+is implemented as a Markdown extension. Note that it doesn't require new syntax.</p>
+<p>Project-wide reference ids are a unique Urubu feature.</p>
 <p>One of the messages of Steve Krug's book is that the text that you click should
 be the title of the page where you land. Therefore, when you use reference
-links, Urubu will insert the title of the link in the generated html (unless
-you specify an alternative text explicitly).</p>
+links, Urubu will insert the page title in the generated html (unless you
+specify an alternative text explicitly).</p>
 <h2 id="development-and-deployment">Development and deployment</h2>
 <p>You can develop a Urubu project is like a software project, from a git or
 mercurial repository.  This gives you best-in-class revision control.

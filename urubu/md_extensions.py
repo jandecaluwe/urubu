@@ -43,16 +43,21 @@ def _set_table_class(tree):
             item.set('class', 'table')
         _set_table_class(item)
 
+
 class TableClass(Treeprocessor):
 
     def run(self, root):
         _set_table_class(root)
         return None
 
+
 class TableClassExtension(Extension):
+
     """Add 'table' class to table elements (for bootstrap)."""
+
     def extendMarkdown(self, md, md_globals):
         md.treeprocessors.add('tableclass', TableClass(md), "_end")
+
 
 class ProjectReferencePattern(ReferencePattern):
 
@@ -68,7 +73,7 @@ class ProjectReferencePattern(ReferencePattern):
             ref = m.group(2)
             shortref = True
 
-        # Clean up linebreaks in ref 
+        # Clean up linebreaks in ref
         ref = self.NEWLINE_CLEANUP_RE.sub(' ', ref)
 
         text = m.group(2)
@@ -76,13 +81,13 @@ class ProjectReferencePattern(ReferencePattern):
 
         if id in self.markdown.references:
             href, title = self.markdown.references[id]
-        else: 
+        else:
             anchor = None
             if '#' in ref:
                 ref, anchor = ref.split('#', 1)
             this = self.markdown.this
             if not posixpath.isabs(ref):
-                rootrelpath = '/' +  '/'.join(this['components'][:-1])
+                rootrelpath = '/' + '/'.join(this['components'][:-1])
                 id = posixpath.normpath(posixpath.join(rootrelpath, ref))
                 id = id.lower()
             else:
@@ -101,14 +106,19 @@ class ProjectReferencePattern(ReferencePattern):
                         text = anchor
                 if anchor is not None:
                     href = '%s#%s' % (href, headerid.slugify(anchor, '-'))
-            else: # ignore undefined refs
+            else:  # ignore undefined refs
                 warn(undef_ref_warning.format(ref, this['fn']), UrubuWarning)
                 return None
 
         return self.makeTag(href, title, text)
 
+
 class ProjectReferenceExtension(Extension):
+
     """Overwrite reference pattern with project reference extension."""
+
     def extendMarkdown(self, md, md_globals):
-        md.inlinePatterns['reference'] = ProjectReferencePattern(REFERENCE_RE, md)
-        md.inlinePatterns['short_reference'] = ProjectReferencePattern(SHORT_REF_RE, md)
+        md.inlinePatterns['reference'] = ProjectReferencePattern(
+            REFERENCE_RE, md)
+        md.inlinePatterns['short_reference'] = ProjectReferencePattern(
+            SHORT_REF_RE, md)

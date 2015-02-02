@@ -24,11 +24,12 @@ import os
 from urubu import __version__
 from urubu import project
 
+
 def serve():
     """HTTP server straight from the docs."""
     # allow running this from the top level
     if os.path.isdir('_build'):
-        os.chdir('_build')     
+        os.chdir('_build')
     import SimpleHTTPServer
     import SocketServer
     # local use, address reuse should be OK
@@ -39,6 +40,7 @@ def serve():
     print("Serving at port {}".format(PORT))
     httpd.serve_forever()
 
+
 def main():
     parser = argparse.ArgumentParser(prog='python -m urubu')
     parser.add_argument('--version', action='version', version=__version__)
@@ -47,5 +49,4 @@ def main():
     if args.command == 'build':
         project.build()
     elif args.command == 'serve':
-        serve() 
-
+        serve()

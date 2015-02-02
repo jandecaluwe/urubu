@@ -33,21 +33,23 @@ from markdown_checklist.extension import ChecklistExtension
 from urubu import UrubuWarning, UrubuError
 from urubu import md_extensions
 
-from urubu.config import layoutdir, tag_layout 
+from urubu.config import layoutdir, tag_layout
 
 tag_layout_warning = "Tags defined, but no {} layout found".format(tag_layout)
+
 
 def skip_yamlfm(f):
     """Return source of a file without yaml frontmatter."""
     f.readline()
     found = False
     lines = []
-    for line in f.readlines():  
+    for line in f.readlines():
         if found:
             lines.append(line)
         if line.strip() == '---':
             found = True
     return ''.join(lines)
+
 
 class ContentProcessor(object):
 
@@ -57,18 +59,19 @@ class ContentProcessor(object):
         self.navlist = project.navlist
         self.taglist = project.taglist
         self.site = project.site
-        tableclass = md_extensions.TableClassExtension() 
+        tableclass = md_extensions.TableClassExtension()
         projectref = md_extensions.ProjectReferenceExtension()
         checklist = ChecklistExtension()
         # there is a strange interaction between smarty and reference links that start on a new line
         # disabling smarty for now...
-	# extensions = ['extra', 'codehilite', 'headerid', 'toc', 'smarty', tableclass, projectref, checklist]
-	extensions = ['extra', 'codehilite', 'headerid', 'toc', tableclass, projectref, checklist]
-        extension_configs = { 'codehilite' : [('guess_lang', 'False'),
-                                              ('linenums', 'False')],
-                              'headerid': [('level', 2)]
-                            }
-        self.md = markdown.Markdown(extensions=extensions, 
+        # extensions = ['extra', 'codehilite', 'headerid', 'toc', 'smarty', tableclass, projectref, checklist]
+        extensions = ['extra', 'codehilite', 'headerid',
+                      'toc', tableclass, projectref, checklist]
+        extension_configs = {'codehilite': [('guess_lang', 'False'),
+                                            ('linenums', 'False')],
+                             'headerid': [('level', 2)]
+                             }
+        self.md = markdown.Markdown(extensions=extensions,
                                     extension_configs=extension_configs)
         self.md.site = self.site
         env = self.env = jinja2.Environment(loader=jinja2.FileSystemLoader(layoutdir),
@@ -81,11 +84,11 @@ class ContentProcessor(object):
             self.templates[layout] = self.env.get_template(layout + '.html')
         # layout for tags is optional, triggers index file generation per tag
         try:
-            self.templates[tag_layout] = self.env.get_template(tag_layout + '.html')
+            self.templates[tag_layout] = self.env.get_template(
+                tag_layout + '.html')
         except jinja2.exceptions.TemplateNotFound:
             if self.taglist:
                 warn(tag_layout_warning, UrubuWarning)
-            
 
     def process(self):
         """Process the content.
@@ -94,14 +97,14 @@ class ContentProcessor(object):
         that the full content is available to the rendering process.
         """
         self.convert()
-        self.render() 
-        
+        self.render()
+
     def convert(self):
         for info in self.filelist:
             fn = info['fn']
             with open(fn, encoding='utf-8-sig') as inf:
-               src = skip_yamlfm(inf)
-            self.md.this = info 
+                src = skip_yamlfm(inf)
+            self.md.this = info
             self.md.toc = ''
             info['body'] = self.md.convert(src)
             info['toc'] = ''
@@ -113,15 +116,15 @@ class ContentProcessor(object):
             mdkeys = [key for key in info if key[-3:] == '.md']
             for mdkey in mdkeys:
                 key = mdkey[:-3]
-                info[key] = self.md.convert(info[mdkey]) 
-            self.md.reset()        
+                info[key] = self.md.convert(info[mdkey])
+            self.md.reset()
         for info in self.navlist:
             # markdown support in keys
             mdkeys = [key for key in info if key[-3:] == '.md']
             for mdkey in mdkeys:
                 key = mdkey[:-3]
-                info[key] = self.md.convert(info[mdkey]) 
-            self.md.reset()        
+                info[key] = self.md.convert(info[mdkey])
+            self.md.reset()
 
     def render_file(self, info):
         layout = info['layout']
@@ -131,7 +134,7 @@ class ContentProcessor(object):
         bfn, ext = os.path.splitext(fn)
         outfn = os.path.join(self.sitedir, bfn) + self.site['file_ext']
         with open(outfn, 'w', encoding='utf-8', errors='strict') as outf:
-           outf.write(html)
+            outf.write(html)
 
     def render(self):
         # content files

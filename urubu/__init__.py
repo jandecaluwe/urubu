@@ -17,9 +17,10 @@
 
 __version__ = "0.6"
 
+
 class UrubuWarning(UserWarning):
     pass
 
+
 class UrubuError(Exception):
     pass
-

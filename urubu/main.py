@@ -24,22 +24,20 @@ import os
 from urubu import __version__
 from urubu import project
 
+from urubu._compat import socketserver, httpserver
 
 def serve():
     """HTTP server straight from the docs."""
     # allow running this from the top level
     if os.path.isdir('_build'):
         os.chdir('_build')
-    import SimpleHTTPServer
-    import SocketServer
     # local use, address reuse should be OK
-    SocketServer.TCPServer.allow_reuse_address = True
+    socketserver.TCPServer.allow_reuse_address = True
     PORT = 8000
-    Handler = SimpleHTTPServer.SimpleHTTPRequestHandler
-    httpd = SocketServer.TCPServer(('', PORT), Handler)
+    handler = httpserver.SimpleHTTPRequestHandler
+    httpd = socketserver.TCPServer(('', PORT), handler)
     print("Serving at port {}".format(PORT))
     httpd.serve_forever()
-
 
 def main():
     parser = argparse.ArgumentParser(prog='python -m urubu')

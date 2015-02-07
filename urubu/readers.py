@@ -21,7 +21,6 @@ from io import open
 
 import yaml
 import re
-import codecs
 import warnings
 
 from urubu import UrubuWarning

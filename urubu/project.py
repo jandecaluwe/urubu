@@ -26,6 +26,9 @@ from warnings import warn
 import shutil
 import datetime
 import itertools
+from operator import itemgetter
+
+from urubu._compat import ifilter
 
 from urubu import UrubuWarning, UrubuError
 from urubu import readers, processors
@@ -325,7 +328,7 @@ class Project(object):
                 return True
             return False
         allinfo = itertools.chain(self.filelist, self.navlist)
-        refcontent = itertools.ifilter(pred, allinfo)
+        refcontent = ifilter(pred, allinfo)
 
         def get_keyval(item):
             return item[key]
@@ -384,10 +387,11 @@ class Project(object):
             self.taglist.append(taginfo)
             self.add_reflink(taginfo['id'], taginfo)
 
-        # sort tags according to content length
-        def get_contentlen(taginfo):
-            return len(taginfo['content'])
-        self.taglist = sorted(self.taglist, key=get_contentlen, reverse=True)
+        # sort tags according to content length, then alphabetically
+        # to get sort order right, invert content length
+        def get_tagkey(taginfo):
+            return (-len(taginfo['content']), taginfo['tag'])
+        self.taglist = sorted(self.taglist, key=get_tagkey)
 
         # set up tagid info dict if it doesn't exist already
         if tagid not in self.site['reflinks']:

@@ -28,8 +28,6 @@ logging.captureWarnings(False)
 
 import jinja2
 
-from markdown_checklist.extension import ChecklistExtension
-
 from urubu import UrubuWarning, UrubuError
 from urubu import md_extensions
 
@@ -61,12 +59,11 @@ class ContentProcessor(object):
         self.site = project.site
         tableclass = md_extensions.TableClassExtension()
         projectref = md_extensions.ProjectReferenceExtension()
-        checklist = ChecklistExtension()
         # there is a strange interaction between smarty and reference links that start on a new line
         # disabling smarty for now...
-        # extensions = ['extra', 'codehilite', 'headerid', 'toc', 'smarty', tableclass, projectref, checklist]
+        # extensions = ['extra', 'codehilite', 'headerid', 'toc', 'smarty', tableclass, projectref]
         extensions = ['extra', 'codehilite', 'headerid',
-                      'toc', tableclass, projectref, checklist]
+                      'toc', tableclass, projectref]
         extension_configs = {'codehilite': [('guess_lang', 'False'),
                                             ('linenums', 'False')],
                              'headerid': [('level', 2)]

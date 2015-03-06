@@ -89,6 +89,7 @@ class Project(object):
     def __init__(self):
         self.config = {}
         self.site = {'brand': '',
+                     'baseurl': None,
                      'reflinks': {},
                      'link_ext': '.html',
                      'file_ext': '.html'
@@ -151,6 +152,12 @@ class Project(object):
         if id in self.site['reflinks']:
             raise UrubuError(ambig_reflink_error.format(id))
         self.site['reflinks'][id] = info
+
+    def finalize_local_url(self, url):
+        """Add a base to a local URL, if configured."""
+        if self.site['baseurl']:
+            url = '/' + self.site['baseurl'] + url
+        return url
 
     def get_contentinfo(self):
         """Get info from the markdown content files."""
@@ -233,7 +240,8 @@ class Project(object):
         info['components'] = components = get_components(relfn)
         info['id'] = make_id(components)
         # make html url from ref
-        info['url'] = info['id'] + self.site['link_ext']
+        info['url'] = self.finalize_local_url(
+            info['id'] + self.site['link_ext'])
         info.update(meta)
         return info
 
@@ -246,7 +254,7 @@ class Project(object):
         info['components'] = components = get_components(relpath)
         info['id'] = make_id(components)
         # add trailing slash for navigation url
-        info['url'] = info['id']
+        info['url'] = self.finalize_local_url(info['id'])
         if info['url'] != '/':
             info['url'] += '/'
         return info
@@ -368,7 +376,7 @@ class Project(object):
         info['components'] = components = (tagdir, tag)
         info['id'] = make_id(components)
         # add trailing slash for tag index url
-        info['url'] = info['id'] + '/'
+        info['url'] = self.finalize_local_url(info['id']) + '/'
         info['content'] = content
         return info
 

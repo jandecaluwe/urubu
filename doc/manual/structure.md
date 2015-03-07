@@ -75,12 +75,29 @@ Currently, these are the predefined attributes:
 Attribute         | Description
 ------------------|-------------
 `reflinks`        | Holds a mapping from reference ids to link objects.
+`baseurl`         | Prefix for generated local URLs
 `file_ext`        | Change default file extension (`'.html'`) for processed `.md` files
 `link_ext`        | Change default file extension (`'.html'`) for links to site's pages
 `ignore_patterns` | List of additional file names or globs to be ignored during processing 
 
 Link objects, for the `reflinks` attribute, are a mapping with an `url` key that maps
-to the link url and a `title` key that maps to the link title. 
+to the link URL and a `title` key that maps to the link title. 
+
+The `baseurl` option mirrors the same feature in [Jekyll][jekyll-options].  It
+allows you to specify a prefix for all local URLs generated within your site.
+This is necessary when your site will be served from a URL that has more than
+just the hostname. For example, on GitHub Pages sites are served from
+http://username.github.io/project_name/, so Urubu needs to include that
+`/project_name/` in generated URLs pointing to local content.
+
+`baseurl` should be specified with no beginning or trailing slashes, e.g.:
+
+```yaml
+baseurl: prefix
+```
+[jekyll-options]: http://jekyllrb.com/docs/configuration/#serve-command-options
+
+
 
 The file extension attributes, `file_ext` and `link_ext`, are both usually set to the
 same value (i.e. `'.php'`), unless the target site has .htaccess rewrite rules that

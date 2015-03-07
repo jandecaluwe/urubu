@@ -24,7 +24,6 @@ The most notable supported extensions are:
 * [def_list]
 * [fenced_code] 
 * [code_hilite]
-* [markdown_checklist]
 
 Code
 ====

@@ -6,6 +6,7 @@
     <meta charset="utf-8">
     <!-- Bootstrap -->
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" media="screen">
+
     <link href="/css/site.css" rel="stylesheet" media="screen">
     <link href="/css/syntax.css" rel="stylesheet" media="screen">
 
@@ -43,7 +44,6 @@
         <div class="navbar-collapse collapse">
 
           <ul class="nav navbar-nav navbar-left">
- 
             <li><a href="/start.html">Read me first</a></li>
             <li><a href="/install.html">Installation</a></li>
             <li class="active"><a href="/manual/">Manual</a></li>
@@ -55,12 +55,12 @@
             <li class="dropdown">
               <a href="/sites/" class="dropdown-toggle" data-toggle="dropdown">Urubu sites <b class="caret"></b></a>
               <ul class="dropdown-menu">
-                <li><a href="http://urubu-quickstart.jandecaluwe.com">Urubu Quickstart</a></li>    
-                <li><a href="http://www.myhdl.org">MyHDL</a></li>    
-                <li><a href="http://dev.myhdl.org">MyHDL development</a></li>    
-                <li><a href="http://www.jandecaluwe.com">Jan Decaluwe</a></li>    
-                <li><a href="http://music.jandecaluwe.com">Jan Decaluwe / Music</a></li>    
-                <li><a href="http://urubu.jandecaluwe.com">This site (Urubu documentation)</a></li>    
+                <li><a href="http://urubu-quickstart.jandecaluwe.com">Urubu Quickstart</a></li>
+                <li><a href="http://www.myhdl.org">MyHDL</a></li>
+                <li><a href="http://dev.myhdl.org">MyHDL development</a></li>
+                <li><a href="http://www.jandecaluwe.com">Jan Decaluwe</a></li>
+                <li><a href="http://music.jandecaluwe.com">Jan Decaluwe / Music</a></li>
+                <li><a href="http://urubu.jandecaluwe.com">This site (Urubu documentation)</a></li>
               </ul>
             </li>
             <li><a href="/about.html">About</a></li>
@@ -80,14 +80,12 @@
   </ol>
 
   <div class="page-header">
- 
     <h1>Project structure</h1>
   </div>
 
   <div class="row">
 
-    <div class="col-md-3" role="navigation"> 
- 
+    <div class="col-md-3" role="navigation">
       <div class="sidebar" data-spy="affix" data-offset-top="80" data-offset-bottom="60">
         <div class="well">
           <a href="#"><strong>Project structure</strong></a>
@@ -112,7 +110,7 @@
         </div>
       </div>
     </div>
- 
+
     <div class="content">
       <div class="col-md-6" role="main">
         <h2 id="the-project-directory">The project directory</h2>
@@ -181,6 +179,10 @@ Currently, these are the predefined attributes: </p>
 <td>Holds a mapping from reference ids to link objects.</td>
 </tr>
 <tr>
+<td><code>baseurl</code></td>
+<td>Prefix for generated local URLs</td>
+</tr>
+<tr>
 <td><code>file_ext</code></td>
 <td>Change default file extension (<code>'.html'</code>) for processed <code>.md</code> files</td>
 </tr>
@@ -195,7 +197,18 @@ Currently, these are the predefined attributes: </p>
 </tbody>
 </table>
 <p>Link objects, for the <code>reflinks</code> attribute, are a mapping with an <code>url</code> key that maps
-to the link url and a <code>title</code> key that maps to the link title. </p>
+to the link URL and a <code>title</code> key that maps to the link title. </p>
+<p>The <code>baseurl</code> option mirrors the same feature in <a href="http://jekyllrb.com/docs/configuration/#serve-command-options">Jekyll</a>.  It
+allows you to specify a prefix for all local URLs generated within your site.
+This is necessary when your site will be served from a URL that has more than
+just the hostname. For example, on GitHub Pages sites are served from
+http://username.github.io/project_name/, so Urubu needs to include that
+<code>/project_name/</code> in generated URLs pointing to local content.</p>
+<p><code>baseurl</code> should be specified with no beginning or trailing slashes, e.g.:</p>
+<div class="codehilite"><pre><span class="l-Scalar-Plain">baseurl</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">prefix</span>
+</pre></div>
+
+
 <p>The file extension attributes, <code>file_ext</code> and <code>link_ext</code>, are both usually set to the
 same value (i.e. <code>'.php'</code>), unless the target site has .htaccess rewrite rules that
 affect the file extensions.</p>
@@ -365,7 +378,7 @@ automatically and needs not be set.</p>
     </div>
 
   </div>
-    
+
   <ul class="pager">
     <li class="previous"><a href="/manual/intro.html">&larr; Concepts</a></li>
     <li class="next"><a href="/manual/authoring.html">Authoring &rarr;</a></li>
@@ -399,7 +412,7 @@ window.__gcfg = {
     </div>
 
 
-</div> 
+</div>
 
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

@@ -85,44 +85,8 @@
 
   <div class="row">
 
-    <div class="col-md-3" role="navigation">
-      <div class="sidebar" data-spy="affix" data-offset-top="80" data-offset-bottom="60">
-        <div class="well">
-          <a href="#"><strong>Templating</strong></a>
-          <div class="toc">
-<ul>
-<li><a href="#overview">Overview</a></li>
-<li><a href="#the-template-library">The template library</a></li>
-<li><a href="#evaluation-context">Evaluation context</a><ul>
-<li><a href="#link-objects">Link objects</a><ul>
-<li><a href="#description">Description</a></li>
-<li><a href="#common-attributes">Common attributes</a></li>
-<li><a href="#common-attributes-except-for-local-link-objects">Common attributes, except for local link objects</a></li>
-<li><a href="#folder-and-page-object-attributes">Folder and page object attributes</a></li>
-<li><a href="#folder-object-attributes">Folder object attributes</a></li>
-<li><a href="#page-object-attributes">Page object attributes</a></li>
-<li><a href="#index-pages">Index pages</a></li>
-<li><a href="#tag-folder-object">Tag folder object</a></li>
-<li><a href="#tag-objects">Tag objects</a></li>
-</ul>
-</li>
-<li><a href="#context-variables">Context variables</a><ul>
-<li><a href="#site">site</a></li>
-<li><a href="#this">this</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="#python-hooks">Python hooks</a></li>
-</ul>
-</div>
-
-        </div>
-      </div>
-    </div>
-
     <div class="content">
-      <div class="col-md-6" role="main">
+      <div class="col-md-7" role="main">
         <h2 id="overview">Overview</h2>
 <p>Templates define the html layout for a particular page type.  In a template you
 can mix plain html with control structures and variable interpolation. The html
@@ -439,6 +403,44 @@ calling the template. </p>
 <p>Filters functions should be defined as <a href="http://jinja.pocoo.org/docs/api/#custom-filters">custom filters in
 Jinja2</a>.</p>
       </div>
+    </div>
+
+    <div class="col-md-3" role="complementary">
+      <nav class="hidden-print hidden-xs hidden-sm">
+        <div class="sidebar" data-spy="affix" data-offset-top="80" data-offset-bottom="60">
+          <div class="well">
+            <a href="#"><strong>Templating</strong></a>
+            <div class="toc">
+<ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#the-template-library">The template library</a></li>
+<li><a href="#evaluation-context">Evaluation context</a><ul>
+<li><a href="#link-objects">Link objects</a><ul>
+<li><a href="#description">Description</a></li>
+<li><a href="#common-attributes">Common attributes</a></li>
+<li><a href="#common-attributes-except-for-local-link-objects">Common attributes, except for local link objects</a></li>
+<li><a href="#folder-and-page-object-attributes">Folder and page object attributes</a></li>
+<li><a href="#folder-object-attributes">Folder object attributes</a></li>
+<li><a href="#page-object-attributes">Page object attributes</a></li>
+<li><a href="#index-pages">Index pages</a></li>
+<li><a href="#tag-folder-object">Tag folder object</a></li>
+<li><a href="#tag-objects">Tag objects</a></li>
+</ul>
+</li>
+<li><a href="#context-variables">Context variables</a><ul>
+<li><a href="#site">site</a></li>
+<li><a href="#this">this</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#python-hooks">Python hooks</a></li>
+</ul>
+</div>
+
+          </div>
+        </div>
+      </nav>
     </div>
 
   </div>

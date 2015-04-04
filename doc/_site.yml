@@ -2,7 +2,7 @@ brand: Urubu
 
 bootswatch: null 
 navbar_inverse: false 
-bootstrap: 3.3.0
+bootstrap: 3.3.4
 
 reflinks:
     jandecaluwe:

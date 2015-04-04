@@ -1,6 +1,6 @@
 ---
 title: What are the licensing requirements? 
-layout: simple_page 
+layout: page 
 date: 2014-01-12
 ---
 

@@ -85,24 +85,8 @@
 
   <div class="row">
 
-    <div class="col-md-3" role="navigation">
-      <div class="sidebar" data-spy="affix" data-offset-top="80" data-offset-bottom="60">
-        <div class="well">
-          <a href="#"><strong>Authoring</strong></a>
-          <div class="toc">
-<ul>
-<li><a href="#content">Content</a></li>
-<li><a href="#code">Code</a></li>
-<li><a href="#reference-links">Reference links</a></li>
-</ul>
-</div>
-
-        </div>
-      </div>
-    </div>
-
     <div class="content">
-      <div class="col-md-6" role="main">
+      <div class="col-md-7" role="main">
         <h2 id="content">Content</h2>
 <p>In Urubu, content is entered in <a href="http://daringfireball.net/projects/markdown/" title="Markdown">Markdown</a> format. This is a lightweight format
 that feels like a natural way to write content in plain text.</p>
@@ -155,6 +139,24 @@ fragment text is inserted. To make the result more readable, you can use
 non-slugified fragment text.  For example, <code>[authoring#Reference links]</code> also
 links to the present section, and is rendered as <a href="/manual/authoring.html#reference-links" title="Authoring">Reference links</a>. </p>
       </div>
+    </div>
+
+    <div class="col-md-3" role="complementary">
+      <nav class="hidden-print hidden-xs hidden-sm">
+        <div class="sidebar" data-spy="affix" data-offset-top="80" data-offset-bottom="60">
+          <div class="well">
+            <a href="#"><strong>Authoring</strong></a>
+            <div class="toc">
+<ul>
+<li><a href="#content">Content</a></li>
+<li><a href="#code">Code</a></li>
+<li><a href="#reference-links">Reference links</a></li>
+</ul>
+</div>
+
+          </div>
+        </div>
+      </nav>
     </div>
 
   </div>

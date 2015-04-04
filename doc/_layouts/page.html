@@ -22,26 +22,28 @@
 
   <div class="row">
 
-    {% block sidebar %}
-    <div class="col-md-3" role="navigation">
-      {% if this.toc %}
-      <div class="sidebar" data-spy="affix" data-offset-top="80" data-offset-bottom="60">
-        <div class="well">
-          <a href="#"><strong>{{this.title}}</strong></a>
-          {{this.toc}}
-        </div>
-      </div>
-      {% endif %}
-    </div>
-    {% endblock %}
-
     <div class="content">
       {% block content %}
-      <div class="col-md-6" role="main">
+      <div class="col-md-7" role="main">
         {{this.body}}
       </div>
       {% endblock %}
     </div>
+
+    {% block sidebar %}
+    {% if this.toc %}
+    <div class="col-md-3" role="complementary">
+      <nav class="hidden-print hidden-xs hidden-sm">
+        <div class="sidebar" data-spy="affix" data-offset-top="80" data-offset-bottom="60">
+          <div class="well">
+            <a href="#"><strong>{{this.title}}</strong></a>
+            {{this.toc}}
+          </div>
+        </div>
+      </nav>
+    </div>
+    {% endif %}
+    {% endblock %}
 
   </div>
 

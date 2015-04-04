@@ -1,6 +1,6 @@
 ---
 title: How to add media files? 
-layout: simple_page 
+layout: page 
 date: 2014-09-11
 ---
 

@@ -14,7 +14,7 @@ To use tservice with an Urubu site instead of using `urubu serve`
 call `tserve` with the prefix option, e.g.
 
 ```
-tserve --prefix baseurl _build
+tserve --prefix <baseurl> _build
 ```
 
-Where "baseurl" is your site's particular prefix.
+Where `<baseurl>` is your site's particular prefix.

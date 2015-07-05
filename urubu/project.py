@@ -70,9 +70,11 @@ def get_components(path, hasext=True):
         components = p.split(os.sep)
     return components
 
-
-def make_id(components):
-    return ('/' + '/'.join(components)).lower()
+def make_id(components, lowercased=True):
+    id = ('/' + '/'.join(components))
+    if lowercased:
+        return id.lower()
+    return id
 
 
 def make_clean(dir):
@@ -241,7 +243,7 @@ class Project(object):
         info['id'] = make_id(components)
         # make html url from ref
         info['url'] = self.finalize_local_url(
-            info['id'] + self.site['link_ext'])
+            make_id(components, lowercased=False) + self.site['link_ext'])
         info.update(meta)
         return info
 
@@ -353,6 +355,7 @@ class Project(object):
                 comps = comps[:-1]
             for comp in comps:
                 id = id + '/' + comp
+                id = id.lower()
                 breadcrumbs.append(self.site['reflinks'][id])
             info['breadcrumbs'] = breadcrumbs
 

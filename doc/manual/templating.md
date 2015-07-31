@@ -50,14 +50,11 @@ check it out when using templates in Urubu.
 A great feature of Jinja2 is template inheritance. With this technique,
 you can easily generate small variations of a parent template.
 
-Evaluation context
-==================
-
-
 Link objects
-------------
+============
 
-### Description
+Description
+-----------
 
 Link objects are the primary objects that you use in templates. 
 They come in a number of flavours: 
@@ -65,26 +62,33 @@ They come in a number of flavours:
 Link object        | Description
 -------------------|---------------
 global link object | Defined in the `_site.yml` file.
-local link object  | Defined in `content` attribute of an index file.
+local link object  | Defined in locally in the `content` attribute of an index file.
 folder object      | Corresponds to a project subdirectory.
 page object        | Correspond to a Markdown content file.
 tag folder object  | Dedicated folder for content ordered by tag. 
 tag object         | Represents content corresponding to a specific tag. 
 
-### Common attributes
+Attributes
+----------
+
+Link objects have attributes. The defined attributes depend on the type of the
+link object. 
+
+The following attributes are common to **all link objects**:
 
 Attribute      | Description 
 ---------------|---------------------------
 `url`          | The url of the object. 
 `title`        | The title of the object.
 
-### Common attributes, except for local link objects
+**All link objects except local link objects** also
+have an `id` attribute:
 
 Attribute      | Description 
 ---------------|---------------------------
 `id`           | The unique id by which the object is known in the project. 
 
-### Folder and page object attributes 
+**Folder and page objects** have the following attributes: 
 
 Attribute      | Description 
 ---------------|---------------------------
@@ -92,7 +96,7 @@ Attribute      | Description
 `components`   | The components of the object's pathname, without file extension, as a list.
 `mdate`        | Modification date
 
-### Folder object attributes
+**Folder objects** also have a `content` attribute: 
 
 Attribute      | Description 
 ---------------|---------------------------
@@ -102,7 +106,7 @@ In addition, all attributes specified in the YAML front matter
 of the corresponding index file will be available as attributes of
 the folder object.
 
-### Page object attributes
+**Page objects** have the following additional attributes:
 
 Attribute      | Description 
 ---------------|---------------------------
@@ -117,31 +121,15 @@ In addition, all attributes specified in the YAML front matter
 of the corresponding file are available as attributes of
 the page object.
 
-### Index pages
+Index pages
+-----------
 
 Index pages are associated with `index.md` files. They are special in the sense
 that they define the attributes and the content of a folder. Therefore, they
 have the same `content` attribute as the corresponding folder object.
 
-### Tag folder object
-
-The tag folder object is a special top-level folder whose `id` is `/tag`. Urubu
-infers tag-related content for this folder automatically.
-
-You can optionally create the corresponding directory in the source code, and
-use the index file to set attributes such as the `layout`. In any case, Urubu
-will create the object if tags are used, and infer the `content` attribute. 
-
-Attribute      | Description 
----------------|---------------------------
-`id`           | `/tag` 
-`components`   | `[tag]`
-`content`      | A list of tag objects, inferred by Urubu. 
-
-The content is ordered according to the content size of tag objects,
-the largest one first.
-
-### Tag objects
+Tag objects
+-----------
 
 Tag objects are inferred by Urubu automatically. They list the content
 corresponding to a tag.
@@ -162,13 +150,34 @@ The layout name is predefined to `tag`. You have to provide the `tag.html`
 template to trigger the rendering of tag objects. In the simplest case, it
 may be sufficient to inherit from a general index layout.
 
-Context variables
+Tag folder object
 -----------------
+
+The tag folder object is a special top-level folder whose `id` is `/tag`. Urubu
+infers tag-related content for this folder automatically.
+
+You can optionally create the corresponding directory in the source code, and
+use the index file to set attributes such as the `layout`. In any case, Urubu
+will create the object if tags are used, and infer the `content` attribute. 
+
+Attribute      | Description 
+---------------|---------------------------
+`id`           | `/tag` 
+`components`   | `[tag]`
+`content`      | A list of tag objects, inferred by Urubu. 
+
+The content is ordered according to the content size of tag objects,
+the largest one first.
+
+
+Context variables
+=================
 
 Urubu makes the context available to templates with
 two context variables.
 
-### `site` 
+`site` 
+------
 
 This variable holds site-wide information.
 
@@ -184,7 +193,8 @@ you can traverse the whole site.
 In addition, all the attributes specified in the `_site.yml` file
 will be available as attributes of the `site` variable.
 
-### `this`
+`this`
+------
 
 This variable holds the current page or tag object.
 

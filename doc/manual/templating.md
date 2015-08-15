@@ -62,9 +62,9 @@ They come in a number of flavours:
 Link object        | Description
 -------------------|---------------
 global link object | Defined in the `_site.yml` file.
-local link object  | Defined in locally in the `content` attribute of an index file.
+local link object  | Defined locally in the `content` attribute of an index file.
 folder object      | Corresponds to a project subdirectory.
-page object        | Correspond to a Markdown content file.
+page object        | Corresponds to a Markdown content file.
 tag folder object  | Dedicated folder for content ordered by tag. 
 tag object         | Represents content corresponding to a specific tag. 
 

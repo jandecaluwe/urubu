@@ -25,8 +25,9 @@ from urubu import __version__
 from urubu import project
 
 from urubu._compat import socketserver, httpserver
+from urubu.httphandler import AliasingHTTPRequestHandler
 
-def serve():
+def serve(project):
     """HTTP server straight from the docs."""
     # allow running this from the top level
     if os.path.isdir('_build'):
@@ -34,9 +35,12 @@ def serve():
     # local use, address reuse should be OK
     socketserver.TCPServer.allow_reuse_address = True
     PORT = 8000
-    handler = httpserver.SimpleHTTPRequestHandler
+    handler = AliasingHTTPRequestHandler
     httpd = socketserver.TCPServer(('', PORT), handler)
+    httpd.baseurl = project.site['baseurl']
+        
     print("Serving at port {}".format(PORT))
+    if httpd.baseurl: print("Using baseurl {}".format(httpd.baseurl))
     httpd.serve_forever()
 
 def main():
@@ -47,4 +51,5 @@ def main():
     if args.command == 'build':
         project.build()
     elif args.command == 'serve':
-        serve()
+        proj = project.load()
+        serve(proj)

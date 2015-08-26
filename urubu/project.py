@@ -451,11 +451,14 @@ class Project(object):
 
 # import pprint
 
-
-def build():
+def load():
     proj = Project()
     proj.get_config()
     proj.get_siteinfo()
+    return proj
+
+def build():
+    proj = load()
     proj.get_pythonhooks()
     proj.get_contentinfo()
     proj.resolve_reflinks()

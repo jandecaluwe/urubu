@@ -25,14 +25,20 @@ class AliasingHTTPRequestHandler(httpserver.SimpleHTTPRequestHandler):
             httpserver.SimpleHTTPRequestHandler.do_GET(self)
             return
 
-        if self.path == "/":
-            # for convenience
+        wk_baseurl = "/%s/" % (baseurl)
+
+        if self.path[:len(wk_baseurl)] != wk_baseurl:
             self.send_response(302, 'Moved Temporarily')
-            self.send_header('Location', "/%s/" % (baseurl,))
+            sep = "/" if self.path[0] != "/" else ""
+
+            # note this replicates underlying bugs in that Location is
+            # not absolute as required by the spec and we throw away
+            # '?' and '#'
+
+            self.send_header('Location', "/%s%s%s" % (baseurl, sep, self.path))
             self.end_headers()
             return
         else:
-            wk_baseurl = "/%s/" % (baseurl)
             if self.path[:len(wk_baseurl)] == wk_baseurl:
                 self.path = self.path[len(wk_baseurl)-1:]
                 httpserver.SimpleHTTPRequestHandler.do_GET(self)

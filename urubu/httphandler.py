@@ -27,7 +27,26 @@ class AliasingHTTPRequestHandler(httpserver.SimpleHTTPRequestHandler):
 
         wk_baseurl = "/%s/" % (baseurl)
 
-        if self.path[:len(wk_baseurl)] != wk_baseurl:
+        if self.path == wk_baseurl[:-1]:
+            # handle /$baseurl -> /$baseurl/
+
+            self.send_response(301, 'Moved Permanently')
+            self.send_header('Location', wk_baseurl)
+            self.end_headers()
+            return
+
+        if self.path[:len(wk_baseurl)] == wk_baseurl:
+            # translate /$baseurl/path internally to /path and serve
+
+            self.path = self.path[len(wk_baseurl)-1:]
+            httpserver.SimpleHTTPRequestHandler.do_GET(self)
+            return
+        else:
+            # handle /xyz/path -> /$baseurl/xyz/path
+            #
+            # usually caused by underlying server sending a redirect
+            # to non-baseurl-prefixed path
+
             self.send_response(302, 'Moved Temporarily')
             sep = "/" if self.path[0] != "/" else ""
 
@@ -38,12 +57,3 @@ class AliasingHTTPRequestHandler(httpserver.SimpleHTTPRequestHandler):
             self.send_header('Location', "/%s%s%s" % (baseurl, sep, self.path))
             self.end_headers()
             return
-        else:
-            if self.path[:len(wk_baseurl)] == wk_baseurl:
-                self.path = self.path[len(wk_baseurl)-1:]
-                httpserver.SimpleHTTPRequestHandler.do_GET(self)
-            elif self.path == wk_baseurl[:-1]:
-                self.send_response(301, 'Moved Permanently')
-                self.send_header('Location', "/%s/" % (baseurl,))
-                self.end_headers()
-                return        

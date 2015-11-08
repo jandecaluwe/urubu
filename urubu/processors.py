@@ -62,11 +62,11 @@ class ContentProcessor(object):
         # there is a strange interaction between smarty and reference links that start on a new line
         # disabling smarty for now...
         # extensions = ['extra', 'codehilite', 'headerid', 'toc', 'smarty', tableclass, projectref]
-        extensions = ['extra', 'codehilite', 'headerid',
-                      'toc', tableclass, projectref]
+        extensions = ['extra', 'codehilite', 'toc', 
+                      tableclass, projectref]
         extension_configs = {'codehilite': [('guess_lang', 'False'),
                                             ('linenums', 'False')],
-                             'headerid': [('level', 2)]
+                             'toc': [('baselevel', 2)]
                              }
         self.md = markdown.Markdown(extensions=extensions,
                                     extension_configs=extension_configs)

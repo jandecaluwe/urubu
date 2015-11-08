@@ -27,7 +27,7 @@ import logging
 logging.captureWarnings(False)
 
 from markdown import Extension
-from markdown.extensions import headerid
+from markdown.extensions import toc 
 from markdown.treeprocessors import Treeprocessor
 from markdown.inlinepatterns import ReferencePattern, REFERENCE_RE, SHORT_REF_RE
 
@@ -105,7 +105,7 @@ class ProjectReferencePattern(ReferencePattern):
                     if anchor is not None:
                         text = anchor
                 if anchor is not None:
-                    href = '%s#%s' % (href, headerid.slugify(anchor, '-'))
+                    href = '%s#%s' % (href, toc.slugify(anchor, '-'))
             else:  # ignore undefined refs
                 warn(undef_ref_warning.format(ref, this['fn']), UrubuWarning)
                 return None

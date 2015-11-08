@@ -172,7 +172,11 @@ class Project(object):
 
             for fn in filenames:
                 if fnmatch.fnmatch(fn, pattern):
-                    relfn = os.path.join(relpath, fn)
+                    # normalize to convert ./foo into foo
+                    # to avoid problems with ignore_patterns matching
+                    relfn = os.path.normpath(os.path.join(relpath, fn))
+                    if any(fnmatch.fnmatch(relfn, ip) for ip in ignore_patterns):
+                        continue
                     meta = readers.get_yamlfm(relfn)
                     if meta is None:
                         warn(yamlfm_warning.format(relfn), UrubuWarning)

@@ -2,7 +2,7 @@ import os
 from urubu import UrubuError, project
 from urubu.project import _error
 
-from . import cd, raises_kind
+from urubu.tests import cd, raises_kind
 
 def test_ambig_refid():
     with cd('ambig_refid'):

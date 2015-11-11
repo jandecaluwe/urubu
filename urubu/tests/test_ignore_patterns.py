@@ -1,7 +1,7 @@
 import os
 from urubu import project
 
-from . import cd
+from urubu.tests import cd
 
 def test_ignore_patterns():
     with cd('ignore_patterns'):

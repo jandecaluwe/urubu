@@ -3,12 +3,13 @@ import os
 from sh import git 
 from urubu import project
 
-from tests import cd
+from urubu.tests import cd
 
 def test_doc():
-    with cd('../doc'):
+    with cd('../../doc'):
         project.build()
-        print git('--no-pager', 'diff')
+        d = git('--no-pager', 'diff')
+        print(d)
 
 test_doc()
 

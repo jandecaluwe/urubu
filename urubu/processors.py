@@ -59,11 +59,12 @@ class ContentProcessor(object):
         self.site = project.site
         tableclass = md_extensions.TableClassExtension()
         projectref = md_extensions.ProjectReferenceExtension()
+        extractanchors = md_extensions.ExtractAnchorsExtension()
         # there is a strange interaction between smarty and reference links that start on a new line
         # disabling smarty for now...
         # extensions = ['extra', 'codehilite', 'headerid', 'toc', 'smarty', tableclass, projectref]
         extensions = ['extra', 'codehilite', 'toc', 
-                      tableclass, projectref]
+                      tableclass, projectref, extractanchors]
         extension_configs = {'codehilite': [('guess_lang', 'False'),
                                             ('linenums', 'False')],
                              'toc': [('baselevel', 2)]
@@ -71,6 +72,7 @@ class ContentProcessor(object):
         self.md = markdown.Markdown(extensions=extensions,
                                     extension_configs=extension_configs)
         self.md.site = self.site
+        self.md.anchors = project.anchors 
         env = self.env = jinja2.Environment(loader=jinja2.FileSystemLoader(layoutdir),
                                             lstrip_blocks=True,
                                             trim_blocks=True

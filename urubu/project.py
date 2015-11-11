@@ -33,7 +33,7 @@ from urubu._compat import ifilter
 from urubu import UrubuWarning, UrubuError
 from urubu import readers, processors
 
-from urubu.config import (configfn, siteinfofn, workdir, sitedir,
+from urubu.config import (configfn, siteinfofn, sitedir,
                           tagdir, tagid, tagindexid, tag_layout)
 
 yamlfm_warning = "No yaml front matter in '{}' - ignored"
@@ -45,6 +45,8 @@ undef_info_error = "{} '{}' has no '{}' attribute"
 date_error = "Date format error in '{}' (should be YYYY-MM-DD)"
 undef_key_error = "Undefined key '{}' in '{}'"
 undef_content_error = "No 'content' or 'order' specified in {}"
+undef_anchor_error = "File {}: undefined anchor: {}"
+
 
 type_error = "'{}' value should be a '{}' in '{}'"
 
@@ -89,6 +91,7 @@ def make_clean(dir):
 class Project(object):
 
     def __init__(self):
+        self.cwd = os.getcwd()
         self.config = {}
         self.site = {'brand': '',
                      'baseurl': None,
@@ -103,6 +106,9 @@ class Project(object):
         self.filters = {}
         self.validators = {}
         self.layouts = []
+        # anchors to be filled in by markdown processor
+        self.anchors = set()
+
 
     def get_config(self):
         """Get the config data from the yaml config file."""
@@ -165,8 +171,8 @@ class Project(object):
         """Get info from the markdown content files."""
         pattern = '*.md'
         ignore_patterns = self.get_ignore_patterns()
-        for path, dirnames, filenames in os.walk(workdir):
-            relpath = get_relpath(path, workdir)
+        for path, dirnames, filenames in os.walk(self.cwd):
+            relpath = get_relpath(path, self.cwd)
             if any(fnmatch.fnmatch(relpath, ip) for ip in ignore_patterns):
                 continue
 
@@ -248,6 +254,7 @@ class Project(object):
         # make html url from ref
         info['url'] = self.finalize_local_url(
             make_id(components, lowercased=False) + self.site['link_ext'])
+        info['_anchorrefs'] = set()
         info.update(meta)
         return info
 
@@ -422,6 +429,12 @@ class Project(object):
             ignore_patterns += tuple(self.site['ignore_patterns'])
         return ignore_patterns
 
+    def check_anchor_links(self):
+        for info in self.filelist:
+            for ar in info['_anchorrefs']:
+                if not ar in self.anchors:
+                    raise UrubuError(undef_anchor_error.format(info['id'], ar)) 
+
     def make_site(self):
         """Make the site."""
         # Keep sitedir alive if it exists, for the server
@@ -430,10 +443,10 @@ class Project(object):
         make_clean(sitedir)
         ignore_patterns = self.get_ignore_patterns() + ('*.md',)
         ignore = shutil.ignore_patterns(*ignore_patterns)
-        for fn in os.listdir(workdir):
+        for fn in os.listdir(self.cwd):
             if any(fnmatch.fnmatch(fn, ip) for ip in ignore_patterns):
                 continue
-            wp = os.path.join(workdir, fn)
+            wp = os.path.join(self.cwd, fn)
             sp = os.path.join(sitedir, fn)
             if os.path.isdir(wp):
                 shutil.copytree(wp, sp, ignore=ignore)
@@ -447,6 +460,7 @@ class Project(object):
             for taginfo in self.taglist:
                 os.mkdir(os.path.join(tagpath, taginfo['tag']))
         self.process_content()
+        self.check_anchor_links()
 
     def process_content(self):
         """Process the content files."""

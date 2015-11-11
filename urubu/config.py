@@ -22,7 +22,6 @@ import os
 
 configfn = '_config.yml'
 siteinfofn = '_site.yml'
-workdir = os.getcwd()
 sitedir = '_build'
 tagdir = 'tag'
 tagid = '/' + tagdir

@@ -105,7 +105,10 @@ class ProjectReferencePattern(ReferencePattern):
                     if anchor is not None:
                         text = anchor
                 if anchor is not None:
-                    href = '%s#%s' % (href, toc.slugify(anchor, '-'))
+                    anchor = toc.slugify(anchor, '-')
+                    href = '%s#%s' % (href, anchor)
+                    anchorref = '%s#%s' % (id, anchor)
+                    self.markdown.this['_anchorrefs'].add(anchorref)
             else:  # ignore undefined refs
                 warn(undef_ref_warning.format(ref, this['fn']), UrubuWarning)
                 return None
@@ -122,3 +125,27 @@ class ProjectReferenceExtension(Extension):
             REFERENCE_RE, md)
         md.inlinePatterns['short_reference'] = ProjectReferencePattern(
             SHORT_REF_RE, md)
+
+
+class ExtractAnchorsClass(Treeprocessor):
+
+    def run(self, tree):
+        this = self.markdown.this
+        thisid = this['id']
+        components = this['components']
+        for item in tree:
+            if 'id' in item.attrib:
+                self.markdown.anchors.add("%s#%s" % (thisid, item.attrib['id']))
+                # add special version for index files
+                if components[-1] == 'index':
+                    navid = thisid[:-6] # remove trailing backslash also
+                    self.markdown.anchors.add("%s#%s" % (navid, item.attrib['id']))
+        return None
+
+
+class ExtractAnchorsExtension(Extension):
+
+    def extendMarkdown(self, md, md_globals):
+        md.treeprocessors.add('extractanchors', ExtractAnchorsClass(md), "_end")
+
+

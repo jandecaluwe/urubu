@@ -6,7 +6,7 @@ bootstrap: 3.3.4
 
 reflinks:
     jandecaluwe:
-        url: ttp://www.jandecaluwe.com
+        url: http://www.jandecaluwe.com
         title: Jan Decaluwe
     myhdl_site: 
         url: http://www.myhdl.org 

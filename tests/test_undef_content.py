@@ -4,7 +4,7 @@ from urubu.project import _error
 
 from . import cd, raises_kind
 
-def test_undef_anchor():
-    with cd('undef_anchor'):
-        with raises_kind(UrubuError, _error.undef_anchor):
+def test_undef_content():
+    with cd('undef_content'):
+        with raises_kind(UrubuError, _error.undef_content):
             project.build()

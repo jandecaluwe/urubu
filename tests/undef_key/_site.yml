@@ -1,0 +1,90 @@
+brand: Urubu 
+
+bootswatch: null 
+navbar_inverse: false 
+bootstrap: 3.3.4
+
+ignore_patterns: ['*.py', 'README.md']
+
+reflinks:
+    jandecaluwe:
+        url: ttp://www.jandecaluwe.com
+        title: Jan Decaluwe
+    myhdl_site: 
+        url: http://www.myhdl.org 
+        title: MyHDL website
+    dev_myhdl_site: 
+        url: http://dev.myhdl.org 
+        title: MyHDL development website
+    content_license:
+        url: http://creativecommons.org/licenses/by-sa/3.0/
+        title: CC-BY-SA License
+    software_license:
+        url: http://www.gnu.org/licenses/agpl-3.0.txt
+        title: GNU Affero General Public License
+    bitbucket:
+        url: http://www.bitbucket.com
+        title: Bitbucket
+    github:
+        url: http://www.github.com
+        title: GitHub
+    markdown:
+        url: http://daringfireball.net/projects/markdown/  
+        title: Markdown
+    markdown_extra:
+        url: http://pythonhosted.org/Markdown/extensions/extra.html
+        title: Markdown Extra
+    python_markdown:
+        url: http://pythonhosted.org/Markdown/
+        title: Python-Markdown 
+    pygments:
+        url: http://pygments.org
+        title: Pygments
+    jinja2:
+        url: http://jinja.pocoo.org
+        title: Jinja2
+    bootstrap:
+        url: http://getbootstrap.com
+        title: Bootstrap
+    bootswatch:
+        url: http://bootswatch.com
+        title: Bootswatch
+    pyyaml:
+        url: http://pyyaml.org
+        title: PyYAML
+    jekyll:
+        url: http://jekyllrb.com
+        title: Jekyll
+    pelican:
+        url: http://getpelican.com
+        title: Pelican
+    virtualenv:
+        url: http://www.virtualenv.org/en/latest/virtualenv.html
+        title: virtualenv
+    urubu_repo:
+        url: https://github.com/jandecaluwe/urubu
+        title: Urubu repo
+    tables: 
+        url: http://pythonhosted.org/Markdown/extensions/tables.html
+        title: Tables
+    abbrev: 
+        url: http://pythonhosted.org/Markdown/extensions/abbreviations.html
+        title: Abbrevations
+    attr_list:
+        url: http://pythonhosted.org/Markdown/extensions/attr_list.html
+        title: Attribute lists
+    def_list: 
+        url: http://pythonhosted.org/Markdown/extensions/definition_lists.html
+        title: Definition Lists
+    fenced_code: 
+        url: http://pythonhosted.org/Markdown/extensions/fenced_code_blocks.html
+        title: Fenced Code Blocks
+    markdown_checklist: 
+        url: https://github.com/FND/markdown-checklist
+        title: GitHub style Task Lists
+    code_hilite: 
+        url: http://pythonhosted.org/Markdown/extensions/code_hilite.html
+        title: CodeHilite
+    urubu-quickstart:
+        url: http://urubu-quickstart.jandecaluwe.com
+        title: Urubu Quickstart

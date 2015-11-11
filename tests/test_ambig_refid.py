@@ -4,7 +4,7 @@ from urubu.project import _error
 
 from . import cd, raises_kind
 
-def test_undef_anchor():
-    with cd('undef_anchor'):
-        with raises_kind(UrubuError, _error.undef_anchor):
+def test_ambig_refid():
+    with cd('ambig_refid'):
+        with raises_kind(UrubuError, _error.ambig_refid):
             project.build()

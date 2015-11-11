@@ -1,0 +1,55 @@
+{% extends "_base.html" %}
+
+{% block body %}
+
+<div class="container">
+
+  <div class="page-header">
+    {% block title %}
+    <h1>{{this.title}}</h1>
+    {% endblock %}
+  </div>
+
+  <div class="row">
+
+    <div class="content">
+      {% block content %}
+      <div class="col-md-7" role="main">
+        {{this.body}}
+      </div>
+      {% endblock %}
+    </div>
+
+    {% block sidebar %}
+    {% if this.toc %}
+    <div class="col-md-3" role="complementary">
+      <nav class="hidden-print hidden-xs hidden-sm">
+        <div class="sidebar" data-spy="affix" data-offset-top="80" data-offset-bottom="60">
+          <div class="well">
+            <a href="#"><strong>{{this.title}}</strong></a>
+            {{this.toc}}
+          </div>
+        </div>
+      </nav>
+    </div>
+    {% endif %}
+    {% endblock %}
+
+  </div>
+
+  {% if this.pager %}
+  <ul class="pager">
+    {% if this.prev %}
+    <li class="previous"><a href="{{this.prev.url}}">&larr; {{this.prev.title}}</a></li>
+    {% endif %}
+    {% if this.next %}
+    <li class="next"><a href="{{this.next.url}}">{{this.next.title}} &rarr;</a></li>
+    {% endif %}
+  </ul>
+  {% endif %}
+
+
+</div>
+
+{% endblock %}
+

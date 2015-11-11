@@ -36,25 +36,25 @@ from urubu import readers, processors
 from urubu.config import (configfn, siteinfofn, sitedir,
                           tagdir, tagid, tagindexid, tag_layout)
 
-yamlfm_warning = "No yaml front matter in '{}' - ignored"
-ambig_reflink_error = "Ambiguous reference id '{}'"
-undef_ref_error = "Undefined reference '{}' in '{}'"
-ambig_ref_error = "Ambiguous reference id '{}' in '{}'"
-undef_layout_error = "'layout' undefined in {}"
-undef_info_error = "{} '{}' has no '{}' attribute"
-date_error = "Date format error in '{}' (should be YYYY-MM-DD)"
-undef_key_error = "Undefined key '{}' in '{}'"
-undef_content_error = "No 'content' or 'order' specified in {}"
-undef_anchor_error = "File {}: undefined anchor: {}"
+yamlfm_warning = "{}: No yaml front matter in - ignored"
 
-
-type_error = "'{}' value should be a '{}' in '{}'"
+class _error():
+    pass
+_error.ambig_refid = "Ambiguous reference id"
+_error.undef_ref = "Undefined reference"
+_error.ambig_ref = "Ambiguous reference, cannot resolve"
+_error.undef_info = "Missing attribute"
+_error.date_format = "Date format error - should be YYYY-MM-DD"
+_error.undef_key = "Undefined key"
+_error.undef_content = "No 'content' or 'order' specified"
+_error.undef_anchor = "Undefined anchor"
 
 
 def require_key(key, mapping, tipe, fn):
+    type_error = "{}: '{}' value should be of type {}"
     if key in mapping:
         if not (isinstance(mapping[key], tipe)):
-            raise TypeError(type_error.format(key, tipe, fn))
+            raise TypeError(type_error.format(fn, key, tipe))
 
 
 def get_relpath(path, start):
@@ -158,7 +158,7 @@ class Project(object):
         """Add a valid reflink to the site reflinks."""
         id = id.lower()
         if id in self.site['reflinks']:
-            raise UrubuError(ambig_reflink_error.format(id))
+            raise UrubuError(_error.ambig_refid, msg=id)
         self.site['reflinks'][id] = info
 
     def finalize_local_url(self, url):
@@ -207,7 +207,7 @@ class Project(object):
     def validate_fileinfo(self, relfn, info):
         # layout is mandatory
         if 'layout' not in info:
-            raise UrubuError(undef_info_error.format('File', relfn, 'layout'))
+            raise UrubuError(_error.undef_info, msg='layout', fn=relfn)
         layout = info['layout']
         # modification date, always available
         t = os.path.getmtime(relfn)
@@ -223,11 +223,11 @@ class Project(object):
             self.layouts.append(layout)
         # title
         if 'title' not in info:
-            raise UrubuError(undef_info_error.format('File', relfn, 'title'))
+            raise UrubuError(_error.undef_info, msg='title', fn=relfn)
         # date
         if 'date' in info:
             if not isinstance(info['date'], datetime.date):
-                raise UrubuError(date_error.format(relfn))
+               raise UrubuError(_error.date_format, fn=relfn)
         # tags
         if 'tags' in info:
             # TODO: make sure it's a list of strings
@@ -242,7 +242,7 @@ class Project(object):
             if info['id'] == tagid:
                 info['content'] = []
             else:
-                raise UrubuError(undef_content_error.format(relfn))
+                raise UrubuError(_error.undef_content, fn=relfn)
         require_key('content', info, list, relfn)
 
     def make_fileinfo(self, relfn, meta):
@@ -314,10 +314,10 @@ class Project(object):
         id = make_id(get_components(path, hasext=False))
         if ref in reflinks:
             if (ref != id) and (id in reflinks):
-                raise UrubuError(ambig_ref_error.format(ref, indexfn))
+                raise UrubuError(_error.ambig_ref, msg=ref, fn=indexfn)
             id = ref
         elif not id in reflinks:
-            raise UrubuError(undef_ref_error.format(ref, indexfn))
+            raise UrubuError(_error.undef_ref, msg=ref, fn=indexfn)
         return reflinks[id]
 
     def resolve_linkspec(self, linkspec, info):
@@ -345,7 +345,7 @@ class Project(object):
                itemcomps[-1] != 'index' and \
                item['layout'] is not None:
                 if key not in item:
-                    raise UrubuError(undef_key_error.format(key, item['fn']))
+                    raise UrubuError(_error.undef_key, msg=key, fn=item['fn'])
                 return True
             return False
         allinfo = itertools.chain(self.filelist, self.navlist)
@@ -433,7 +433,7 @@ class Project(object):
         for info in self.filelist:
             for ar in info['_anchorrefs']:
                 if not ar in self.anchors:
-                    raise UrubuError(undef_anchor_error.format(info['id'], ar)) 
+                    raise UrubuError(_error.undef_anchor, msg=ar, fn=info['id'] ) 
 
     def make_site(self):
         """Make the site."""

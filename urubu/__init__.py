@@ -23,4 +23,16 @@ class UrubuWarning(UserWarning):
 
 
 class UrubuError(Exception):
-    pass
+    def __init__(self, kind, msg='', fn=''):
+        self.kind = kind
+        self.msg = msg
+        self.fn = fn 
+    def __str__(self):
+        fn = self.fn 
+        if fn:
+            fn = 'in ' + fn + ': '
+        msg = self.msg
+        if msg:
+            msg = ': ' + "'{}'".format(msg)
+        return fn + self.kind + msg
+

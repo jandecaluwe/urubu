@@ -31,11 +31,15 @@ from markdown.extensions import toc
 from markdown.treeprocessors import Treeprocessor
 from markdown.inlinepatterns import ReferencePattern, REFERENCE_RE, SHORT_REF_RE
 
-from urubu import UrubuWarning, UrubuError
+from urubu import UrubuWarning, urubu_warn, UrubuError
 
-undef_ref_warning = "Undefined ref [{}] in file '{}'"
-ambig_ref_error = "Ambiguous ref [{}] in file '{}'"
+class _error():
+    pass
+_error.ambig_ref_md = 'Ambiguous reference' 
 
+class _warning():
+    pass
+_warning.undef_ref_md = 'Undefined reference'
 
 def _set_table_class(tree):
     for item in tree:
@@ -95,7 +99,7 @@ class ProjectReferencePattern(ReferencePattern):
             ref = ref.lower()
             if ref in self.markdown.site['reflinks']:
                 if (ref != id) and (id in self.markdown.site['reflinks']):
-                    raise UrubuError(ambig_ref_error.format(ref, this['fn']))
+                    raise UrubuError(_error.ambig_ref_md, msg=ref, fn=this['fn'])
                 id = ref
             if id in self.markdown.site['reflinks']:
                 item = self.markdown.site['reflinks'][id]
@@ -110,7 +114,7 @@ class ProjectReferencePattern(ReferencePattern):
                     anchorref = '%s#%s' % (id, anchor)
                     self.markdown.this['_anchorrefs'].add(anchorref)
             else:  # ignore undefined refs
-                warn(undef_ref_warning.format(ref, this['fn']), UrubuWarning)
+                urubu_warn(_warning.undef_ref_md, msg=ref, fn=this['fn'])
                 return None
 
         return self.makeTag(href, title, text)

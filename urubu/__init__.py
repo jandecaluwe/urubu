@@ -17,9 +17,17 @@
 
 __version__ = "0.7"
 
+from warnings import warn
 
 class UrubuWarning(UserWarning):
     pass
+
+def urubu_warn(kind, msg='', fn=''):
+    if fn:
+        fn = 'in ' + fn + ': '
+    if msg:
+        msg = ': ' + "'{}'".format(msg)
+    warn(fn + kind + msg, UrubuWarning, stacklevel=2)
 
 
 class UrubuError(Exception):

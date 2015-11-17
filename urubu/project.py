@@ -29,26 +29,11 @@ from operator import itemgetter
 
 from urubu._compat import ifilter
 
-from urubu import UrubuWarning, UrubuError, urubu_warn, _warning
+from urubu import UrubuWarning, UrubuError, urubu_warn, _warning, _error
 from urubu import readers, processors
 
 from urubu.config import (configfn, siteinfofn, sitedir,
                           tagdir, tagid, tagindexid, tag_layout)
-
-yamlfm_warning = "{}: No yaml front matter in - ignored"
-
-class _error():
-    pass
-_error.ambig_refid = "Ambiguous reference id"
-_error.undef_ref = "Undefined reference"
-_error.ambig_ref = "Ambiguous reference, cannot resolve"
-_error.undef_info = "Missing attribute"
-_error.date_format = "Date format error - should be YYYY-MM-DD"
-_error.undef_key = "Undefined key"
-_error.undef_content = "No 'content' or 'order' specified"
-_error.undef_anchor = "Undefined anchor"
-_error.undef_reflink_key = "Undefined key in site reflink"
-
 
 def require_key(key, mapping, tipe, fn):
     type_error = "{}: '{}' value should be of type {}"

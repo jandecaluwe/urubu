@@ -30,15 +30,7 @@ from markdown.extensions import toc
 from markdown.treeprocessors import Treeprocessor
 from markdown.inlinepatterns import ReferencePattern, REFERENCE_RE, SHORT_REF_RE
 
-from urubu import UrubuWarning, urubu_warn, UrubuError
-
-class _error():
-    pass
-_error.ambig_ref_md = 'Ambiguous reference' 
-
-class _warning():
-    pass
-_warning.undef_ref_md = 'Undefined reference'
+from urubu import UrubuWarning, urubu_warn, UrubuError, _warning, _error
 
 def _set_table_class(tree):
     for item in tree:

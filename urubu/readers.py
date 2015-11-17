@@ -21,10 +21,6 @@ from io import open
 
 import yaml
 import re
-import warnings
-
-from urubu import UrubuWarning
-
 
 def get_yamlfm(fn):
     """Return the yaml frontmatter."""

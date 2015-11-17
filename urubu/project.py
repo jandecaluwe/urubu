@@ -48,6 +48,7 @@ _error.date_format = "Date format error - should be YYYY-MM-DD"
 _error.undef_key = "Undefined key"
 _error.undef_content = "No 'content' or 'order' specified"
 _error.undef_anchor = "Undefined anchor"
+_error.undef_reflink_key = "Undefined key in site reflink"
 
 
 def require_key(key, mapping, tipe, fn):
@@ -148,11 +149,9 @@ class Project(object):
 
     def validate_sitereflink(self, id, info):
         if 'title' not in info:
-            raise UrubuError(
-                undef_meta_error.format('Site reflink', id, 'title'))
+            raise UrubuError(_error.undef_reflink_key, fn=id, msg=id + ': title')
         if 'url' not in info:
-            raise UrubuError(
-                undef_meta_error.format('Site reflink', id, 'url'))
+            raise UrubuError(_error.undef_reflink_key, fn='_site.yml', msg=id + ': url')
 
     def add_reflink(self, id, info):
         """Add a valid reflink to the site reflinks."""

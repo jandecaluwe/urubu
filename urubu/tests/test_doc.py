@@ -12,7 +12,7 @@ def test_doc():
         d = git('--no-pager', 'diff', '--', '_build')
         if d:
             print(d)
-            raise UrubuError('Diffs in website')
+            raise ValueError('Diffs in website')
 
 test_doc()
 

@@ -50,11 +50,6 @@ def test_ignore_patterns():
         assert not os.path.exists(os.path.join('_build', 'README.html'))
         assert os.path.exists(os.path.join('_build', 'page.html'))
 
-def test_undef_anchor():
-    with cd('undef_anchor'):
-        with raises_kind(UrubuError, _error.undef_anchor):
-            project.build()
-
 def test_undef_content():
     with cd('undef_content'):
         with raises_kind(UrubuError, _error.undef_content):

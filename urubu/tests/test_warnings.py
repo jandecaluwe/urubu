@@ -25,3 +25,10 @@ def test_undef_ref_md():
         assert len(record) == 1
         assert _warning.undef_ref_md in str(record[0].message)
 
+def test_undef_anchor():
+    with cd('undef_anchor'):
+        with pytest.warns(UrubuWarning) as record:
+            project.build()
+        assert len(record) == 1
+        assert _warning.undef_anchor in str(record[0].message)
+

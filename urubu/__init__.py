@@ -53,6 +53,7 @@ class _warning():
 _warning.no_yamlfm = "No yaml front matter - ignored"
 _warning.undef_tag_layout = "Tags defined, but no tag layout found"
 _warning.undef_ref_md = 'Undefined reference'
+_warning.undef_anchor = "Undefined anchor"
 
 _error.ambig_refid = "Ambiguous reference id"
 _error.undef_ref = "Undefined reference"
@@ -61,6 +62,5 @@ _error.undef_info = "Missing attribute"
 _error.date_format = "Date format error - should be YYYY-MM-DD"
 _error.undef_key = "Undefined key"
 _error.undef_content = "No 'content' or 'order' specified"
-_error.undef_anchor = "Undefined anchor"
 _error.undef_reflink_key = "Undefined key in site reflink"
 _error.ambig_ref_md = 'Ambiguous reference' 

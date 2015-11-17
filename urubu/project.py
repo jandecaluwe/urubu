@@ -416,7 +416,7 @@ class Project(object):
         for info in self.filelist:
             for ar in info['_anchorrefs']:
                 if not ar in self.anchors:
-                    raise UrubuError(_error.undef_anchor, msg=ar, fn=info['id'] ) 
+                    urubu_warn(_warning.undef_anchor, msg=ar, fn=info['id'] ) 
 
     def make_site(self):
         """Make the site."""

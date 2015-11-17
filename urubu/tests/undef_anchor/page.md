@@ -4,4 +4,5 @@ layout: page
 ---
 
 Define an anchor.
-{: .an_anchor}
+{: #an-anchor}
+

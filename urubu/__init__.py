@@ -49,4 +49,4 @@ class _warning():
 
 _warning.no_yamlfm = "No yaml front matter - ignored"
 _warning.undef_tag_layout = "Tags defined, but no tag layout found"
-
+_warning.undef_ref_md = 'Undefined reference'

@@ -20,7 +20,6 @@ from __future__ import unicode_literals
 from io import open
 
 import os
-from warnings import warn
 
 import markdown
 import logging
@@ -28,13 +27,10 @@ logging.captureWarnings(False)
 
 import jinja2
 
-from urubu import UrubuWarning, UrubuError
+from urubu import UrubuWarning, UrubuError, urubu_warn, _warning
 from urubu import md_extensions
 
 from urubu.config import layoutdir, tag_layout
-
-tag_layout_warning = "Tags defined, but no {} layout found".format(tag_layout)
-
 
 def skip_yamlfm(f):
     """Return source of a file without yaml frontmatter."""
@@ -87,7 +83,7 @@ class ContentProcessor(object):
                 tag_layout + '.html')
         except jinja2.exceptions.TemplateNotFound:
             if self.taglist:
-                warn(tag_layout_warning, UrubuWarning)
+                urubu_warn(_warning.undef_tag_layout, msg=tag_layout)
 
     def process(self):
         """Process the content.

@@ -11,3 +11,10 @@ def test_no_yamlfm():
         assert len(record) == 1
         assert _warning.no_yamlfm in str(record[0].message)
 
+def test_undef_tag_layout():
+    with cd('undef_tag_layout'):
+        with pytest.warns(UrubuWarning) as record:
+            project.build()
+        assert len(record) == 1
+        assert _warning.undef_tag_layout in str(record[0].message)
+

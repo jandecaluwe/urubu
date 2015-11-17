@@ -48,3 +48,5 @@ class _warning():
     pass
 
 _warning.no_yamlfm = "No yaml front matter - ignored"
+_warning.undef_tag_layout = "Tags defined, but no tag layout found"
+

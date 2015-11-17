@@ -19,7 +19,6 @@
 from __future__ import unicode_literals
 from io import open
 
-from warnings import warn
 import posixpath
 
 import markdown

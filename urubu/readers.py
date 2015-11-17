@@ -25,14 +25,10 @@ import warnings
 
 from urubu import UrubuWarning
 
-yamlfm_warning = 'No yaml frontmatter found in {}'
-
 
 def get_yamlfm(fn):
     """Return the yaml frontmatter."""
     info = _get_yamlfm_helper(fn)
-    if info is None:
-        warnings.warn(yamlfm_warning.format(fn), UrubuWarning)
     return info
 
 

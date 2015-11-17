@@ -22,7 +22,6 @@ from io import open
 import os
 import yaml
 import fnmatch
-from warnings import warn
 import shutil
 import datetime
 import itertools
@@ -30,7 +29,7 @@ from operator import itemgetter
 
 from urubu._compat import ifilter
 
-from urubu import UrubuWarning, UrubuError
+from urubu import UrubuWarning, UrubuError, urubu_warn, _warning
 from urubu import readers, processors
 
 from urubu.config import (configfn, siteinfofn, sitedir,
@@ -184,7 +183,7 @@ class Project(object):
                         continue
                     meta = readers.get_yamlfm(relfn)
                     if meta is None:
-                        warn(yamlfm_warning.format(relfn), UrubuWarning)
+                        urubu_warn(_warning.no_yamlfm, fn=relfn)
                         continue
                     fileinfo = self.make_fileinfo(relfn, meta)
                     self.filelist.append(fileinfo)

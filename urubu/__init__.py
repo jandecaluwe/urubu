@@ -44,6 +44,7 @@ class UrubuError(Exception):
             msg = ': ' + "'{}'".format(msg)
         return fn + self.kind + msg
 
+class _warning():
+    pass
 
-
-
+_warning.no_yamlfm = "No yaml front matter - ignored"

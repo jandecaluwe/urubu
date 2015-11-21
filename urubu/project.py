@@ -191,6 +191,8 @@ class Project(object):
         # layout is mandatory
         if 'layout' not in info:
             raise UrubuError(_error.undef_info, msg='layout', fn=relfn)
+        if 'layout' is None:
+            return
         layout = info['layout']
         # modification date, always available
         t = os.path.getmtime(relfn)

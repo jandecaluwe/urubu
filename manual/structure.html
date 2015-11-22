@@ -264,7 +264,7 @@ date: 2014-01-15
 </tr>
 <tr>
 <td><code>layout</code></td>
-<td>Specifies the desired layout, without the <code>.html</code> extension. Mandatory.</td>
+<td>Specifies the layout, without the <code>.html</code> extension, or <code>null</code>. Mandatory.</td>
 </tr>
 <tr>
 <td><code>date</code></td>
@@ -276,6 +276,9 @@ date: 2014-01-15
 </tr>
 </tbody>
 </table>
+<p>The <code>layout</code> attribute is mandatory, but can be given a <code>null</code> value.
+This is useful when the page content is used by other pages, but
+no html output is required for the page itself.</p>
 <p>In addition, you can add arbitrary user-defined attributes. All attributes 
 are made available as page object attributes to the template engine.</p>
 <h2 id="markdown-in-attributes">Markdown in attributes</h2>

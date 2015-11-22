@@ -187,9 +187,13 @@ The following attributes are predefined:
 Attribute | Description
 -----------|------------
 `title`    | Specifies the page title. Mandatory.
-`layout`   | Specifies the desired layout, without the `.html` extension. Mandatory.
+`layout`   | Specifies the layout, without the `.html` extension, or `null`. Mandatory.
 `date`     | Specifies the date in YYYY-MM-DD format. Optional.
 `tags`     | A tag or list of tags for the content. 
+
+The `layout` attribute is mandatory, but can be given a `null` value.
+This is useful when the page content is used by other pages, but
+no html output is required for the page itself.
 
 In addition, you can add arbitrary user-defined attributes. All attributes 
 are made available as page object attributes to the template engine.

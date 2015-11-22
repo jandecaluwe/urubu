@@ -87,14 +87,16 @@
 
     <div class="content">
       <div class="col-md-7" role="main">
-        <p>The <code>urubu serve</code> server does not include the <code>baseurl</code> prefix when serving
-pages so sites that use <code>baseurl</code> can't be previewed locally using
-<code>urubu serve</code>.
-An alternative option is to use
-<a href="https://github.com/jiffyclub/tservice">tservice</a>, which includes
-an option to serve a local static site with a URL prefix.
-To use tservice with an Urubu site instead of using <code>urubu serve</code>
-call <code>tserve</code> with the prefix option, e.g.</p>
+        <h3 id="urubu-version-08">Urubu version 0.8</h3>
+<p>The <code>urubu serve</code> command  takes the <code>baseurl</code> setting automatically into
+account. </p>
+<h3 id="urubu-version-07">Urubu version 0.7</h3>
+<p>The <code>urubu serve</code> server does not include the <code>baseurl</code> prefix when serving
+pages so sites that use <code>baseurl</code> can't be previewed locally using <code>urubu
+serve</code>.  An alternative option is to use
+<a href="https://github.com/jiffyclub/tservice">tservice</a>, which includes an option to
+serve a local static site with a URL prefix.  To use tservice with an Urubu
+site instead of using <code>urubu serve</code> call <code>tserve</code> with the prefix option, e.g.</p>
 <div class="codehilite"><pre>tserve --prefix &lt;baseurl&gt; _build
 </pre></div>
 
@@ -103,6 +105,22 @@ call <code>tserve</code> with the prefix option, e.g.</p>
       </div>
     </div>
 
+    <div class="col-md-3" role="complementary">
+      <nav class="hidden-print hidden-xs hidden-sm">
+        <div class="sidebar" data-spy="affix" data-offset-top="80" data-offset-bottom="60">
+          <div class="well">
+            <a href="#"><strong>How to preview sites that use the baseurl option?</strong></a>
+            <div class="toc">
+<ul>
+<li><a href="#urubu-version-08">Urubu version 0.8</a></li>
+<li><a href="#urubu-version-07">Urubu version 0.7</a></li>
+</ul>
+</div>
+
+          </div>
+        </div>
+      </nav>
+    </div>
 
   </div>
 

@@ -76,10 +76,35 @@
     <div class="row">
 
         <div class="col-md-8 role="main">
-                <div class="page-header">
-                  <h1>07-Mar-2015&nbsp;&nbsp;Urubu 0.7: Python 3 support, baseurl option</h1>
+                <div> 
+                  <h3>12-Nov-2015&nbsp;&nbsp;Urubu 0.8 released</h3>
                 </div>
-                <div class="lead">
+                <div>
+                    <p>Release highlights:</p>
+<ul>
+<li>
+<p>the <code>urubu</code> serve command automatically takes
+the <code>baseurl</code> option into account (Pull request #27).</p>
+</li>
+<li>
+<p>when an undefined anchor is referred to in a page, a
+warning is generated, just like for references to undefined pages (Issue #30).</p>
+</li>
+<li>
+<p>the <code>layout</code> attribute can be assigned <code>null</code>. In this
+way the page content can be used by other pages, but no html is generated for
+the page itself.</p>
+</li>
+</ul>
+<p>In addition, an significant effort was put into development robustness. In
+particular, a regression test suite has been added. This is based on <code>py.test</code>
+and <code>tox</code>, so that both Python 2.7 and 3.4 are verified. </p>
+                    <hr>
+                </div>
+                <div> 
+                  <h3>07-Mar-2015&nbsp;&nbsp;Urubu 0.7: Python 3 support, baseurl option</h3>
+                </div>
+                <div>
                     <p>Urubu 0.7 adds features that make it more flexible to use. </p>
 <p>First, the release adds Python 3 support, from a single codebase.
 You can use Python 2.7 or Python 3.4.</p>
@@ -87,63 +112,72 @@ You can use Python 2.7 or Python 3.4.</p>
 URLs. <a href="/manual/structure.html#_siteyml" title="Project structure">More info&nbsp;&raquo;</a>.</p>
 <p>On the other hand, the checklist extension has been removed as it caused issues
 with reference id resolution.</p>
+                    <hr>
                 </div>
-                <div class="page-header">
-                  <h1>28-Jan-2015&nbsp;&nbsp;Urubu 0.6 released</h1>
+                <div> 
+                  <h3>28-Jan-2015&nbsp;&nbsp;Urubu 0.6 released</h3>
                 </div>
-                <div class="lead">
+                <div>
                     <p>Urubu 0.6 improves on wiki links: now you can link to a location within a page. </p>
 <p>Read <a href="http://www.jandecaluwe.com/blog/urubu-0-6.html">my blog post</a> for more info.</p>
+                    <hr>
                 </div>
-                <div class="page-header">
-                  <h1>08-Sep-2014&nbsp;&nbsp;Urubu 0.5 released</h1>
+                <div> 
+                  <h3>08-Sep-2014&nbsp;&nbsp;Urubu 0.5 released</h3>
                 </div>
-                <div class="lead">
+                <div>
                     <p>Urubu 0.5 introduces tag support. </p>
 <p>Read <a href="http://www.jandecaluwe.com/blog/tag_support_urubu.html">my blog post</a> for an introduction.</p>
+                    <hr>
                 </div>
-                <div class="page-header">
-                  <h1>25-May-2014&nbsp;&nbsp;Urubu 0.4 and Urubu Quickstart released</h1>
+                <div> 
+                  <h3>25-May-2014&nbsp;&nbsp;Urubu 0.4 and Urubu Quickstart released</h3>
                 </div>
-                <div class="lead">
+                <div>
                     <p>Release features: </p>
 <ul>
 <li>Run <code>urubu serve</code> from the top-level project directory. </li>
 <li><a href="/manual/structure.html" title="Project structure">Programmable file extensions</a> for site pages</li>
 <li>Introducing <a href="http://urubu-quickstart.jandecaluwe.com" title="Urubu Quickstart">Urubu Quickstart</a>: a quick way to set up a new Urubu project.</li>
 </ul>
+                    <hr>
                 </div>
-                <div class="page-header">
-                  <h1>18-Mar-2014&nbsp;&nbsp;Urubu 0.3.1 released</h1>
+                <div> 
+                  <h3>18-Mar-2014&nbsp;&nbsp;Urubu 0.3.1 released</h3>
                 </div>
-                <div class="lead">
+                <div>
                     <p>This is a bug-fix release.</p>
+                    <hr>
                 </div>
-                <div class="page-header">
-                  <h1>27-Feb-2014&nbsp;&nbsp;Urubu 0.3 released</h1>
+                <div> 
+                  <h3>27-Feb-2014&nbsp;&nbsp;Urubu 0.3 released</h3>
                 </div>
-                <div class="lead">
+                <div>
                     <p>This release adds markdown support for front-matter attributes.
 <a href="/manual/structure.html#markdown-in-attributes">Read more&nbsp;&raquo;</a></p>
+                    <hr>
                 </div>
-                <div class="page-header">
-                  <h1>15-Feb-2014&nbsp;&nbsp;Urubu 0.2.1 released</h1>
+                <div> 
+                  <h3>15-Feb-2014&nbsp;&nbsp;Urubu 0.2.1 released</h3>
                 </div>
-                <div class="lead">
+                <div>
                     <p>This is a bug fix release.</p>
+                    <hr>
                 </div>
-                <div class="page-header">
-                  <h1>22-Jan-2014&nbsp;&nbsp;Urubu 0.2 released</h1>
+                <div> 
+                  <h3>22-Jan-2014&nbsp;&nbsp;Urubu 0.2 released</h3>
                 </div>
-                <div class="lead">
+                <div>
                     <p>This release adds support for github-style task lists.</p>
+                    <hr>
                 </div>
-                <div class="page-header">
-                  <h1>12-Jan-2014&nbsp;&nbsp;Urubu 0.1 released</h1>
+                <div> 
+                  <h3>12-Jan-2014&nbsp;&nbsp;Urubu 0.1 released</h3>
                 </div>
-                <div class="lead">
+                <div>
                     <p>Introducing Urubu, a Python-based micro CMS for static websites.
 Read about <a href="http://www.jandecaluwe.com/blog/i-dont-like-blogs.html">the rationale behind it</a>.</p>
+                    <hr>
                 </div>
         </div>
 

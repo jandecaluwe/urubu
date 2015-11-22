@@ -8,11 +8,12 @@
 
         <div class="col-md-8 role="main">
             {% for item in this.content %}
-                <div class="page-header">
-                  <h1>{{item.date|dateformat}}&nbsp;&nbsp;{{item.title}}</h1>
+                <div> 
+                  <h3>{{item.date|dateformat}}&nbsp;&nbsp;{{item.title}}</h3>
                 </div>
-                <div class="lead">
+                <div>
                     {{item.body}}
+                    <hr>
                 </div>
             {% endfor %}
         </div>

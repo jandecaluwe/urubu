@@ -6,7 +6,8 @@ content:
     - install
     - manual 
     - faq
-    - support
+    - ref: urubu_repo 
+      title: GitHub 
     - sites
     - about
 tagline:

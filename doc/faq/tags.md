@@ -6,9 +6,9 @@ date: 2015-12-05
 
 Urubu supports tags. To use them, you need 2 things:
 
-* Assign the desired tags to content pages. This is done by assigning a tag or
-a list of tags to the `tags` attribute in the YAML frontmatter of pages.  See
-also: [/manual/structure#Content files].
+* Assign the desired tags to content pages, by assigning a tag or
+a list of tags to the `tags` attribute.  See also: 
+[/manual/structure#Content files].
 
 * Provide a `tag.html` layout in the `_layouts` directory. 
 

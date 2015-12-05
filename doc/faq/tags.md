@@ -14,11 +14,11 @@ a list of tags to the `tags` attribute.  See also:
 
 It is the existence of the `tag.html` layout that triggers the generation of
 tag-related content. For example, if you have used tags `bar` and `foo` in the
-project, you will see that the `_build_` folder contains `tag/bar/index.html`
+project, you will see that the `_build` folder contains `tag/bar/index.html`
 and `tag/foo/index.html`. Those index files use the `tag.html` layout to show 
 the content related to a tag.
 
-Presumably, there is already a general `index.html` layout to list content in a
+Presumably, there is already a general `index.html` layout to show content in a
 folder. An initial `tag.html` layout can then be a one-liner by using template
 inheritance, like so: 
 

@@ -143,7 +143,7 @@ Attribute      | Description
 `layout`       | `tag`  
 `content`      | List of page & folder objects corresponding to `tag`. 
 
-The content is ordered according to the date of the object. If the date is not
+The tag content is ordered by date, most recent first. If the date is not
 defined, the modification date is used as a fallback (`mdate` attribute).
 
 The layout name is predefined to `tag`. You have to provide the `tag.html`

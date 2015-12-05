@@ -137,9 +137,9 @@ link_ext: '.htm'  # Change default link extension ('.html')
 `_layouts`
 ----------
 
-This directory contains the templates that define the available layouts.
+This directory contains the available layouts.
 They are used by the Jinja2 template engine to render html pages.
-The templates files should have the `.html` extension.
+The layout files should have the `.html` extension.
 
 `_python`
 ---------

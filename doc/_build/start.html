@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Read me first</title>
+    <title>Overview</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
     <!-- Bootstrap -->
@@ -26,6 +26,7 @@
   ga('send', 'pageview');
 
 </script>
+ 
   </head>
 
   <body>
@@ -44,26 +45,24 @@
         <div class="navbar-collapse collapse">
 
           <ul class="nav navbar-nav navbar-left">
-            <li class="active"><a href="/start.html">Read me first</a></li>
-            <li><a href="/install.html">Installation</a></li>
+            <li class="active"><a href="/start.html">Overview</a></li>
             <li><a href="/manual/">Manual</a></li>
             <li><a href="/faq/">FAQ</a></li>
             <li><a href="https://github.com/jandecaluwe/urubu">GitHub</a></li>
           </ul>
-
+          <form class="navbar-form navbar-left" action="/search.html" role="search">
+            <div class="form-group">
+              <input type="text" required name="q" id="tipue_search_input" class="form-control" placeholder="Search"> 
+            </div>
+          </form>
           <ul class="nav navbar-nav navbar-right">
             <li class="dropdown">
-              <a href="/sites/" class="dropdown-toggle" data-toggle="dropdown">Urubu sites <b class="caret"></b></a>
+              <a href="/info/" class="dropdown-toggle" data-toggle="dropdown">Info <b class="caret"></b></a>
               <ul class="dropdown-menu">
-                <li><a href="http://urubu-quickstart.jandecaluwe.com">Urubu Quickstart</a></li>
-                <li><a href="http://www.myhdl.org">MyHDL</a></li>
-                <li><a href="http://dev.myhdl.org">MyHDL development</a></li>
-                <li><a href="http://www.jandecaluwe.com">Jan Decaluwe</a></li>
-                <li><a href="http://music.jandecaluwe.com">Jan Decaluwe / Music</a></li>
-                <li><a href="http://urubu.jandecaluwe.com">This site (Urubu documentation)</a></li>
+                <li><a href="/info/about.html">About</a></li>
+                <li><a href="/info/sites/">Urubu sites</a></li>
               </ul>
             </li>
-            <li><a href="/about.html">About</a></li>
           </ul>
 
         </div><!--/.nav-collapse -->
@@ -75,17 +74,18 @@
 
   <ol class="breadcrumb">
     <li><a href="/">Home</a></li>
-      <li class="active">Read me first</li>
+      <li class="active">Overview</li>
   </ol>
 
   <div class="page-header">
-    <h1>Read me first</h1>
+    <h1>Overview</h1>
   </div>
 
   <div class="row">
 
     <div class="content">
       <div class="col-md-7" role="main">
+      <main>
         <h2 id="what-is-urubu">What is Urubu?</h2>
 <p>Urubu is a tool to build static websites. The following sections will help you
 to decide whether it is the right tool for you.</p>
@@ -136,6 +136,7 @@ mercurial repository and use the workflows that these systems enable.  For
 example, you can collaborate on <a href="http://www.github.com" title="GitHub">GitHub</a> or <a href="http://www.bitbucket.com" title="Bitbucket">Bitbucket</a> through <a href="https://help.github.com/articles/using-pull-requests">pull
 requests</a>. Also, deployment can be as straightforward as pushing to an upstream
 repository. </p>
+      </main>
       </div>
     </div>
 
@@ -143,7 +144,7 @@ repository. </p>
       <nav class="hidden-print hidden-xs hidden-sm">
         <div class="sidebar" data-spy="affix" data-offset-top="80" data-offset-bottom="60">
           <div class="well">
-            <a href="#"><strong>Read me first</strong></a>
+            <a href="#"><strong>Overview</strong></a>
             <div class="toc">
 <ul>
 <li><a href="#what-is-urubu">What is Urubu?</a></li>
@@ -162,7 +163,7 @@ repository. </p>
   </div>
 
   <ul class="pager">
-    <li class="next"><a href="/install.html">Installation &rarr;</a></li>
+    <li class="next"><a href="/manual/">Manual &rarr;</a></li>
   </ul>
 
     <div class="footer">
@@ -197,9 +198,11 @@ window.__gcfg = {
 
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://code.jquery.com/jquery.js"></script>
+    <!-- <script src="https://code.jquery.com/jquery.js"></script> -->
     <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+ 
 
   </body>
 </html>

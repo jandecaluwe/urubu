@@ -1,0 +1,21 @@
+{% extends "page.html" %}
+
+{% block head_addon %}
+<link href="tipuesearch/tipuesearch.css" rel="stylesheet">
+{% endblock %}
+
+{% block body_addon %}
+<script src="tipuesearch/tipuesearch_content.js"></script>
+<script src="tipuesearch/tipuesearch_set.js"></script>
+<script src="tipuesearch/tipuesearch.min.js"></script>
+<script>
+$(document).ready(function() {
+     $('#tipue_search_input').tipuesearch({
+          'mode': 'json',
+          'contentLocation': 'tipuesearch/tipuesearch_content.json' 
+     });
+});
+</script>
+
+{% endblock %}
+

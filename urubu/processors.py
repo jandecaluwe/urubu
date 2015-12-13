@@ -18,19 +18,20 @@
 # Python 3 idioms
 from __future__ import unicode_literals
 from io import open
-
-import os
+import os, json
 
 import markdown
 import logging
 logging.captureWarnings(False)
+from bs4 import BeautifulSoup
 
 import jinja2
 
 from urubu import UrubuWarning, UrubuError, urubu_warn, _warning
 from urubu import md_extensions
 
-from urubu.config import layoutdir, tag_layout
+from urubu.config import layoutdir, tag_layout, tipuesearchdir, tipuesearch_content
+from urubu._compat import text_type
 
 def skip_yamlfm(f):
     """Return source of a file without yaml frontmatter."""
@@ -93,6 +94,7 @@ class ContentProcessor(object):
         """
         self.convert()
         self.render()
+        self.make_tipuesearch_content()
 
     def convert(self):
         for info in self.filelist:
@@ -121,16 +123,6 @@ class ContentProcessor(object):
                 info[key] = self.md.convert(info[mdkey])
             self.md.reset()
 
-    def render_file(self, info):
-        layout = info['layout']
-        templ = self.templates[layout]
-        html = templ.render(this=info, site=self.site)
-        fn = info['fn']
-        bfn, ext = os.path.splitext(fn)
-        outfn = os.path.join(self.sitedir, bfn) + self.site['file_ext']
-        with open(outfn, 'w', encoding='utf-8', errors='strict') as outf:
-            outf.write(html)
-
     def render(self):
         # content files
         for info in self.filelist:
@@ -142,3 +134,49 @@ class ContentProcessor(object):
             return
         for info in self.taglist:
             self.render_file(info)
+
+    def render_file(self, info):
+        layout = info['layout']
+        templ = self.templates[layout]
+        html = templ.render(this=info, site=self.site)
+        # extract text from html for search support
+        self.extract_text(html, info)
+        fn = info['fn']
+        bfn, ext = os.path.splitext(fn)
+        outfn = os.path.join(self.sitedir, bfn) + self.site['file_ext']
+        with open(outfn, 'w', encoding='utf-8', errors='strict') as outf:
+            outf.write(html)
+
+    def extract_text(self, html, info):
+        # select main tag for search content
+        m = BeautifulSoup(html, "html.parser").select('main')
+        text = ""
+        if m:
+            text = m[0].get_text(" ", strip=True)
+        info['text'] = text
+
+    def make_tipuesearch_content(self):
+        tsd = os.path.join(self.sitedir, tipuesearchdir)
+        if not os.path.isdir(tsd):
+            return
+        tsc = os.path.join(tsd, tipuesearch_content)
+        items = [] 
+        for info in self.filelist:
+            if 'text' not in info:
+                return
+            tags = ""
+            if 'tags' in info:
+               tags = ' '.join(info['tags'])
+            item = {'text' : info['text'],
+                    'title': info['title'],
+                    'url'  : info['url'],
+                    'tags' : tags} 
+            items.append(item)
+        obj = {'pages': items}
+        with open(tsc, 'w', encoding='utf-8') as fd:
+            # json.dump is buggy in Python2 -- use workaround
+            # print json.dumps(obj, ensure_ascii=False, indent=4) 
+            data = json.dumps(obj, fd, ensure_ascii=False, indent=4) 
+            fd.write(text_type(data))
+
+

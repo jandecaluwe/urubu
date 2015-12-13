@@ -3,13 +3,11 @@ title: Urubu
 layout: home
 content:
     - start 
-    - install
     - manual 
     - faq
     - ref: urubu_repo 
       title: GitHub 
-    - sites
-    - about
+    - info 
 tagline:
     A micro CMS for static websites, with a focus on good
     navigation practices.

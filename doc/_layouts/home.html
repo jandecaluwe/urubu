@@ -17,9 +17,11 @@
 </div>
 
 <div class="container">
+<main>
 {% set news = site.reflinks['/news'].content[0] %}
 <p class="lead text-center">{{news.date|dateformat}}: <a href="news">{{news.title}}</a></p>
 {{this.body}}
+</main>
 </div>
 
 {% include 'footer.html' %}

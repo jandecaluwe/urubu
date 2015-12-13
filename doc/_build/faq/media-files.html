@@ -26,6 +26,7 @@
   ga('send', 'pageview');
 
 </script>
+ 
   </head>
 
   <body>
@@ -44,26 +45,24 @@
         <div class="navbar-collapse collapse">
 
           <ul class="nav navbar-nav navbar-left">
-            <li><a href="/start.html">Read me first</a></li>
-            <li><a href="/install.html">Installation</a></li>
+            <li><a href="/start.html">Overview</a></li>
             <li><a href="/manual/">Manual</a></li>
             <li class="active"><a href="/faq/">FAQ</a></li>
             <li><a href="https://github.com/jandecaluwe/urubu">GitHub</a></li>
           </ul>
-
+          <form class="navbar-form navbar-left" action="/search.html" role="search">
+            <div class="form-group">
+              <input type="text" required name="q" id="tipue_search_input" class="form-control" placeholder="Search"> 
+            </div>
+          </form>
           <ul class="nav navbar-nav navbar-right">
             <li class="dropdown">
-              <a href="/sites/" class="dropdown-toggle" data-toggle="dropdown">Urubu sites <b class="caret"></b></a>
+              <a href="/info/" class="dropdown-toggle" data-toggle="dropdown">Info <b class="caret"></b></a>
               <ul class="dropdown-menu">
-                <li><a href="http://urubu-quickstart.jandecaluwe.com">Urubu Quickstart</a></li>
-                <li><a href="http://www.myhdl.org">MyHDL</a></li>
-                <li><a href="http://dev.myhdl.org">MyHDL development</a></li>
-                <li><a href="http://www.jandecaluwe.com">Jan Decaluwe</a></li>
-                <li><a href="http://music.jandecaluwe.com">Jan Decaluwe / Music</a></li>
-                <li><a href="http://urubu.jandecaluwe.com">This site (Urubu documentation)</a></li>
+                <li><a href="/info/about.html">About</a></li>
+                <li><a href="/info/sites/">Urubu sites</a></li>
               </ul>
             </li>
-            <li><a href="/about.html">About</a></li>
           </ul>
 
         </div><!--/.nav-collapse -->
@@ -87,11 +86,13 @@
 
     <div class="content">
       <div class="col-md-7" role="main">
+      <main>
         <p>The source structure of a project is preserved in the built website, and all
 non-markdown content files are copied verbatim. See <a href="/manual/structure.html" title="Project structure">Project structure</a>. </p>
 <p>Therefore, you can put media files at any convenient place in the source, and
 refer to them using Markdown image syntax, with a relative or root-relative
 path to the source file.</p>
+      </main>
       </div>
     </div>
 
@@ -131,9 +132,11 @@ window.__gcfg = {
 
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://code.jquery.com/jquery.js"></script>
+    <!-- <script src="https://code.jquery.com/jquery.js"></script> -->
     <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+ 
 
   </body>
 </html>

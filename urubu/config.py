@@ -27,4 +27,6 @@ tagdir = 'tag'
 tagid = '/' + tagdir
 tagindexid = tagid + '/' + 'index'
 tag_layout = 'tag'
-layoutdir = "_layouts"
+layoutdir = '_layouts'
+tipuesearchdir = 'tipuesearch'
+tipuesearch_content = 'tipuesearch_content.json'

@@ -1,7 +1,6 @@
 ---
 title: Urubu sites
 layout: index
-dropdown: true
 content:
     - urubu-quickstart
     - ref: myhdl_site 

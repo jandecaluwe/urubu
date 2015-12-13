@@ -9,7 +9,7 @@ def test_doc():
     with cd('../../doc'):
         project.build()
         touch('_build/.nojekyll')
-        d = git('--no-pager', 'diff', '--', '_build')
+        d = git('--no-pager', 'diff', '-w', '--', '_build')
         if d:
             print(d)
             raise ValueError('Diffs in website')

@@ -18,7 +18,7 @@
 # Python 3 idioms
 from __future__ import unicode_literals
 from io import open
-import os, json
+import os, json, itertools
 
 import markdown
 import logging
@@ -161,7 +161,11 @@ class ContentProcessor(object):
             return
         tsc = os.path.join(tsd, tipuesearch_content)
         items = [] 
-        for info in self.filelist:
+        # use tag index files if they have been rendered
+        taglist = []
+        if tag_layout in self.templates:
+           taglist = self.taglist
+        for info in itertools.chain(self.filelist, taglist):
             if 'text' not in info:
                 return
             tags = ""

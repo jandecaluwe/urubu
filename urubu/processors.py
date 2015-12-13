@@ -176,7 +176,7 @@ class ContentProcessor(object):
         with open(tsc, 'w', encoding='utf-8') as fd:
             # json.dump is buggy in Python2 -- use workaround
             # print json.dumps(obj, ensure_ascii=False, indent=4) 
-            data = json.dumps(obj, fd, ensure_ascii=False, indent=4) 
+            data = json.dumps(obj, fd, ensure_ascii=False, indent=4, sort_keys=True) 
             fd.write(text_type(data))
 
 

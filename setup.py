@@ -1,7 +1,7 @@
 from setuptools import setup
 
 requires = ['jinja2 >= 2.7', 'pygments',
-            'markdown', 'pyyaml']
+            'markdown', 'pyyaml', 'beautifulsoup4']
 
 entry_points = {
     'console_scripts': [

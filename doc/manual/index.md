@@ -8,5 +8,6 @@ content:
     - authoring
     - building
     - templating
+    - search
 ---
 

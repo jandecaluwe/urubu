@@ -28,6 +28,16 @@
       <main>
         {{this.body}}
       </main>
+      {% if this.pager %}
+      <ul class="pager">
+        {% if this.prev %}
+        <li class="previous"><a href="{{this.prev.url}}">&larr; {{this.prev.title}}</a></li>
+        {% endif %}
+        {% if this.next %}
+        <li class="next"><a href="{{this.next.url}}">{{this.next.title}} &rarr;</a></li>
+        {% endif %}
+      </ul>
+      {% endif %}
       </div>
       {% endblock %}
     </div>
@@ -49,16 +59,6 @@
 
   </div>
 
-  {% if this.pager %}
-  <ul class="pager">
-    {% if this.prev %}
-    <li class="previous"><a href="{{this.prev.url}}">&larr; {{this.prev.title}}</a></li>
-    {% endif %}
-    {% if this.next %}
-    <li class="next"><a href="{{this.next.url}}">{{this.next.title}} &rarr;</a></li>
-    {% endif %}
-  </ul>
-  {% endif %}
 
   {% include 'footer.html' %}
 

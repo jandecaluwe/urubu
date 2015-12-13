@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Adding search</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <!-- Bootstrap -->
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet" media="screen">
+
+    <link href="/css/site.css" rel="stylesheet" media="screen">
+    <link href="/css/syntax.css" rel="stylesheet" media="screen">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-48968311-3', 'jandecaluwe.com');
+  ga('send', 'pageview');
+
+</script>
+ 
+  </head>
+
+  <body>
+
+    <!-- Fixed navbar -->
+    <div class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">Urubu</a>
+        </div>
+        <div class="navbar-collapse collapse">
+
+          <ul class="nav navbar-nav navbar-left">
+            <li><a href="/start.html">Overview</a></li>
+            <li class="active"><a href="/manual/">Manual</a></li>
+            <li><a href="/faq/">FAQ</a></li>
+            <li><a href="https://github.com/jandecaluwe/urubu">GitHub</a></li>
+          </ul>
+          <form class="navbar-form navbar-left" action="/search.html" role="search">
+            <div class="form-group">
+              <input type="text" required name="q" id="tipue_search_input" class="form-control" placeholder="Search"> 
+            </div>
+          </form>
+          <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+              <a href="/info/" class="dropdown-toggle" data-toggle="dropdown">Info <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="/info/about.html">About</a></li>
+                <li><a href="/info/sites/">Urubu sites</a></li>
+              </ul>
+            </li>
+          </ul>
+
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+
+
+<div class="container">
+
+  <ol class="breadcrumb">
+    <li><a href="/">Home</a></li>
+      <li><a href="/manual/">Manual</a></li>
+      <li class="active">Adding search</li>
+  </ol>
+
+  <div class="page-header">
+    <h1>Adding search</h1>
+  </div>
+
+  <div class="row">
+
+    <div class="content">
+      <div class="col-md-7" role="main">
+      <main>
+        <h2 id="introduction">Introduction</h2>
+<p>A static site has limitations: it cannot natively support certain interesting
+dynamic services. Fortunately, it is possible and often a good solution to
+integrate dedicated dynamic services within a static site.</p>
+<p>One of the most prominent examples is Search. One possibility is integrating an
+external service such as Google Custom Search. The disadvantage is that one has
+either to pay for it or accept the branding.  </p>
+<p>As an alternative, Urubu supports an open source solution based on
+javascript executed by the browser, called Tipue Search. As part
+of the site building, Urubu can generate a view on the searchable
+content for Tipue Search. In this chapter, we describe how the
+integration can be accomplished.  </p>
+<h2 id="installing-tipue-search">Installing Tipue Search</h2>
+<p>The first step is to <a href="http://www.tipue.com/search/">download</a> Tipue Search.  The distribution contains a
+<code>tipuesearch</code> directory. Copy that directory to the top level of your project.
+As usual, Urubu will copy it to the built website, so that the required
+stylesheets and javascript files will be available in the expected location.</p>
+<p>Do not rename the <code>tipuesearch</code> directory. The existence of that
+directory triggers Urubu's support for the solution. </p>
+<p>Tipue search has good <a href="http://www.tipue.com/search/docs/">documentation</a> that you may want to review.
+This chapter is based on it, but uses a slightly modified approach
+to achieve a good integration in a typical Urubu project. </p>
+<h2 id="the-search-box">The search box</h2>
+<p>The second step is to create a search box. Suppose you want to
+make it part of the navbar, as in the present site. This is
+achieved with the following html code: </p>
+<div class="codehilite"><pre>&lt;form class=&quot;navbar-form navbar-left&quot; action=&quot;/search.html&quot; role=&quot;search&quot;&gt;
+  &lt;div class=&quot;form-group&quot;&gt;
+    &lt;input type=&quot;text&quot; required name=&quot;q&quot; id=&quot;tipue_search_input&quot; class=&quot;form-control&quot; placeholder=&quot;Search&quot;&gt; 
+   &lt;/div&gt;
+&lt;/form&gt;
+</pre></div>
+
+
+<p>The 'name' and the 'id' values in the <code>&lt;input&gt;</code> tag of the search box are
+mandatory for Tipue Search.  The typical place for this code would be in the
+navbar code in a base layout that is inherited from other pages. In the present
+site, this layout is 'base.html'.</p>
+<h2 id="the-search-results-page">The search results page</h2>
+<p>The third step is to create a search result page. The way to integrate it with
+the site by creating a dedicated layout using template inheritance.  Let us
+assume that is a <code>head_addon</code> and a <code>body_addon</code> block that make it possible to
+add links and scripts to the <code>&lt;head</code> and the <code>&lt;body&gt;</code> section respectively. The
+<code>search.html</code> layout is then as follows:  </p>
+<div class="codehilite"><pre>{% extends &quot;page.html&quot; %}
+
+{% block head_addon %}
+&lt;link href=&quot;tipuesearch/tipuesearch.css&quot; rel=&quot;stylesheet&quot;&gt;
+{% endblock %}
+
+{% block body_addon %}
+&lt;script src=&quot;tipuesearch/tipuesearch_content.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;tipuesearch/tipuesearch_set.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;tipuesearch/tipuesearch.min.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+$(document).ready(function() {
+     $(&#39;#tipue_search_input&#39;).tipuesearch({
+          &#39;mode&#39;: &#39;json&#39;,
+          &#39;contentLocation&#39;: &#39;tipuesearch/tipuesearch_content.json&#39; 
+     });
+});
+&lt;/script&gt;
+{% endblock %}
+</pre></div>
+
+
+<p>First, we inherit from a parent <code>page.html</code> layout. In the <code>head_addon</code> block,
+we add the Tipue Search style sheet for the result page. In the <code>body_addon</code>
+page we add the Tipue Search java script modules, and the inline script that
+generates the results. </p>
+<p>This setup assumes that the jQuery javascript library itself is already loaded
+in the body of the parent layout. If you use the bootstrap javascript modules,
+that will be the case.</p>
+<p>In the top level project directory, we can then create a <code>search.md</code> files that
+uses the <code>search.html</code> layout and has the generated search results as its
+content:</p>
+<div class="codehilite"><pre>---
+title: Search results
+layout: search
+---
+
+&lt;div id=&quot;tipue_search_content&quot;&gt;&lt;/div&gt;
+</pre></div>
+
+
+<h2 id="the-search-content">The search content</h2>
+<p>The searchable content itself is in a JSON object defined in the file
+<code>tipuesearch/tipuesearch_content.json</code>.  This is where Urubu kicks in: this
+file is generated automatically. </p>
+<p>Extracting meaningful searchable content from a web site is not trivial. A
+design decision for Urubu was to use modern techniques to help with this. In
+particular, Urubu will only consider content that is wrapped with the <code>&lt;main&gt;</code>
+tag. This is a relatively new html5 tag with exactly the purpose to indicate
+the page content explicitly.</p>
+<p>The site designer should therefore review the site layouts and wrap all
+searchable content with the <code>&lt;main&gt;</code> tag. Typically, this is the region were
+the <code>this.body</code> variable is called in a template.</p>
+      </main>
+      <ul class="pager">
+        <li class="previous"><a href="/manual/templating.html">&larr; Templating</a></li>
+      </ul>
+      </div>
+    </div>
+
+    <div class="col-md-3" role="complementary">
+      <nav class="hidden-print hidden-xs hidden-sm">
+        <div class="sidebar" data-spy="affix" data-offset-top="80" data-offset-bottom="60">
+          <div class="well">
+            <a href="#"><strong>Adding search</strong></a>
+            <div class="toc">
+<ul>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#installing-tipue-search">Installing Tipue Search</a></li>
+<li><a href="#the-search-box">The search box</a></li>
+<li><a href="#the-search-results-page">The search results page</a></li>
+<li><a href="#the-search-content">The search content</a></li>
+</ul>
+</div>
+
+          </div>
+        </div>
+      </nav>
+    </div>
+
+  </div>
+
+
+    <div class="footer">
+        <div style="margin: 5px">
+<a href="https://twitter.com/share" class="twitter-share-button">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+<!-- Place this tag where you want the +1 button to render. -->
+<div class="g-plusone" data-size="medium"></div>
+
+<!-- Place this tag after the last +1 button tag. -->
+<script type="text/javascript">
+window.__gcfg = {
+    lang: 'en-US'
+};
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/plusone.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>
+
+<script type="text/javascript" src="http://www.reddit.com/static/button/button1.js"></script>        </div>
+        <p> Content licensed under the
+           <a href="http://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA License</a>.
+        </p> 
+        <p>Website powered by <a href="http://urubu.jandecaluwe.com">Urubu</a>.</p>
+    </div>
+
+
+</div>
+
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <!-- <script src="https://code.jquery.com/jquery.js"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+ 
+
+  </body>
+</html>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Urubu 0.8 released</title>
+    <title>Info</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
     <!-- Bootstrap -->
@@ -56,7 +56,7 @@
             </div>
           </form>
           <ul class="nav navbar-nav navbar-right">
-            <li class="dropdown">
+            <li class="active" class="dropdown">
               <a href="/info/" class="dropdown-toggle" data-toggle="dropdown">Info <b class="caret"></b></a>
               <ul class="dropdown-menu">
                 <li><a href="/info/about.html">About</a></li>
@@ -70,78 +70,30 @@
     </div>
 
 
-<div class="container">
-
-  <ol class="breadcrumb">
-    <li><a href="/">Home</a></li>
-      <li><a href="/news/">Newsfeed</a></li>
-      <li class="active">Urubu 0.8 released</li>
-  </ol>
-
-  <div class="page-header">
-    <h1>Urubu 0.8 released</h1>
+<div class="jumbotron">
+  <div class="container">
+    <div class="row">
+       <div class="col-md-7">
+         <h1>Info</h1>
+         <p></p>
+    </div>
   </div>
+ </div>
+</div>
 
+<div class="container">
   <div class="row">
 
-    <div class="content">
-      <div class="col-md-7" role="main">
-      <main>
-        <p>Release highlights:</p>
-<ul>
-<li>
-<p>the <code>urubu</code> serve command automatically takes
-the <code>baseurl</code> option into account (Pull request #27).</p>
-</li>
-<li>
-<p>when an undefined anchor is referred to in a page, a
-warning is generated, just like for references to undefined pages (Issue #30).</p>
-</li>
-<li>
-<p>the <code>layout</code> attribute can be assigned <code>null</code>. In this
-way the page content can be used by other pages, but no html is generated for
-the page itself.</p>
-</li>
-</ul>
-<p>In addition, a significant effort was put into development robustness. In
-particular, a regression test suite has been added. This is based on <code>py.test</code>
-and <code>tox</code>, so that both Python 2.7 and 3.4 are verified. </p>
-      </main>
-      </div>
+    <div class="col-md-7" role="main">
+    <main>
+      <h4><a href="/info/about.html">About</a></h4>
+        <p></p>
+      <h4><a href="/info/sites/">Urubu sites</a></h4>
+        <p></p>
+    </main>
     </div>
 
-
-  </div>
-
-
-    <div class="footer">
-        <div style="margin: 5px">
-<a href="https://twitter.com/share" class="twitter-share-button">Tweet</a>
-<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-
-<!-- Place this tag where you want the +1 button to render. -->
-<div class="g-plusone" data-size="medium"></div>
-
-<!-- Place this tag after the last +1 button tag. -->
-<script type="text/javascript">
-window.__gcfg = {
-    lang: 'en-US'
-};
-  (function() {
-    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-    po.src = 'https://apis.google.com/js/plusone.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-  })();
-</script>
-
-<script type="text/javascript" src="http://www.reddit.com/static/button/button1.js"></script>        </div>
-        <p> Content licensed under the
-           <a href="http://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA License</a>.
-        </p> 
-        <p>Website powered by <a href="http://urubu.jandecaluwe.com">Urubu</a>.</p>
-    </div>
-
-
+ </div>
 </div>
 
 

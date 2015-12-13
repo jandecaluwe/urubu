@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Urubu 0.8 released</title>
+    <title>Installation</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
     <!-- Bootstrap -->
@@ -46,7 +46,7 @@
 
           <ul class="nav navbar-nav navbar-left">
             <li><a href="/start.html">Overview</a></li>
-            <li><a href="/manual/">Manual</a></li>
+            <li class="active"><a href="/manual/">Manual</a></li>
             <li><a href="/faq/">FAQ</a></li>
             <li><a href="https://github.com/jandecaluwe/urubu">GitHub</a></li>
           </ul>
@@ -74,12 +74,12 @@
 
   <ol class="breadcrumb">
     <li><a href="/">Home</a></li>
-      <li><a href="/news/">Newsfeed</a></li>
-      <li class="active">Urubu 0.8 released</li>
+      <li><a href="/manual/">Manual</a></li>
+      <li class="active">Installation</li>
   </ol>
 
   <div class="page-header">
-    <h1>Urubu 0.8 released</h1>
+    <h1>Installation</h1>
   </div>
 
   <div class="row">
@@ -87,25 +87,25 @@
     <div class="content">
       <div class="col-md-7" role="main">
       <main>
-        <p>Release highlights:</p>
-<ul>
-<li>
-<p>the <code>urubu</code> serve command automatically takes
-the <code>baseurl</code> option into account (Pull request #27).</p>
-</li>
-<li>
-<p>when an undefined anchor is referred to in a page, a
-warning is generated, just like for references to undefined pages (Issue #30).</p>
-</li>
-<li>
-<p>the <code>layout</code> attribute can be assigned <code>null</code>. In this
-way the page content can be used by other pages, but no html is generated for
-the page itself.</p>
-</li>
-</ul>
-<p>In addition, a significant effort was put into development robustness. In
-particular, a regression test suite has been added. This is based on <code>py.test</code>
-and <code>tox</code>, so that both Python 2.7 and 3.4 are verified. </p>
+        <p>Urubu works with modern versions of Python 2 and Python 3 using the same
+codebase. More specifically, it requires Python 2.7 or Python 3.4.</p>
+<p>You can install Urubu using pip: </p>
+<div class="codehilite"><pre>pip install urubu
+</pre></div>
+
+
+<p>To upgrade an existing installation to the
+latest version, use:</p>
+<div class="codehilite"><pre>pip install --upgrade urubu
+</pre></div>
+
+
+<p>If pip is not yet available on your system, follow the <a href="http://www.pip-installer.org/en/latest/installing.html">pip installation
+instructions</a>.</p>
+<p>You may want to install Urubu in an isolated environment using <a href="http://www.virtualenv.org/en/latest/virtualenv.html" title="virtualenv">virtualenv</a>.</p>
+<p>Urubu depends on a number of libraries that will automatically be installed if
+not yet available: <a href="http://pythonhosted.org/Markdown/" title="Python-Markdown">Python-Markdown</a>, <a href="http://pyyaml.org" title="PyYAML">PyYAML</a>, <a href="http://pygments.org" title="Pygments">Pygments</a> and <a href="http://jinja.pocoo.org" title="Jinja2">Jinja2</a>.</p>
+<p>For a quick way to set up a new Urubu project, visit <a href="http://urubu-quickstart.jandecaluwe.com" title="Urubu Quickstart">Urubu Quickstart</a>.</p>
       </main>
       </div>
     </div>
@@ -113,6 +113,10 @@ and <code>tox</code>, so that both Python 2.7 and 3.4 are verified. </p>
 
   </div>
 
+  <ul class="pager">
+    <li class="previous"><a href="/manual/intro.html">&larr; Concepts</a></li>
+    <li class="next"><a href="/manual/structure.html">Project structure &rarr;</a></li>
+  </ul>
 
     <div class="footer">
         <div style="margin: 5px">

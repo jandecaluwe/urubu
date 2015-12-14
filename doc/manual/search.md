@@ -1,5 +1,5 @@
 ---
-title: Adding search 
+title: Search 
 layout: page 
 pager: true
 author: Jan Decaluwe
@@ -8,41 +8,40 @@ author: Jan Decaluwe
 Introduction
 ============
 
-A static site has limitations: it cannot natively support certain interesting
-dynamic services. Fortunately, it is possible and often a good solution to
-integrate dedicated dynamic services within a static site.
+A static site cannot natively support dynamic services. Fortunately, it is
+possible and often elegant to integrate third party solutions within a static
+site.
 
 One of the most prominent examples is Search. One possibility is integrating an
 external service such as Google Custom Search. The disadvantage is that one has
 either to pay for it or accept the branding.  
 
-As an alternative, Urubu supports an open source solution based on
-javascript executed by the browser, called Tipue Search. As part
-of the site building, Urubu can generate a view on the searchable
-content for Tipue Search. In this chapter, we describe how the
-integration can be accomplished.  
+As an alternative, Urubu supports Tipue Search, an open source solution based
+on javascript executed in the browser. As part of the site building, Urubu
+generates a view on the searchable content.  In this chapter, we describe how
+the integration is accomplished.  
 
 Installing Tipue Search
 =======================
 
-The first step is to [download][1] Tipue Search.  The distribution contains a
+The first step is to [download][1] the Tipue Search distribution It contains a
 `tipuesearch` directory. Copy that directory to the top level of your project.
-As usual, Urubu will copy it to the built website, so that the required
-stylesheets and javascript files will be available in the expected location.
+As usual, Urubu copies it to the built website, so that the required
+stylesheets and javascript files are available in the expected location.
 
 Do not rename the `tipuesearch` directory. The existence of that
-directory triggers Urubu's support for the solution. 
+directory triggers Urubu's support. 
 
-Tipue search has good [documentation][2] that you may want to review.
-This chapter is based on it, but uses a slightly modified approach
-to achieve a good integration in a typical Urubu project. 
+Tipue Search has good [documentation][2] that you may want to review.  This
+chapter uses a slightly modified approach to achieve a good integration in a
+typical Urubu project. 
 
 The search box
 ==============
 
-The second step is to create a search box. Suppose you want to
-make it part of the navbar, as in the present site. This is
-achieved with the following html code: 
+The next step is to create a search box. Suppose you want to make it part of
+the navbar, as in the present site. This is achieved with the following html
+code: 
 
 ```
 <form class="navbar-form navbar-left" action="/search.html" role="search">
@@ -53,19 +52,17 @@ achieved with the following html code:
 ```
 
 The 'name' and the 'id' values in the `<input>` tag of the search box are
-mandatory for Tipue Search.  The typical place for this code would be in the
-navbar code in a base layout that is inherited from other pages. In the present
-site, this layout is 'base.html'.
-
+mandatory for Tipue Search. The typical place for this code would be in the
+navbar code in a basic layout for the site.
 
 The search results page
 =======================
 
-The third step is to create a search result page. The way to integrate it with
-the site by creating a dedicated layout using template inheritance.  Let us
-assume that is a `head_addon` and a `body_addon` block that make it possible to
-add links and scripts to the `<head` and the `<body>` section respectively. The
-`search.html` layout is then as follows:  
+The next step is to create a search result page. To integrate it we first
+create a dedicated layout using template inheritance.  Let us assume that is
+there is  a `head_addon` and a `body_addon` block to add links and scripts to
+the `<head` and the `<body>` section respectively. The `search.html` layout is
+then as follows:  
 
 ```
 {% extends "page.html" %}
@@ -89,14 +86,19 @@ $(document).ready(function() {
 {% endblock %}
 ```
 
-First, we inherit from a parent `page.html` layout. In the `head_addon` block,
-we add the Tipue Search style sheet for the result page. In the `body_addon`
-page we add the Tipue Search java script modules, and the inline script that
-generates the results. 
+We inherit from a parent `page.html` layout. In the `head_addon` block, we add
+the Tipue Search style sheet for the result page. In the `body_addon` page we
+add the Tipue Search java script modules, and the inline script that generates
+the results. 
 
 This setup assumes that the jQuery javascript library itself is already loaded
-in the body of the parent layout. If you use the bootstrap javascript modules,
-that will be the case.
+in the body of the parent layout, with a line like the following: 
+
+```
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+```
+
+If you use the bootstrap javascript modules, that will be the case.
 
 In the top level project directory, we can then create a `search.md` files that
 uses the `search.html` layout and has the generated search results as its
@@ -112,10 +114,18 @@ layout: search
 
 ```
 
+After building the site, there will be a functional `search.html` file in the
+top-level directory.
+
+The `tipuesearch.css` stylesheet also contains styling for the search box,
+which may interfere with the styling of the search box integrated in the
+navbar.  You may want to comment that out.
+{.text-info}
+
 The search content
 ==================
 
-The searchable content itself is in a JSON object defined in the file
+The searchable content itself is a JSON object defined in the file
 `tipuesearch/tipuesearch_content.json`.  This is where Urubu kicks in: this
 file is generated automatically. 
 
@@ -129,6 +139,9 @@ The site designer should therefore review the site layouts and wrap all
 searchable content with the `<main>` tag. Typically, this is the region were
 the `this.body` variable is called in a template.
 
+There appears to be a problem (and a workaround) with the `<main>` tag in IE11.
+To be investigated further.
+{.text-info}
 
 [1]: http://www.tipue.com/search/
 [2]: http://www.tipue.com/search/docs/

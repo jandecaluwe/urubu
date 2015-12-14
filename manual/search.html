@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Adding search</title>
+    <title>Search</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
     <!-- Bootstrap -->
@@ -75,11 +75,11 @@
   <ol class="breadcrumb">
     <li><a href="/">Home</a></li>
       <li><a href="/manual/">Manual</a></li>
-      <li class="active">Adding search</li>
+      <li class="active">Search</li>
   </ol>
 
   <div class="page-header">
-    <h1>Adding search</h1>
+    <h1>Search</h1>
   </div>
 
   <div class="row">
@@ -88,31 +88,30 @@
       <div class="col-md-7" role="main">
       <main>
         <h2 id="introduction">Introduction</h2>
-<p>A static site has limitations: it cannot natively support certain interesting
-dynamic services. Fortunately, it is possible and often a good solution to
-integrate dedicated dynamic services within a static site.</p>
+<p>A static site cannot natively support dynamic services. Fortunately, it is
+possible and often elegant to integrate third party solutions within a static
+site.</p>
 <p>One of the most prominent examples is Search. One possibility is integrating an
 external service such as Google Custom Search. The disadvantage is that one has
 either to pay for it or accept the branding.  </p>
-<p>As an alternative, Urubu supports an open source solution based on
-javascript executed by the browser, called Tipue Search. As part
-of the site building, Urubu can generate a view on the searchable
-content for Tipue Search. In this chapter, we describe how the
-integration can be accomplished.  </p>
+<p>As an alternative, Urubu supports Tipue Search, an open source solution based
+on javascript executed in the browser. As part of the site building, Urubu
+generates a view on the searchable content.  In this chapter, we describe how
+the integration is accomplished.  </p>
 <h2 id="installing-tipue-search">Installing Tipue Search</h2>
-<p>The first step is to <a href="http://www.tipue.com/search/">download</a> Tipue Search.  The distribution contains a
+<p>The first step is to <a href="http://www.tipue.com/search/">download</a> the Tipue Search distribution It contains a
 <code>tipuesearch</code> directory. Copy that directory to the top level of your project.
-As usual, Urubu will copy it to the built website, so that the required
-stylesheets and javascript files will be available in the expected location.</p>
+As usual, Urubu copies it to the built website, so that the required
+stylesheets and javascript files are available in the expected location.</p>
 <p>Do not rename the <code>tipuesearch</code> directory. The existence of that
-directory triggers Urubu's support for the solution. </p>
-<p>Tipue search has good <a href="http://www.tipue.com/search/docs/">documentation</a> that you may want to review.
-This chapter is based on it, but uses a slightly modified approach
-to achieve a good integration in a typical Urubu project. </p>
+directory triggers Urubu's support. </p>
+<p>Tipue Search has good <a href="http://www.tipue.com/search/docs/">documentation</a> that you may want to review.  This
+chapter uses a slightly modified approach to achieve a good integration in a
+typical Urubu project. </p>
 <h2 id="the-search-box">The search box</h2>
-<p>The second step is to create a search box. Suppose you want to
-make it part of the navbar, as in the present site. This is
-achieved with the following html code: </p>
+<p>The next step is to create a search box. Suppose you want to make it part of
+the navbar, as in the present site. This is achieved with the following html
+code: </p>
 <div class="codehilite"><pre>&lt;form class=&quot;navbar-form navbar-left&quot; action=&quot;/search.html&quot; role=&quot;search&quot;&gt;
   &lt;div class=&quot;form-group&quot;&gt;
     &lt;input type=&quot;text&quot; required name=&quot;q&quot; id=&quot;tipue_search_input&quot; class=&quot;form-control&quot; placeholder=&quot;Search&quot;&gt; 
@@ -122,15 +121,14 @@ achieved with the following html code: </p>
 
 
 <p>The 'name' and the 'id' values in the <code>&lt;input&gt;</code> tag of the search box are
-mandatory for Tipue Search.  The typical place for this code would be in the
-navbar code in a base layout that is inherited from other pages. In the present
-site, this layout is 'base.html'.</p>
+mandatory for Tipue Search. The typical place for this code would be in the
+navbar code in a basic layout for the site.</p>
 <h2 id="the-search-results-page">The search results page</h2>
-<p>The third step is to create a search result page. The way to integrate it with
-the site by creating a dedicated layout using template inheritance.  Let us
-assume that is a <code>head_addon</code> and a <code>body_addon</code> block that make it possible to
-add links and scripts to the <code>&lt;head</code> and the <code>&lt;body&gt;</code> section respectively. The
-<code>search.html</code> layout is then as follows:  </p>
+<p>The next step is to create a search result page. To integrate it we first
+create a dedicated layout using template inheritance.  Let us assume that is
+there is  a <code>head_addon</code> and a <code>body_addon</code> block to add links and scripts to
+the <code>&lt;head</code> and the <code>&lt;body&gt;</code> section respectively. The <code>search.html</code> layout is
+then as follows:  </p>
 <div class="codehilite"><pre>{% extends &quot;page.html&quot; %}
 
 {% block head_addon %}
@@ -153,13 +151,17 @@ $(document).ready(function() {
 </pre></div>
 
 
-<p>First, we inherit from a parent <code>page.html</code> layout. In the <code>head_addon</code> block,
-we add the Tipue Search style sheet for the result page. In the <code>body_addon</code>
-page we add the Tipue Search java script modules, and the inline script that
-generates the results. </p>
+<p>We inherit from a parent <code>page.html</code> layout. In the <code>head_addon</code> block, we add
+the Tipue Search style sheet for the result page. In the <code>body_addon</code> page we
+add the Tipue Search java script modules, and the inline script that generates
+the results. </p>
 <p>This setup assumes that the jQuery javascript library itself is already loaded
-in the body of the parent layout. If you use the bootstrap javascript modules,
-that will be the case.</p>
+in the body of the parent layout, with a line like the following: </p>
+<div class="codehilite"><pre>&lt;script src=&quot;https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js&quot;&gt;&lt;/script&gt;
+</pre></div>
+
+
+<p>If you use the bootstrap javascript modules, that will be the case.</p>
 <p>In the top level project directory, we can then create a <code>search.md</code> files that
 uses the <code>search.html</code> layout and has the generated search results as its
 content:</p>
@@ -172,8 +174,13 @@ layout: search
 </pre></div>
 
 
+<p>After building the site, there will be a functional <code>search.html</code> file in the
+top-level directory.</p>
+<p class="text-info">The <code>tipuesearch.css</code> stylesheet also contains styling for the search box,
+which may interfere with the styling of the search box integrated in the
+navbar.  You may want to comment that out.</p>
 <h2 id="the-search-content">The search content</h2>
-<p>The searchable content itself is in a JSON object defined in the file
+<p>The searchable content itself is a JSON object defined in the file
 <code>tipuesearch/tipuesearch_content.json</code>.  This is where Urubu kicks in: this
 file is generated automatically. </p>
 <p>Extracting meaningful searchable content from a web site is not trivial. A
@@ -184,6 +191,8 @@ the page content explicitly.</p>
 <p>The site designer should therefore review the site layouts and wrap all
 searchable content with the <code>&lt;main&gt;</code> tag. Typically, this is the region were
 the <code>this.body</code> variable is called in a template.</p>
+<p class="text-info">There appears to be a problem (and a workaround) with the <code>&lt;main&gt;</code> tag in IE11.
+To be investigated further.</p>
       </main>
       <ul class="pager">
         <li class="previous"><a href="/manual/templating.html">&larr; Templating</a></li>
@@ -195,7 +204,7 @@ the <code>this.body</code> variable is called in a template.</p>
       <nav class="hidden-print hidden-xs hidden-sm">
         <div class="sidebar" data-spy="affix" data-offset-top="80" data-offset-bottom="60">
           <div class="well">
-            <a href="#"><strong>Adding search</strong></a>
+            <a href="#"><strong>Search</strong></a>
             <div class="toc">
 <ul>
 <li><a href="#introduction">Introduction</a></li>

@@ -51,7 +51,7 @@ code:
 </form>
 ```
 
-The 'name' and the 'id' values in the `<input>` tag of the search box are
+The `name` and the `id` values in the `<input>` tag of the search box are
 mandatory for Tipue Search. The typical place for this code would be in the
 navbar code in a basic layout for the site.
 
@@ -86,7 +86,7 @@ $(document).ready(function() {
 {% endblock %}
 ```
 
-We inherit from a parent `page.html` layout. In the `head_addon` block, we add
+We inherit from a `page.html` layout. In the `head_addon` block, we add
 the Tipue Search style sheet for the result page. In the `body_addon` page we
 add the Tipue Search java script modules, and the inline script that generates
 the results. 

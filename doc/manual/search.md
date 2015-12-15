@@ -5,12 +5,16 @@ pager: true
 author: Jan Decaluwe
 ---
 
+Search functionality is under development. It is not yet
+present the released version.
+{.lead .text-info}
+
 Introduction
 ============
 
 A static site cannot natively support dynamic services. Fortunately, it is
-possible and often elegant to integrate third party solutions within a static
-site.
+often an elegant solution to integrate third party solutions within a
+static site.
 
 One of the most prominent examples is Search. One possibility is integrating an
 external service such as Google Custom Search. The disadvantage is that one has

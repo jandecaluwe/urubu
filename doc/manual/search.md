@@ -5,10 +5,6 @@ pager: true
 author: Jan Decaluwe
 ---
 
-Search functionality is under development. It is not yet
-present the released version.
-{.lead .text-info}
-
 Introduction
 ============
 
@@ -102,7 +98,7 @@ in the body of the parent layout, with a line like the following:
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 ```
 
-If you use the bootstrap javascript modules, that will be the case.
+If you use the Bootstrap javascript modules, that will be the case.
 
 In the top level project directory, we can then create a `search.md` files that
 uses the `search.html` layout and has the generated search results as its
@@ -121,9 +117,9 @@ layout: search
 After building the site, there will be a functional `search.html` file in the
 top-level directory.
 
-The `tipuesearch.css` stylesheet also contains styling for the search box,
-which may interfere with the styling of the search box integrated in the
-navbar.  You may want to comment that out.
+**Note** The `tipuesearch.css` stylesheet also contains styling for the search
+box. The result may be undesirable if you use your own styling, like in the
+present website. The workaround is to comment the search box styling out. 
 {.text-info}
 
 The search content
@@ -143,8 +139,9 @@ The site designer should therefore review the site layouts and wrap all
 searchable content with the `<main>` tag. Typically, this is the region were
 the `this.body` variable is called in a template.
 
-There appears to be a problem (and a workaround) with the `<main>` tag in IE11.
-To be investigated further.
+**Note** The `<main>` tag is not supported in IE11. A popular workaround is to
+use the `html5shiv.js` Javascript module. Layouts based on Bootstrap do
+this already.
 {.text-info}
 
 [1]: http://www.tipue.com/search/

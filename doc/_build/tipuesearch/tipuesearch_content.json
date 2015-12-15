@@ -8,7 +8,7 @@
         }, 
         {
             "tags": "", 
-            "text": "15-Dec-2015: Urubu 0.9 released For websites, not just blogs Set up a website as logically related content. Content\nordering is flexible, not just by date. Focus on navigation Easily set up a navbar, a table of contents sidebar,\nbreadcrumbs and pagers. Ready for Bootstrap Urubu plays well with Bootstrap, the popular framework\nfor great looking websites. Markdown content Enter content in light-weight Markdown syntax, with\npopular extensions. Wiki links Easily refer to other pages like\nin wikis, using Markdown syntax. Powerful templating Use the powerful Jinja2 templating library to \ndefine page layouts. Sophisticated control Per-page control of page layout \n  and other stuff. Plus\n  user-defined variables. Python power Urubu is built with Python. It provides Python hooks\nto assist in templating. Ideal with git or mercurial Use a git or mercurial workflow to develop\nyour website. Deploy by pushing. And of course, it's open source!", 
+            "text": "15-Dec-2015: Urubu 0.9.0 released For websites, not just blogs Set up a website as logically related content. Content\nordering is flexible, not just by date. Focus on navigation Easily set up a navbar, a table of contents sidebar,\nbreadcrumbs and pagers. Ready for Bootstrap Urubu plays well with Bootstrap, the popular framework\nfor great looking websites. Markdown content Enter content in light-weight Markdown syntax, with\npopular extensions. Wiki links Easily refer to other pages like\nin wikis, using Markdown syntax. Powerful templating Use the powerful Jinja2 templating library to \ndefine page layouts. Sophisticated control Per-page control of page layout \n  and other stuff. Plus\n  user-defined variables. Python power Urubu is built with Python. It provides Python hooks\nto assist in templating. Ideal with git or mercurial Use a git or mercurial workflow to develop\nyour website. Deploy by pushing. And of course, it's open source!", 
             "title": "Urubu", 
             "url": "/index.html"
         }, 
@@ -51,7 +51,7 @@
         {
             "tags": "", 
             "text": "This release adds support for Tipue Search, an open source search solution\nbased on Javascript in the browser. Read more in the chapter Search in the manual.", 
-            "title": "Urubu 0.9 released", 
+            "title": "Urubu 0.9.0 released", 
             "url": "/news/2015-12-15.html"
         }, 
         {

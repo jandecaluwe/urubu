@@ -1,5 +1,5 @@
-Urubu 0.9
-=========
+Urubu 0.9.0
+===========
 
 Urubu is a micro CMS for static websites, with a focus on good navigation
 practices.

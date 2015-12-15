@@ -87,9 +87,7 @@
     <div class="content">
       <div class="col-md-7" role="main">
       <main>
-        <p class="lead text-info">Search functionality is under development. It is not yet
-present the released version.</p>
-<h2 id="introduction">Introduction</h2>
+        <h2 id="introduction">Introduction</h2>
 <p>A static site cannot natively support dynamic services. Fortunately, it is
 often an elegant solution to integrate third party solutions within a
 static site.</p>
@@ -163,7 +161,7 @@ in the body of the parent layout, with a line like the following: </p>
 </pre></div>
 
 
-<p>If you use the bootstrap javascript modules, that will be the case.</p>
+<p>If you use the Bootstrap javascript modules, that will be the case.</p>
 <p>In the top level project directory, we can then create a <code>search.md</code> files that
 uses the <code>search.html</code> layout and has the generated search results as its
 content:</p>
@@ -178,9 +176,9 @@ layout: search
 
 <p>After building the site, there will be a functional <code>search.html</code> file in the
 top-level directory.</p>
-<p class="text-info">The <code>tipuesearch.css</code> stylesheet also contains styling for the search box,
-which may interfere with the styling of the search box integrated in the
-navbar.  You may want to comment that out.</p>
+<p class="text-info"><strong>Note</strong> The <code>tipuesearch.css</code> stylesheet also contains styling for the search
+box. The result may be undesirable if you use your own styling, like in the
+present website. The workaround is to comment the search box styling out. </p>
 <h2 id="the-search-content">The search content</h2>
 <p>The searchable content itself is a JSON object defined in the file
 <code>tipuesearch/tipuesearch_content.json</code>.  This is where Urubu kicks in: this
@@ -193,8 +191,9 @@ the page content explicitly.</p>
 <p>The site designer should therefore review the site layouts and wrap all
 searchable content with the <code>&lt;main&gt;</code> tag. Typically, this is the region were
 the <code>this.body</code> variable is called in a template.</p>
-<p class="text-info">There appears to be a problem (and a workaround) with the <code>&lt;main&gt;</code> tag in IE11.
-To be investigated further.</p>
+<p class="text-info"><strong>Note</strong> The <code>&lt;main&gt;</code> tag is not supported in IE11. A popular workaround is to
+use the <code>html5shiv.js</code> Javascript module. Layouts based on Bootstrap do
+this already.</p>
       </main>
       <ul class="pager">
         <li class="previous"><a href="/manual/templating.html">&larr; Templating</a></li>

@@ -1,5 +1,5 @@
 ---
-title: Search 
+title: Adding Search 
 layout: page 
 pager: true
 author: Jan Decaluwe

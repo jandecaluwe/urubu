@@ -414,6 +414,11 @@ class Project(object):
             ignore_patterns += tuple(self.site['ignore_patterns'])
         return ignore_patterns
 
+    def get_keep_files(self):
+        if 'keep_files' in self.site:
+            return self.site['keep_files']
+        return []
+
     def check_anchor_links(self):
         for info in self.filelist:
             for ar in info['_anchorrefs']:
@@ -437,6 +442,14 @@ class Project(object):
                 shutil.copytree(wp, sp, ignore=ignore)
             elif os.path.isfile(wp):
                 shutil.copyfile(wp, sp)
+
+        # explicit files to keep
+        for fn in self.get_keep_files():
+            wp = os.path.join(self.cwd, fn)
+            sp = os.path.join(sitedir, fn)
+            if os.path.isfile(wp):
+                shutil.copyfile(wp, sp)
+      
         # make tag index dirs
         if self.taglist:
             tagpath = os.path.join(sitedir, tagdir)

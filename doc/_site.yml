@@ -4,6 +4,8 @@ bootswatch: null
 navbar_inverse: false 
 bootstrap: 3.3.4
 
+keep_files: [ .nojekyll ]
+
 reflinks:
     jandecaluwe:
         url: http://www.jandecaluwe.com

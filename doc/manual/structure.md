@@ -51,20 +51,23 @@ Urubu generates a website by processing the files and directory in the project
 directory, and putting the result in a `_build` subdirectory. The processing
 depends on the pathname as follows:
 
-* a `Makefile` is not copied to the build. 
-* files and directories starting with a
-dot `.` or underscore `_` are not copied to the build.
+* a `Makefile` is ignored and not copied to the build. 
+
+* files and directories starting with a dot `.` or 
+underscore `_` are ignored and not copied to the build.
+
 * Markdown files with extension `.md` are converted to a
 html file that is put into the build in the same relative location.
+
 * all other files and directories are copied unmodified to the build in the
 same relative location.
 
-As a result of the project organization and the build process, the
-structure of the build matches the structure of the project directory.
-The relative location of all files is thus preserved.
+As a result of the project organization and the build process, the structure of
+the build matches the structure of the project directory.  The relative
+location of all files is thus preserved.
 
-Special files
-=============
+Special files and directories
+=============================
 
 `_site.yml`
 -----------
@@ -79,6 +82,7 @@ Attribute         | Description
 `file_ext`        | Change default file extension (`'.html'`) for processed `.md` files
 `link_ext`        | Change default file extension (`'.html'`) for links to site's pages
 `ignore_patterns` | List of additional file names or globs to be ignored during processing 
+`keep_files`      | List of explicit file names be kept, overriding any ignores 
 
 Link objects, for the `reflinks` attribute, are a mapping with an `url` key that maps
 to the link URL and a `title` key that maps to the link title. 
@@ -97,8 +101,6 @@ baseurl: prefix
 ```
 [jekyll-options]: http://jekyllrb.com/docs/configuration/#serve-command-options
 
-
-
 The file extension attributes, `file_ext` and `link_ext`, are both usually set to the
 same value (i.e. `'.php'`), unless the target site has .htaccess rewrite rules that
 affect the file extensions.
@@ -111,6 +113,15 @@ be set to `''`, so that the `a href` links are directed to the files without ext
 Otherwise, `file_ext` and `link_ext` should be set to the same extension, specially
 during testing, so that the simple web server invoked by `urubu serve` works fine,
 as well as any web server that does not rewrite the file extensions of the requests. 
+
+The `ignore_patterns` attribute specifies glob-style patterns to be ignored
+during processing, in addition to the default ones according ot the Processing
+Rules. 
+
+In some cases you may explicitly want to keep certain files that would normally
+be ignored. For example, you may have hidden files like `.nojekyll` to prevent
+Jekyll processing, or `.htaccess` and `.htpasswd` for access control.  You can
+keep such files in the build using the `keep_files` attribute.
 
 You can define additional attributes that will be made available as
 site variables to the template engine. The following is an example of a

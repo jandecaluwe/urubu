@@ -125,18 +125,26 @@ directory should have an <code>index.md</code> file, including the top-level dir
 directory, and putting the result in a <code>_build</code> subdirectory. The processing
 depends on the pathname as follows:</p>
 <ul>
-<li>a <code>Makefile</code> is not copied to the build. </li>
-<li>files and directories starting with a
-dot <code>.</code> or underscore <code>_</code> are not copied to the build.</li>
-<li>Markdown files with extension <code>.md</code> are converted to a
-html file that is put into the build in the same relative location.</li>
-<li>all other files and directories are copied unmodified to the build in the
-same relative location.</li>
+<li>
+<p>a <code>Makefile</code> is ignored and not copied to the build. </p>
+</li>
+<li>
+<p>files and directories starting with a dot <code>.</code> or 
+underscore <code>_</code> are ignored and not copied to the build.</p>
+</li>
+<li>
+<p>Markdown files with extension <code>.md</code> are converted to a
+html file that is put into the build in the same relative location.</p>
+</li>
+<li>
+<p>all other files and directories are copied unmodified to the build in the
+same relative location.</p>
+</li>
 </ul>
-<p>As a result of the project organization and the build process, the
-structure of the build matches the structure of the project directory.
-The relative location of all files is thus preserved.</p>
-<h2 id="special-files">Special files</h2>
+<p>As a result of the project organization and the build process, the structure of
+the build matches the structure of the project directory.  The relative
+location of all files is thus preserved.</p>
+<h2 id="special-files-and-directories">Special files and directories</h2>
 <h3 id="_siteyml"><code>_site.yml</code></h3>
 <p>This file contains site configuration info in YAML format.
 Currently, these are the predefined attributes: </p>
@@ -168,6 +176,10 @@ Currently, these are the predefined attributes: </p>
 <td><code>ignore_patterns</code></td>
 <td>List of additional file names or globs to be ignored during processing</td>
 </tr>
+<tr>
+<td><code>keep_files</code></td>
+<td>List of explicit file names be kept, overriding any ignores</td>
+</tr>
 </tbody>
 </table>
 <p>Link objects, for the <code>reflinks</code> attribute, are a mapping with an <code>url</code> key that maps
@@ -193,6 +205,13 @@ be set to <code>''</code>, so that the <code>a href</code> links are directed to
 <p>Otherwise, <code>file_ext</code> and <code>link_ext</code> should be set to the same extension, specially
 during testing, so that the simple web server invoked by <code>urubu serve</code> works fine,
 as well as any web server that does not rewrite the file extensions of the requests. </p>
+<p>The <code>ignore_patterns</code> attribute specifies glob-style patterns to be ignored
+during processing, in addition to the default ones according ot the Processing
+Rules. </p>
+<p>In some cases you may explicitly want to keep certain files that would normally
+be ignored. For example, you may have hidden files like <code>.nojekyll</code> to prevent
+Jekyll processing, or <code>.htaccess</code> and <code>.htpasswd</code> for access control.  You can
+keep such files in the build using the <code>keep_files</code> attribute.</p>
 <p>You can define additional attributes that will be made available as
 site variables to the template engine. The following is an example of a
 <code>_site.yml</code> file:</p>
@@ -368,7 +387,7 @@ automatically and needs not be set.</p>
 <ul>
 <li><a href="#the-project-directory">The project directory</a></li>
 <li><a href="#processing-rules">Processing rules</a></li>
-<li><a href="#special-files">Special files</a><ul>
+<li><a href="#special-files-and-directories">Special files and directories</a><ul>
 <li><a href="#_siteyml">_site.yml</a></li>
 <li><a href="#_layouts">_layouts</a></li>
 <li><a href="#_python">_python</a></li>

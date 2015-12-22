@@ -1,6 +1,5 @@
 ---
 title: Is there a way to render formulas? 
-layout: page 
 date: 2015-08-08
 ---
 

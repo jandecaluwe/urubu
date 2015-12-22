@@ -20,7 +20,6 @@ from __future__ import unicode_literals
 
 import os
 
-configfn = '_config.yml'
 siteinfofn = '_site.yml'
 sitedir = '_build'
 tagdir = 'tag'

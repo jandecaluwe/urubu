@@ -32,7 +32,7 @@ from urubu._compat import ifilter
 from urubu import UrubuWarning, UrubuError, urubu_warn, _warning, _error
 from urubu import readers, processors
 
-from urubu.config import (configfn, siteinfofn, sitedir,
+from urubu.config import (siteinfofn, sitedir,
                           tagdir, tagid, tagindexid, tag_layout)
 
 def require_key(key, mapping, tipe, fn):
@@ -77,29 +77,37 @@ class Project(object):
 
     def __init__(self):
         self.cwd = os.getcwd()
-        self.config = {}
-        self.site = {'brand': '',
-                     'baseurl': None,
+        self.site = {'baseurl': None,
                      'reflinks': {},
                      'link_ext': '.html',
                      'file_ext': '.html'
                      }
+        self.get_siteinfo()
+
+        """Get user-defined python hooks."""
+        # load _python module from cwd only
+        import imp
+        try:
+            f, fn, desc = imp.find_module('_python', [os.getcwd()])
+            _python = imp.load_module('_python', f, fn, desc)
+        except ImportError:
+            _python = None
+        self.filters = getattr(_python, 'filters', {})
+        self.validators = getattr(_python, 'validators', {})
+        # overwrite placeholder method if function found
+        self.process_info = getattr(_python, 'process_info', self.process_info)
+
         self.filelist = []
         self.navlist = []
         self.taglist = []
         self.tagmap = {}
-        self.filters = {}
-        self.validators = {}
         self.layouts = []
         # anchors to be filled in by markdown processor
         self.anchors = set()
 
-
-    def get_config(self):
-        """Get the config data from the yaml config file."""
-        if os.path.isfile(configfn):
-            with open(configfn, encoding='utf-8-sig') as f:
-                self.config = yaml.safe_load(f)
+    def process_info(self, info, site):
+        """Plugin placeholder"""
+        pass
 
     def get_siteinfo(self):
         """Get the siteinfo from the yaml data file."""
@@ -115,21 +123,6 @@ class Project(object):
                 self.add_reflink(id, info)
             del meta['reflinks']
         self.site.update(meta)
-
-    def get_pythonhooks(self):
-        """Get user-defined python hooks."""
-        # add cwd to path to make it entry points work on windows
-        import sys
-        sys.path.insert(0, os.getcwd())
-        try:
-            import _python
-        except ImportError:
-            _python = None
-        if _python is not None:
-            if hasattr(_python, 'filters'):
-                self.filters = _python.filters
-            if hasattr(_python, 'validators'):
-                self.validators = _python.validators
 
     def validate_sitereflink(self, id, info):
         if 'title' not in info:
@@ -149,6 +142,7 @@ class Project(object):
         if self.site['baseurl']:
             url = '/' + self.site['baseurl'] + url
         return url
+
 
     def get_contentinfo(self):
         """Get info from the markdown content files."""
@@ -172,14 +166,15 @@ class Project(object):
                         continue
                     fileinfo = self.make_fileinfo(relfn, meta)
                     self.filelist.append(fileinfo)
+                    self.process_info(fileinfo, self.site)
                     # validate after file info has been added so it can be used
-                    self.validate_fileinfo(relfn, fileinfo)
+                    self.validate_fileinfo(fileinfo)
                     self.add_reflink(fileinfo['id'], fileinfo)
                     if fn == 'index.md':
                         # start from fileinfo of index file
                         navinfo = self.make_navinfo(relpath, fileinfo)
                         self.navlist.append(navinfo)
-                        self.validate_navinfo(relfn, navinfo)
+                        self.validate_navinfo(navinfo)
                         self.add_reflink(navinfo['id'], navinfo)
                         # add nav info to tag map
                         self.add_info_to_tagmap(navinfo)
@@ -187,15 +182,16 @@ class Project(object):
                         # add id for non-index files to tag tags
                         self.add_info_to_tagmap(fileinfo)
 
-    def validate_fileinfo(self, relfn, info):
+    def validate_fileinfo(self, info):
+        fn = info['fn']
         # layout is mandatory
         if 'layout' not in info:
-            raise UrubuError(_error.undef_info, msg='layout', fn=relfn)
+            raise UrubuError(_error.undef_info, msg='layout', fn=fn)
         if 'layout' is None:
             return
         layout = info['layout']
         # modification date, always available
-        t = os.path.getmtime(relfn)
+        t = os.path.getmtime(fn)
         info['mdate'] = datetime.date.fromtimestamp(t)
         # first run a validator if it exist
         if layout in self.validators:
@@ -208,11 +204,11 @@ class Project(object):
             self.layouts.append(layout)
         # title
         if 'title' not in info:
-            raise UrubuError(_error.undef_info, msg='title', fn=relfn)
+            raise UrubuError(_error.undef_info, msg='title', fn=fn)
         # date
         if 'date' in info:
             if not isinstance(info['date'], datetime.date):
-               raise UrubuError(_error.date_format, fn=relfn)
+               raise UrubuError(_error.date_format, fn=fn)
         # tags
         if 'tags' in info:
             # TODO: make sure it's a list of strings
@@ -220,15 +216,16 @@ class Project(object):
                 info['tags'] = [info['tags']]
             # TODO: normalize tags
 
-    def validate_navinfo(self, relfn, info):
+    def validate_navinfo(self, info):
+        fn = info['indexfn']
         if ('content' not in info) and ('order' not in info):
             # exception: tag folder doesn't require content atribute
             # set it to empty list align with normal folders
             if info['id'] == tagid:
                 info['content'] = []
             else:
-                raise UrubuError(_error.undef_content, fn=relfn)
-        require_key('content', info, list, relfn)
+                raise UrubuError(_error.undef_content, fn=fn)
+        require_key('content', info, list, fn)
 
     def make_fileinfo(self, relfn, meta):
         """Make a fileinfo dict."""
@@ -248,6 +245,7 @@ class Project(object):
         # start from fileinfo of index file
         info = fileinfo.copy()
         # overwrite attributes according to navinfo view
+        info['indexfn'] = info['fn'] 
         info['fn'] = relpath
         info['components'] = components = get_components(relpath)
         info['id'] = make_id(components)
@@ -295,7 +293,7 @@ class Project(object):
         reflinks = self.site['reflinks']
         ref = ref.lower()
         path = os.path.normpath(os.path.join(info['fn'], ref))
-        indexfn = info['fn'] + '/index'
+        indexfn = info['indexfn'] 
         id = make_id(get_components(path, hasext=False))
         if ref in reflinks:
             if (ref != id) and (id in reflinks):
@@ -465,17 +463,12 @@ class Project(object):
         p = processors.ContentProcessor(sitedir, project=self)
         p.process()
 
-# import pprint
-
 def load():
     proj = Project()
-    proj.get_config()
-    proj.get_siteinfo()
     return proj
 
 def build():
     proj = load()
-    proj.get_pythonhooks()
     proj.get_contentinfo()
     proj.resolve_reflinks()
     # pprint.pprint(proj.site['reflinks'])

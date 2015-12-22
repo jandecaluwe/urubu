@@ -27,7 +27,7 @@ from urubu import project
 from urubu._compat import socketserver, httpserver
 from urubu.httphandler import AliasingHTTPRequestHandler
 
-def serve(project):
+def serve(baseurl):
     """HTTP server straight from the docs."""
     # allow running this from the top level
     if os.path.isdir('_build'):
@@ -37,7 +37,7 @@ def serve(project):
     PORT = 8000
     handler = AliasingHTTPRequestHandler
     httpd = socketserver.TCPServer(('', PORT), handler)
-    httpd.baseurl = project.site['baseurl']
+    httpd.baseurl = baseurl
         
     print("Serving at port {}".format(PORT))
     if httpd.baseurl: print("Using baseurl {}".format(httpd.baseurl))
@@ -52,4 +52,4 @@ def main():
         project.build()
     elif args.command == 'serve':
         proj = project.load()
-        serve(proj)
+        serve(proj.site['baseurl'])

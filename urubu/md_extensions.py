@@ -82,6 +82,9 @@ class ProjectReferencePattern(ReferencePattern):
                 ref, anchor = ref.split('#', 1)
             this = self.markdown.this
             if not posixpath.isabs(ref):
+                # treat empty ref as reference to current page
+                if not ref: 
+                    ref = this['components'][-1]
                 rootrelpath = '/' + '/'.join(this['components'][:-1])
                 id = posixpath.normpath(posixpath.join(rootrelpath, ref))
                 id = id.lower()

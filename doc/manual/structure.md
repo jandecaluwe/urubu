@@ -115,8 +115,8 @@ during testing, so that the simple web server invoked by `urubu serve` works fin
 as well as any web server that does not rewrite the file extensions of the requests. 
 
 The `ignore_patterns` attribute specifies glob-style patterns to be ignored
-during processing, in addition to the default ones according ot the Processing
-Rules. 
+during processing, in addition to the default ones according to the
+[#Processing Rules]. 
 
 In some cases you may explicitly want to keep certain files that would normally
 be ignored. For example, you may have hidden files like `.nojekyll` to prevent

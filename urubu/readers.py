@@ -49,9 +49,3 @@ def _get_yamlfm_helper(fn):
                 lines.append(line)
 
 
-def get_yaml_navinfo(fn):
-    """Read yaml navigation info."""
-    with open(fn, 'r', encoding='utf-8-sig') as f:
-        s = f.read()
-        info = yaml.safe_load(s)
-        return info

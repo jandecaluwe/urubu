@@ -1,4 +1,4 @@
-# Copyright 2014 Jan Decaluwe
+# Copyright 2014, 2015 Jan Decaluwe
 #
 # This file is part of Urubu.
 #

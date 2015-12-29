@@ -17,9 +17,8 @@ Variable              | Description
 `filters`             | A mapping from filter names to filter functions.
 `process_info`        | A function to inspect and process content file info. 
 
-You have to make sure that these names are exported correctly for Urubu to find
-them. For example, if you organize `_python` as a package, it could look as as
-follows:
+You have to make sure that these names are exported correctly.  For example, if
+you organize `_python` as a package, it could look as as follows:
 
 ```
 _python/
@@ -28,7 +27,8 @@ _python/
     hooks.py
 ```
 
-The `__init__.py` file would contain:
+If `filters` is defined in `filters.py`, and `process_info` in `hooks.py`, the
+`__init__.py` file would contain:
 
 ```
 from .filters import filters
@@ -86,9 +86,9 @@ Attribute      | Description
 In addition, all attributes specified in the YAML front matter of the
 corresponding content file are available as attributes of the `info` object.
 
-The `site` and `info` variables are Python dictionaries. This implies that the
-attributes being available through key access, not Python attribute access.
-This is because the YAML reader constructs Python dictionaries from the front
+The `site` and `info` variables are Python dictionaries. This means that the
+attributes are available via key access, not via Python attribute access.  This
+is because the YAML reader constructs Python dictionaries from the front
 matter.
 
 The `process_info` function can can inspect the attributes, verify and modify
@@ -113,8 +113,8 @@ def process_info(info, site):
             info['layout'] = 'page'
 ```
 
-Defining a specific layout for certain pages
---------------------------------------------
+Defining a specific layout 
+--------------------------
 
 Suppose we have a `blog` directory and we want to automatically define a
 specific `post` layout for blog posts:

@@ -109,9 +109,8 @@ predefined names.  The following hooks are defined:</p>
 </tr>
 </tbody>
 </table>
-<p>You have to make sure that these names are exported correctly for Urubu to find
-them. For example, if you organize <code>_python</code> as a package, it could look as as
-follows:</p>
+<p>You have to make sure that these names are exported correctly.  For example, if
+you organize <code>_python</code> as a package, it could look as as follows:</p>
 <div class="codehilite"><pre>_python/
     __init__.py
     filters.py
@@ -119,7 +118,8 @@ follows:</p>
 </pre></div>
 
 
-<p>The <code>__init__.py</code> file would contain:</p>
+<p>If <code>filters</code> is defined in <code>filters.py</code>, and <code>process_info</code> in <code>hooks.py</code>, the
+<code>__init__.py</code> file would contain:</p>
 <div class="codehilite"><pre>from .filters import filters
 from .hooks import process_info
 </pre></div>
@@ -184,9 +184,9 @@ inferred attributes are available:</p>
 </table>
 <p>In addition, all attributes specified in the YAML front matter of the
 corresponding content file are available as attributes of the <code>info</code> object.</p>
-<p>The <code>site</code> and <code>info</code> variables are Python dictionaries. This implies that the
-attributes being available through key access, not Python attribute access.
-This is because the YAML reader constructs Python dictionaries from the front
+<p>The <code>site</code> and <code>info</code> variables are Python dictionaries. This means that the
+attributes are available via key access, not via Python attribute access.  This
+is because the YAML reader constructs Python dictionaries from the front
 matter.</p>
 <p>The <code>process_info</code> function can can inspect the attributes, verify and modify
 them, and add additional ones.</p>
@@ -204,7 +204,7 @@ attribute is not specified in the content file.  Suppose we want a default
 </pre></div>
 
 
-<h3 id="defining-a-specific-layout-for-certain-pages">Defining a specific layout for certain pages</h3>
+<h3 id="defining-a-specific-layout">Defining a specific layout</h3>
 <p>Suppose we have a <code>blog</code> directory and we want to automatically define a
 specific <code>post</code> layout for blog posts:</p>
 <div class="codehilite"><pre>def process_info(info, site):
@@ -237,7 +237,7 @@ def process_post(info):
 <li><a href="#the-process_info-hook">The process_info hook</a></li>
 <li><a href="#process_info-examples">process_info examples</a><ul>
 <li><a href="#defining-a-default-layout">Defining a default layout</a></li>
-<li><a href="#defining-a-specific-layout-for-certain-pages">Defining a specific layout for certain pages</a></li>
+<li><a href="#defining-a-specific-layout">Defining a specific layout</a></li>
 </ul>
 </li>
 </ul>

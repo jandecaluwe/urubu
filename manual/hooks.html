@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Python hooks</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <!-- Bootstrap -->
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet" media="screen">
+
+    <link href="/css/site.css" rel="stylesheet" media="screen">
+    <link href="/css/syntax.css" rel="stylesheet" media="screen">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-48968311-3', 'jandecaluwe.com');
+  ga('send', 'pageview');
+
+</script>
+ 
+  </head>
+
+  <body>
+
+    <!-- Fixed navbar -->
+    <div class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">Urubu</a>
+        </div>
+        <div class="navbar-collapse collapse">
+
+          <ul class="nav navbar-nav navbar-left">
+            <li><a href="/start.html">Overview</a></li>
+            <li class="active"><a href="/manual/">Manual</a></li>
+            <li><a href="/faq/">FAQ</a></li>
+            <li><a href="https://github.com/jandecaluwe/urubu">GitHub</a></li>
+          </ul>
+          <form class="navbar-form navbar-left" action="/search.html" role="search">
+            <div class="form-group">
+              <input type="text" required name="q" id="tipue_search_input" class="form-control" placeholder="Search"> 
+            </div>
+          </form>
+          <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+              <a href="/info/" class="dropdown-toggle" data-toggle="dropdown">Info <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="/info/about.html">About</a></li>
+                <li><a href="/info/sites/">Urubu sites</a></li>
+              </ul>
+            </li>
+          </ul>
+
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+
+
+<div class="container">
+
+  <ol class="breadcrumb">
+    <li><a href="/">Home</a></li>
+      <li><a href="/manual/">Manual</a></li>
+      <li class="active">Python hooks</li>
+  </ol>
+
+  <div class="page-header">
+    <h1>Python hooks</h1>
+  </div>
+
+  <div class="row">
+
+    <div class="content">
+      <div class="col-md-7" role="main">
+      <main>
+        <h2 id="introduction">Introduction</h2>
+<p>Urubu support Python hooks to make templating easier. Upon a build, it tries to
+import a <code>_python</code> module or package, and looks for hook variables with
+predefined names.  The following hooks are defined:</p>
+<table class="table">
+<thead>
+<tr>
+<th>Variable</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>filters</code></td>
+<td>A mapping from filter names to filter functions.</td>
+</tr>
+<tr>
+<td><code>process_info</code></td>
+<td>A function to inspect and process content file info.</td>
+</tr>
+</tbody>
+</table>
+<p>You have to make sure that these names are exported correctly for Urubu to find
+them. For example, if you organize <code>_python</code> as a package, it could look as as
+follows:</p>
+<div class="codehilite"><pre>_python/
+    __init__.py
+    filters.py
+    hooks.py
+</pre></div>
+
+
+<p>The <code>__init__.py</code> file would contain:</p>
+<div class="codehilite"><pre>from .filters import filters
+from .hooks import process_info
+</pre></div>
+
+
+<h2 id="the-filters-hook">The <code>filters</code> hook</h2>
+<p>Filters functions should be defined as <a href="http://jinja.pocoo.org/docs/api/#custom-filters">custom filters in
+Jinja2</a>.</p>
+<p>As a typical example, consider a filter that converts a date value into a
+desired format. The <code>filters.py</code> module would contain the following:</p>
+<div class="codehilite"><pre>def dateformat(value, format=&quot;%d-%b-%Y&quot;):
+    return value.strftime(format)
+
+filters = {}
+filters[&#39;dateformat&#39;] = dateformat
+</pre></div>
+
+
+<p>You can then use the <code>dateformat</code> filter in templates.</p>
+<h2 id="the-process_info-hook">The <code>process_info</code> hook</h2>
+<p>The interface of the <code>process_info</code> function is as follows:</p>
+<div class="codehilite"><pre>def process(info, site):
+    ...
+</pre></div>
+
+
+<p>This function is called for every content file in the project.</p>
+<p>The <code>site</code> variable provides access to the site variables defined in
+<code>_site.yml</code>.</p>
+<p>The <code>info</code> variable contains the file content info as it is being
+constructed by Urubu. At the moment of the call, the following
+inferred attributes are available:</p>
+<table class="table">
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>The unique id by which the object is known in the project.</td>
+</tr>
+<tr>
+<td><code>url</code></td>
+<td>The url of the object.</td>
+</tr>
+<tr>
+<td><code>components</code></td>
+<td>The components of the object's pathname, without file extension, as a list.</td>
+</tr>
+<tr>
+<td><code>fn</code></td>
+<td>The pathname of the file or directory corresponding the object.</td>
+</tr>
+<tr>
+<td><code>mdate</code></td>
+<td>Modification date</td>
+</tr>
+</tbody>
+</table>
+<p>In addition, all attributes specified in the YAML front matter of the
+corresponding content file are available as attributes of the <code>info</code> object.</p>
+<p>The <code>site</code> and <code>info</code> variables are Python dictionaries. This implies that the
+attributes being available through key access, not Python attribute access.
+This is because the YAML reader constructs Python dictionaries from the front
+matter.</p>
+<p>The <code>process_info</code> function can can inspect the attributes, verify and modify
+them, and add additional ones.</p>
+<h2 id="process_info-examples"><code>process_info</code> examples</h2>
+<h3 id="defining-a-default-layout">Defining a default <code>layout</code></h3>
+<p>It can be handy to define a default <code>layout</code> for the case this mandatory
+attribute is not specified in the content file.  Suppose we want a default
+<code>index</code> layout for index files, and a <code>page</code> layout for other files:</p>
+<div class="codehilite"><pre>def process_info(info, site):
+    if &#39;layout&#39; not in info:
+        if info[&#39;components&#39;][-1] == &#39;index&#39;:
+            info[&#39;layout&#39;] = &#39;index&#39;
+        else:
+            info[&#39;layout&#39;] = &#39;page&#39;
+</pre></div>
+
+
+<h3 id="defining-a-specific-layout-for-certain-pages">Defining a specific layout for certain pages</h3>
+<p>Suppose we have a <code>blog</code> directory and we want to automatically define a
+specific <code>post</code> layout for blog posts:</p>
+<div class="codehilite"><pre>def process_info(info, site):
+    components = info[&#39;components&#39;]
+    if len(components) == 2:
+        if components[0] == &#39;blog&#39; and components[1] != &#39;index&#39;:
+            process_post(info)
+
+def process_post(info):
+    if not &#39;layout&#39; in info:
+        info[&#39;layout&#39;] = &#39;post&#39;
+</pre></div>
+      </main>
+      <ul class="pager">
+        <li class="previous"><a href="/manual/templating.html">&larr; Templating</a></li>
+        <li class="next"><a href="/manual/search.html">Adding Search &rarr;</a></li>
+      </ul>
+      </div>
+    </div>
+
+    <div class="col-md-3" role="complementary">
+      <nav class="hidden-print hidden-xs hidden-sm">
+        <div class="sidebar" data-spy="affix" data-offset-top="80" data-offset-bottom="60">
+          <div class="well">
+            <a href="#"><strong>Python hooks</strong></a>
+            <div class="toc">
+<ul>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#the-filters-hook">The filters hook</a></li>
+<li><a href="#the-process_info-hook">The process_info hook</a></li>
+<li><a href="#process_info-examples">process_info examples</a><ul>
+<li><a href="#defining-a-default-layout">Defining a default layout</a></li>
+<li><a href="#defining-a-specific-layout-for-certain-pages">Defining a specific layout for certain pages</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+          </div>
+        </div>
+      </nav>
+    </div>
+
+  </div>
+
+
+    <div class="footer">
+        <div style="margin: 5px">
+<a href="https://twitter.com/share" class="twitter-share-button">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+<!-- Place this tag where you want the +1 button to render. -->
+<div class="g-plusone" data-size="medium"></div>
+
+<!-- Place this tag after the last +1 button tag. -->
+<script type="text/javascript">
+window.__gcfg = {
+    lang: 'en-US'
+};
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/plusone.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>
+
+<script type="text/javascript" src="http://www.reddit.com/static/button/button1.js"></script>        </div>
+        <p> Content licensed under the
+           <a href="http://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA License</a>.
+        </p> 
+        <p>Website powered by <a href="http://urubu.jandecaluwe.com">Urubu</a>.</p>
+    </div>
+
+
+</div>
+
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <!-- <script src="https://code.jquery.com/jquery.js"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+ 
+
+  </body>
+</html>

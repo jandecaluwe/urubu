@@ -117,9 +117,8 @@ Attribute      | Description
 `prev`         | The previous page object in the content, or `None` if there is none
 `next`         | The next page object in the content, or `None` if there is none
 
-In addition, all attributes specified in the YAML front matter
-of the corresponding file are available as attributes of
-the page object.
+In addition, all attributes specified in the YAML front matter of the
+corresponding content file are available as attributes of the page object.
 
 Index pages
 -----------
@@ -197,29 +196,4 @@ will be available as attributes of the `site` variable.
 ------
 
 This variable holds the current page or tag object.
-
-
-Python hooks
-============
-
-Urubu support Python hooks to make templating easier. Upon
-a build, it tries to import a `_python` module or package,
-and looks for hook variables with predefined names. 
-
-Variable              | Description
-----------------------|-------------
-`validators`          | A mapping from layout names to page object validation functions.
-`filters`             | A mapping from filter names to filter functions.
-
-A validator function should be defined with a page object as its argument. It
-can inspect the attributes, verify and possibly modify them, and even add
-additional ones. The appropriate validator function is looked up via the
-`layout` attribute of a page. If it exists, it is run on the page object before
-calling the template. 
-
-Filters functions should be defined as [custom filters in
-Jinja2][jinja2_filters].
-
-[jinja2_filters]: http://jinja.pocoo.org/docs/api/#custom-filters
-
 

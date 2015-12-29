@@ -271,9 +271,8 @@ the folder object.</p>
 </tr>
 </tbody>
 </table>
-<p>In addition, all attributes specified in the YAML front matter
-of the corresponding file are available as attributes of
-the page object.</p>
+<p>In addition, all attributes specified in the YAML front matter of the
+corresponding content file are available as attributes of the page object.</p>
 <h3 id="index-pages">Index pages</h3>
 <p>Index pages are associated with <code>index.md</code> files. They are special in the sense
 that they define the attributes and the content of a folder. Therefore, they
@@ -376,39 +375,10 @@ you can traverse the whole site.</p>
 will be available as attributes of the <code>site</code> variable.</p>
 <h3 id="this"><code>this</code></h3>
 <p>This variable holds the current page or tag object.</p>
-<h2 id="python-hooks">Python hooks</h2>
-<p>Urubu support Python hooks to make templating easier. Upon
-a build, it tries to import a <code>_python</code> module or package,
-and looks for hook variables with predefined names. </p>
-<table class="table">
-<thead>
-<tr>
-<th>Variable</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>validators</code></td>
-<td>A mapping from layout names to page object validation functions.</td>
-</tr>
-<tr>
-<td><code>filters</code></td>
-<td>A mapping from filter names to filter functions.</td>
-</tr>
-</tbody>
-</table>
-<p>A validator function should be defined with a page object as its argument. It
-can inspect the attributes, verify and possibly modify them, and even add
-additional ones. The appropriate validator function is looked up via the
-<code>layout</code> attribute of a page. If it exists, it is run on the page object before
-calling the template. </p>
-<p>Filters functions should be defined as <a href="http://jinja.pocoo.org/docs/api/#custom-filters">custom filters in
-Jinja2</a>.</p>
       </main>
       <ul class="pager">
         <li class="previous"><a href="/manual/building.html">&larr; Project building</a></li>
-        <li class="next"><a href="/manual/search.html">Adding Search &rarr;</a></li>
+        <li class="next"><a href="/manual/hooks.html">Python hooks &rarr;</a></li>
       </ul>
       </div>
     </div>
@@ -435,7 +405,6 @@ Jinja2</a>.</p>
 <li><a href="#this">this</a></li>
 </ul>
 </li>
-<li><a href="#python-hooks">Python hooks</a></li>
 </ul>
 </div>
 

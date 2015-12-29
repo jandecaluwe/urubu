@@ -8,6 +8,7 @@ content:
     - authoring
     - building
     - templating
+    - hooks
     - search
 ---
 

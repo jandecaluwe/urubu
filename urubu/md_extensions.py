@@ -32,6 +32,29 @@ from markdown.inlinepatterns import ReferencePattern, REFERENCE_RE, SHORT_REF_RE
 
 from urubu import UrubuWarning, urubu_warn, UrubuError, _warning, _error
 
+
+def _set_dl_class(tree):
+    for item in tree:
+        if item.tag == 'dl':
+            item.set('class', 'dl-horizontal')
+        _set_dl_class(item)
+
+
+class DLClass(Treeprocessor):
+
+    def run(self, root):
+        _set_dl_class(root)
+        return None
+
+
+class DLClassExtension(Extension):
+
+    """Add 'dl-horizontal' class to definition list elements (for bootstrap)."""
+
+    def extendMarkdown(self, md, md_globals):
+        md.treeprocessors.add('dlclass', DLClass(md), "_end")
+
+
 def _set_table_class(tree):
     for item in tree:
         if item.tag == 'table':

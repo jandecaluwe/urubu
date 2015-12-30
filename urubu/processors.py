@@ -54,6 +54,7 @@ class ContentProcessor(object):
         self.navlist = project.navlist
         self.taglist = project.taglist
         self.site = project.site
+        dlclass = md_extensions.DLClassExtension()
         tableclass = md_extensions.TableClassExtension()
         projectref = md_extensions.ProjectReferenceExtension()
         extractanchors = md_extensions.ExtractAnchorsExtension()
@@ -61,7 +62,7 @@ class ContentProcessor(object):
         # disabling smarty for now...
         # extensions = ['extra', 'codehilite', 'headerid', 'toc', 'smarty', tableclass, projectref]
         extensions = ['extra', 'codehilite', 'toc', 
-                      tableclass, projectref, extractanchors]
+                      dlclass, tableclass, projectref, extractanchors]
         extension_configs = {'codehilite': [('guess_lang', 'False'),
                                             ('linenums', 'False')],
                              'toc': [('baselevel', 2)]

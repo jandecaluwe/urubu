@@ -2,6 +2,7 @@ brand: Urubu
 
 bootswatch: null 
 navbar_inverse: false 
+navbar_right_items: 1
 bootstrap: 3.3.4
 
 keep_files: [ .nojekyll ]
@@ -61,7 +62,7 @@ reflinks:
     virtualenv:
         url: http://www.virtualenv.org/en/latest/virtualenv.html
         title: virtualenv
-    urubu_repo:
+    urubu-repo:
         url: https://github.com/jandecaluwe/urubu
         title: Urubu repo
     tables: 

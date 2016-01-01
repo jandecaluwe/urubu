@@ -20,7 +20,7 @@ under the [content_license].
 Development
 ===========
 
-The Urubu software is developed on [github] in the [urubu_repo].
+The Urubu software is developed on [github] in the [urubu-repo].
 
 The documentation is developed as a website in a `gh-pages` branch in the same
 repo. It can be accessed from the custom domain [urubu.jandecaluwe.com] but it

@@ -4,10 +4,10 @@ layout: home
 content:
     - start 
     - manual 
+    - ref: urubu-quickstart
+      title: Quickstart
     - faq
-    - ref: urubu_repo 
-      title: GitHub 
-    - info 
+    - more 
 tagline:
     A micro CMS for static websites, with a focus on good
     navigation practices.

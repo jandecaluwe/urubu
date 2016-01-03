@@ -153,6 +153,7 @@ class Project(object):
             if any(fnmatch.fnmatch(relpath, ip) for ip in ignore_patterns):
                 continue
 
+            content_found = index_found = False
             for fn in filenames:
                 if fnmatch.fnmatch(fn, pattern):
                     # normalize to convert ./foo into foo
@@ -171,6 +172,7 @@ class Project(object):
                     self.validate_fileinfo(fileinfo)
                     self.add_reflink(fileinfo['id'], fileinfo)
                     if fn == 'index.md':
+                        index_found = True
                         # start from fileinfo of index file
                         navinfo = self.make_navinfo(relpath, fileinfo)
                         self.navlist.append(navinfo)
@@ -179,8 +181,12 @@ class Project(object):
                         # add nav info to tag map
                         self.add_info_to_tagmap(navinfo)
                     else:
+                        content_found = True
                         # add id for non-index files to tag tags
                         self.add_info_to_tagmap(fileinfo)
+            # a folder with content but no index is an error
+            if content_found and not index_found:
+                raise UrubuError(_error.no_index, msg='', fn=relpath) 
 
     def validate_fileinfo(self, info):
         fn = info['fn']
@@ -471,7 +477,6 @@ def build():
     proj = load()
     proj.get_contentinfo()
     proj.resolve_reflinks()
-    # pprint.pprint(proj.site['reflinks'])
     proj.make_breadcrumbs()
     proj.make_pager()
     proj.process_tags()

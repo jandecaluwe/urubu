@@ -70,4 +70,9 @@ def test_undef_ref():
         with raises_kind(UrubuError, _error.undef_ref):
             project.build()
 
+def test_no_index():
+    with cd('no_index'):
+        with raises_kind(UrubuError, _error.no_index):
+            project.build()
+
 

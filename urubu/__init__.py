@@ -64,3 +64,4 @@ _error.undef_key = "Undefined key"
 _error.undef_content = "No 'content' or 'order' specified"
 _error.undef_reflink_key = "Undefined key in site reflink"
 _error.ambig_ref_md = 'Ambiguous reference' 
+_error.no_index = 'Missing index file'

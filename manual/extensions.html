@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Python hooks</title>
+    <title>Markdown extensions</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
     <!-- Bootstrap -->
@@ -76,11 +76,11 @@
   <ol class="breadcrumb">
     <li><a href="/">Home</a></li>
       <li><a href="/manual/">Manual</a></li>
-      <li class="active">Python hooks</li>
+      <li class="active">Markdown extensions</li>
   </ol>
 
   <div class="page-header">
-    <h1>Python hooks</h1>
+    <h1>Markdown extensions</h1>
   </div>
 
   <div class="row">
@@ -89,139 +89,45 @@
       <div class="col-md-7" role="main">
       <main>
         <h2 id="introduction">Introduction</h2>
-<p>Urubu support Python hooks to make templating easier. Upon a build, it tries to
-import a <code>_python</code> module or package, and looks for hook variables with
-predefined names.  The following hooks are defined:</p>
-<table class="table">
-<thead>
-<tr>
-<th>Variable</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>filters</code></td>
-<td>A mapping from filter names to filter functions.</td>
-</tr>
-<tr>
-<td><code>process_info</code></td>
-<td>A function to inspect and process content file info.</td>
-</tr>
-</tbody>
-</table>
-<p>You have to make sure that these names are exported correctly.  For example, if
-you organize <code>_python</code> as a package, it could look as as follows:</p>
-<div class="codehilite"><pre>_python/
-    __init__.py
-    filters.py
-    hooks.py
-</pre></div>
-
-
-<p>If <code>filters</code> is defined in <code>filters.py</code>, and <code>process_info</code> in <code>hooks.py</code>, the
-<code>__init__.py</code> file would contain:</p>
-<div class="codehilite"><pre>from .filters import filters
-from .hooks import process_info
-</pre></div>
-
-
-<h2 id="the-filters-hook">The <code>filters</code> hook</h2>
-<p>Filters functions should be defined as <a href="http://jinja.pocoo.org/docs/api/#custom-filters">custom filters in
-Jinja2</a>.</p>
-<p>As a typical example, consider a filter that converts a date value into a
-desired format. The <code>filters.py</code> module would contain the following:</p>
-<div class="codehilite"><pre>def dateformat(value, format=&quot;%d-%b-%Y&quot;):
-    return value.strftime(format)
-
-filters = {}
-filters[&#39;dateformat&#39;] = dateformat
-</pre></div>
-
-
-<p>You can then use the <code>dateformat</code> filter in templates.</p>
-<h2 id="the-process_info-hook">The <code>process_info</code> hook</h2>
-<p>The interface of the <code>process_info</code> function is as follows:</p>
-<div class="codehilite"><pre>def process(info, site):
-    ...
-</pre></div>
-
-
-<p>This function is called for every content file in the project.</p>
-<p>The <code>site</code> variable provides access to the site variables defined in
-<code>_site.yml</code>.</p>
-<p>The <code>info</code> variable contains the file content info as it is being
-constructed by Urubu. At the moment of the call, the following
-inferred attributes are available:</p>
-<table class="table">
-<thead>
-<tr>
-<th>Attribute</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>id</code></td>
-<td>The unique id by which the object is known in the project.</td>
-</tr>
-<tr>
-<td><code>url</code></td>
-<td>The url of the object.</td>
-</tr>
-<tr>
-<td><code>components</code></td>
-<td>The components of the object's pathname, without file extension, as a list.</td>
-</tr>
-<tr>
-<td><code>fn</code></td>
-<td>The pathname of the file or directory corresponding the object.</td>
-</tr>
-<tr>
-<td><code>mdate</code></td>
-<td>Modification date</td>
-</tr>
-</tbody>
-</table>
-<p>In addition, all attributes specified in the YAML front matter of the
-corresponding content file are available as attributes of the <code>info</code> object.</p>
-<p>The <code>site</code> and <code>info</code> variables are Python dictionaries. This means that the
-attributes are available via key access, not via Python attribute access.  This
-is because the YAML reader constructs Python dictionaries from the front
-matter.</p>
-<p>The <code>process_info</code> function can can inspect the attributes, verify and modify
-them, and add additional ones.</p>
-<h2 id="process_info-examples"><code>process_info</code> examples</h2>
-<h3 id="defining-a-default-layout">Defining a default <code>layout</code></h3>
-<p>It can be handy to define a default <code>layout</code> for the case this mandatory
-attribute is not specified in the content file.  Suppose we want a default
-<code>index</code> layout for index files, and a <code>page</code> layout for other files:</p>
-<div class="codehilite"><pre>def process_info(info, site):
-    if &#39;layout&#39; not in info:
-        if info[&#39;components&#39;][-1] == &#39;index&#39;:
-            info[&#39;layout&#39;] = &#39;index&#39;
-        else:
-            info[&#39;layout&#39;] = &#39;page&#39;
-</pre></div>
-
-
-<h3 id="defining-a-specific-layout">Defining a specific layout</h3>
-<p>Suppose we have a <code>blog</code> directory and we want to automatically define a
-specific <code>post</code> layout for blog posts:</p>
-<div class="codehilite"><pre>def process_info(info, site):
-    components = info[&#39;components&#39;]
-    if len(components) == 2:
-        if components[0] == &#39;blog&#39; and components[1] != &#39;index&#39;:
-            process_post(info)
-
-def process_post(info):
-    if not &#39;layout&#39; in info:
-        info[&#39;layout&#39;] = &#39;post&#39;
-</pre></div>
+<p>Urubu implements a number of Markdown extensions. These extensions do not
+change or extend the Markdown syntax. Rather, they add interesting features by
+processing and rendering the Markdown source in more sophisticated ways. </p>
+<p>The extensions are described in more detail below.</p>
+<h2 id="project-wide-reference-ids">Project-wide reference ids</h2>
+<p>Urubu implements a Markdown extension to resolve project-wide reference ids.
+This means that all pages in the project are automatically available as
+reference ids, and can be referred to using Markdown's syntax for reference
+links.</p>
+<p>This feature is described in more detail in the sections
+<a href="/manual/structure.html#project-wide-reference-ids" title="Project structure">Project-wide reference ids</a> and <a href="/manual/authoring.html#reference-links" title="Authoring">Reference links</a>. It is Urubu's most important extension and a fundamental feature of the
+tool.</p>
+<h2 id="bootstrap-specific-extensions">Bootstrap-specific extensions</h2>
+<p>Urubu is designed to play well with <a href="http://getbootstrap.com" title="Bootstrap">Bootstrap</a>.  To use certain Bootstrap
+features, it has extensions that add Bootstrap classes to certain tags.
+More specifically, the following classes are added:</p>
+<dl class="dl-horizontal">
+<dt>table</dt>
+<dd>Added to the <code>&lt;table&gt;</code> tag. This defines basic styling for tables.</dd>
+<dt>dl-horizontal</dt>
+<dd>Added to the <code>&lt;dl&gt;</code> tag that defines definition lists. This creates 
+a horizontal layout for definition lists in wide viewports.</dd>
+</dl>
+<h2 id="support-for-the-mark-tag">Support for the <code>&lt;mark&gt;</code> tag</h2>
+<p>The html5 specification added <mark>a new tag to highlight text</mark>: the <code>&lt;mark&gt;</code>
+tag. For a good explanation of its purpose and the differences with the
+<code>&lt;strong&gt;</code> and <code>&lt;em&gt;</code> tags, see <a href="http://stackoverflow.com/a/14741437">this answer on Stack Overflow</a>. </p>
+<p>Urubu supports light-weight markup for this tag by taking advantage of a
+redundancy in Markdown. In standard Markdown, you can either use asterisks
+(<code>*</code>) or underscores (<code>_</code>) to indicate emphasis. With the Urubu extension, the
+underscore (<code>_</code>) version is rendered using <code>&lt;mark&gt;</code> instead.</p>
+<p>This is an experimental feature that may be taken out if there are
+serious objections, although at this point there do not seem to be
+disadvantages. To disable the feature, the <code>mark_tag_support</code> variable
+can be set to <code>false</code> in the <code>_site.yml</code> file. </p>
       </main>
       <ul class="pager">
-        <li class="previous"><a href="/manual/templating.html">&larr; Templating</a></li>
-        <li class="next"><a href="/manual/extensions.html">Markdown extensions &rarr;</a></li>
+        <li class="previous"><a href="/manual/hooks.html">&larr; Python hooks</a></li>
+        <li class="next"><a href="/manual/search.html">Adding Search &rarr;</a></li>
       </ul>
       </div>
     </div>
@@ -230,17 +136,13 @@ def process_post(info):
       <nav class="hidden-print hidden-xs hidden-sm">
         <div class="sidebar" data-spy="affix" data-offset-top="80" data-offset-bottom="60">
           <div class="well">
-            <a href="#"><strong>Python hooks</strong></a>
+            <a href="#"><strong>Markdown extensions</strong></a>
             <div class="toc">
 <ul>
 <li><a href="#introduction">Introduction</a></li>
-<li><a href="#the-filters-hook">The filters hook</a></li>
-<li><a href="#the-process_info-hook">The process_info hook</a></li>
-<li><a href="#process_info-examples">process_info examples</a><ul>
-<li><a href="#defining-a-default-layout">Defining a default layout</a></li>
-<li><a href="#defining-a-specific-layout">Defining a specific layout</a></li>
-</ul>
-</li>
+<li><a href="#project-wide-reference-ids">Project-wide reference ids</a></li>
+<li><a href="#bootstrap-specific-extensions">Bootstrap-specific extensions</a></li>
+<li><a href="#support-for-the-mark-tag">Support for the &lt;mark&gt; tag</a></li>
 </ul>
 </div>
 

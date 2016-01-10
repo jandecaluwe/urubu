@@ -11,7 +11,7 @@ entry_points = {
 
 setup(
     name="urubu",
-    version="1.0.0",
+    version="1.1.0",
     url='http://urubu.jandecaluwe.com',
     author='Jan Decaluwe',
     author_email='jan@jandecaluwe.com',

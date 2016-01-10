@@ -80,7 +80,8 @@ class Project(object):
         self.site = {'baseurl': None,
                      'reflinks': {},
                      'link_ext': '.html',
-                     'file_ext': '.html'
+                     'file_ext': '.html',
+                     'mark_tag_support': True
                      }
         self.get_siteinfo()
 

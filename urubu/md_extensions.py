@@ -29,6 +29,7 @@ from markdown import Extension
 from markdown.extensions import toc 
 from markdown.treeprocessors import Treeprocessor
 from markdown.inlinepatterns import ReferencePattern, REFERENCE_RE, SHORT_REF_RE
+from markdown.inlinepatterns import SimpleTagPattern, SMART_EMPHASIS_RE
 
 from urubu import UrubuWarning, urubu_warn, UrubuError, _warning, _error
 
@@ -168,5 +169,13 @@ class ExtractAnchorsExtension(Extension):
 
     def extendMarkdown(self, md, md_globals):
         md.treeprocessors.add('extractanchors', ExtractAnchorsClass(md), "_end")
+
+
+# extension for the <mark> tag
+class MarkTagExtension(Extension):
+    def extendMarkdown(self, md, md_globals):
+        # emphasis2 is the one with underscores, use the smart version
+        md.inlinePatterns['emphasis2'] = SimpleTagPattern(SMART_EMPHASIS_RE, 'mark')
+
 
 

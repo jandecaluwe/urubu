@@ -9,6 +9,7 @@ content:
     - building
     - templating
     - hooks
+    - extensions
     - search
 ---
 

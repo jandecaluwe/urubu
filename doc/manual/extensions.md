@@ -50,7 +50,7 @@ tag. For a good explanation of its purpose and the differences with the
 
 [mark]: http://stackoverflow.com/a/14741437
 
-Urubu supports light-weight markup for this tag by taking advantage of a
+Urubu supports lightweight markup for this tag by taking advantage of a
 redundancy in Markdown. In standard Markdown, you can either use asterisks
 (`*`) or underscores (`_`) to indicate emphasis. With the Urubu extension, the
 underscore (`_`) version is rendered using `<mark>` instead.

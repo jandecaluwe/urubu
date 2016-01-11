@@ -104,21 +104,21 @@
         }, 
         {
             "tags": "", 
+            "text": "I created Urubu to solve a personal problem: how to create and maintain\nwebsites for my projects. I open-sourced it \"in the hope it can be useful\".  On\nthis page I list a number of sites that are powered by Urubu. By others Sigasi Insights - Documentation for Sigasi's tools. For others, by me Vlaamse sofrologen - Site of the flemish sophrologists (in Dutch) Troca Vins Naturels - Natural wines MyHDL MyHDL website - all about MyHDL, for users MyHDL development website - info for MyHDL developers Urubu Urubu Quickstart - the Quickstart companion site for Urubu Urubu Documentation - this site Personal Jan Decaluwe My site about professional activities Jan Decaluwe / Music My music projects Jan Decaluwe / Opinions My opinions, in Dutch", 
+            "title": "Sites powered by Urubu", 
+            "url": "/more/sites.html"
+        }, 
+        {
+            "tags": "", 
             "text": "Author The Urubu software is written by Jan Decaluwe . License The Urubu software is licensed under the GNU Affero General Public License . The content on this documentation website is licensed\nunder the CC-BY-SA License . Development The Urubu software is developed on GitHub in the Urubu repo . The documentation is developed as a website in a gh-pages branch in the same\nrepo. It can be accessed from the custom domain urubu.jandecaluwe.com but it\nis hosted on GitHub Pages . Theme The theme on this website uses the Bootstrap framework,\nand is based on stock Bootstrap . Trivia An urubu is a brazilian vulture. Urubu is also the 10th album of\nAntonio Carlos Jobim, one of my favorite song composers.", 
-            "title": "About", 
+            "title": "About this site", 
             "url": "/more/about.html"
         }, 
         {
             "tags": "", 
-            "text": "GitHub repository Urubu sites About", 
+            "text": "GitHub repository Sites powered by Urubu About this site", 
             "title": "More", 
             "url": "/more/index.html"
-        }, 
-        {
-            "tags": "", 
-            "text": "Urubu Quickstart MyHDL MyHDL development Jan Decaluwe Jan Decaluwe / Music This site (Urubu documentation)", 
-            "title": "Urubu sites", 
-            "url": "/more/sites/index.html"
         }, 
         {
             "tags": "", 

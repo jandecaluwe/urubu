@@ -1,5 +1,5 @@
 ---
-title: About 
+title: About this site 
 layout: page 
 date: 2014-01-10
 ---

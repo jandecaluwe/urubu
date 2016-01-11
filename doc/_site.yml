@@ -89,3 +89,6 @@ reflinks:
     urubu-quickstart:
         url: http://urubu-quickstart.jandecaluwe.com
         title: Urubu Quickstart
+    urubu:
+        url: http://urubu.jandecaluwe.com
+        title: Urubu Documentation 

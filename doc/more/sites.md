@@ -1,11 +1,11 @@
 ---
-title: Sites powered by Urubu
+title: Websites powered by Urubu
 layout: simple_page
 ---
 
 I created Urubu to solve a personal problem: how to create and maintain
 websites for my projects. I open-sourced it "in the hope it can be useful".  On
-this page I list a number of sites that are powered by Urubu.
+this page I list a number of websites that are powered by Urubu.
 
 By others
 =========

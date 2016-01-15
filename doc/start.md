@@ -8,8 +8,8 @@ date: 2014-01-10
 What is Urubu?
 ==============
 
-Urubu is a tool to build static websites. The following sections will help you
-to decide whether it is the right tool for you.
+Urubu is _a tool to build static websites_. The following sections will help
+you to decide whether it is the right tool for you.
 
 Static versus dynamic
 =====================
@@ -53,24 +53,22 @@ structure of a set of similar pages.
 Why Urubu?
 ==========
 
-There is no shortage of static web site generators, including
-a lot of [Python solutions][tool_list].   
+There is no shortage of static web site generators, including a lot of [Python
+solutions][tool_list].   However, these tools are typically blog oriented. If
+your website is primarily a blog, with content in reverse chronological order
+and with good support for tagging and archiving, there are many other solutions
+than Urubu.
 
 [tool_list]: https://wiki.python.org/moin/PythonBlogSoftware#Static
 
-However, these tools are typically blog oriented. If you think of your website
-primarily as blog, with content in reverse chronological order and with good
-support for tagging and archiving, there are probably better solutions than
-Urubu.
-
-On the other hand, if you think of your website as set of logically connected
-content pages, Urubu may be a good choice. Urubu makes it it easy to define a good
-navigation structure, so that a user is never "lost". This is especially
+On the other hand, _if you view your website as a set of logically connected
+content pages, Urubu is an excellent choice_. Urubu makes it it easy to define
+a good navigation structure, so that a user is never "lost". This is especially
 important for technical content.
 
-Of course, it is possible to include a simple blog in an Urubu site.
-Within a folder, you can specify how the content should be ordered using
-an arbitrary key. For a blog, this would be reverse order by date.
+Of course, you can also include a blog in an Urubu site.  Within a folder, you
+can specify how the content should be ordered using an arbitrary key. For a
+blog, this would be reverse order by date.
 
 Urubu's ideal use case
 ======================

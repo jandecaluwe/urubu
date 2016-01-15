@@ -4,8 +4,8 @@ layout: page
 date: 2015-04-30
 ---
 
-Urubu version 0.8
-------------------
+Urubu version 0.8 and higher
+----------------------------
 
 The `urubu serve` command  takes the `baseurl` setting automatically into
 account. 

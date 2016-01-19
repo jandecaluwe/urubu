@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Markdown extensions</title>
+    <title>Templating in pages</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
     <!-- Bootstrap -->
@@ -80,11 +80,11 @@
   <ol class="breadcrumb">
     <li><a href="/">Home</a></li>
       <li><a href="/manual/">Manual</a></li>
-      <li class="active">Markdown extensions</li>
+      <li class="active">Templating in pages</li>
   </ol>
 
   <div class="page-header">
-    <h1>Markdown extensions</h1>
+    <h1>Templating in pages</h1>
   </div>
 
   <div class="row">
@@ -92,46 +92,116 @@
     <div class="content">
       <div class="col-md-6" role="main">
       <main>
-        <h2 id="introduction">Introduction</h2>
-<p>Urubu implements a number of Markdown extensions. These extensions do not
-change or extend the Markdown syntax. Rather, they add interesting features by
-processing and rendering the Markdown source in more sophisticated ways. </p>
-<p>The extensions are described in more detail below.</p>
-<h2 id="project-wide-reference-ids">Project-wide reference ids</h2>
-<p>Urubu implements a Markdown extension to resolve project-wide reference ids.
-This means that all pages in the project are automatically available as
-reference ids, and can be referred to using Markdown's syntax for reference
-links.</p>
-<p>This feature is described in more detail in the sections
-<a href="/manual/structure.html#project-wide-reference-ids" title="Project structure">Project-wide reference ids</a> and <a href="/manual/authoring.html#reference-links" title="Authoring">Reference links</a>. It is Urubu's most important extension and a fundamental feature of the
-tool.</p>
-<h2 id="bootstrap-specific-extensions">Bootstrap-specific extensions</h2>
-<p>Urubu is designed to play well with <a href="http://getbootstrap.com" title="Bootstrap">Bootstrap</a>.  To use certain Bootstrap
-features, it has extensions that add Bootstrap classes to certain tags.
-More specifically, the following classes are added:</p>
-<dl class="dl-horizontal">
-<dt>table</dt>
-<dd>Added to the <code>&lt;table&gt;</code> tag. This defines basic styling for tables.</dd>
-<dt>dl-horizontal</dt>
-<dd>Added to the <code>&lt;dl&gt;</code> tag that defines definition lists. This creates 
-a horizontal layout for definition lists in wide viewports.</dd>
-</dl>
-<h2 id="support-for-the-mark-tag">Support for the <code>&lt;mark&gt;</code> tag</h2>
-<p>The html5 specification added <mark>a new tag to highlight text</mark>: the <code>&lt;mark&gt;</code>
-tag. For a good explanation of its purpose and the differences with the
-<code>&lt;strong&gt;</code> and <code>&lt;em&gt;</code> tags, see <a href="http://stackoverflow.com/a/14741437">this answer on Stack Overflow</a>. </p>
-<p>Urubu supports lightweight markup for this tag by taking advantage of a
-redundancy in Markdown. In standard Markdown, you can either use asterisks
-(<code>*</code>) or underscores (<code>_</code>) to indicate emphasis. With the Urubu extension, the
-underscore (<code>_</code>) version is rendered using <code>&lt;mark&gt;</code> instead.</p>
-<p>This is an experimental feature that may be taken out if there are
-serious objections, although at this point there do not seem to be
-disadvantages. To disable the feature, the <code>mark_tag_support</code> variable
-can be set to <code>false</code> in the <code>_site.yml</code> file. </p>
+        <h2 id="overview">Overview</h2>
+<p>Writing in Markdown is great, but sometimes you will run into limitations. For
+those cases, Urubu supports a feature gratefully borrowed from <a href="http://jekyllrb.com" title="Jekyll">Jekyll</a>: using
+templating constructs in content pages.</p>
+<p>Basically, all content pages are processed by the templating engine before
+going to the Markdown processor. The full power of <a href="http://jinja.pocoo.org" title="Jinja2">Jinja2</a> is thus available
+in your content pages. </p>
+<h2 id="usage">Usage</h2>
+<p>The usage of templating constructs in content pages is best described with a
+number of examples.</p>
+<h3 id="task-list-icons">Task list icons</h3>
+<p>Suppose you want to emulate <a href="http://www.github.com" title="GitHub">GitHub</a> style task lists, as follows:</p>
+<ul>
+<li><i class="fa fa-square-o"> </i> Task 1</li>
+<li><i class="fa fa-check-square-o"></i> Task 2</li>
+<li><i class="fa fa-square-o"> </i> Task 1</li>
+</ul>
+<p>An icon is used to show whether a task is still open or not. </p>
+<p>We can support this by defining well-named reusable variables in a dedicated
+layout file, as follows:</p>
+<div class="codehilite"><pre>{% set open = &#39;&lt;i class=&quot;fa fa-square-o&quot;&gt; &lt;/i&gt;&#39; %}
+{% set done = &#39;&lt;i class=&quot;fa fa-check-square-o&quot;&gt;&lt;/i&gt;&#39; %}
+</pre></div>
+
+
+<p>Variables <code>open</code> and <code>done</code> now hold HTML that refer to icons. In these
+examples, I use the <a href="http://fortawesome.github.io/Font-Awesome" title="Font Awesome">Font Awesome</a> icon  library. You will need to add the
+appropriate reference to the icon stylesheet in your base template. </p>
+<p>Suppose these variables are defined in the file <code>_layouts/util.html</code>. We can
+import them in any content page as follows:</p>
+<div class="codehilite"><pre>{% from &#39;util.html&#39; import open, done %}
+</pre></div>
+
+
+<p>Note that Urubu knows to look up <code>util.html</code> in the <code>_layouts/</code> directory,
+because that is where templates should be located. </p>
+<p>Within the content page, we can use the variables as follows, to give the
+results as above:</p>
+<div class="codehilite"><pre>* {{ open }} Task 1
+* {{ done }} Task 2
+* {{ open }} Task 1
+</pre></div>
+
+
+<h3 id="general-icon-interface">General icon interface</h3>
+<p>Suppose you want a more general interface to icons, so that you can easily
+refer to any icon by name. This can be done by using a Jinja2 macro. A macro
+is like a function that can take parameters:</p>
+<div class="codehilite"><pre>{% macro fa(name, class=&#39;&#39;) %}
+&lt;i class=&quot;fa fa-{{name}} {{class}}&quot;&gt;&lt;/i&gt;
+{% endmacro %}
+</pre></div>
+
+
+<p>Again, we can import the macro <code>fa</code> in content pages:</p>
+<div class="codehilite"><pre>{% from &#39;util.html&#39; import fa %}
+</pre></div>
+
+
+<p>Then we can use it as follows, for example to refer to the Github icon:</p>
+<div class="codehilite"><pre>{{ fa(&#39;github&#39;) }}
+</pre></div>
+
+
+<p>This gives the following result:</p>
+<p><i class="fa fa-github "></i></p>
+<p>We can pass additional CSS classes via the optional <code>class</code> parameter. The
+following example gets the alternative Github icon in twice the basic size:</p>
+<div class="codehilite"><pre>{{ fa(&#39;github-alt&#39;, &#39;fa-2x&#39;) }}
+</pre></div>
+
+
+<p>This gives the following result:</p>
+<p><i class="fa fa-github-alt fa-2x"></i></p>
+<h3 id="figure">Figure</h3>
+<p>Standard Markdown does not support the HTML5 <code>&lt;figure&gt;</code> tag, and the related
+<code>&lt;figcaption&gt;</code> tag to add captions. We can support this with the
+following macro:</p>
+<div class="codehilite"><pre>{% macro figure(fn, caption=&#39;&#39;) %}
+&lt;figure&gt;
+  &lt;img src=&quot;/img/{{fn}}&quot; class=&quot;img-responsive&quot; alt=&quot;{{caption}}&quot;&gt;
+  {% if caption %}
+  &lt;figcaption class=&quot;text-center&quot;&gt;{{caption}}&lt;/figcaption&gt;
+  {% endif %}
+&lt;/figure&gt;
+{% endmacro %}
+</pre></div>
+
+
+<p>This macro assumes that images will be places in an 'img/' directory. In
+addition, it makes the image responsive using a Bootstrap class, and centers
+the optional caption.  Again, we can use the macro by importing:</p>
+<div class="codehilite"><pre>{% from &#39;util.html&#39; import figure %}
+</pre></div>
+
+
+<p>This is an example usage:</p>
+<div class="codehilite"><pre>{{ figure(&#39;urubu.jpg&#39;, &quot;An Urubu - a brazilian vulture&quot;) }}
+</pre></div>
+
+
+<p>This gives the following result:</p>
+<figure>
+  <img src="/img/urubu.jpg" class="img-responsive" alt="An Urubu - a brazilian vulture">
+  <figcaption class="text-center">An Urubu - a brazilian vulture</figcaption>
+</figure>
       </main>
       <ul class="pager">
-        <li class="previous"><a href="/manual/hooks.html">&larr; Python hooks</a></li>
-        <li class="next"><a href="/manual/search.html">Adding Search &rarr;</a></li>
+        <li class="previous"><a href="/manual/templates.html">&larr; Templates</a></li>
+        <li class="next"><a href="/manual/hooks.html">Python hooks &rarr;</a></li>
       </ul>
       </div>
     </div>
@@ -140,13 +210,16 @@ can be set to <code>false</code> in the <code>_site.yml</code> file. </p>
       <nav class="hidden-print hidden-xs hidden-sm">
         <div class="sidebar" data-spy="affix" data-offset-top="80" data-offset-bottom="60">
           <div class="well">
-            <a href="#"><strong>Markdown extensions</strong></a>
+            <a href="#"><strong>Templating in pages</strong></a>
             <div class="toc">
 <ul>
-<li><a href="#introduction">Introduction</a></li>
-<li><a href="#project-wide-reference-ids">Project-wide reference ids</a></li>
-<li><a href="#bootstrap-specific-extensions">Bootstrap-specific extensions</a></li>
-<li><a href="#support-for-the-mark-tag">Support for the &lt;mark&gt; tag</a></li>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#usage">Usage</a><ul>
+<li><a href="#task-list-icons">Task list icons</a></li>
+<li><a href="#general-icon-interface">General icon interface</a></li>
+<li><a href="#figure">Figure</a></li>
+</ul>
+</li>
 </ul>
 </div>
 

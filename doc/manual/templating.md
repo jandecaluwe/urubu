@@ -29,13 +29,8 @@ constructs. Template programming is good for common tasks like the following:
 * comparing the loop item object with the current object, to check whether it is active
 
 Urubu interacts with templates by providing an evaluation context with the
-appropriate objects with a number of attributes.  The goal is to make the job
-of the templates as easy as possible with ready-to-use attributes. 
-
-Urubu supports Python hooks that make the task of the template easier.
-You can define validators that validate and possibly change an
-item before passing it to the template. Also, you can define custom filters
-that for use by the templates.
+appropriate objects.  The goal is to make the job of the templates as easy as
+possible with ready-to-use object attributes. 
 
 The template library
 ====================

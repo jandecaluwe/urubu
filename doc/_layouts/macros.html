@@ -1,0 +1,8 @@
+{% macro figure(fn, caption='') %}
+<figure>
+  <img src="/img/{{fn}}" class="img-responsive" alt="{{caption}}">
+  {% if caption %}
+  <figcaption>{{caption}}</figcaption>
+  {% endif %}
+</figure>
+{% endmacro %}

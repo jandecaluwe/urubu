@@ -65,6 +65,7 @@ the `<head` and the `<body>` section respectively. The `search.html` layout is
 then as follows:  
 
 ```
+{% raw %}
 {% extends "page.html" %}
 
 {% block head_addon %}
@@ -84,6 +85,7 @@ $(document).ready(function() {
 });
 </script>
 {% endblock %}
+{% endraw %}
 ```
 
 We inherit from a `page.html` layout. In the `head_addon` block, we add

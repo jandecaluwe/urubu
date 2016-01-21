@@ -92,3 +92,6 @@ reflinks:
     urubu:
         url: http://urubu.jandecaluwe.com
         title: Urubu Documentation 
+    font-awesome:
+        url: http://fortawesome.github.io/Font-Awesome
+        title: Font Awesome

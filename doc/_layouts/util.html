@@ -1,0 +1,19 @@
+{# task list icons #} 
+{% set open = '<i class="fa fa-square-o"></i>' %}
+{% set done = '<i class="fa fa-check-square-o"></i>' %}
+
+{# general font awesome icon interface #}
+{% macro fa(name, class='') %}
+<i class="fa fa-{{name}} {{class}}"></i>
+{% endmacro %}
+
+{# figure support #}
+{% macro figure(fn, caption='') %}
+<figure>
+  <img src="/img/{{fn}}" class="img-responsive" alt="{{caption}}">
+  {% if caption %}
+  <figcaption class="text-center">{{caption}}</figcaption>
+  {% endif %}
+</figure>
+{% endmacro %}
+

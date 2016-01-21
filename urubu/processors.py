@@ -18,7 +18,7 @@
 # Python 3 idioms
 from __future__ import unicode_literals
 from io import open
-import os, json, itertools
+import os, sys, json, itertools
 
 import markdown
 import logging
@@ -106,6 +106,13 @@ class ContentProcessor(object):
             with open(fn, encoding='utf-8-sig') as inf:
                 src = skip_yamlfm(inf)
             self.md.this = info
+            # first process as a template
+            try:
+                templ = self.env.from_string(src)
+                src = templ.render(this=info, site=self.site)
+            except:
+                exc, msg, tb = sys.exc_info()
+                raise UrubuError(str(exc), msg=msg, fn=fn)
             self.md.toc = ''
             info['body'] = self.md.convert(src)
             info['toc'] = ''

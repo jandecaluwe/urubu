@@ -1,5 +1,5 @@
 ---
-title: Templating 
+title: Templates
 layout: page 
 pager: true
 author: Jan Decaluwe
@@ -128,6 +128,7 @@ Tag objects
 Tag objects are inferred by Urubu automatically. They list the content
 corresponding to a tag.
 
+{% raw %}
 Attribute      | Description 
 ---------------|---------------------------
 `id`           | `/tag/{{tag}}`
@@ -136,6 +137,7 @@ Attribute      | Description
 `tag`          | `tag`
 `layout`       | `tag`  
 `content`      | List of page & folder objects corresponding to `tag`. 
+{% endraw %}
 
 The tag content is ordered by date, most recent first. If the date is not
 defined, the modification date is used as a fallback (`mdate` attribute).

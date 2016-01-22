@@ -18,11 +18,12 @@ Basically, all content pages are processed by the templating engine before
 going to the Markdown processor. The full power of [jinja2] is thus available
 in your content pages. 
 
-Usage
-=====
+The usage of templating constructs in content pages is best explained with
+examples. So we will show some examples first, and review the concepts
+afterwards.
 
-The usage of templating constructs in content pages is best described with a
-number of examples.
+Example usage
+=============
 
 Task list icons
 ---------------
@@ -161,4 +162,76 @@ This is an example usage:
 This gives the following result:
 
 {{ figure('urubu.jpg', "An Urubu - a brazilian vulture") }}
+
+Templating concepts
+===================
+
+Template processing is done first
+---------------------------------
+
+The examples illustrate how you can use template variables and macros to
+construct HTML code. However, it is important to understand that template
+processing is done first, before Markdown processing (for good reasons).  Thus,
+the HTML code from variables and macros first becomes part of Markdown source
+code.  This works well because Markdown is designed to handle HTML
+transparently.
+
+Full template power available
+-----------------------------
+
+The examples demonstrate the use of variables, macros, and imports.  This is
+merely the beginning: in fact, the full power of Jinja2 templates is available.
+This is a vast subject. To learn what is possible, see the [Jinja2 Template
+Designer Documentation][jinja2_templates].
+
+Context variables
+-----------------
+
+Certain context variables are automatically available in a page.  It works
+exactly like for regular templates, as described in [/manual/templates#Context
+Variables]. Basically, variable `this` provides access to the page attributes,
+and variable `site` provides access to the global site attributes. 
+
+Template delimiters
+-------------------
+
+Template support introduces new delimiters as follows:
+
+{% raw -%}
+* `{# ... #}` for comments not included in the output
+* `{{ ... }}` for expressions, to print to the output
+* `{% ... %}` for statements
+{% endraw %}
+
+These delimiters deserve some attention.
+
+{# Now commenting about comments #} 
+
+First, the comment delimiters are interesting because they add a functionality
+that is not available in Markdown: comments that will not show up in the
+output.
+
+Secondly, as always with delimiters, there is the problem of how to
+escape them if you want to use them literally in source code,
+without interpretation.
+
+For an inline literal or snippet you can use literal expressions.  For example,
+to get `{{ '{{' }}` you can use {% raw %} `{{ '{{' }}` {% endraw %}.   
+
+For a larger section, you can mark a block *raw*, as follows:
+
+```
+{{ '{% raw %}' }}
+{% raw -%}
+* `{# ... #}` for comments not included in the output
+* `{{ ... }}` for expressions, to print to the output
+* `{% ... %}` for statements
+{% endraw %}
+{{ '{% endraw %}' }}
+```
+
+[jinja2_templates]: http://jinja.pocoo.org/docs/dev/templates
+
+
+
 

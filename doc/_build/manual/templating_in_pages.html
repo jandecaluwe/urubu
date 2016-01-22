@@ -99,9 +99,10 @@ templating constructs in content pages.</p>
 <p>Basically, all content pages are processed by the templating engine before
 going to the Markdown processor. The full power of <a href="http://jinja.pocoo.org" title="Jinja2">Jinja2</a> is thus available
 in your content pages. </p>
-<h2 id="usage">Usage</h2>
-<p>The usage of templating constructs in content pages is best described with a
-number of examples.</p>
+<p>The usage of templating constructs in content pages is best explained with
+examples. So we will show some examples first, and review the concepts
+afterwards.</p>
+<h2 id="example-usage">Example usage</h2>
 <h3 id="task-list-icons">Task list icons</h3>
 <p>Suppose you want to emulate <a href="http://www.github.com" title="GitHub">GitHub</a> style task lists, as follows:</p>
 <ul>
@@ -198,6 +199,47 @@ the optional caption.  Again, we can use the macro by importing:</p>
   <img src="/img/urubu.jpg" class="img-responsive" alt="An Urubu - a brazilian vulture">
   <figcaption class="text-center">An Urubu - a brazilian vulture</figcaption>
 </figure>
+
+<h2 id="templating-concepts">Templating concepts</h2>
+<h3 id="template-processing-is-done-first">Template processing is done first</h3>
+<p>The examples illustrate how you can use template variables and macros to
+construct HTML code. However, it is important to understand that template
+processing is done first, before Markdown processing (for good reasons).  Thus,
+the HTML code from variables and macros first becomes part of Markdown source
+code.  This works well because Markdown is designed to handle HTML
+transparently.</p>
+<h3 id="full-template-power-available">Full template power available</h3>
+<p>The examples demonstrate the use of variables, macros, and imports.  This is
+merely the beginning: in fact, the full power of Jinja2 templates is available.
+This is a vast subject. To learn what is possible, see the <a href="http://jinja.pocoo.org/docs/dev/templates">Jinja2 Template
+Designer Documentation</a>.</p>
+<h3 id="context-variables">Context variables</h3>
+<p>Certain context variables are automatically available in a page.  It works
+exactly like for regular templates, as described in <a href="/manual/templates.html#context-variables" title="Templates">Context Variables</a>. Basically, variable <code>this</code> provides access to the page attributes,
+and variable <code>site</code> provides access to the global site attributes. </p>
+<h3 id="template-delimiters">Template delimiters</h3>
+<p>Template support introduces new delimiters as follows:</p>
+<ul>
+<li><code>{# ... #}</code> for comments not included in the output</li>
+<li><code>{{ ... }}</code> for expressions, to print to the output</li>
+<li><code>{% ... %}</code> for statements</li>
+</ul>
+<p>These delimiters deserve some attention.</p>
+<p>First, the comment delimiters are interesting because they add a functionality
+that is not available in Markdown: comments that will not show up in the
+output.</p>
+<p>Secondly, as always with delimiters, there is the problem of how to
+escape them if you want to use them literally in source code,
+without interpretation.</p>
+<p>For an inline literal or snippet you can use literal expressions.  For example,
+to get <code>{{</code> you can use  <code>{{ '{{' }}</code> .   </p>
+<p>For a larger section, you can mark a block <em>raw</em>, as follows:</p>
+<div class="codehilite"><pre>{% raw %}
+* `{# ... #}` for comments not included in the output
+* `{{ ... }}` for expressions, to print to the output
+* `{% ... %}` for statements
+{% endraw %}
+</pre></div>
       </main>
       <ul class="pager">
         <li class="previous"><a href="/manual/templates.html">&larr; Templates</a></li>
@@ -214,10 +256,17 @@ the optional caption.  Again, we can use the macro by importing:</p>
             <div class="toc">
 <ul>
 <li><a href="#overview">Overview</a></li>
-<li><a href="#usage">Usage</a><ul>
+<li><a href="#example-usage">Example usage</a><ul>
 <li><a href="#task-list-icons">Task list icons</a></li>
 <li><a href="#general-icon-interface">General icon interface</a></li>
 <li><a href="#figure">Figure</a></li>
+</ul>
+</li>
+<li><a href="#templating-concepts">Templating concepts</a><ul>
+<li><a href="#template-processing-is-done-first">Template processing is done first</a></li>
+<li><a href="#full-template-power-available">Full template power available</a></li>
+<li><a href="#context-variables">Context variables</a></li>
+<li><a href="#template-delimiters">Template delimiters</a></li>
 </ul>
 </li>
 </ul>

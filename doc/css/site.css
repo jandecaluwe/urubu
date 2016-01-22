@@ -1,3 +1,9 @@
+.urubu {
+  background-image: url("../img/urubu_cover.png");
+  background-size: cover;
+  color: white;
+}
+
 body {
   position: relative;
   padding-top: 50px;

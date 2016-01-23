@@ -1,11 +1,16 @@
 ---
-title: Templating in pages
+title: Templating constructs in pages
 layout: page 
 pager: true
 author: Jan Decaluwe
 ---
 
 {% from 'util.html' import open, done, fa, figure %}
+
+This feature is currently under consideration and development.  Please test it
+from the [master branch](https://github.com/jandecaluwe/urubu) in Github, and
+[provide feedback](https://github.com/jandecaluwe/urubu/issues/37). 
+{: .lead .bg-warning}
 
 Overview
 ========
@@ -19,7 +24,7 @@ going to the Markdown processor. The full power of [jinja2] is thus available
 in your content pages. 
 
 The usage of templating constructs in content pages is best explained with
-examples. So we will show some examples first, and review the concepts
+examples. Therefore, we will start with some examples, and review the concepts
 afterwards.
 
 Example usage
@@ -46,7 +51,7 @@ template file, as follows:
 {% endraw %}
 ```
 
-Variables `open` and `done` now hold HTML that refer to icons. In these
+Variables `open` and `done` now hold HTML code that refers to icons. In these
 examples, I use the [font-awesome] icon  library. You will need to add the
 appropriate reference to the icon stylesheet in your base template. 
 
@@ -125,8 +130,8 @@ Figure
 ------
 
 Standard Markdown does not support the HTML5 `<figure>` tag, and the related
-`<figcaption>` tag to add captions. We can support this with the
-following macro:
+`<figcaption>` tag to add captions. We can support this with the following
+macro:
 
 ```
 {% raw %}
@@ -187,10 +192,11 @@ Designer Documentation][jinja2_templates].
 Context variables
 -----------------
 
-Certain context variables are automatically available in a page.  It works
-exactly like for regular templates, as described in [/manual/templates#Context
-Variables]. Basically, variable `this` provides access to the page attributes,
-and variable `site` provides access to the global site attributes. 
+When Urubu invokes template processing on a page, it automatically passes
+certain context variables.  This works exactly like for regular templates, as
+described in [/manual/templates#Context Variables]. Basically, variable `this`
+provides access to the page attributes, and variable `site` provides access to
+the global site attributes. 
 
 Template delimiters
 -------------------
@@ -211,14 +217,14 @@ First, the comment delimiters are interesting because they add a functionality
 that is not available in Markdown: comments that will not show up in the
 output.
 
-Secondly, as always with delimiters, there is the problem of how to
-escape them if you want to use them literally in source code,
-without interpretation.
+Secondly, as always with delimiters, there is the problem of how to escape them
+if you want to use them literally in source code, without interpretation.
 
 For an inline literal or snippet you can use literal expressions.  For example,
-to get `{{ '{{' }}` you can use {% raw %} `{{ '{{' }}` {% endraw %}.   
+to get `{{ '{{' }}` you can write {% raw %} `{{ '{{' }}` {% endraw %}.   
 
-For a larger section, you can mark a block *raw*, as follows:
+For a larger section, you can mark a block *raw*. For example, to
+get the list shown earlier in this section, you can write:
 
 ```
 {{ '{% raw %}' }}
@@ -231,7 +237,5 @@ For a larger section, you can mark a block *raw*, as follows:
 ```
 
 [jinja2_templates]: http://jinja.pocoo.org/docs/dev/templates
-
-
 
 

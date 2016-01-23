@@ -8,8 +8,8 @@ author: Jan Decaluwe
 Introduction
 =============
 
-Urubu support Python hooks to make templating easier. Upon a build, it tries to
-import a `_python` module or package, and looks for hook variables with
+Urubu supports Python hooks to make templating easier. Upon a build, it tries
+to import a `_python` module or package, and looks for hook variables with
 predefined names.  The following hooks are defined:
 
 Variable              | Description

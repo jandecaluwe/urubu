@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Templating in pages</title>
+    <title>Templating constructs in pages</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
     <!-- Bootstrap -->
@@ -80,11 +80,11 @@
   <ol class="breadcrumb">
     <li><a href="/">Home</a></li>
       <li><a href="/manual/">Manual</a></li>
-      <li class="active">Templating in pages</li>
+      <li class="active">Templating constructs in pages</li>
   </ol>
 
   <div class="page-header">
-    <h1>Templating in pages</h1>
+    <h1>Templating constructs in pages</h1>
   </div>
 
   <div class="row">
@@ -92,7 +92,10 @@
     <div class="content">
       <div class="col-md-6" role="main">
       <main>
-        <h2 id="overview">Overview</h2>
+        <p class="lead bg-warning">This feature is currently under consideration and development.  Please test it
+from the <a href="https://github.com/jandecaluwe/urubu">master branch</a> in Github, and
+<a href="https://github.com/jandecaluwe/urubu/issues/37">provide feedback</a>. </p>
+<h2 id="overview">Overview</h2>
 <p>Writing in Markdown is great, but sometimes you will run into limitations. For
 those cases, Urubu supports a feature gratefully borrowed from <a href="http://jekyllrb.com" title="Jekyll">Jekyll</a>: using
 templating constructs in content pages.</p>
@@ -100,7 +103,7 @@ templating constructs in content pages.</p>
 going to the Markdown processor. The full power of <a href="http://jinja.pocoo.org" title="Jinja2">Jinja2</a> is thus available
 in your content pages. </p>
 <p>The usage of templating constructs in content pages is best explained with
-examples. So we will show some examples first, and review the concepts
+examples. Therefore, we will start with some examples, and review the concepts
 afterwards.</p>
 <h2 id="example-usage">Example usage</h2>
 <h3 id="task-list-icons">Task list icons</h3>
@@ -118,7 +121,7 @@ template file, as follows:</p>
 </pre></div>
 
 
-<p>Variables <code>open</code> and <code>done</code> now hold HTML that refer to icons. In these
+<p>Variables <code>open</code> and <code>done</code> now hold HTML code that refers to icons. In these
 examples, I use the <a href="http://fortawesome.github.io/Font-Awesome" title="Font Awesome">Font Awesome</a> icon  library. You will need to add the
 appropriate reference to the icon stylesheet in your base template. </p>
 <p>Suppose these variables are defined in the file <code>_layouts/util.html</code>. We can
@@ -169,8 +172,8 @@ following example gets the alternative Github icon in twice the basic size:</p>
 <p><i class="fa fa-github-alt fa-2x"></i></p>
 <h3 id="figure">Figure</h3>
 <p>Standard Markdown does not support the HTML5 <code>&lt;figure&gt;</code> tag, and the related
-<code>&lt;figcaption&gt;</code> tag to add captions. We can support this with the
-following macro:</p>
+<code>&lt;figcaption&gt;</code> tag to add captions. We can support this with the following
+macro:</p>
 <div class="codehilite"><pre>{% macro figure(fn, caption=&#39;&#39;) %}
 &lt;figure&gt;
   &lt;img src=&quot;/img/{{fn}}&quot; class=&quot;img-responsive&quot; alt=&quot;{{caption}}&quot;&gt;
@@ -214,9 +217,11 @@ merely the beginning: in fact, the full power of Jinja2 templates is available.
 This is a vast subject. To learn what is possible, see the <a href="http://jinja.pocoo.org/docs/dev/templates">Jinja2 Template
 Designer Documentation</a>.</p>
 <h3 id="context-variables">Context variables</h3>
-<p>Certain context variables are automatically available in a page.  It works
-exactly like for regular templates, as described in <a href="/manual/templates.html#context-variables" title="Templates">Context Variables</a>. Basically, variable <code>this</code> provides access to the page attributes,
-and variable <code>site</code> provides access to the global site attributes. </p>
+<p>When Urubu invokes template processing on a page, it automatically passes
+certain context variables.  This works exactly like for regular templates, as
+described in <a href="/manual/templates.html#context-variables" title="Templates">Context Variables</a>. Basically, variable <code>this</code>
+provides access to the page attributes, and variable <code>site</code> provides access to
+the global site attributes. </p>
 <h3 id="template-delimiters">Template delimiters</h3>
 <p>Template support introduces new delimiters as follows:</p>
 <ul>
@@ -228,12 +233,12 @@ and variable <code>site</code> provides access to the global site attributes. </
 <p>First, the comment delimiters are interesting because they add a functionality
 that is not available in Markdown: comments that will not show up in the
 output.</p>
-<p>Secondly, as always with delimiters, there is the problem of how to
-escape them if you want to use them literally in source code,
-without interpretation.</p>
+<p>Secondly, as always with delimiters, there is the problem of how to escape them
+if you want to use them literally in source code, without interpretation.</p>
 <p>For an inline literal or snippet you can use literal expressions.  For example,
-to get <code>{{</code> you can use  <code>{{ '{{' }}</code> .   </p>
-<p>For a larger section, you can mark a block <em>raw</em>, as follows:</p>
+to get <code>{{</code> you can write  <code>{{ '{{' }}</code> .   </p>
+<p>For a larger section, you can mark a block <em>raw</em>. For example, to
+get the list shown earlier in this section, you can write:</p>
 <div class="codehilite"><pre>{% raw %}
 * `{# ... #}` for comments not included in the output
 * `{{ ... }}` for expressions, to print to the output
@@ -252,7 +257,7 @@ to get <code>{{</code> you can use  <code>{{ '{{' }}</code> .   </p>
       <nav class="hidden-print hidden-xs hidden-sm">
         <div class="sidebar" data-spy="affix" data-offset-top="80" data-offset-bottom="60">
           <div class="well">
-            <a href="#"><strong>Templating in pages</strong></a>
+            <a href="#"><strong>Templating constructs in pages</strong></a>
             <div class="toc">
 <ul>
 <li><a href="#overview">Overview</a></li>

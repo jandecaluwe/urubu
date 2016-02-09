@@ -187,7 +187,7 @@ class Project(object):
                         self.add_info_to_tagmap(fileinfo)
             # a folder with content but no index is an error
             if content_found and not index_found:
-                raise UrubuError(_error.no_index, msg='', fn=relpath) 
+                raise UrubuError(_error.no_index, msg='', fn=relpath)
 
     def validate_fileinfo(self, info):
         fn = info['fn']
@@ -212,6 +212,9 @@ class Project(object):
         # title
         if 'title' not in info:
             raise UrubuError(_error.undef_info, msg='title', fn=fn)
+        # make sure title is a string (and not an integer for example)
+        # this matters for the json dump for search
+        info['title'] = str(info['title'])
         # date
         if 'date' in info:
             if not isinstance(info['date'], datetime.date):
@@ -252,7 +255,7 @@ class Project(object):
         # start from fileinfo of index file
         info = fileinfo.copy()
         # overwrite attributes according to navinfo view
-        info['indexfn'] = info['fn'] 
+        info['indexfn'] = info['fn']
         info['fn'] = relpath
         info['components'] = components = get_components(relpath)
         info['id'] = make_id(components)
@@ -300,7 +303,7 @@ class Project(object):
         reflinks = self.site['reflinks']
         ref = ref.lower()
         path = os.path.normpath(os.path.join(info['fn'], ref))
-        indexfn = info['indexfn'] 
+        indexfn = info['indexfn']
         id = make_id(get_components(path, hasext=False))
         if ref in reflinks:
             if (ref != id) and (id in reflinks):
@@ -428,7 +431,7 @@ class Project(object):
         for info in self.filelist:
             for ar in info['_anchorrefs']:
                 if not ar in self.anchors:
-                    urubu_warn(_warning.undef_anchor, msg=ar, fn=info['id'] ) 
+                    urubu_warn(_warning.undef_anchor, msg=ar, fn=info['id'] )
 
     def make_site(self):
         """Make the site."""
@@ -454,7 +457,7 @@ class Project(object):
             sp = os.path.join(sitedir, fn)
             if os.path.isfile(wp):
                 shutil.copyfile(wp, sp)
-      
+
         # make tag index dirs
         if self.taglist:
             tagpath = os.path.join(sitedir, tagdir)

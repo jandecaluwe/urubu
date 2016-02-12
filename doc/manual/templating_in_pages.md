@@ -7,16 +7,11 @@ author: Jan Decaluwe
 
 {% from 'util.html' import open, done, fa, figure %}
 
-This feature is currently under consideration and development.  Please test it
-from the [master branch](https://github.com/jandecaluwe/urubu) in Github, and
-[provide feedback](https://github.com/jandecaluwe/urubu/issues/37). 
-{: .lead .bg-warning}
-
 Overview
 ========
 
-Writing in Markdown is great, but sometimes you will run into limitations. For
-those cases, Urubu supports a feature gratefully borrowed from [jekyll]: using
+Writing in Markdown is great, but sometimes you run into limitations. For those
+cases, Urubu supports a feature gratefully borrowed from [jekyll]: using
 templating constructs in content pages.
 
 Basically, all content pages are processed by the templating engine before

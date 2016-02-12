@@ -212,9 +212,11 @@ class Project(object):
         # title
         if 'title' not in info:
             raise UrubuError(_error.undef_info, msg='title', fn=fn)
-        # make sure title is a string (and not an integer for example)
+        # Support integer titles by converting to string
         # this matters for the json dump for search
-        info['title'] = str(info['title'])
+        # test type explicitly to avoid problems with unicode titles...
+        if isinstance(info['title'], int):
+            info['title'] = str(info['title'])
         # date
         if 'date' in info:
             if not isinstance(info['date'], datetime.date):

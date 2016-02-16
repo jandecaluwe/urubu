@@ -8,7 +8,7 @@ content:
     - authoring
     - building
     - templates
-    - templating_in_pages
+    - templating-in-pages
     - hooks
     - extensions
     - search

@@ -22,25 +22,23 @@
 
   <div class="row">
 
-    <div class="content">
-      {% block content %}
-      <div class="col-md-6" role="main">
-      <main>
-        {{this.body}}
-      </main>
-      {% if this.pager %}
-      <ul class="pager">
-        {% if this.prev %}
-        <li class="previous"><a href="{{this.prev.url}}">&larr; {{this.prev.title}}</a></li>
-        {% endif %}
-        {% if this.next %}
-        <li class="next"><a href="{{this.next.url}}">{{this.next.title}} &rarr;</a></li>
-        {% endif %}
-      </ul>
+    {% block content %}
+    <div class="col-md-6 content" role="main">
+    <main>
+      {{this.body}}
+    </main>
+    {% if this.pager %}
+    <ul class="pager">
+      {% if this.prev %}
+      <li class="previous"><a href="{{this.prev.url}}">&larr; {{this.prev.title}}</a></li>
       {% endif %}
-      </div>
-      {% endblock %}
+      {% if this.next %}
+      <li class="next"><a href="{{this.next.url}}">{{this.next.title}} &rarr;</a></li>
+      {% endif %}
+    </ul>
+    {% endif %}
     </div>
+    {% endblock %}
 
     {% block sidebar %}
     {% if this.toc %}
@@ -64,4 +62,3 @@
 </div>
 
 {% endblock %}
-

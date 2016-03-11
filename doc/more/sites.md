@@ -10,7 +10,9 @@ this page I list a number of websites that are powered by Urubu.
 By others
 =========
 
-[Sigasi Insights][sigasi] - Documentation for Sigasi's tools. 
+[Sigasi Insights][sigasi] - Documentation for Sigasi's tools.
+
+[Leonardo Uieda][leouieda] - Website about Leonardo's professional activities.
 
 For others, by me
 =================
@@ -31,7 +33,7 @@ Urubu
 
 [urubu-quickstart] - the Quickstart companion site for Urubu
 
-[urubu] - this site 
+[urubu] - this site
 
 Personal
 ========
@@ -44,6 +46,7 @@ Personal
 
 
 [sigasi]: http://doc.sigasi.com
+[leouieda]: http://www.leouieda.com/
 [sofro]: http://www.vlaamsesofrologen.be
 [jan]: http://www.jandecaluwe.com
 [janmusic]: http://music.jandecaluwe.com

@@ -75,16 +75,14 @@ class ContentProcessor(object):
         self.md.site = self.site
         self.md.anchors = project.anchors
         if 'strict_undefined' in self.site and self.site['strict_undefined']:
-            env = self.env = jinja2.Environment(
-                loader=jinja2.FileSystemLoader(layoutdir),
-                lstrip_blocks=True,
-                trim_blocks=True,
-                undefined=jinja2.StrictUndefined)
+            undefined_class = jinja2.StrictUndefined
         else:
-            env = self.env = jinja2.Environment(
-                loader=jinja2.FileSystemLoader(layoutdir),
-                lstrip_blocks=True,
-                trim_blocks=True)
+            undefined_class = jinja2.Undefined
+        env = self.env = jinja2.Environment(
+            loader=jinja2.FileSystemLoader(layoutdir),
+            lstrip_blocks=True,
+            trim_blocks=True,
+            undefined=undefined_class)
         env.filters.update(project.filters)
         self.templates = {}
         for layout in project.layouts:

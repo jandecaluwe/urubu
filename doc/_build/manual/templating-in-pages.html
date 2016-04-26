@@ -112,7 +112,7 @@ afterwards.</p>
 <p>An icon is used to show whether a task is still open or not. </p>
 <p>We can support this by defining well-named reusable variables in a dedicated
 template file, as follows:</p>
-<div class="codehilite"><pre>{% set open = &#39;&lt;i class=&quot;fa fa-square-o&quot;&gt;&lt;/i&gt;&#39; %}
+<div class="codehilite"><pre><span></span>{% set open = &#39;&lt;i class=&quot;fa fa-square-o&quot;&gt;&lt;/i&gt;&#39; %}
 {% set done = &#39;&lt;i class=&quot;fa fa-check-square-o&quot;&gt;&lt;/i&gt;&#39; %}
 </pre></div>
 
@@ -122,7 +122,7 @@ examples, I use the <a href="http://fortawesome.github.io/Font-Awesome" title="F
 appropriate reference to the icon stylesheet in your base template. </p>
 <p>Suppose these variables are defined in the file <code>_layouts/util.html</code>. We can
 import them in any content page as follows:</p>
-<div class="codehilite"><pre>{% from &#39;util.html&#39; import open, done %}
+<div class="codehilite"><pre><span></span>{% from &#39;util.html&#39; import open, done %}
 </pre></div>
 
 
@@ -130,7 +130,7 @@ import them in any content page as follows:</p>
 because that is where templates should be located. </p>
 <p>Within the content page, we can use the variables as follows, to get the result
 as above:</p>
-<div class="codehilite"><pre>* {{ open }} Task 1
+<div class="codehilite"><pre><span></span>* {{ open }} Task 1
 * {{ done }} Task 2
 * {{ open }} Task 1
 </pre></div>
@@ -140,19 +140,19 @@ as above:</p>
 <p>Suppose you want a more general interface to icons, so that you can easily
 refer to any icon by name. This can be done with a Jinja2 macro. A macro is
 like a function that can take parameters:</p>
-<div class="codehilite"><pre>{% macro fa(name, class=&#39;&#39;) %}
+<div class="codehilite"><pre><span></span>{% macro fa(name, class=&#39;&#39;) %}
 &lt;i class=&quot;fa fa-{{name}} {{class}}&quot;&gt;&lt;/i&gt;
 {% endmacro %}
 </pre></div>
 
 
 <p>Again, we can import the macro <code>fa</code> in content pages:</p>
-<div class="codehilite"><pre>{% from &#39;util.html&#39; import fa %}
+<div class="codehilite"><pre><span></span>{% from &#39;util.html&#39; import fa %}
 </pre></div>
 
 
 <p>Then we can use it as follows, for example to refer to the Github icon:</p>
-<div class="codehilite"><pre>{{ fa(&#39;github&#39;) }}
+<div class="codehilite"><pre><span></span>{{ fa(&#39;github&#39;) }}
 </pre></div>
 
 
@@ -160,7 +160,7 @@ like a function that can take parameters:</p>
 <p><i class="fa fa-github "></i></p>
 <p>We can pass additional CSS classes via the optional <code>class</code> parameter. The
 following example gets the alternative Github icon in twice the basic size:</p>
-<div class="codehilite"><pre>{{ fa(&#39;github-alt&#39;, &#39;fa-2x&#39;) }}
+<div class="codehilite"><pre><span></span>{{ fa(&#39;github-alt&#39;, &#39;fa-2x&#39;) }}
 </pre></div>
 
 
@@ -170,7 +170,7 @@ following example gets the alternative Github icon in twice the basic size:</p>
 <p>Standard Markdown does not support the HTML5 <code>&lt;figure&gt;</code> tag, and the related
 <code>&lt;figcaption&gt;</code> tag to add captions. We can support this with the following
 macro:</p>
-<div class="codehilite"><pre>{% macro figure(fn, caption=&#39;&#39;) %}
+<div class="codehilite"><pre><span></span>{% macro figure(fn, caption=&#39;&#39;) %}
 &lt;figure&gt;
   &lt;img src=&quot;/img/{{fn}}&quot; class=&quot;img-responsive&quot; alt=&quot;{{caption}}&quot;&gt;
   {% if caption %}
@@ -184,12 +184,12 @@ macro:</p>
 <p>This macro assumes that images will be placed in an <code>img/</code> directory. In
 addition, it makes the image responsive using a Bootstrap class, and centers
 the optional caption.  Again, we can use the macro by importing:</p>
-<div class="codehilite"><pre>{% from &#39;util.html&#39; import figure %}
+<div class="codehilite"><pre><span></span>{% from &#39;util.html&#39; import figure %}
 </pre></div>
 
 
 <p>This is an example usage:</p>
-<div class="codehilite"><pre>{{ figure(&#39;urubu.jpg&#39;, &quot;An Urubu - a brazilian vulture&quot;) }}
+<div class="codehilite"><pre><span></span>{{ figure(&#39;urubu.jpg&#39;, &quot;An Urubu - a brazilian vulture&quot;) }}
 </pre></div>
 
 
@@ -235,7 +235,7 @@ if you want to use them literally in source code, without interpretation.</p>
 to get <code>{{</code> you can write  <code>{{ '{{' }}</code> .   </p>
 <p>For a larger section, you can mark a block <em>raw</em>. For example, to
 get the list shown earlier in this section, you can write:</p>
-<div class="codehilite"><pre>{% raw %}
+<div class="codehilite"><pre><span></span>{% raw %}
 * `{# ... #}` for comments not included in the output
 * `{{ ... }}` for expressions, to print to the output
 * `{% ... %}` for statements

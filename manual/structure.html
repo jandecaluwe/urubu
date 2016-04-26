@@ -93,7 +93,7 @@
     <main>
       <h2 id="the-project-directory">The project directory</h2>
 <p>A typical Urubu project directory looks as follows:</p>
-<div class="codehilite"><pre>Makefile
+<div class="codehilite"><pre><span></span>Makefile
 _site.yml
 _layouts/_base.html
          page.html
@@ -117,7 +117,7 @@ folder2/index.md
 
 <p>Files and directories with pathnames starting with an underscore <code>_</code> are
 special. They are used during processing, but excluded from the built website.
-Their function will be discussed below.  </p>
+Their function will be discussed below.</p>
 <p>The <code>css</code> and <code>js</code> directories are just an example of how CSS style sheets and
 javascript files could be organized. You can use any organization that you
 prefer.</p>
@@ -130,10 +130,10 @@ directory, and putting the result in a <code>_build</code> subdirectory. The pro
 depends on the pathname as follows:</p>
 <ul>
 <li>
-<p>a <code>Makefile</code> is ignored and not copied to the build. </p>
+<p>a <code>Makefile</code> is ignored and not copied to the build.</p>
 </li>
 <li>
-<p>files and directories starting with a dot <code>.</code> or 
+<p>files and directories starting with a dot <code>.</code> or
 underscore <code>_</code> are ignored and not copied to the build.</p>
 </li>
 <li>
@@ -151,7 +151,7 @@ location of all files is thus preserved.</p>
 <h2 id="special-files-and-directories">Special files and directories</h2>
 <h3 id="_siteyml"><code>_site.yml</code></h3>
 <p>This file contains site configuration info in YAML format.
-Currently, these are the predefined attributes: </p>
+Currently, these are the predefined attributes:</p>
 <table class="table">
 <thead>
 <tr>
@@ -184,10 +184,14 @@ Currently, these are the predefined attributes: </p>
 <td><code>keep_files</code></td>
 <td>List of explicit file names be kept, overriding any ignores</td>
 </tr>
+<tr>
+<td><code>strict_undefined</code></td>
+<td>Set the default behavior regarding undefined template variables</td>
+</tr>
 </tbody>
 </table>
 <p>Link objects, for the <code>reflinks</code> attribute, are a mapping with an <code>url</code> key that maps
-to the link URL and a <code>title</code> key that maps to the link title. </p>
+to the link URL and a <code>title</code> key that maps to the link title.</p>
 <p>The <code>baseurl</code> option mirrors the same feature in <a href="http://jekyllrb.com/docs/configuration/#serve-command-options">Jekyll</a>.  It
 allows you to specify a prefix for all local URLs generated within your site.
 This is necessary when your site will be served from a URL that has more than
@@ -195,7 +199,7 @@ just the hostname. For example, on GitHub Pages sites are served from
 http://username.github.io/project_name/, so Urubu needs to include that
 <code>/project_name/</code> in generated URLs pointing to local content.</p>
 <p><code>baseurl</code> should be specified with no beginning or trailing slashes, e.g.:</p>
-<div class="codehilite"><pre><span class="l-Scalar-Plain">baseurl</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">prefix</span>
+<div class="codehilite"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">baseurl</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">prefix</span>
 </pre></div>
 
 
@@ -208,18 +212,22 @@ to <code>www.test.com/account.htm</code>. For this case, one would need to set <
 be set to <code>''</code>, so that the <code>a href</code> links are directed to the files without extension.</p>
 <p>Otherwise, <code>file_ext</code> and <code>link_ext</code> should be set to the same extension, specially
 during testing, so that the simple web server invoked by <code>urubu serve</code> works fine,
-as well as any web server that does not rewrite the file extensions of the requests. </p>
+as well as any web server that does not rewrite the file extensions of the requests.</p>
 <p>The <code>ignore_patterns</code> attribute specifies glob-style patterns to be ignored
 during processing, in addition to the default ones according to the
-<a href="/manual/structure.html#processing-rules" title="Project structure">Processing Rules</a>. </p>
+<a href="/manual/structure.html#processing-rules" title="Project structure">Processing Rules</a>.</p>
 <p>In some cases you may explicitly want to keep certain files that would normally
 be ignored. For example, you may have hidden files like <code>.nojekyll</code> to prevent
 Jekyll processing, or <code>.htaccess</code> and <code>.htpasswd</code> for access control.  You can
 keep such files in the build using the <code>keep_files</code> attribute.</p>
+<p>The <code>strict_undefined</code> attribute controls whether the build should
+silently ignore undefined template variables or raise an error when they are
+encountered. If <code>false</code> or undefined, undefined template variables are treated
+as empty strings (<code>''</code>). If <code>true</code>, the build will stop and raise an error.</p>
 <p>You can define additional attributes that will be made available as
 site variables to the template engine. The following is an example of a
 <code>_site.yml</code> file:</p>
-<div class="codehilite"><pre>brand: Urubu 
+<div class="codehilite"><pre><span></span>brand: Urubu
 
 reflinks:
     content_license:
@@ -229,7 +237,7 @@ reflinks:
         url: http://www.gnu.org/licenses/agpl-3.0.txt
         title: GNU Affero General Public License
     markdown:
-        url: http://daringfireball.net/projects/markdown/  
+        url: http://daringfireball.net/projects/markdown/
         title: Markdown
 
 file_ext: &#39;.htm&#39;  # Change default file extension (&#39;.html&#39;)
@@ -242,7 +250,7 @@ link_ext: &#39;.htm&#39;  # Change default link extension (&#39;.html&#39;)
 They are used by the Jinja2 template engine to render html pages.
 The layout files should have the <code>.html</code> extension.</p>
 <h3 id="_python"><code>_python</code></h3>
-<p>This directory contains Python hooks for the template engine. </p>
+<p>This directory contains Python hooks for the template engine.</p>
 <h2 id="project-wide-reference-ids">Project-wide reference ids</h2>
 <p>Urubu has the concept of project-wide reference ids.  You can use them to refer
 to link objects in your content and configuration.  Their definition comes
@@ -254,16 +262,16 @@ configuration file, as discussed earlier.</li>
 </ul>
 <p>Project-wide references ids live in a single namespace. For pages and folders,
 the id is a root-relative pathname starting with a slash <code>/</code> and without file
-extension. By convention, global reference ids should not start with a <code>/</code>.   </p>
+extension. By convention, global reference ids should not start with a <code>/</code>.</p>
 <p>In your content and configuration info, you can also use relative reference
 ids. Urubu will resolve them depending on the file location in the project. In
 case of a name clash with a global reference id, you will have to disambiguate
-by adding pathname components. </p>
+by adding pathname components.</p>
 <p>In accordance with Markdown conventions, reference ids are case-insensitive.</p>
 <h2 id="content-files">Content files</h2>
 <p>Content files are Markdown files with extension <code>.md</code>. They should start with
 YAML front matter that defines a number of attributes, as in the following example:</p>
-<div class="codehilite"><pre>---
+<div class="codehilite"><pre><span></span>---
 title: Read me first
 layout: page
 date: 2014-01-15
@@ -302,22 +310,22 @@ date: 2014-01-15
 <p>The <code>layout</code> attribute is mandatory, but can be given a <code>null</code> value.
 This is useful when the page content is used by other pages, but
 no html output is required for the page itself.</p>
-<p>In addition, you can add arbitrary user-defined attributes. All attributes 
+<p>In addition, you can add arbitrary user-defined attributes. All attributes
 are made available as page object attributes to the template engine.</p>
 <h2 id="markdown-in-attributes">Markdown in attributes</h2>
 <p>Optionally, you can use markdown format in front matter attributes.  Markdown
 processing is enabled by adding a <code>.md</code> suffix to the attribute. The resulting
-html code will be stored in a synthesized attribute without the <code>.md</code> suffix.  </p>
+html code will be stored in a synthesized attribute without the <code>.md</code> suffix.</p>
 <p>For example:</p>
-<div class="codehilite"><pre>---
-title:  
+<div class="codehilite"><pre><span></span>---
+title:
 layout: page
 summary.md: |
     A summary of the page items as a list:
 
     * item 1
     * item 2
-    * item 3 
+    * item 3
 ---
 </pre></div>
 
@@ -328,7 +336,7 @@ code.</p>
 <p>Index files with basename <code>index.md</code> are a special kind of content files.  They
 are used to specify the attributes and the content of a directory. There are
 two options to specify the content, explicitly with the <code>content</code> attribute or
-implicitly using the <code>order</code> attribute.  </p>
+implicitly using the <code>order</code> attribute.</p>
 <table class="table">
 <thead>
 <tr>
@@ -358,8 +366,8 @@ with a <code>title</code> key.</p>
 <p>The ordering attribute can be predefined or user-defined, but it should be
 specified in each content file in the directory.  As an example, you can
 specify that the content of a directory should be ordered as blog by the
-following front matter in the index file: </p>
-<div class="codehilite"><pre>---
+following front matter in the index file:</p>
+<div class="codehilite"><pre><span></span>---
 title: Blog
 layout: blog_index
 order: date

@@ -8,6 +8,7 @@ def test_no_yamlfm():
     with cd('no_yamlfm'):
         with pytest.warns(UrubuWarning) as record:
             project.build()
+        print (record)
         assert len(record) == 1
         assert _warning.no_yamlfm in str(record[0].message)
 

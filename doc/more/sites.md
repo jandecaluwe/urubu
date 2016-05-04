@@ -45,7 +45,7 @@ Personal
 [Jan Decaluwe / Opinions][janopinion] My opinions, in Dutch
 
 
-[sigasi]: http://doc.sigasi.com
+[sigasi]: http://insights.sigasi.com
 [leouieda]: http://www.leouieda.com/
 [sofro]: http://www.vlaamsesofrologen.be
 [jan]: http://www.jandecaluwe.com

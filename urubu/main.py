@@ -27,29 +27,31 @@ from urubu import project
 from urubu._compat import socketserver, httpserver
 from urubu.httphandler import AliasingHTTPRequestHandler
 
-def serve(baseurl):
+def serve(baseurl, host='localhost', port=8000):
     """HTTP server straight from the docs."""
     # allow running this from the top level
     if os.path.isdir('_build'):
         os.chdir('_build')
     # local use, address reuse should be OK
     socketserver.TCPServer.allow_reuse_address = True
-    PORT = 8000
     handler = AliasingHTTPRequestHandler
-    httpd = socketserver.TCPServer(('', PORT), handler)
+    httpd = socketserver.TCPServer((host, port), handler)
     httpd.baseurl = baseurl
-        
-    print("Serving at port {}".format(PORT))
+
+    print("Serving {} at port {}".format(host, port))
     if httpd.baseurl: print("Using baseurl {}".format(httpd.baseurl))
     httpd.serve_forever()
 
 def main():
     parser = argparse.ArgumentParser(prog='python -m urubu')
     parser.add_argument('--version', action='version', version=__version__)
-    parser.add_argument('command', choices=['build', 'serve'])
+    parser.add_argument('command', choices=['build', 'serve', 'serveany'])
     args = parser.parse_args()
     if args.command == 'build':
         project.build()
     elif args.command == 'serve':
         proj = project.load()
         serve(proj.site['baseurl'])
+    elif args.command == 'serveany':
+        proj = project.load()
+        serve(proj.site['baseurl'], host='')

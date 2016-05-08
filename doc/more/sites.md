@@ -14,6 +14,9 @@ By others
 
 [Leonardo Uieda][leouieda] - Website about Leonardo's professional activities.
 
+[PINGA lab][pinga] - Site for the PINGA lab, a research group studying inverse
+problems in geophysics.
+
 For others, by me
 =================
 
@@ -47,6 +50,7 @@ Personal
 
 [sigasi]: http://insights.sigasi.com
 [leouieda]: http://www.leouieda.com/
+[pinga]: http://www.pinga-lab.org/
 [sofro]: http://www.vlaamsesofrologen.be
 [jan]: http://www.jandecaluwe.com
 [janmusic]: http://music.jandecaluwe.com

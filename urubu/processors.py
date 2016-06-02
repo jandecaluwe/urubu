@@ -158,8 +158,14 @@ class ContentProcessor(object):
         # extract text from html for search support
         self.extract_text(html, info)
         fn = info['fn']
-        bfn, ext = os.path.splitext(fn)
-        outfn = os.path.join(self.sitedir, bfn) + self.site['file_ext']
+
+        # check if filename is overriden
+        if info.get('saveas') is not None:
+            outfn = os.path.join(self.sitedir, info.get('saveas'))
+        else:
+            bfn, ext = os.path.splitext(fn)
+            outfn = os.path.join(self.sitedir, bfn) + self.site['file_ext']
+
         with open(outfn, 'w', encoding='utf-8', errors='strict') as outf:
             outf.write(html)
 

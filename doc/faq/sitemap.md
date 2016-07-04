@@ -21,6 +21,7 @@ saveas: sitemap.xml
 
 * Provide a `sitemap.html` in the `_layouts` directory, with looking something like the following:
 ```
+{% raw %}
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="{{ this.xmlns }}">
 {% for t in site.reflinks %}
@@ -33,6 +34,7 @@ saveas: sitemap.xml
     {% endif %}
 {% endfor %}
 </urlset>
+{% endraw %}
 ```
 
 What makes this work is for the main part the `saveas` parameter in the `sitemap.md` file, which overrides the default output filename with `sitemap.xml` instead of `sitemap.html`

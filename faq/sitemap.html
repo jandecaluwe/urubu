@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Urubu 0.1 released</title>
+    <title>How do I make a sitemap?</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
     <!-- Bootstrap -->
@@ -52,7 +52,7 @@
             <li><a href="/start.html">Overview</a></li>
             <li><a href="/manual/">Manual</a></li>
             <li><a href="http://urubu-quickstart.jandecaluwe.com">Quickstart</a></li>
-            <li><a href="/faq/">FAQ</a></li>
+            <li class="active"><a href="/faq/">FAQ</a></li>
           </ul>
           <form class="navbar-form navbar-left" action="/search.html" role="search">
             <div class="form-group">
@@ -79,20 +79,52 @@
 
   <ol class="breadcrumb">
     <li><a href="/">Home</a></li>
-      <li><a href="/news/">Newsfeed</a></li>
-      <li class="active">Urubu 0.1 released</li>
+      <li><a href="/faq/">FAQ</a></li>
+      <li class="active">How do I make a sitemap?</li>
   </ol>
 
   <div class="page-header">
-    <h1>Urubu 0.1 released</h1>
+    <h1>How do I make a sitemap?</h1>
   </div>
 
   <div class="row">
 
     <div class="col-md-6 content" role="main">
     <main>
-      <p>Introducing Urubu, a Python-based micro <abbr title="Content Management System">CMS</abbr> for static websites.
-Read about <a href="http://www.jandecaluwe.com/blog/i-dont-like-blogs.html">the rationale behind it</a>.</p>
+      <p>To generate a sitemap you need to do the following:</p>
+<ul>
+<li>Create a markdown file called <code>sitemap.md</code> like this:</li>
+</ul>
+<div class="codehilite"><pre><span></span>---
+title: sitemap
+layout: sitemap
+changefreq: monthly
+priority: 1.0
+xmlns: http://www.google.com/schemas/sitemap/0.84
+saveas: sitemap.xml
+---
+</pre></div>
+
+
+<ul>
+<li>Provide a <code>sitemap.html</code> in the <code>_layouts</code> directory, with looking something like the following:</li>
+</ul>
+<div class="codehilite"><pre><span></span>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;urlset xmlns=&quot;{{ this.xmlns }}&quot;&gt;
+{% for t in site.reflinks %}
+    {% if site.reflinks[t].fn and not site.reflinks[t].hidden %}
+    &lt;url&gt;
+        &lt;loc&gt;{{ site.hostname }}{{ site.reflinks[t].url }}&lt;/loc&gt;
+        &lt;changefreq&gt;{{ this.changefreq }}&lt;/changefreq&gt;
+        &lt;priority&gt;{{ this.priority }}&lt;/priority&gt;
+    &lt;/url&gt;
+    {% endif %}
+{% endfor %}
+&lt;/urlset&gt;
+</pre></div>
+
+
+<p>What makes this work is for the main part the <code>saveas</code> parameter in the <code>sitemap.md</code> file, which overrides the default output filename with <code>sitemap.xml</code> instead of <code>sitemap.html</code></p>
     </main>
     </div>
 

@@ -208,6 +208,7 @@ Attribute | Description
 `layout`   | Specifies the layout, without the `.html` extension, or `null`. Mandatory.
 `date`     | Specifies the date in YYYY-MM-DD format. Optional.
 `tags`     | A tag or list of tags for the content.
+`saveas`   | Allows overriding of the output filename.
 
 The `layout` attribute is mandatory, but can be given a `null` value.
 This is useful when the page content is used by other pages, but

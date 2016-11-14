@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Urubu 0.1 released</title>
+    <title>Urubu 1.3.0 released</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
     <!-- Bootstrap -->
@@ -80,19 +80,33 @@
   <ol class="breadcrumb">
     <li><a href="/">Home</a></li>
       <li><a href="/news/">Newsfeed</a></li>
-      <li class="active">Urubu 0.1 released</li>
+      <li class="active">Urubu 1.3.0 released</li>
   </ol>
 
   <div class="page-header">
-    <h1>Urubu 0.1 released</h1>
+    <h1>Urubu 1.3.0 released</h1>
   </div>
 
   <div class="row">
 
     <div class="col-md-6 content" role="main">
     <main>
-      <p>Introducing Urubu, a Python-based micro CMS for static websites.
-Read about <a href="http://www.jandecaluwe.com/blog/i-dont-like-blogs.html">the rationale behind it</a>.</p>
+      <p>Highlights:</p>
+<ul>
+<li>
+<p>Add posibility to override output filename. (#51). See the <code>saveas</code> attribute
+in the <a href="/manual/structure.html#content-files" title="Project structure">manual</a>.
+An example usage, see <a href="/faq/sitemap.html" title="How do I make a sitemap?">How do I make a sitemap?</a>.</p>
+</li>
+<li>
+<p>The <code>urubu serve</code> command is more secure.  This is transparent to the user
+(#49).</p>
+</li>
+<li>
+<p>Added option for jinja2 to fail on undefined vars (#47). 
+See the <code>strict_undefined</code> attribute in the <a href="/manual/structure.html#_siteyml" title="Project structure">manual</a>.</p>
+</li>
+</ul>
     </main>
     </div>
 

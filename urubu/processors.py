@@ -86,11 +86,11 @@ class ContentProcessor(object):
         env.filters.update(project.filters)
         self.templates = {}
         for layout in project.layouts:
-            self.templates[layout] = self.env.get_template(layout + '.html')
+            self.templates[layout] = self.env.select_template([layout, layout + '.html'])
         # layout for tags is optional, triggers index file generation per tag
         try:
-            self.templates[tag_layout] = self.env.get_template(
-                tag_layout + '.html')
+            self.templates[tag_layout] = self.env.select_template(
+                [tag_layout, tag_layout + '.html'])
         except jinja2.exceptions.TemplateNotFound:
             if self.taglist:
                 urubu_warn(_warning.undef_tag_layout, msg=tag_layout)

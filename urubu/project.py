@@ -369,7 +369,7 @@ class Project(object):
         for info in self.navlist:
             content = info['content']
             if not content:
-                return
+                continue
             content[0]['prev'] = None
             for i in range(1, len(content)):
                 content[i - 1]['next'] = content[i]

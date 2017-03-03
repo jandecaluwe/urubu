@@ -67,7 +67,7 @@ def make_id(components, lowercased=True):
 def make_clean(dir):
     for fn in os.listdir(dir):
         p = os.path.join(dir, fn)
-        if os.path.isdir(p):
+        if os.path.isdir(p) and not fn == '.git':
             shutil.rmtree(p)
         elif os.path.isfile(p):
             os.remove(p)

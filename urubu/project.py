@@ -66,7 +66,7 @@ def make_id(components, lowercased=True):
 
 def make_clean(dir):
     for fn in os.listdir(dir):
-        p = os.path.join(sitedir, fn)
+        p = os.path.join(dir, fn)
         if os.path.isdir(p):
             shutil.rmtree(p)
         elif os.path.isfile(p):

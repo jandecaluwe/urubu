@@ -127,7 +127,8 @@ class Project(object):
         self.site.update(meta)
         # check for custom build directory 
         if 'build_dir' in meta:
-            self.sitedir = os.path.expanduser(meta['build_dir'])
+            builddir = os.path.expanduser(meta['build_dir'])
+            self.sitedir = os.path.abspath(builddir)
 
     def validate_sitereflink(self, id, info):
         if 'title' not in info:

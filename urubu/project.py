@@ -69,7 +69,7 @@ def make_clean(dir):
         p = os.path.join(dir, fn)
         if os.path.isdir(p) and not fn == '.git':
             shutil.rmtree(p)
-        elif os.path.isfile(p):
+        elif os.path.isfile(p) and not fn == 'CNAME':
             os.remove(p)
 
 

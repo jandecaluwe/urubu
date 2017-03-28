@@ -1,6 +1,6 @@
 ---
-title: Python hooks 
-layout: page 
+title: Python hooks
+layout: page
 pager: true
 author: Jan Decaluwe
 ---
@@ -15,10 +15,10 @@ predefined names.  The following hooks are defined:
 Variable              | Description
 ----------------------|-------------
 `filters`             | A mapping from filter names to filter functions.
-`process_info`        | A function to inspect and process content file info. 
+`process_info`        | A function to inspect and process content file info.
 
 You have to make sure that these names are exported correctly.  For example, if
-you organize `_python` as a package, it could look as as follows:
+you organize `_python` as a package, it could look as follows:
 
 ```
 _python/
@@ -75,12 +75,12 @@ The `info` variable contains the file content info as it is being
 constructed by Urubu. At the moment of the call, the following
 inferred attributes are available:
 
-Attribute      | Description 
+Attribute      | Description
 ---------------|---------------------------
-`id`           | The unique id by which the object is known in the project. 
-`url`          | The url of the object. 
+`id`           | The unique id by which the object is known in the project.
+`url`          | The url of the object.
 `components`   | The components of the object's pathname, without file extension, as a list.
-`fn`           | The pathname of the file or directory corresponding the object. 
+`fn`           | The pathname of the file or directory corresponding the object.
 `mdate`        | Modification date
 
 In addition, all attributes specified in the YAML front matter of the
@@ -113,7 +113,7 @@ def process_info(info, site):
             info['layout'] = 'page'
 ```
 
-Defining a specific layout 
+Defining a specific layout
 --------------------------
 
 Suppose we have a `blog` directory and we want to automatically define a
@@ -133,5 +133,5 @@ def process_post(info):
 
 
 
- 
+
 

@@ -243,7 +243,8 @@ class Project(object):
         """Make a fileinfo dict."""
         info = {}
         info['fn'] = relfn
-        info['components'] = components = get_components(relfn)
+        info['components'] = components = get_components(
+            relfn if meta.get('saveas') is None else meta.get('saveas'))
         info['id'] = make_id(components)
         # make html url from ref
         info['url'] = self.finalize_local_url(

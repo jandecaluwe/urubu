@@ -383,7 +383,7 @@ class Project(object):
         info['layout'] = tag_layout
         info['fn'] = os.path.join(tagdir, tag, 'index')
         info['components'] = components = (tagdir, tag)
-        info['id'] = make_id(components)
+        info['id'] = make_id(components, lowercased=False)
         # add trailing slash for tag index url
         info['url'] = self.finalize_local_url(info['id']) + '/'
         info['content'] = content

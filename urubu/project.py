@@ -369,7 +369,7 @@ class Project(object):
         for info in self.navlist:
             content = info['content']
             if not content:
-                return
+                continue
             content[0]['prev'] = None
             for i in range(1, len(content)):
                 content[i - 1]['next'] = content[i]
@@ -383,7 +383,7 @@ class Project(object):
         info['layout'] = tag_layout
         info['fn'] = os.path.join(tagdir, tag, 'index')
         info['components'] = components = (tagdir, tag)
-        info['id'] = make_id(components)
+        info['id'] = make_id(components, lowercased=False)
         # add trailing slash for tag index url
         info['url'] = self.finalize_local_url(info['id']) + '/'
         info['content'] = content

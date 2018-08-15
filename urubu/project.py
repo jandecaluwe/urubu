@@ -66,10 +66,10 @@ def make_id(components, lowercased=True):
 
 def make_clean(dir):
     for fn in os.listdir(dir):
-        p = os.path.join(sitedir, fn)
-        if os.path.isdir(p):
+        p = os.path.join(dir, fn)
+        if os.path.isdir(p) and not fn == '.git':
             shutil.rmtree(p)
-        elif os.path.isfile(p):
+        elif os.path.isfile(p) and not fn == 'CNAME':
             os.remove(p)
 
 
@@ -83,6 +83,7 @@ class Project(object):
                      'file_ext': '.html',
                      'mark_tag_support': True
                      }
+        self.sitedir = sitedir
         self.get_siteinfo()
 
         """Get user-defined python hooks."""
@@ -124,6 +125,10 @@ class Project(object):
                 self.add_reflink(id, info)
             del meta['reflinks']
         self.site.update(meta)
+        # check for custom build directory 
+        if 'build_dir' in meta:
+            builddir = os.path.expanduser(meta['build_dir'])
+            self.sitedir = os.path.abspath(builddir)
 
     def validate_sitereflink(self, id, info):
         if 'title' not in info:
@@ -143,7 +148,6 @@ class Project(object):
         if self.site['baseurl']:
             url = '/' + self.site['baseurl'] + url
         return url
-
 
     def get_contentinfo(self):
         """Get info from the markdown content files."""
@@ -439,16 +443,16 @@ class Project(object):
     def make_site(self):
         """Make the site."""
         # Keep sitedir alive if it exists, for the server
-        if not os.path.exists(sitedir):
-            os.mkdir(sitedir)
-        make_clean(sitedir)
+        if not os.path.exists(self.sitedir):
+            os.mkdir(self.sitedir)
+        make_clean(self.sitedir)
         ignore_patterns = self.get_ignore_patterns() + ('*.md',)
         ignore = shutil.ignore_patterns(*ignore_patterns)
         for fn in os.listdir(self.cwd):
             if any(fnmatch.fnmatch(fn, ip) for ip in ignore_patterns):
                 continue
             wp = os.path.join(self.cwd, fn)
-            sp = os.path.join(sitedir, fn)
+            sp = os.path.join(self.sitedir, fn)
             if os.path.isdir(wp):
                 shutil.copytree(wp, sp, ignore=ignore)
             elif os.path.isfile(wp):
@@ -457,13 +461,13 @@ class Project(object):
         # explicit files to keep
         for fn in self.get_keep_files():
             wp = os.path.join(self.cwd, fn)
-            sp = os.path.join(sitedir, fn)
+            sp = os.path.join(self.sitedir, fn)
             if os.path.isfile(wp):
                 shutil.copyfile(wp, sp)
 
         # make tag index dirs
         if self.taglist:
-            tagpath = os.path.join(sitedir, tagdir)
+            tagpath = os.path.join(self.sitedir, tagdir)
             if not os.path.isdir(tagpath):
                 os.mkdir(tagpath)
             for taginfo in self.taglist:
@@ -473,7 +477,7 @@ class Project(object):
 
     def process_content(self):
         """Process the content files."""
-        p = processors.ContentProcessor(sitedir, project=self)
+        p = processors.ContentProcessor(self.sitedir, project=self)
         p.process()
 
 def load():

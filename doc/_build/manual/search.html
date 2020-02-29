@@ -116,12 +116,12 @@ typical Urubu project. </p>
 <p>The next step is to create a search box. Suppose you want to make it part of
 the navbar, as in the present site. This is achieved with the following html
 code: </p>
-<div class="codehilite"><pre><span></span>&lt;form class=&quot;navbar-form navbar-left&quot; action=&quot;/search.html&quot; role=&quot;search&quot;&gt;
+<div class="codehilite"><pre><span></span><code>&lt;form class=&quot;navbar-form navbar-left&quot; action=&quot;/search.html&quot; role=&quot;search&quot;&gt;
   &lt;div class=&quot;form-group&quot;&gt;
     &lt;input type=&quot;text&quot; required name=&quot;q&quot; id=&quot;tipue_search_input&quot; class=&quot;form-control&quot; placeholder=&quot;Search&quot;&gt; 
    &lt;/div&gt;
 &lt;/form&gt;
-</pre></div>
+</code></pre></div>
 
 
 <p>The <code>name</code> and the <code>id</code> values in the <code>&lt;input&gt;</code> tag of the search box are
@@ -133,7 +133,7 @@ create a dedicated layout using template inheritance.  Let us assume that is
 there is  a <code>head_addon</code> and a <code>body_addon</code> block to add links and scripts to
 the <code>&lt;head</code> and the <code>&lt;body&gt;</code> section respectively. The <code>search.html</code> layout is
 then as follows:  </p>
-<div class="codehilite"><pre><span></span>{% extends &quot;page.html&quot; %}
+<div class="codehilite"><pre><span></span><code>{% extends &quot;page.html&quot; %}
 
 {% block head_addon %}
 &lt;link href=&quot;tipuesearch/tipuesearch.css&quot; rel=&quot;stylesheet&quot;&gt;
@@ -152,7 +152,7 @@ $(document).ready(function() {
 });
 &lt;/script&gt;
 {% endblock %}
-</pre></div>
+</code></pre></div>
 
 
 <p>We inherit from a <code>page.html</code> layout. In the <code>head_addon</code> block, we add
@@ -161,21 +161,21 @@ add the Tipue Search java script modules, and the inline script that generates
 the results. </p>
 <p>This setup assumes that the jQuery javascript library itself is already loaded
 in the body of the parent layout, with a line like the following: </p>
-<div class="codehilite"><pre><span></span>&lt;script src=&quot;https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js&quot;&gt;&lt;/script&gt;
-</pre></div>
+<div class="codehilite"><pre><span></span><code>&lt;script src=&quot;https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js&quot;&gt;&lt;/script&gt;
+</code></pre></div>
 
 
 <p>If you use the Bootstrap javascript modules, that will be the case.</p>
 <p>In the top level project directory, we can then create a <code>search.md</code> files that
 uses the <code>search.html</code> layout and has the generated search results as its
 content:</p>
-<div class="codehilite"><pre><span></span>---
+<div class="codehilite"><pre><span></span><code>---
 title: Search results
 layout: search
 ---
 
 &lt;div id=&quot;tipue_search_content&quot;&gt;&lt;/div&gt;
-</pre></div>
+</code></pre></div>
 
 
 <p>After building the site, there will be a functional <code>search.html</code> file in the

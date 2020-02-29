@@ -41,8 +41,8 @@ dl-horizontal
 :   Added to the `<dl>` tag that defines definition lists. This creates 
 a horizontal layout for definition lists in wide viewports.
 
-Support for the `<mark>` tag
-============================
+Support for the `mark` tag
+==========================
 
 The html5 specification added _a new tag to highlight text_: the `<mark>`
 tag. For a good explanation of its purpose and the differences with the

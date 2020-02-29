@@ -95,7 +95,7 @@
 <ul>
 <li>Create a markdown file called <code>sitemap.md</code> like this:</li>
 </ul>
-<div class="codehilite"><pre><span></span>---
+<div class="codehilite"><pre><span></span><code>---
 title: sitemap
 layout: sitemap
 changefreq: monthly
@@ -103,13 +103,13 @@ priority: 1.0
 xmlns: http://www.google.com/schemas/sitemap/0.84
 saveas: sitemap.xml
 ---
-</pre></div>
+</code></pre></div>
 
 
 <ul>
 <li>Provide a <code>sitemap.html</code> in the <code>_layouts</code> directory, with looking something like the following:</li>
 </ul>
-<div class="codehilite"><pre><span></span>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+<div class="codehilite"><pre><span></span><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
 &lt;urlset xmlns=&quot;{{ this.xmlns }}&quot;&gt;
 {% for t in site.reflinks %}
     {% if site.reflinks[t].fn and not site.reflinks[t].hidden %}
@@ -121,7 +121,7 @@ saveas: sitemap.xml
     {% endif %}
 {% endfor %}
 &lt;/urlset&gt;
-</pre></div>
+</code></pre></div>
 
 
 <p>What makes this work is for the main part the <code>saveas</code> parameter in the <code>sitemap.md</code> file, which overrides the default output filename with <code>sitemap.xml</code> instead of <code>sitemap.html</code></p>

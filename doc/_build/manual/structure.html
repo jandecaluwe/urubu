@@ -93,7 +93,7 @@
     <main>
       <h2 id="the-project-directory">The project directory</h2>
 <p>A typical Urubu project directory looks as follows:</p>
-<div class="codehilite"><pre><span></span>Makefile
+<div class="codehilite"><pre><span></span><code>Makefile
 _site.yml
 _layouts/_base.html
          page.html
@@ -112,7 +112,7 @@ folder2/index.md
         file2.md
         file3.md
         ...
-</pre></div>
+</code></pre></div>
 
 
 <p>Files and directories with pathnames starting with an underscore <code>_</code> are
@@ -199,8 +199,8 @@ just the hostname. For example, on GitHub Pages sites are served from
 http://username.github.io/project_name/, so Urubu needs to include that
 <code>/project_name/</code> in generated URLs pointing to local content.</p>
 <p><code>baseurl</code> should be specified with no beginning or trailing slashes, e.g.:</p>
-<div class="codehilite"><pre><span></span><span class="nt">baseurl</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">prefix</span>
-</pre></div>
+<div class="codehilite"><pre><span></span><code><span class="nt">baseurl</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">prefix</span>
+</code></pre></div>
 
 
 <p>The file extension attributes, <code>file_ext</code> and <code>link_ext</code>, are both usually set to the
@@ -227,7 +227,7 @@ as empty strings (<code>''</code>). If <code>true</code>, the build will stop an
 <p>You can define additional attributes that will be made available as
 site variables to the template engine. The following is an example of a
 <code>_site.yml</code> file:</p>
-<div class="codehilite"><pre><span></span>brand: Urubu
+<div class="codehilite"><pre><span></span><code>brand: Urubu
 
 reflinks:
     content_license:
@@ -242,7 +242,7 @@ reflinks:
 
 file_ext: &#39;.htm&#39;  # Change default file extension (&#39;.html&#39;)
 link_ext: &#39;.htm&#39;  # Change default link extension (&#39;.html&#39;)
-</pre></div>
+</code></pre></div>
 
 
 <h3 id="_layouts"><code>_layouts</code></h3>
@@ -271,13 +271,13 @@ by adding pathname components.</p>
 <h2 id="content-files">Content files</h2>
 <p>Content files are Markdown files with extension <code>.md</code>. They should start with
 YAML front matter that defines a number of attributes, as in the following example:</p>
-<div class="codehilite"><pre><span></span>---
+<div class="codehilite"><pre><span></span><code>---
 title: Read me first
 layout: page
 date: 2014-01-15
 ---
 &lt;Markdown content&gt;
-</pre></div>
+</code></pre></div>
 
 
 <p>The following attributes are predefined:</p>
@@ -321,7 +321,7 @@ are made available as page object attributes to the template engine.</p>
 processing is enabled by adding a <code>.md</code> suffix to the attribute. The resulting
 html code will be stored in a synthesized attribute without the <code>.md</code> suffix.</p>
 <p>For example:</p>
-<div class="codehilite"><pre><span></span>---
+<div class="codehilite"><pre><span></span><code>---
 title:
 layout: page
 summary.md: |
@@ -331,7 +331,7 @@ summary.md: |
     * item 2
     * item 3
 ---
-</pre></div>
+</code></pre></div>
 
 
 <p>After processing, the page object will have a <code>summary</code> attribute with the html
@@ -371,13 +371,13 @@ with a <code>title</code> key.</p>
 specified in each content file in the directory.  As an example, you can
 specify that the content of a directory should be ordered as blog by the
 following front matter in the index file:</p>
-<div class="codehilite"><pre><span></span>---
+<div class="codehilite"><pre><span></span><code>---
 title: Blog
 layout: blog_index
 order: date
 reverse: true
 ---
-</pre></div>
+</code></pre></div>
 
 
 <h2 id="tag-directory">Tag directory</h2>

@@ -140,7 +140,10 @@ class Project(object):
         """Add a valid reflink to the site reflinks."""
         id = id.lower()
         if id in self.site['reflinks']:
-            raise UrubuError(_error.ambig_refid, msg=id)
+            cFile = self.site['reflinks'][id]
+            errmsg = "id '{ID}' in {FN} conflicts with {CFN}".\
+                format(ID=id, FN=info['fn'], CFN=cFile['fn'])
+            raise UrubuError(_error.ambig_refid, msg=errmsg)
         self.site['reflinks'][id] = info
 
     def finalize_local_url(self, url):

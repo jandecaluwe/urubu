@@ -115,18 +115,18 @@ predefined names.  The following hooks are defined:</p>
 </table>
 <p>You have to make sure that these names are exported correctly.  For example, if
 you organize <code>_python</code> as a package, it could look as follows:</p>
-<div class="codehilite"><pre><span></span>_python/
+<div class="codehilite"><pre><span></span><code>_python/
     __init__.py
     filters.py
     hooks.py
-</pre></div>
+</code></pre></div>
 
 
 <p>If <code>filters</code> is defined in <code>filters.py</code>, and <code>process_info</code> in <code>hooks.py</code>, the
 <code>__init__.py</code> file would contain:</p>
-<div class="codehilite"><pre><span></span>from .filters import filters
+<div class="codehilite"><pre><span></span><code>from .filters import filters
 from .hooks import process_info
-</pre></div>
+</code></pre></div>
 
 
 <h2 id="the-filters-hook">The <code>filters</code> hook</h2>
@@ -134,20 +134,20 @@ from .hooks import process_info
 Jinja2</a>.</p>
 <p>As a typical example, consider a filter that converts a date value into a
 desired format. The <code>filters.py</code> module would contain the following:</p>
-<div class="codehilite"><pre><span></span>def dateformat(value, format=&quot;%d-%b-%Y&quot;):
+<div class="codehilite"><pre><span></span><code>def dateformat(value, format=&quot;%d-%b-%Y&quot;):
     return value.strftime(format)
 
 filters = {}
 filters[&#39;dateformat&#39;] = dateformat
-</pre></div>
+</code></pre></div>
 
 
 <p>You can then use the <code>dateformat</code> filter in templates.</p>
 <h2 id="the-process_info-hook">The <code>process_info</code> hook</h2>
 <p>The interface of the <code>process_info</code> function is as follows:</p>
-<div class="codehilite"><pre><span></span>def process(info, site):
+<div class="codehilite"><pre><span></span><code>def process(info, site):
     ...
-</pre></div>
+</code></pre></div>
 
 
 <p>This function is called for every content file in the project.</p>
@@ -199,19 +199,19 @@ them, and add additional ones.</p>
 <p>It can be handy to define a default <code>layout</code> for the case this mandatory
 attribute is not specified in the content file.  Suppose we want a default
 <code>index</code> layout for index files, and a <code>page</code> layout for other files:</p>
-<div class="codehilite"><pre><span></span>def process_info(info, site):
+<div class="codehilite"><pre><span></span><code>def process_info(info, site):
     if &#39;layout&#39; not in info:
         if info[&#39;components&#39;][-1] == &#39;index&#39;:
             info[&#39;layout&#39;] = &#39;index&#39;
         else:
             info[&#39;layout&#39;] = &#39;page&#39;
-</pre></div>
+</code></pre></div>
 
 
 <h3 id="defining-a-specific-layout">Defining a specific layout</h3>
 <p>Suppose we have a <code>blog</code> directory and we want to automatically define a
 specific <code>post</code> layout for blog posts:</p>
-<div class="codehilite"><pre><span></span>def process_info(info, site):
+<div class="codehilite"><pre><span></span><code>def process_info(info, site):
     components = info[&#39;components&#39;]
     if len(components) == 2:
         if components[0] == &#39;blog&#39; and components[1] != &#39;index&#39;:
@@ -220,7 +220,7 @@ specific <code>post</code> layout for blog posts:</p>
 def process_post(info):
     if not &#39;layout&#39; in info:
         info[&#39;layout&#39;] = &#39;post&#39;
-</pre></div>
+</code></pre></div>
     </main>
     <ul class="pager">
       <li class="previous"><a href="/manual/templating-in-pages.html">&larr; Templating constructs in pages</a></li>

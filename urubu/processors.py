@@ -58,14 +58,14 @@ class ContentProcessor(object):
         tableclass = md_extensions.TableClassExtension()
         projectref = md_extensions.ProjectReferenceExtension()
         extractanchors = md_extensions.ExtractAnchorsExtension()
-        #marktag = md_extensions.MarkTagExtension()
+        marktag = md_extensions.MarkTagExtension()
         # there is a strange interaction between smarty and reference links that start on a new line
         # disabling smarty for now...
         # extensions = ['extra', 'codehilite', 'headerid', 'toc', 'smarty', tableclass, projectref]
         extensions = ['markdown.extensions.extra', 'markdown.extensions.codehilite', 'markdown.extensions.toc',
                       dlclass, tableclass, projectref, extractanchors]
-        #if self.site['mark_tag_support']:
-        #    extensions.append(marktag)
+        if self.site['mark_tag_support']:
+            extensions.append(marktag)
         extension_configs = {'markdown.extensions.codehilite': [('guess_lang', 'False'),
                                                                 ('linenums', 'False')],
                              'markdown.extensions.toc': [('baselevel', 2)]

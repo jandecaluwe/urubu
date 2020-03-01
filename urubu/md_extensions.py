@@ -30,7 +30,9 @@ from markdown import Extension
 from markdown.extensions import toc 
 from markdown.treeprocessors import Treeprocessor
 from markdown.inlinepatterns import ReferenceInlineProcessor, REFERENCE_RE
-from markdown.inlinepatterns import SimpleTagPattern, SMART_EMPHASIS_RE
+from markdown.inlinepatterns import AsteriskProcessor, EmStrongItem 
+from markdown.inlinepatterns import EM_STRONG2_RE, STRONG_EM2_RE
+from markdown.inlinepatterns import SMART_STRONG_EM_RE, SMART_STRONG_RE, SMART_EMPHASIS_RE
 
 from urubu import UrubuWarning, urubu_warn, UrubuError, _warning, _error
 
@@ -196,12 +198,23 @@ class ExtractAnchorsExtension(Extension):
         md.treeprocessors.register(ExtractAnchorsClass(md), 'extractanchors', 5)
 
 
-## extension for the <mark> tag
-#class MarkTagExtension(Extension):
-#    def extendMarkdown(self, md, md_globals):
-#        # emphasis2 is the one with underscores, use the smart version
-#        md.inlinePatterns['emphasis2'] = SimpleTagPattern(SMART_EMPHASIS_RE, 'mark')
-#        md.inlinePatterns.register(SimpleTagPattern(SMART_EMPHASIS_RE, md), 'mark')
+# extension for the <mark> tag
+class UnderscoreMarkProcessor(AsteriskProcessor):
+    """Emphasis processor for handling strong and mark matches inside underscores."""
+
+    PATTERNS = [
+        EmStrongItem(re.compile(EM_STRONG2_RE, re.DOTALL | re.UNICODE), 'double', 'strong,mark'),
+        EmStrongItem(re.compile(STRONG_EM2_RE, re.DOTALL | re.UNICODE), 'double', 'mark,strong'),
+        EmStrongItem(re.compile(SMART_STRONG_EM_RE, re.DOTALL | re.UNICODE), 'double2', 'strong,mark'),
+        EmStrongItem(re.compile(SMART_STRONG_RE, re.DOTALL | re.UNICODE), 'single', 'strong'),
+        EmStrongItem(re.compile(SMART_EMPHASIS_RE, re.DOTALL | re.UNICODE), 'single', 'mark')
+    ]
+
+class MarkTagExtension(Extension):
+
+    def extendMarkdown(self, md, md_globals):
+        md.inlinePatterns.deregister('em_strong2')
+        md.inlinePatterns.register(UnderscoreMarkProcessor(r'_'), 'em_strong2', 50)
 
 
 

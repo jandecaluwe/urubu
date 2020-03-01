@@ -14,6 +14,7 @@ def test_doc():
         if d:
             print(d)
             raise ValueError('Diffs in website')
+    _python = None
 
 test_doc()
 

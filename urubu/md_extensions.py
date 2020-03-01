@@ -55,7 +55,7 @@ class DLClassExtension(Extension):
 
     """Add 'dl-horizontal' class to definition list elements (for bootstrap)."""
 
-    def extendMarkdown(self, md, md_globals):
+    def extendMarkdown(self, md):
         md.treeprocessors.add('dlclass', DLClass(md), "_end")
 
 
@@ -77,7 +77,7 @@ class TableClassExtension(Extension):
 
     """Add 'table' class to table elements (for bootstrap)."""
 
-    def extendMarkdown(self, md, md_globals):
+    def extendMarkdown(self, md):
         md.treeprocessors.add('tableclass', TableClass(md), "_end")
 
 
@@ -169,7 +169,7 @@ class ProjectReferenceExtension(Extension):
 
     """Overwrite reference patterns with project reference extensions."""
 
-    def extendMarkdown(self, md, md_globals):
+    def extendMarkdown(self, md):
         md.inlinePatterns.deregister('reference')
         md.inlinePatterns.register(ProjectReferenceInlineProcessor(REFERENCE_RE, md), 'reference', 170)
         md.inlinePatterns.deregister('short_reference')
@@ -194,7 +194,7 @@ class ExtractAnchorsClass(Treeprocessor):
 
 class ExtractAnchorsExtension(Extension):
 
-    def extendMarkdown(self, md, md_globals):
+    def extendMarkdown(self, md):
         md.treeprocessors.register(ExtractAnchorsClass(md), 'extractanchors', 5)
 
 
@@ -212,7 +212,7 @@ class UnderscoreMarkProcessor(AsteriskProcessor):
 
 class MarkTagExtension(Extension):
 
-    def extendMarkdown(self, md, md_globals):
+    def extendMarkdown(self, md):
         md.inlinePatterns.deregister('em_strong2')
         md.inlinePatterns.register(UnderscoreMarkProcessor(r'_'), 'em_strong2', 50)
 

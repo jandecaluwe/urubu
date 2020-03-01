@@ -19,12 +19,13 @@
 from __future__ import unicode_literals
 from io import open
 
-import os
+import os, sys
 import yaml
 import fnmatch
 import shutil
 import datetime
 import itertools
+import importlib
 from operator import itemgetter
 
 from urubu._compat import ifilter
@@ -87,12 +88,10 @@ class Project(object):
         self.get_siteinfo()
 
         """Get user-defined python hooks."""
-        # load _python module from cwd only
-        import imp
+        # load _python module from cwd 
         try:
-            f, fn, desc = imp.find_module('_python', [os.getcwd()])
-            _python = imp.load_module('_python', f, fn, desc)
-        except ImportError:
+            _python = importlib.import_module('_python')
+        except ModuleNotFoundError:
             _python = None
         self.filters = getattr(_python, 'filters', {})
         self.validators = getattr(_python, 'validators', {})

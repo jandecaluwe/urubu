@@ -56,7 +56,7 @@ class DLClassExtension(Extension):
     """Add 'dl-horizontal' class to definition list elements (for bootstrap)."""
 
     def extendMarkdown(self, md):
-        md.treeprocessors.add('dlclass', DLClass(md), "_end")
+        md.treeprocessors.register(DLClass(md), 'dlclass', 3)
 
 
 def _set_table_class(tree):
@@ -78,7 +78,7 @@ class TableClassExtension(Extension):
     """Add 'table' class to table elements (for bootstrap)."""
 
     def extendMarkdown(self, md):
-        md.treeprocessors.add('tableclass', TableClass(md), "_end")
+        md.treeprocessors.register(TableClass(md), 'tableclass', 4)
 
 
 class ProjectReferenceInlineProcessor(ReferenceInlineProcessor):

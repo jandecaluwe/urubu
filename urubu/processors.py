@@ -128,9 +128,10 @@ class ContentProcessor(object):
         # The page and any new pages created from it will get new attributes:
         #
         #     numpages - the number of total pages generated
+        #     thispage - the page number of this page in the chain
         #     prevpage - the previous page in the chain
         #     nextpage - the next page in the chain
-        #
+        # 
         # The first page will have no prevpage, and the last page
         # will have no nextpage.
 
@@ -161,6 +162,7 @@ class ContentProcessor(object):
                     # First chunk is always the current page
                     info['content'] = source[0:items_per_page]
                     info['numpages'] = chunks
+                    info['thispage'] = 1
                     chunk = 1
                     prev_page = info
                     
@@ -175,6 +177,7 @@ class ContentProcessor(object):
                         new_info['content'] = source[(chunk-1)*items_per_page:(chunk-1)*items_per_page+items_per_page]
                         
                         new_info['numpages'] = chunks
+                        new_info['thispage'] = chunk
 
                         # Name the new page based on its chunk number
                         fn_parts = os.path.splitext(new_info['fn'])

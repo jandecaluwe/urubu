@@ -131,6 +131,7 @@ class ContentProcessor(object):
         #     thispage - the page number of this page in the chain
         #     prevpage - the previous page in the chain
         #     nextpage - the next page in the chain
+        #     pages    - a list of page numbers and page objects
         # 
         # The first page will have no prevpage, and the last page
         # will have no nextpage.
@@ -153,6 +154,11 @@ class ContentProcessor(object):
                 if source:
                     items_per_page = info['items_per_page']
                     
+                    # This will be a shared list among all the pages
+                    # that lists each page along with its page number,
+                    # e.g. {'pagenum': 1, 'page': info}
+                    pages = []
+                    
                     # Split source into items_per_page sized chunks,
                     # starting with info and then creating new
                     # files with incrementing numbers
@@ -163,6 +169,10 @@ class ContentProcessor(object):
                     info['content'] = source[0:items_per_page]
                     info['numpages'] = chunks
                     info['thispage'] = 1
+                    info['pages'] = pages
+                    
+                    pages.append({'pagenum': 1, 'page': info})
+                    
                     chunk = 1
                     prev_page = info
                     
@@ -172,6 +182,9 @@ class ContentProcessor(object):
                         new_info = info.copy()
                         # Prevent the new page from spinning off new pages
                         del new_info['items_per_page']
+                        
+                        new_info['pages'] = pages
+                        pages.append({'pagenum': chunk, 'page': new_info})
                         
                         # Set the content to the right slice of the source
                         new_info['content'] = source[(chunk-1)*items_per_page:(chunk-1)*items_per_page+items_per_page]

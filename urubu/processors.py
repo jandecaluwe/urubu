@@ -142,10 +142,11 @@ class ContentProcessor(object):
             source = None
             
             if 'items_per_page' in info:
-                if info['items_index'] == "this":
-                    source = info['content']
-                else:
-                    source = next(x for x in self.filelist if x['fn'] == info['items_index'])['content']
+                if 'items_index' in info:
+                    if info['items_index'] == "this":
+                        source = info['content']
+                    else:
+                        source = next(x for x in self.filelist if x['fn'] == info['items_index'])['content']
             
                 if 'items_filter' in info:
                     filter = info['items_filter'].split()
@@ -153,12 +154,7 @@ class ContentProcessor(object):
                 
                 if source:
                     items_per_page = info['items_per_page']
-
-                    # See if we even need to worry about pagination
-                    # Maybe everything fits on the one page already
-                    if len(source) <= items_per_page:
-                        continue
-                        
+                    
                     # This will be a shared list among all the pages
                     # that lists each page along with its page number,
                     # e.g. {'pagenum': 1, 'page': info}
@@ -169,9 +165,15 @@ class ContentProcessor(object):
                     # files with incrementing numbers
                     
                     chunks = math.ceil(len(source) / items_per_page)
-                    
+
                     # First chunk is always the current page
                     info['content'] = source[0:items_per_page]
+                    
+                    # See if we even need to worry about pagination
+                    # Maybe everything fits on the one page already
+                    if len(source) <= items_per_page:
+                        continue
+                    
                     info['numpages'] = chunks
                     info['thispage'] = 1
                     info['pages'] = pages

@@ -102,9 +102,95 @@ class ContentProcessor(object):
         that the full content is available to the rendering process.
         """
         self.convert()
+        self.pagination()
         self.render()
         self.make_tipuesearch_content()
 
+    def pagination(self):
+        # We look at attributes in pages here, e.g.:
+        #
+        #   items_per_page: 5
+        #   items_index: news\index.md
+        #
+        #   OR
+        #
+        #   items_per_page: 5
+        #   items_filter: mysteries time-loop
+        #
+        # We then find the info item for the items index/filter and
+        # use it to create more entries for the current item in
+        # the file list, splitting it out into items_per_page
+        # chunks for each file.
+        #  
+        # The filters are the same ones defined in _python for Jinja2
+        # to use.  The name of the function is followed by its parameters
+        #
+        # The page and any new pages created from it will get new attributes:
+        #
+        #     numpages - the number of total pages generated
+        #     prevpage - the previous page in the chain
+        #     nextpage - the next page in the chain
+        #
+        # The first page will have no prevpage, and the last page
+        # will have no nextpage.
+
+        import math
+        
+        for info in self.filelist:
+            source = None
+            
+            if 'items_per_page' in info:
+                if info['items_index'] == "this":
+                    source = info['content']
+                else:
+                    source = next(x for x in self.filelist if x['fn'] == info['items_index'])['content']
+            
+                if 'items_filter' in info:
+                    filter = info['items_filter'].split()
+                    source = self.env.filters[filter[0]](*filter[1:])
+                
+                if source:
+                    items_per_page = info['items_per_page']
+                    
+                    # Split source into items_per_page sized chunks,
+                    # starting with info and then creating new
+                    # files with incrementing numbers
+                    
+                    chunks = math.ceil(len(source) / items_per_page)
+                    
+                    # First chunk is always the current page
+                    info['content'] = source[0:items_per_page]
+                    info['numpages'] = chunks
+                    chunk = 1
+                    prev_page = info
+                    
+                    # If we need more chunks, split off new pages for them
+                    while chunk < chunks:
+                        chunk += 1
+                        new_info = info.copy()
+                        # Prevent the new page from spinning off new pages
+                        del new_info['items_per_page']
+                        
+                        # Set the content to the right slice of the source
+                        new_info['content'] = source[(chunk-1)*items_per_page:(chunk-1)*items_per_page+items_per_page]
+                        
+                        new_info['numpages'] = chunks
+
+                        # Name the new page based on its chunk number
+                        fn_parts = os.path.splitext(new_info['fn'])
+                        new_info['fn'] = fn_parts[0]+str(chunk)+fn_parts[1]
+
+                        fn_parts = os.path.splitext(new_info['url'])
+                        new_info['url'] = fn_parts[0]+str(chunk)+fn_parts[1]
+                        
+                        # Setup the prevpage and nextpage attributes
+                        new_info['prevpage'] = prev_page
+                        prev_page['nextpage'] = new_info
+                        
+                        prev_page = new_info
+                        
+                        self.filelist.append(new_info)
+        
     def convert(self):
         for info in self.filelist:
             fn = info['fn']

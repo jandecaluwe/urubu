@@ -153,7 +153,12 @@ class ContentProcessor(object):
                 
                 if source:
                     items_per_page = info['items_per_page']
-                    
+
+                    # See if we even need to worry about pagination
+                    # Maybe everything fits on the one page already
+                    if len(source) <= items_per_page:
+                        continue
+                        
                     # This will be a shared list among all the pages
                     # that lists each page along with its page number,
                     # e.g. {'pagenum': 1, 'page': info}
@@ -202,6 +207,9 @@ class ContentProcessor(object):
                         # Setup the prevpage and nextpage attributes
                         new_info['prevpage'] = prev_page
                         prev_page['nextpage'] = new_info
+                        # We may have inherited this from the first chunk
+                        if 'nextpage' in new_info:
+                            del new_info['nextpage']
                         
                         prev_page = new_info
                         

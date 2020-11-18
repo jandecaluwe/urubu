@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="{{ this.xmlns }}">
+{% for t in site.reflinks %}
+    {% if site.reflinks[t].fn and not site.reflinks[t].hidden %}
+    <url>
+        <loc>http://{{site.cname}}{{site.reflinks[t].url}}</loc>
+        <changefreq>{{this.changefreq}}</changefreq>
+        <priority>{{this.priority}}</priority>
+        {% if site.reflinks[t].date %}<lastmod>{{site.reflinks[t].date}}</lastmod>{% endif %}
+    </url>
+    {% endif %}
+{% endfor %}
+</urlset>

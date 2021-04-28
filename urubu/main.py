@@ -27,6 +27,14 @@ from urubu import project
 from urubu._compat import socketserver, httpserver
 from urubu.httphandler import AliasingHTTPRequestHandler
 
+__IDESC__ = """
+Micro CMS tool to build and test static websites.
+"""
+
+__IEPILOG__ = """
+Documentation: <https://urubu.jandecaluwe.com/manual/>
+"""
+
 def serve(baseurl, host='localhost', port=8000):
     """HTTP server straight from the docs."""
     # allow running this from the top level
@@ -43,7 +51,8 @@ def serve(baseurl, host='localhost', port=8000):
     httpd.serve_forever()
 
 def main():
-    parser = argparse.ArgumentParser(prog='python -m urubu', add_help=False)
+    parser = argparse.ArgumentParser(prog='python -m urubu', add_help=False,
+                                     epilog=__IEPILOG__, description=__IDESC__)
     parser.add_argument('-h', '--help', action='help', help="show program's help and exit")
     parser.add_argument('-v', '--version', action='version', version=__version__)
     parser.add_argument('command', choices=['build', 'serve', 'serveany'])

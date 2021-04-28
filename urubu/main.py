@@ -20,6 +20,7 @@ from __future__ import print_function
 import argparse
 
 import os
+from sys import stderr
 
 from urubu import __version__
 from urubu import project
@@ -46,7 +47,13 @@ def serve(baseurl, host='localhost', port=8000):
     httpd = socketserver.TCPServer((host, port), handler)
     httpd.baseurl = baseurl
 
-    print("Serving {} at port {}".format(host, port))
+    if host == '':
+        print("This web server is not safe for public/production use.", file=stderr)
+        print("Serving all peers at port {port}...\n\
+Browse <http://localhost:{port}/> (*:{port})".format(host=host, port=port))
+    else:
+        print("Serving {host} at port {port}...\n\
+Browse <http://{host}:{port}/>.".format(host=host, port=port))
     if httpd.baseurl: print("Using baseurl {}".format(httpd.baseurl))
     httpd.serve_forever()
 

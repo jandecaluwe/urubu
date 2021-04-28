@@ -20,12 +20,21 @@ from __future__ import print_function
 import argparse
 
 import os
+from sys import stderr
 
 from urubu import __version__
 from urubu import project
 
 from urubu._compat import socketserver, httpserver
 from urubu.httphandler import AliasingHTTPRequestHandler
+
+__IDESC__ = """
+Micro CMS tool to build and test static websites.
+"""
+
+__IEPILOG__ = """
+Documentation: <https://urubu.jandecaluwe.com/manual/>
+"""
 
 def serve(baseurl, host='localhost', port=8000):
     """HTTP server straight from the docs."""
@@ -38,13 +47,21 @@ def serve(baseurl, host='localhost', port=8000):
     httpd = socketserver.TCPServer((host, port), handler)
     httpd.baseurl = baseurl
 
-    print("Serving {} at port {}".format(host, port))
+    if host == '':
+        print("This web server is not safe for public/production use.", file=stderr)
+        print("Serving all peers at port {port}...\n\
+Browse <http://localhost:{port}/> (*:{port})".format(host=host, port=port))
+    else:
+        print("Serving {host} at port {port}...\n\
+Browse <http://{host}:{port}/>.".format(host=host, port=port))
     if httpd.baseurl: print("Using baseurl {}".format(httpd.baseurl))
     httpd.serve_forever()
 
 def main():
-    parser = argparse.ArgumentParser(prog='python -m urubu')
-    parser.add_argument('--version', action='version', version=__version__)
+    parser = argparse.ArgumentParser(prog='python -m urubu', add_help=False,
+                                     epilog=__IEPILOG__, description=__IDESC__)
+    parser.add_argument('-h', '--help', action='help', help="show program's help and exit")
+    parser.add_argument('-v', '--version', action='version', version=__version__)
     parser.add_argument('command', choices=['build', 'serve', 'serveany'])
     args = parser.parse_args()
     if args.command == 'build':

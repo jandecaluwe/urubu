@@ -43,8 +43,9 @@ def serve(baseurl, host='localhost', port=8000):
     httpd.serve_forever()
 
 def main():
-    parser = argparse.ArgumentParser(prog='python -m urubu')
-    parser.add_argument('--version', action='version', version=__version__)
+    parser = argparse.ArgumentParser(prog='python -m urubu', add_help=False)
+    parser.add_argument('-h', '--help', action='help', help="show program's help and exit")
+    parser.add_argument('-v', '--version', action='version', version=__version__)
     parser.add_argument('command', choices=['build', 'serve', 'serveany'])
     args = parser.parse_args()
     if args.command == 'build':

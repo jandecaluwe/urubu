@@ -24,17 +24,13 @@ the integration is accomplished.
 Installing Tipue Search
 =======================
 
-The first step is to [download][1] the Tipue Search distribution It contains a
+The first step is to [download][1] the Tipue Search distribution. It contains a
 `tipuesearch` directory. Copy that directory to the top level of your project.
 As usual, Urubu copies it to the built website, so that the required
 stylesheets and javascript files are available in the expected location.
 
 Do not rename the `tipuesearch` directory. The existence of that
 directory triggers Urubu's support. 
-
-Tipue Search has good [documentation][2] that you may want to review.  This
-chapter uses a slightly modified approach to achieve a good integration in a
-typical Urubu project. 
 
 The search box
 ==============
@@ -146,5 +142,4 @@ use the `html5shiv.js` Javascript module. Layouts based on Bootstrap do
 this already.
 {.text-info}
 
-[1]: http://www.tipue.com/search/
-[2]: http://www.tipue.com/search/docs/
+[1]: https://github.com/calfzhou/Tipue-Search

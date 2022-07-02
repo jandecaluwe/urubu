@@ -12,5 +12,6 @@ content:
     - hooks
     - extensions
     - search
+    - pagination
 ---
 

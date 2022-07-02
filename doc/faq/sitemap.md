@@ -37,5 +37,4 @@ saveas: sitemap.xml
 {% endraw %}
 ```
 
-What makes this work is for the main part the `saveas` parameter in the `sitemap.md` file, which overrides the default output filename with `sitemap.xml` instead of `sitemap.html`
-
+What makes this work is for the main part the `saveas` parameter in the `sitemap.md` file, which overrides the default output filename with `sitemap.xml` instead of `sitemap.html`. If you add other sitemaps don't forget to specify distinct `id` and `saveas` for each one, to prevent `Ambiguous reference id` errors. 

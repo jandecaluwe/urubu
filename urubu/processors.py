@@ -292,7 +292,7 @@ class ContentProcessor(object):
     def make_tipuesearch_content(self):
         tsd = os.path.join(self.sitedir, tipuesearchdir)
         if not os.path.isdir(tsd):
-            continue
+            return
         tsc = os.path.join(tsd, tipuesearch_content)
         items = []
         # use tag index files if they have been rendered

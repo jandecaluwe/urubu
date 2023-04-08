@@ -310,6 +310,8 @@ class ContentProcessor(object):
                     'url'  : info['url'],
                     'tags' : tags}
             items.append(item)
+        if len(items) <= 0:
+            return
         obj = {'pages': items}
         with open(tsc, 'w', encoding='utf-8') as fd:
             # json.dump is buggy in Python2 -- use workaround

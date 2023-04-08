@@ -301,7 +301,7 @@ class ContentProcessor(object):
            taglist = self.taglist
         for info in itertools.chain(self.filelist, taglist):
             if 'text' not in info:
-                return
+                continue
             tags = ""
             if 'tags' in info:
                tags = ' '.join(info['tags'])

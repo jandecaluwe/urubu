@@ -102,10 +102,38 @@ class ContentProcessor(object):
         that the full content is available to the rendering process.
         """
         self.convert()
+        self.alt_layouts()
         self.pagination()
         self.render()
         self.make_tipuesearch_content()
 
+    def alt_layouts(self):
+        # If a file contains the alt_layouts attribute, then
+        # we need to generate a copy of the file for each
+        # additional layout, in the location given.  Each 
+        # alt layout has two fields, layout and location
+        for info in self.filelist:
+            if 'alt_layouts' in info: 
+                for layout in info['alt_layouts']:
+                    new_info = info.copy()
+                    
+                    # Make sure the alt layout is available
+                    if layout['layout'] not in self.templates:
+                        self.templates[layout['layout']] = self.env.get_template(layout['layout'] + '.html')
+                        
+                    # Set the layout of the new file
+                    new_info['layout'] = layout['layout']
+                    
+                    # Set path of the new file
+                    import ntpath
+                    filename = ntpath.basename(new_info['fn'])
+                    new_info['fn'] = layout['location']+"\\"+filename                   
+                    
+                    # Prevent the new file from generating more new files
+                    del new_info['alt_layouts']
+                    
+                    self.filelist.append(new_info)
+        
     def pagination(self):
         # We look at attributes in pages here, e.g.:
         #

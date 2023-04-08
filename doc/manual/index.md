@@ -13,5 +13,6 @@ content:
     - extensions
     - search
     - pagination
+    - alt_layouts
 ---
 

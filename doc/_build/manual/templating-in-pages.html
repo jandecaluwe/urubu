@@ -116,7 +116,6 @@ template file, as follows:</p>
 {% set done = &#39;&lt;i class=&quot;fa fa-check-square-o&quot;&gt;&lt;/i&gt;&#39; %}
 </code></pre></div>
 
-
 <p>Variables <code>open</code> and <code>done</code> now hold HTML code that refers to icons. In these
 examples, I use the <a href="http://fortawesome.github.io/Font-Awesome" title="Font Awesome">Font Awesome</a> icon  library. You will need to add the
 appropriate reference to the icon stylesheet in your base template. </p>
@@ -124,7 +123,6 @@ appropriate reference to the icon stylesheet in your base template. </p>
 import them in any content page as follows:</p>
 <div class="codehilite"><pre><span></span><code>{% from &#39;util.html&#39; import open, done %}
 </code></pre></div>
-
 
 <p>Note that Urubu knows to look up <code>util.html</code> in the <code>_layouts/</code> directory,
 because that is where templates should be located. </p>
@@ -135,7 +133,6 @@ as above:</p>
 * {{ open }} Task 1
 </code></pre></div>
 
-
 <h3 id="general-icon-interface">General icon interface</h3>
 <p>Suppose you want a more general interface to icons, so that you can easily
 refer to any icon by name. This can be done with a Jinja2 macro. A macro is
@@ -145,16 +142,13 @@ like a function that can take parameters:</p>
 {% endmacro %}
 </code></pre></div>
 
-
 <p>Again, we can import the macro <code>fa</code> in content pages:</p>
 <div class="codehilite"><pre><span></span><code>{% from &#39;util.html&#39; import fa %}
 </code></pre></div>
 
-
 <p>Then we can use it as follows, for example to refer to the Github icon:</p>
 <div class="codehilite"><pre><span></span><code>{{ fa(&#39;github&#39;) }}
 </code></pre></div>
-
 
 <p>This gives the following result:</p>
 <p><i class="fa fa-github "></i></p>
@@ -162,7 +156,6 @@ like a function that can take parameters:</p>
 following example gets the alternative Github icon in twice the basic size:</p>
 <div class="codehilite"><pre><span></span><code>{{ fa(&#39;github-alt&#39;, &#39;fa-2x&#39;) }}
 </code></pre></div>
-
 
 <p>This gives the following result:</p>
 <p><i class="fa fa-github-alt fa-2x"></i></p>
@@ -180,18 +173,15 @@ macro:</p>
 {% endmacro %}
 </code></pre></div>
 
-
 <p>This macro assumes that images will be placed in an <code>img/</code> directory. In
 addition, it makes the image responsive using a Bootstrap class, and centers
 the optional caption.  Again, we can use the macro by importing:</p>
 <div class="codehilite"><pre><span></span><code>{% from &#39;util.html&#39; import figure %}
 </code></pre></div>
 
-
 <p>This is an example usage:</p>
 <div class="codehilite"><pre><span></span><code>{{ figure(&#39;urubu.jpg&#39;, &quot;An Urubu - a brazilian vulture&quot;) }}
 </code></pre></div>
-
 
 <p>This gives the following result:</p>
 <figure>

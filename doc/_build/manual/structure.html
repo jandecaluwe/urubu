@@ -114,7 +114,6 @@ folder2/index.md
         ...
 </code></pre></div>
 
-
 <p>Files and directories with pathnames starting with an underscore <code>_</code> are
 special. They are used during processing, but excluded from the built website.
 Their function will be discussed below.</p>
@@ -199,9 +198,8 @@ just the hostname. For example, on GitHub Pages sites are served from
 http://username.github.io/project_name/, so Urubu needs to include that
 <code>/project_name/</code> in generated URLs pointing to local content.</p>
 <p><code>baseurl</code> should be specified with no beginning or trailing slashes, e.g.:</p>
-<div class="codehilite"><pre><span></span><code><span class="nt">baseurl</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">prefix</span>
+<div class="codehilite"><pre><span></span><code><span class="nt">baseurl</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">prefix</span>
 </code></pre></div>
-
 
 <p>The file extension attributes, <code>file_ext</code> and <code>link_ext</code>, are both usually set to the
 same value (i.e. <code>'.php'</code>), unless the target site has .htaccess rewrite rules that
@@ -244,7 +242,6 @@ file_ext: &#39;.htm&#39;  # Change default file extension (&#39;.html&#39;)
 link_ext: &#39;.htm&#39;  # Change default link extension (&#39;.html&#39;)
 </code></pre></div>
 
-
 <h3 id="_layouts"><code>_layouts</code></h3>
 <p>This directory contains the available layouts.
 They are used by the Jinja2 template engine to render html pages.
@@ -278,7 +275,6 @@ date: 2014-01-15
 ---
 &lt;Markdown content&gt;
 </code></pre></div>
-
 
 <p>The following attributes are predefined:</p>
 <table class="table">
@@ -333,7 +329,6 @@ summary.md: |
 ---
 </code></pre></div>
 
-
 <p>After processing, the page object will have a <code>summary</code> attribute with the html
 code.</p>
 <h2 id="index-files">Index files</h2>
@@ -378,7 +373,6 @@ order: date
 reverse: true
 ---
 </code></pre></div>
-
 
 <h2 id="tag-directory">Tag directory</h2>
 <p>The optional top-level directory called <code>tag</code> has a predefined meaning.  Urubu

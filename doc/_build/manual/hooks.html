@@ -121,13 +121,11 @@ you organize <code>_python</code> as a package, it could look as follows:</p>
     hooks.py
 </code></pre></div>
 
-
 <p>If <code>filters</code> is defined in <code>filters.py</code>, and <code>process_info</code> in <code>hooks.py</code>, the
 <code>__init__.py</code> file would contain:</p>
 <div class="codehilite"><pre><span></span><code>from .filters import filters
 from .hooks import process_info
 </code></pre></div>
-
 
 <h2 id="the-filters-hook">The <code>filters</code> hook</h2>
 <p>Filters functions should be defined as <a href="http://jinja.pocoo.org/docs/api/#custom-filters">custom filters in
@@ -141,14 +139,12 @@ filters = {}
 filters[&#39;dateformat&#39;] = dateformat
 </code></pre></div>
 
-
 <p>You can then use the <code>dateformat</code> filter in templates.</p>
 <h2 id="the-process_info-hook">The <code>process_info</code> hook</h2>
 <p>The interface of the <code>process_info</code> function is as follows:</p>
 <div class="codehilite"><pre><span></span><code>def process(info, site):
     ...
 </code></pre></div>
-
 
 <p>This function is called for every content file in the project.</p>
 <p>The <code>site</code> variable provides access to the site variables defined in
@@ -206,7 +202,6 @@ attribute is not specified in the content file.  Suppose we want a default
         else:
             info[&#39;layout&#39;] = &#39;page&#39;
 </code></pre></div>
-
 
 <h3 id="defining-a-specific-layout">Defining a specific layout</h3>
 <p>Suppose we have a <code>blog</code> directory and we want to automatically define a

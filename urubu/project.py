@@ -200,7 +200,7 @@ class Project(object):
         # layout is mandatory
         if 'layout' not in info:
             raise UrubuError(_error.undef_info, msg='layout', fn=fn)
-        if 'layout' is None:
+        if info['layout'] is None:
             return
         layout = info['layout']
         # modification date, always available

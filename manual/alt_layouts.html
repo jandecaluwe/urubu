@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Manual</title>
+    <title>Alt Layouts</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
     <!-- Bootstrap -->
@@ -75,50 +75,97 @@
     </div>
 
 
-<div class="jumbotron">
-  <div class="container">
-    <div class="row">
-       <div class="col-md-7">
-         <h1>Manual</h1>
-         <p></p>
-    </div>
-  </div>
- </div>
-</div>
-
 <div class="container">
+
+  <ol class="breadcrumb">
+    <li><a href="/">Home</a></li>
+      <li><a href="/manual/">Manual</a></li>
+      <li class="active">Alt Layouts</li>
+  </ol>
+
+  <div class="page-header">
+    <h1>Alt Layouts</h1>
+  </div>
+
   <div class="row">
 
-    <div class="col-md-7" role="main">
+    <div class="col-md-6 content" role="main">
     <main>
-      <h4><a href="/manual/intro.html">Concepts</a></h4>
-        <p></p>
-      <h4><a href="/manual/install.html">Installation</a></h4>
-        <p></p>
-      <h4><a href="/manual/structure.html">Project structure</a></h4>
-        <p></p>
-      <h4><a href="/manual/authoring.html">Authoring</a></h4>
-        <p></p>
-      <h4><a href="/manual/building.html">Project building</a></h4>
-        <p></p>
-      <h4><a href="/manual/templates.html">Templates</a></h4>
-        <p></p>
-      <h4><a href="/manual/templating-in-pages.html">Templating constructs in pages</a></h4>
-        <p></p>
-      <h4><a href="/manual/hooks.html">Python hooks</a></h4>
-        <p></p>
-      <h4><a href="/manual/extensions.html">Markdown extensions</a></h4>
-        <p></p>
-      <h4><a href="/manual/search.html">Adding Search</a></h4>
-        <p></p>
-      <h4><a href="/manual/pagination.html">Pagination</a></h4>
-        <p></p>
-      <h4><a href="/manual/alt_layouts.html">Alt Layouts</a></h4>
-        <p></p>
+      <h2 id="alt-layouts">Alt Layouts</h2>
+<p>Alt Layouts are for when you want to create more than one physical .html file per .md file.  This is most useful when the additional .html files do not depend on the content of the original page, but on the front matter attributes.</p>
+<h3 id="usage">Usage</h3>
+<p>To enable alt layouts for a .md file, add an <code>alt_layouts</code> attribute to the front matter of a page.  This is a list of objects containing two attributes, <code>layout</code> and <code>location</code>.</p>
+<p>The <code>layout</code> attribute gives the name of an alternate layout to use.  The <code>location</code> attribute gives the directory where the .html file should be put.  That directory must already exist in your directory structure.</p>
+<p>Also add either <code>items_index</code> or <code>items_filter</code> to say where the list of it</p>
+<h3 id="example">Example</h3>
+<p>The following is a sample of generating two additional .html files for a product page:</p>
+<div class="codehilite"><pre><span></span><code>layout: product
+
+alt_layouts:
+    - layout: confirmation
+      location: confirmations
+    - layout: product_details
+      location: details
+</code></pre></div>
+
+<p>If the original foo.md file was in the products directory, three .html files would be generated:</p>
+<div class="codehilite"><pre><span></span><code>products/foo.html
+confirmations/foo.html
+details/foo.html
+</code></pre></div>
     </main>
     </div>
 
- </div>
+    <div class="col-md-3" role="complementary">
+      <nav class="hidden-print hidden-xs hidden-sm">
+        <div class="sidebar" data-spy="affix" data-offset-top="80" data-offset-bottom="60">
+          <div class="well">
+            <a href="#"><strong>Alt Layouts</strong></a>
+            <div class="toc">
+<ul>
+<li><a href="#alt-layouts">Alt Layouts</a><ul>
+<li><a href="#usage">Usage</a></li>
+<li><a href="#example">Example</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+          </div>
+        </div>
+      </nav>
+    </div>
+
+  </div>
+
+    <div class="footer">
+        <div style="margin: 5px">
+<a href="https://twitter.com/share" class="twitter-share-button">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+<!-- Place this tag where you want the +1 button to render. -->
+<div class="g-plusone" data-size="medium"></div>
+
+<!-- Place this tag after the last +1 button tag. -->
+<script type="text/javascript">
+window.__gcfg = {
+    lang: 'en-US'
+};
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/plusone.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>
+
+<script type="text/javascript" src="http://www.reddit.com/static/button/button1.js"></script>        </div>
+        <p> Content licensed under the
+           <a href="http://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA License</a>.
+        </p> 
+        <p>Website powered by <a href="http://urubu.jandecaluwe.com">Urubu</a>.</p>
+    </div>
+
+
 </div>
 
 

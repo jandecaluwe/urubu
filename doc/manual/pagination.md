@@ -1,3 +1,9 @@
+---
+title: Pagination 
+layout: page 
+author: Jay Shafstall
+---
+
 # Pagination
 
 There are times when an index file will contain more entries than you want to include in a single page.  Pagination allows Urubu to automatically split that page into separate pages in your site.

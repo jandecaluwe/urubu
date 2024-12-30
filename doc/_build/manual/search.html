@@ -103,15 +103,12 @@ on javascript executed in the browser. As part of the site building, Urubu
 generates a view on the searchable content.  In this chapter, we describe how
 the integration is accomplished.  </p>
 <h2 id="installing-tipue-search">Installing Tipue Search</h2>
-<p>The first step is to <a href="http://www.tipue.com/search/">download</a> the Tipue Search distribution It contains a
+<p>The first step is to <a href="https://github.com/calfzhou/Tipue-Search">download</a> the Tipue Search distribution. It contains a
 <code>tipuesearch</code> directory. Copy that directory to the top level of your project.
 As usual, Urubu copies it to the built website, so that the required
 stylesheets and javascript files are available in the expected location.</p>
 <p>Do not rename the <code>tipuesearch</code> directory. The existence of that
 directory triggers Urubu's support. </p>
-<p>Tipue Search has good <a href="http://www.tipue.com/search/docs/">documentation</a> that you may want to review.  This
-chapter uses a slightly modified approach to achieve a good integration in a
-typical Urubu project. </p>
 <h2 id="the-search-box">The search box</h2>
 <p>The next step is to create a search box. Suppose you want to make it part of
 the navbar, as in the present site. This is achieved with the following html
@@ -197,6 +194,7 @@ this already.</p>
     </main>
     <ul class="pager">
       <li class="previous"><a href="/manual/extensions.html">&larr; Markdown extensions</a></li>
+      <li class="next"><a href="/manual/pagination.html">Pagination &rarr;</a></li>
     </ul>
     </div>
 

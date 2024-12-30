@@ -1,3 +1,9 @@
+---
+title: Alt Layouts 
+layout: page 
+author: Jay Shafstall
+---
+
 # Alt Layouts
 
 Alt Layouts are for when you want to create more than one physical .html file per .md file.  This is most useful when the additional .html files do not depend on the content of the original page, but on the front matter attributes.

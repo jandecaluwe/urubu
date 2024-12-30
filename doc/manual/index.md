@@ -12,5 +12,7 @@ content:
     - hooks
     - extensions
     - search
+    - pagination
+    - alt_layouts
 ---
 

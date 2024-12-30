@@ -123,7 +123,6 @@ code: </p>
 &lt;/form&gt;
 </code></pre></div>
 
-
 <p>The <code>name</code> and the <code>id</code> values in the <code>&lt;input&gt;</code> tag of the search box are
 mandatory for Tipue Search. The typical place for this code would be in the
 navbar code in a basic layout for the site.</p>
@@ -154,7 +153,6 @@ $(document).ready(function() {
 {% endblock %}
 </code></pre></div>
 
-
 <p>We inherit from a <code>page.html</code> layout. In the <code>head_addon</code> block, we add
 the Tipue Search style sheet for the result page. In the <code>body_addon</code> page we
 add the Tipue Search java script modules, and the inline script that generates
@@ -163,7 +161,6 @@ the results. </p>
 in the body of the parent layout, with a line like the following: </p>
 <div class="codehilite"><pre><span></span><code>&lt;script src=&quot;https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js&quot;&gt;&lt;/script&gt;
 </code></pre></div>
-
 
 <p>If you use the Bootstrap javascript modules, that will be the case.</p>
 <p>In the top level project directory, we can then create a <code>search.md</code> files that
@@ -176,7 +173,6 @@ layout: search
 
 &lt;div id=&quot;tipue_search_content&quot;&gt;&lt;/div&gt;
 </code></pre></div>
-
 
 <p>After building the site, there will be a functional <code>search.html</code> file in the
 top-level directory.</p>

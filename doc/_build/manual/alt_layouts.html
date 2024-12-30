@@ -91,13 +91,12 @@
 
     <div class="col-md-6 content" role="main">
     <main>
-      <h2 id="alt-layouts">Alt Layouts</h2>
-<p>Alt Layouts are for when you want to create more than one physical .html file per .md file.  This is most useful when the additional .html files do not depend on the content of the original page, but on the front matter attributes.</p>
-<h3 id="usage">Usage</h3>
+      <p>Alt Layouts are for when you want to create more than one physical .html file per .md file.  This is most useful when the additional .html files do not depend on the content of the original page, but on the front matter attributes.</p>
+<h2 id="usage">Usage</h2>
 <p>To enable alt layouts for a .md file, add an <code>alt_layouts</code> attribute to the front matter of a page.  This is a list of objects containing two attributes, <code>layout</code> and <code>location</code>.</p>
 <p>The <code>layout</code> attribute gives the name of an alternate layout to use.  The <code>location</code> attribute gives the directory where the .html file should be put.  That directory must already exist in your directory structure.</p>
 <p>Also add either <code>items_index</code> or <code>items_filter</code> to say where the list of it</p>
-<h3 id="example">Example</h3>
+<h2 id="example">Example</h2>
 <p>The following is a sample of generating two additional .html files for a product page:</p>
 <div class="codehilite"><pre><span></span><code>layout: product
 
@@ -123,11 +122,8 @@ details/foo.html
             <a href="#"><strong>Alt Layouts</strong></a>
             <div class="toc">
 <ul>
-<li><a href="#alt-layouts">Alt Layouts</a><ul>
 <li><a href="#usage">Usage</a></li>
 <li><a href="#example">Example</a></li>
-</ul>
-</li>
 </ul>
 </div>
 

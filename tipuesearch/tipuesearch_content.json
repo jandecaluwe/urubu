@@ -8,7 +8,7 @@
         },
         {
             "tags": "",
-            "text": "30-Dec-2024: Urubu 1.4.0 released For websites, not just blogs Set up a website as logically related content. Content\nordering is flexible , not just by date. Focus on navigation Easily set up a navbar, a table of contents sidebar,\nbreadcrumbs and pagers. Ready for Bootstrap Urubu plays well with Bootstrap , the popular framework\nfor great looking websites. Markdown content Enter content in light-weight Markdown syntax, with\npopular extensions. Wiki links Easily refer to other pages like\nin wikis , using Markdown syntax. Powerful templating Use the powerful Jinja2 templating library to \ndefine page layouts. Sophisticated control Per-page control of page layout \n  and other stuff. Plus user-defined variables . Python power Urubu is built with Python. It provides Python hooks to assist in templating. Ideal with git Use a git workflow to develop\nyour website. Deploy by pushing. And of course, it's open source!",
+            "text": "30-Mar-2026: Urubu 1.4.1 released For websites, not just blogs Set up a website as logically related content. Content\nordering is flexible , not just by date. Focus on navigation Easily set up a navbar, a table of contents sidebar,\nbreadcrumbs and pagers. Ready for Bootstrap Urubu plays well with Bootstrap , the popular framework\nfor great looking websites. Markdown content Enter content in light-weight Markdown syntax, with\npopular extensions. Wiki links Easily refer to other pages like\nin wikis , using Markdown syntax. Powerful templating Use the powerful Jinja2 templating library to \ndefine page layouts. Sophisticated control Per-page control of page layout \n  and other stuff. Plus user-defined variables . Python power Urubu is built with Python. It provides Python hooks to assist in templating. Ideal with git Use a git workflow to develop\nyour website. Deploy by pushing. And of course, it's open source!",
             "title": "Urubu",
             "url": "/index.html"
         },
@@ -65,6 +65,12 @@
             "text": "The highlight of this release is support for Templating constructs in pages .",
             "title": "Urubu 1.2.0 released",
             "url": "/news/2016-02-12.html"
+        },
+        {
+            "tags": "",
+            "text": "Maintenance release: added test dependencies to setup.py, removed Python 2\ncompatibility layer, and relaxed the Markdown version pin to >= 3.0.",
+            "title": "Urubu 1.4.1 released",
+            "url": "/news/2026-03-30.html"
         },
         {
             "tags": "",

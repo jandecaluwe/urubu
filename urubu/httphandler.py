@@ -15,7 +15,7 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with Urubu.  If not, see <http://www.gnu.org/licenses/>.
 
-from urubu._compat import httpserver
+import http.server as httpserver
 
 class AliasingHTTPRequestHandler(httpserver.SimpleHTTPRequestHandler):
     def do_GET(self):

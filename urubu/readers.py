@@ -15,10 +15,6 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with Urubu.  If not, see <http://www.gnu.org/licenses/>.
 
-# Python 3 idioms
-from __future__ import unicode_literals
-from io import open
-
 import yaml
 import re
 

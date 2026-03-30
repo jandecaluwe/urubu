@@ -15,9 +15,6 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with Urubu.  If not, see <http://www.gnu.org/licenses/>.
 
-# Python 3 idioms
-from __future__ import unicode_literals
-from io import open
 import os, sys, json, itertools
 
 import markdown
@@ -31,7 +28,6 @@ from urubu import UrubuWarning, UrubuError, urubu_warn, _warning
 from urubu import md_extensions
 
 from urubu.config import layoutdir, tag_layout, tipuesearchdir, tipuesearch_content
-from urubu._compat import text_type
 
 def skip_yamlfm(f):
     """Return source of a file without yaml frontmatter."""
@@ -345,4 +341,4 @@ class ContentProcessor(object):
             # json.dump is buggy in Python2 -- use workaround
             # print json.dumps(obj, ensure_ascii=False, indent=4)
             data = json.dumps(obj, ensure_ascii=False, indent=4, sort_keys=True)
-            fd.write(text_type(data))
+            fd.write(str(data))

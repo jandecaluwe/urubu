@@ -15,8 +15,6 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with Urubu.  If not, see <http://www.gnu.org/licenses/>.
 
-from __future__ import print_function
-
 import argparse
 
 import os
@@ -25,7 +23,8 @@ from sys import stderr
 from urubu import __version__
 from urubu import project
 
-from urubu._compat import socketserver, httpserver
+import socketserver
+import http.server as httpserver
 from urubu.httphandler import AliasingHTTPRequestHandler
 
 __IDESC__ = """

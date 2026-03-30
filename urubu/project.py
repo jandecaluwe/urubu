@@ -15,10 +15,6 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with Urubu.  If not, see <http://www.gnu.org/licenses/>.
 
-# Python 3 idioms
-from __future__ import unicode_literals
-from io import open
-
 import os, sys
 import yaml
 import fnmatch
@@ -27,8 +23,6 @@ import datetime
 import itertools
 import importlib
 from operator import itemgetter
-
-from urubu._compat import ifilter
 
 from urubu import UrubuWarning, UrubuError, urubu_warn, _warning, _error
 from urubu import readers, processors
@@ -351,7 +345,7 @@ class Project(object):
                 return True
             return False
         allinfo = itertools.chain(self.filelist, self.navlist)
-        refcontent = ifilter(pred, allinfo)
+        refcontent = filter(pred, allinfo)
 
         def get_keyval(item):
             return item[key]

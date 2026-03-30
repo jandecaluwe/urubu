@@ -21,6 +21,9 @@ setup(
     include_package_data=True,
     install_requires=requires,
     entry_points=entry_points,
+    extras_require={
+        'test': ['pytest', 'sh'],
+    },
     classifiers=[
         'Development Status :: 3 - Alpha',
         'License :: OSI Approved :: GNU Affero General Public License v3',
